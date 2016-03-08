@@ -1,0 +1,443 @@
+
+
+                              FijiSchema Release Notes
+
+Version 1.6.0
+  * SCHEMA-892. [Breaking Change] Remove hadoop1 and HBase 0.92 support.
+  * SCHEMA-874. Bumps root pom version and our slf4j dependencies. Removes
+      FijiSchema's implementation of slf4j's LoggerFactory.
+  * SCHEMA-875. Revert binary incompatibility introduced in SCHEMA-826.
+  * POM-40. Require JDK 7 to compile Fiji projects.
+  * SCHEMA-851. Deprecate CellSpec table reader overrides; fix hashCode & equality
+      of FijiDataRequest; cleanups to CellDecoderProvider.
+  * SCHEMA-695. Rebase and merge all Cassandra code onto master.
+
+Version 1.5.0
+  * SCHEMA-828. Remove finalization in favor of DebugResourceTracker.
+  * SCHEMA-826. Make FijiURI, FijiInstaller, and FijiFactory generic to the
+      underlying database.
+  * SCHEMA-823. Add Fiji Services tool.
+  * SCHEMA-775. Refactor FijiColumnNameTranslator/HBaseColumnName/LayoutCapsule
+
+Version 1.4.3
+  * SCHEMA-813. Split ZooKeeperFactory out of HBaseFactory, remove LocalLock,
+      reference track Curator ZK connections
+
+Version 1.4.2
+  * SCHEMA-802. Log warning when uninstalling instances and deleting tables
+      with registered users
+  * SCHEMA-776. Enable bridge support for CDH 4.6
+
+Version 1.4.1
+  * SCHEMA-741. Integration tests now clean up dummy instances when using an
+      external HBase.
+  * SCHEMA-678. If HADOOP_HOME, HBASE_HOME, or JAVA_HOME are not set the fiji
+      script will attempt to resolve those environment variables by
+      utilizing the corresponding binary.
+
+Version 1.4.0
+  * SCHEMA-675. Adds support for configuration of Fiji column name translation.
+  * SCHEMA-687. DebugResourceTracker no longer accepts null error messages.
+  * SCHEMA-672. DecodedCell and FijiCell now support getting the reader Schema
+      with which the cell was decoded (if any). Decoded cell adds a constructor
+      which accepts a writer schema, reader schema, and value.
+  * SCHEMA-648. Adds support for CDH5 and HBase 96 and updates platform bridge
+      API to be compatible. Due to the remove of client-exposed row locks,
+      deleteMapFamily will no longer hold a lock while deleting qualifiers.
+
+Version 1.3.7
+  * SCHEMA-663. FijiTablePool now properly sets the retain count when spawning
+      tables to reach the minimum size.
+  * SCHEMA-656. Resources which should be closed before JVM shutdown may now
+      be registered with DebugResourceTracker, which will log errors for all
+      unclosed resources when the JVM shuts down.
+  * SCHEMA-651. cleanup deleted instances from zookeeper in
+      /fiji-schema/instances.
+  * SCHEMA-491. Share/reuse Zookeeper connections instances when possible.
+  * SCHEMA-650. The FijiTableReaderPool now retains the FijiTable associated with
+      its FijiReaderFactory. Closing the pool will release the table.
+
+Version 1.3.5
+  * SCHEMA-627. The schema table tool now permits listing all schemas and
+      output to StdOut.
+
+Version 1.3.4
+  * SCHEMA-604. Adds support for MapR's distribution of HBase.
+  * SCHEMA-557. Removes HTablePool usage.
+  * SCHEMA-605. Fixes compatibility with the latest 1.X Hadoop and 0.94.X
+      HBase releases.
+
+Version 1.3.3
+  * SCHEMA-584. FijiTableAnnotator now supports storing string key-value
+      annotations on tables and columns.
+
+Version 1.3.2
+  * SCHEMA-586. FijiTableReaderPool now supports managing a pool of open
+      FijiTableReaders for thread safe concurrent reads.
+
+Version 1.3.1
+  * SCHEMA-544. Introduce new layout version 1.4 with PROTOBUF cell encoding.
+  * SCHEMA-574. Fixed broken validation logic from Avro.
+  * SCHEMA-581. Fixed potential race condition in client IDs used to identify
+      users of Fiji instances and Fiji tables.
+
+Version 1.3.0
+  * SCHEMA-548. Introduce RAW_BYTES cell encoding that expose pure bytes cells.
+  * SCHEMA-547. AtomicFijiPutter.checkAndCommit() can check for the
+      non-existence of a cell.
+  * SCHEMA-515. Exposes table and data request in HBaseFijiRowData.
+  * SCHEMA-485. Adds profiling pointcuts for HBase reads/writes.
+  * SCHEMA-514. DeleteTool correctly formats the delete confirmation message
+      when deleting all entries from a cell.
+  * SCHEMA-543. Added a table layout containing all relevant cell types that
+      can be used in tests.
+
+Version 1.2.0
+  * SCHEMA-335, SCHEMA-489. Fix: FormattedEntityId and FijiTableLayout trigger
+      NPE if RowKeyFormat2.salt is null. Omitted salt entries now default to a
+      2-byte MD5-based hash prefix.
+  * SCHEMA-474. FijiTable maintains a pool of HTable objects.
+      Readers, writers, scanners and pagers borrow HTable objects from the pool.
+  * SCHEMA-469. Fix: VersionInfo should recognize backward-compatibility
+      requirements for instance versions.
+  * SCHEMA-396. HBase FijiTable readers and writers can now receive table
+      layout updates by subscribing to a LayoutConsumer list managed by the
+      table. Registered readers and writers will recreate their layout dependent
+      state in response to a table layout update.
+
+Version 1.1.2
+  * SCHEMA-358. Adds a withTable(TableLayoutDesc) method to
+      InstanceBuilder.TableBuilder.
+  * SCHEMA-475. Include support for profiling. Use the enable-profiling.sh
+      script to switch to profiling-enabled FijiSchema (and FijiMR) jars.
+  * SCHEMA-462. Include support for CDH 4.3.
+  * SCHEMA-258. Fix: HBaseFijiTable.getRegions() closes the underlying HTable.
+  * SCHEMA-415. FijiRandomRowFilter and FijiFirstKeyOnlyColumnFilter
+  * SCHEMA-467. Fix: Upgrade checkin notification thread may hang.
+  * SCHEMA-466. Fall back to $HADOOP_HOME/lib/native/ for native libraries.
+      Correctly detect native libraries in CDH 4.2 and CDH 4.3 packaging.
+  * SCHEMA-465. Fix: Can't create 256 regions on a table with 1 byte hash prefix
+  * SCHEMA-459. Improve performance of ColumnId translation.
+  * SCHEMA-456. HashedEntityId should throw an exception when getting
+      row key components.
+
+Version 1.1.1
+  * SCHEMA-455. Add CellByteSizeAsValueFilter for computing table sizes.
+  * SCHEMA-445. Fixes a bug in the DataRequest adapter that causes requests
+      with mixed paging and non-paging columns to discard all values from all
+      columns in a row, causing IOException while decoding the cells later on.
+  * SCHEMA-139. Correctly close Fiji instances if an exception occurs during
+      construction.
+  * SCHEMA-332. Add basic maven archetype for FijiSchema-based user projects.
+  * SCHEMA-439. Properly close HTable connections in HBaseFijiBufferedWriter.
+  * SCHEMA-433. Fiji ls now defaults to listing Fiji instances if no argument
+      is given.
+  * SCHEMA-440. An IOException or FijiNotInstalledException occuring during the
+      instantiation of an HBaseFiji instance no longer leads to retained
+      reference count warnings once the JVM garbage collects.
+  * SCHEMA-438. Fix bug detecting some HBase versions in compatibility shims.
+
+Version 1.1.0
+  * SCHEMA-434. Fixes a race condition in ZooKeeperClient which might cause
+      a NPE when closing a Fiji instance.
+  * SCHEMA-429. Fiji command line now asks the user to type in the instance or
+      table name when uninstalling or deleting them.
+  * SCHEMA-405. Adds FijiRowKeyComponents, a way to specify the components
+      of a Fiji row key independent of a RowKeyFormat. May be converted into
+      an EntityId, given a FijiTable or EntityIdFactory.
+  * SCHEMA-388. FijiRowScanner handles HBase scanner timeouts and reopens
+      the scanner as needed. Introduces two scanner options:
+       - FijiScannerOptions.setReopenScannerOnTimeout() is true by default,
+	 which means HBase scanners are automatically reopened on timeouts
+	 instead of throwing a ScannerTimeoutException;
+       - FijiScannerOptions.setRowCaching() configures the number of rows
+	 fetched for each RPC to the region server. By defaults, this has
+	 the of value the configuration property hbase.client.scanner.caching,
+	 which is 1 unless overridden in hbase-site.xml.
+  * SCHEMA-380. Version pagers may now be created on fully-qualified columns
+      belonging to paging-enabled map-type families.
+  * SCHEMA-355. FijiRowKeySplitter is parametrized by row key resolution.
+  * SCHEMA-346. AtomicFijiPutter is no longer restricted to writing within a
+      single locality group.  Calls to commit() no longer accept a locality group name.
+  * SCHEMA-354. Change use of filters to comply with HBase 0.92 and 0.94 semantics.
+    This provides experimental support for HBase 0.94, though this is not the
+    default.  FijiSchema uses HBase filters to convert FijiDataRequests into the
+    smallest possible HBase request. Where columns have a different maxVersions,
+    columns with maxVersions not equal to 1 may communicate more values across
+    the wire than are requested; the actual amount of data transferred may be as
+    many as the largest maxVersions observed in the data request.  Previously
+    (<= 0.92) all per-column maxVersions could be respected on the wire in
+    addition to within FijiRowData.
+  * SCHEMA-283. Add more table and and locality group properties to
+      TableLayoutDesc. These properties control e.g. max HFile size and bloom
+      filter usage. You must use layout version "layout-1.2.0" to expose
+      these properties.
+  * SCHEMA-339. JVM System property to configure FijiClientTest to use a
+      real HBase instance.
+  * SCHEMA-322. Restrict behavior of FijiPager on map-type families.
+      Paging on a map-type family yields qualifiers only, no actual cell.
+  * SCHEMA-323. Adds FijiTable.getReaderFactory() to provide custom readers.
+  * SCHEMA-327. AvroCellEncoder uses the proper writer schema,
+      instead of the reader schema.
+  * SCHEMA-187. Allows decoding records with the writer schema when no
+      specific record is available (ie. when there is no reader schema).
+  * SCHEMA-324. bin/fiji supports loading Hadoop distro-specific dependencies
+      by inferring from "bin/hadoop version" or $KIJI_HADOOP_DISTRO_VER.
+
+Version 1.0.2
+  * SCHEMA-317. Silence spurious warning about not using GenericOptionsParser.
+  * SCHEMA-318. Fixes a bug when closing FijiBufferedWriters.
+  * SCHEMA-306. Fixes a bug on FijiPager on fully-qualified columns.
+      There is a known issue with the versions returned from a map family.
+  * SCHEMA-314. Row filters constructors are being replaced with
+      factory methods such Filters.and(...) and Filters.or(...).
+  * SCHEMA-303. Allows proper serialization of row filters.
+      Contributed by Jeff Kolesky (jeff.kolesky@gmail.com).
+  * SCHEMA-304. Adds additional column filters.
+  * SCHEMA-297. Adds FijiCell.equals() and .hashCode().
+
+Version 1.0.1
+  * SCHEMA-254. Adds cellList methods to FijiRowData.
+  * SCHEMA-296. Adds hashCode and equals methods for Filters.
+
+Version 1.0.0
+  * SCHEMA-227. Fix get/scan behavior on tables with no families.
+  * SCHEMA-284. Fix usage doc string for fiji scan --start-row/limit-row flags.
+  * SCHEMA-37. Adds stability annotations to all classes.
+  * SCHEMA-280. Removes deprecated close() method from FijiTable.  Use
+      table.release().
+  * SCHEMA-8. Adds Schema Table Tool for reading and writing to a FijiSchemaTable.
+  * SCHEMA-115. FijiManagedHBaseTableName no longer manages names for SchemaV5
+      tables.
+  * SCHEMA-287. Suppress slf4j classpath warnings without modifying classpath.
+  * SCHEMA-189. Adds FijiBufferedWriter.
+  * SCHEMA-106. Move CellSpec to org.fiji.schema.layout and mark as Framework.
+
+Version 1.0.0-rc5
+  * SCHEMA-240. Composite key format support in all CLI tools.
+  * SCHEMA-134. Hides FijiDataRequestValidator's constructor and
+      changes validate()'s signature. Framework developers should
+      use the factory method validatorForLayout() to get a validator
+      which can validate FijiDataRequests against a table layout.
+  * SCHEMA-261. Bugfix: Restrict FijiRowData.getValues(family) and
+      getMostRecentValues() to only work on map-type column families.
+  * SCHEMA-238. Adds a warning for new tables created with a layout
+      that uses RowKeyFormat. New tables should be made with RowKeyFormat2.
+  * SCHEMA-239. FijiTable.close() is deprecated, use FijiTable.release().
+  * SCHEMA-262. FijiPager and FijiRowScanner throw unchecked FijiIOException.
+  * SCHEMA-173. Improves CLI parsing of EntityIds.  Adds abstract
+      toShellString() to EntityId which returns a string which can be
+      copied into CLI.
+  * SCHEMA-207. FijiURIBuilder supports relative paths to
+      DEFAULT_HBASE_URI.
+  * SCHEMA-247. The ls tool can no longer perform get and scan.
+  * SCHEMA-241. Change audience annotations of FijiDeleter,
+      FijiIncrementer, and FijiPutter to @ApiAudience.Public.
+  * SCHEMA-139. FijiTableKeyValueDatabase methods return the true
+      instance type, not the interface type.
+  * SCHEMA-248. Fiji.modifyTableLayout() no longer takes a table name.
+      The Fiji.modifyTableLayout() methods that take a String name are
+      now deprecated.
+  * SCHEMA-223. Adds backup methods to FijiSystemTable and SystemTable
+      backup to MetadataTool.
+  * SCHEMA-244. Fiji.createTable() now takes a TableLayoutDesc object.
+      The Fiji.createTable() methods that take a FijiTableLayout object
+      are deprecated.
+  * SCHEMA-233. Extract fiji get functionality out of fiji ls.
+  * SCHEMA-242. Enforce constraint of no non-hashed components
+      in a FORMATTED row key with SuppressKeyMaterialization=true.
+  * SCHEMA-141. Improved FijiTablePool API.
+  * SCHEMA-234. Extract fiji scan functionality out of fiji ls.
+  * SCHEMA-219. Adds FijiWriterFactory with access in FijiTable and
+      AtomicFijiPutter with access in FijiUtilityWriterFactory.
+  * SCHEMA-103. Remove ColumnNameTranslator from public API.
+  * SCHEMA-140. Update API for metatable backups. This changes the
+      backup format. Please re-backup your tables using the new API.
+  * SCHEMA-136. Make FijiRowKeySplitter a non-static class. Get an instance
+      with the FijiRowKeySplitter.get() method.
+  * SCHEMA-145. Change FijiColumnFilter.Context to abstract class.
+  * SCHEMA-199. VALID_INSTANCE_NAME should not match the empty string.
+  * SCHEMA-9. Add a CLI tool for FijiSchema System Table.
+      supports putting and getting properties from the system table.
+  * SCHEMA-198. FijiColumnName validates family names using
+      FijiNameValidator. FijiInvalidNameException is unchecked.
+  * SCHEMA-135. Clean up API for table layout backups. This changes the
+      backup format. Please re-backup your tables using the new API.
+
+Version 1.0.0-rc4
+  * BENTO-15. When run within a BentoBox, the 'fiji' script will notify you
+      of a new BentoBox version if one is available.
+  * SCHEMA-218. Fix instance-listing capability in 'fiji ls'.
+  * SCHEMA-67. Remove unused classes (CounterManager, NumberParser).
+  * SCHEMA-197. Layout versions now use the "layout" namespace.
+      Changes the expected layout format version to "layout-1.0" or
+      "layout-1.1". This avoids a collision with instances, etc. All layouts
+      in resources have had their version numbers changed to "layout-1.0" or
+      "layout-1.1". Existing layouts with a 'fiji-1.0' version string are
+      supported. "fiji version" will now show the minimum and maximum layout
+      versions that this fiji version can recognize.
+  * SCHEMA-211. Use "default" instance in default FijiURIBuilder.
+  * SCHEMA-208. Make FijiURIException unchecked.
+  * SCHEMA-201. Fix NPE in 'fiji install'.
+  * SCHEMA-196. Instance format should not use "fiji" protocol namespace.
+      Changes the instance format installed via 'fiji install' to
+      'system-1.0', rather than 'fiji-1.0'. This avoids a namespace collision
+      with layouts, etc. Existing deployments with a 'fiji-1.0' instance
+      format are still supported.
+  * SCHEMA-151. Add org.fiji.schema.util.ProtocolVersion to manage
+      format/protocol version compatibility.
+  * SCHEMA-150. Update CLI tools to support composite entity IDs.
+      Entity IDs can now be specified as:
+        --entity-id=hbase=hex:deadc0de as hexadecimal HBase keys
+        --entity-id=hbase=[utf8:]'hbase\x0akey\x00' as UTF-8 encoded HBase keys
+        --entity-id=[fiji=]'fiji-key' for raw, hashed or hash-prefixed Fiji keys
+        --entity-id="['component1', 2, 'comp3']" for Fiji formatted row keys.
+  * SCHEMA-151. Stricter checking of layout "version" fields for compatibility
+      with supported layout features. VersionInfo.get(Client/Cluster)DataVersion()
+      now return a ProtocolVersion, not a string.
+  * SCHEMA-190. Removed FijiDataBuffer.
+  * SCHEMA-27. Add timestamp-related constants to KConstants:
+      KConstants.BEGINNING_OF_TIME = 0
+      KConstants.END_OF_TIME = Long.MAX_VALUE
+  * SCHEMA-3. Add support for composite entity ids. You can now create
+      compound keys containing a mix of hashed, string, integer, and null
+      components.
+  * SCHEMA-175. fiji script can now use tools provided by fiji-mapreduce. To make
+      fiji-mapreduce tools available for use through the fiji script, make sure
+      the environment variable KIJI_MR_HOME is set to the path to a fiji-mapreduce
+      distribution.
+  * SCHEMA-153. Adds a getRegions() method to FijiTable. Returns logical
+      region divisions in a fiji table.
+  * SCHEMA-119. Remove TableLayoutSerializer class.
+  * SCHEMA-147. Hide OperatorRowFilter. You should use AndRowFilter or
+      OrRowFilter directly.
+  * SCHEMA-118. FijiTableLayout constructors are now hidden. Create a new layout
+      with FijiTableLayout.newLayout(TableLayoutDesc) or create one updated from
+      an old one with FijiTableLayout.createUpdatedLayout(TableLayoutDesc,
+      FijiTableLayout).
+  * SCHEMA-10. CLI tools use FijiURIs:
+      - "fiji ls" flags --instances and --table are remove and inferred
+        from URI in --fiji=fiji://...
+      - flag --table is no longer present; it is superseeded by the table
+        component from Fiji URIs.
+  * SCHEMA-123. Removed spin-wait from deleteTable in HBaseFiji.
+  * SCHEMA-169. Add FijiPager class that allows users to easily paginate and
+      iterate over values from a column while reading from a FijiTable.
+  * SCHEMA-99. FijiConfiguration removed. Use a FijiURI paired with a
+      Hadoop Configuration object instead:
+
+      FijiURI uri = FijiURI.newBuilder().withInstanceName("default")
+          .withTableName("myTable").build();
+  * SCHEMA-155. Merged methods in FijiAdmin into Fiji.
+  * SCHEMA-133. Introduce FijiDataRequestBuilder class. FijiDataRequest
+      objects are now immutable. Construct one with FijiDataRequest.create(),
+      or call FijiDataRequest.builder() to get a FijiDataRequestBuilder.
+  * SCHEMA-102. Removed overloaded variety of toHBaseFilter that accepted a
+      ColumnNameTranslator.
+  * SCHEMA-131. Move HBase classes to org.fiji.schema.hbase.
+  * SCHEMA-82. FijiCell is now the uniquely located cell in a table with
+      family, qualifier, and timestamp.  FijiCounters no longer exist and
+      are represented as FijiCell<Long> with no writer schema instead.
+  * SCHEMA-143. FijiURI constructors are now hidden.  FijiURIs should be built
+      with FijiURIBuilders.
+  * SCHEMA-109. FijiInstaller is no longer static.  Get an instance of it with
+      FijiInstaller.get().
+
+Version 1.0.0-rc3
+  * SCHEMA-83. Added containsCell method to FijiRowData.
+  * SCHEMA-154. FijiAdmin is now an interface. Use Fiji.getAdmin() to
+      get an instance.
+  * SCHEMA-105. Hide FijiColumnPager from public API.
+  * SCHEMA-127. Command-line tools --confirm is replaced with --interactive,
+      which suppresses yes/no prompts if false.
+  * SCHEMA-142. FijiTableReader.getScanner() now takes a FijiScannerOptions
+      argument as configuration.
+  * SCHEMA-50. Fiji.close() is replaced by Fiji.retain() and Fiji.release().
+      Fiji instances are created with a reference count of 1. Use the retain()
+      method to increase this reference count, if another consumer holds a
+      reference to this object.
+
+      You should call release(), or ReferenceCountableUtils.releaseQuietly()
+      before discarding the reference. Instances are closed when the reference
+      count hits zero.
+  * SCHEMA-97. org.fiji.schema.Fiji is now an interface, not a class.
+      Use Fiji.Factory.open() to get a Fiji instance.
+  * SCHEMA-157. Add FijiTable.getURI().
+  * SCHEMA-159. Fixes a bug where FijiRowData.getValues() would return values
+      in the wrong order.
+  * SCHEMA-128. Add minPoolSize option to FijiTablePool. Fiji will aggressively
+      open the min number of connections the first time a table connection is
+      requested and will maintain at least that size of a pool indefinitely.
+  * SCHEMA-17. DeleteTool replaces and improves DeleteTableTool.
+      `fiji delete-table` has been removed. See `fiji delete --help` for
+      instructions on using this tool, which can delete rows / cells in addition
+      to tables.
+  * SCHEMA-129. FijiTableReader converted to an interface. Use
+      FijiTable.openTableReader() to get an instance of FijiTableReader for a
+      given table.
+  * SCHEMA-114. Fix NullPointerException in `fiji install`.
+  * SCHEMA-20. Improve validation of cell schema changes.
+      - Counters must specify schema storage 'final'.
+      - Final columns require inline schema specifications and cannot change.
+      - Schema storage cannot be modified.
+  * SCHEMA-113. Bugfix: `fiji metadata` command reports an incorrect usage message.
+  * SCHEMA-1. Writes through FijiTableWriter are validated against common reader schema.
+  * SCHEMA-111. Adds RELEASE_NOTES.txt
+  * SCHEMA-90. FijiURIException subclasses IOException.
+  * SCHEMA-13. Removed HBaseTableRecordReader from public API.
+
+Version 1.0.0-rc2
+  * SCHEMA-93. Deprecate the org.fiji.schema.mapreduce package. This marks
+      classes in this package as @Deprecated in preparation for the eventual
+      release of FijiMapReduce.
+  * SCHEMA-52. Initial effort at multiple Hadoop version support. While
+      MapReduce code requires CDH4, non-MR-based operations provided by
+      FijiSchema can be performed with both CDH4 or Apache Hadoop 1.0
+      and HBase 0.92.1.
+  * SCHEMA-60. Multiple platform profiles for FijiSchema. To facilitate
+      multiple Hadoop version support in Fiji, your project must now
+      explicitly declare a reference to the underlying Hadoop distribution.
+      Specifically, put this in your pom.xml file to continue working with
+      CDH4:
+      <dependency>
+        <groupId>org.fiji.platforms</groupId>
+        <artifactId>fiji-cdh4-platform</artifactId>
+        <version>1.0.0-rc2</version>
+        <scope>provided</scope>
+      </dependency>
+      See https://github.com/fijiproject/fiji-platforms/blob/master/README.md
+      for a full list of available platforms.
+  * SCHEMA-7. Add metadata backup and restore tools ('fiji metadata')
+  * SCHEMA-28. Removed FijiDataWrapper and its subclasses. This change
+      refactors large parts of FijiSchema and has several incompatible
+      changes associated with it:
+      ** FijiURIs are now used more pervasively to reference Fiji instance
+         and table names. FijiConfiguration is deprecated; you should open
+         Fiji instances through FijiURIs.
+      ** FijiCellEncoder and FijiCellDecoder were significantly revamped.
+      ** FijiTable is now an interface.
+      ** Interaction between Fiji, FijiTable, and FijiTableReader/Writer
+         reworked. See the javadoc for the Fiji.open() and
+         FijiTable.openTableReader() / openTableWriter() methods.
+      ** FijiTableWriter was significantly simplified. You no longer need to
+         specify the schema when writing to a cell; the schema is induced from
+         the type when you write. The forms of the put() method where schemas
+         are specified have been removed.
+      ** FijiTableReader and FijiRowData have been significantly simplified.
+         You no longer need to explicitly specify the type when you read a cell
+         (e.g., via getStringValue()). Methods like getIntValue(),
+         getStringValues(), etc. have been removed. Instead, a universal
+         getMostRecentValue() method can now use type inference in combination
+         with the default reader schema specified in the table's layout to
+         deserialize the data with the correct type signature.
+  * SCHEMA-40. Add audience annotations to classes. Provisional annotations
+      have been added to indicate whether classes are intended for use by all
+      clients, other framework modules, or only the current module.
+      See github.com/fijiproject/annotations for more documentation.
+      Related to this, several classes have been made 'final', to prevent end
+      users from extending them.
+  * SCHEMA-51. Use Fiji artifacts, not odiago/wibi artifacts.
+  * SCHEMA-43. bugfix: bin-script cannot be directly symlinked.
+  * SCHEMA-36. fiji-schema jar is now always added to the front of the
+      classpath.
+  * SCHEMA-34. Handle general exceptions more gracefully in Fiji tools.

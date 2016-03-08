@@ -1,0 +1,30 @@
+
+                             FijiModeling Release Notes
+
+Version 0.11.0
+  * POM-40. Require JDK 7 to compile Fiji projects.
+
+Version 0.7.0
+  * MODELING-27. Removed the Model Lifecycle.
+
+Version 0.5.0
+  * Updates for Express stable release.
+  * MODELING-16. lift and confidence don't discard existing fields.
+  * MODELING-15. Support accepts field names for frequency.
+  * EXP-350. Support multiple HFile output taps in single flow.
+
+Version 0.4.0
+  * MODELING-5. Add Association Rule Mining to FijiModeling examples.
+  * Modularize FijiModeling to add an examples module.
+  * EXP-336. Add cosine, pearson similarity to modeling.
+  * EXP-349. Add confidence and lift measures to itemset mining.
+
+Version 0.3.0
+  * EXP-311. Rename Cell to FlowCell.
+
+Version 0.2.0
+  * EXP-285. Changed access modifiers on framework-level classes from private[modeling]
+      to private[fiji] and protected[modeling] to protected[fiji].
+
+Version 0.1.0
+  * EXP-249. Moved FijiModeling to its own project.

@@ -1,0 +1,170 @@
+/**
+ * (c) Copyright 2013 WibiData, Inc.
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.moz.fiji.schema.shell.api
+
+import java.io.ByteArrayOutputStream
+import java.io.Closeable
+import java.io.InputStream
+import java.io.PrintStream
+
+import com.moz.fiji.annotations.ApiAudience
+import com.moz.fiji.annotations.ApiStability
+import com.moz.fiji.schema.KConstants
+import com.moz.fiji.schema.FijiURI
+import com.moz.fiji.schema.shell.AbstractFijiSystem
+import com.moz.fiji.schema.shell.Environment
+import com.moz.fiji.schema.shell.InputProcessor
+import com.moz.fiji.schema.shell.FijiSystem
+import com.moz.fiji.schema.shell.ddl.DDLCommand
+import com.moz.fiji.schema.shell.ddl.ErrorCommand
+import com.moz.fiji.schema.shell.input.InputSource
+import com.moz.fiji.schema.shell.input.StreamInputSource
+import com.moz.fiji.schema.shell.input.StringInputSource
+import com.moz.fiji.schema.util.ResourceUtils
+
+/**
+ * An API used to programmatically execute Schema DDL commands.
+ *
+ * <p>Create a new instance of a Client, parameterized by a Fiji URI,
+ * using the `Client.newInstance(uri)` method.</p>
+ *
+ * <p>Make one or more calls to `executeStream()` and `executeUpdate()`.
+ * Instances of this class are not internally synchronized and should be restricted to
+ * a single client thread.</p>
+ *
+ * <p>Call the `close()` method when you are done with this to release system resources.</p>
+ *
+ * <p>A client is bound to a particular Fiji URI when it is created. Client instances
+ * appear stateless between calls to one of the execute*() methods. So for instance, a
+ * `USE` statement in `executeUpdate()` would not cause any specific effect.
+ * You should create a client for the specific Fiji instance you want to connect to.
+ * A `USE` statement or other environment-altering statement within a stream being
+ * processed via `executeStream()` will have an effect on the remainder of the stream,
+ * but is not persistent between streams.</p>
+ */
+@ApiAudience.Public
+@ApiStability.Experimental
+final class Client private(val fijiUri: FijiURI, val fijiSystem: AbstractFijiSystem)
+    extends Closeable {
+
+  /** Output stream where stdout from DDL commands is redirected. */
+  private val mStdoutBytes = new ByteArrayOutputStream
+
+  /** Last environment returned by the input processor. */
+  private var mLastEnv: Option[Environment] = None
+
+  /**
+   * Executes a DDL statement. The statement does not need to be terminated by a ';'
+   * character.
+   *
+   * @param ddl the DDL statement to execute. (e.g., "CREATE TABLE ...")
+   * @throws DDLException if there's an error processing the command.
+   */
+  def executeUpdate(ddl: String): Unit = {
+    val trimmed = ddl.trim()
+    val trueScript = if (trimmed.endsWith(";")) { trimmed } else { trimmed + ";" }
+    doExecute(new StringInputSource(trueScript))
+  }
+
+  /**
+   * Executes a set of DDL statements in a file or other stream-based resource.
+   *
+   * <p>Processes a stream line-wise as if it is a script file containing one or more
+   * DDL input statements. Statements must be terminated by a ';' character. The stream
+   * will be entirely consumed and also closed by this method.</p>
+   *
+   * @param stream is an InputStream containing one or more DDL statements to execute.
+   *     (e.g., "CREATE TABLE ...")
+   * @throws DDLException if there's an error processing the command.
+   */
+  def executeStream(stream: InputStream): Unit = {
+    doExecute(new StreamInputSource(stream))
+  }
+
+  /**
+   * Actually execute DDL statements from executeUpdate() or executeStream().
+   *
+   * @param input the InputSource to read from.
+   * @throws DDLException if there's an error processing the command.
+   */
+  private def doExecute(input: InputSource): Unit = {
+    mStdoutBytes.reset()
+    val output = new PrintStream(mStdoutBytes, false, "UTF-8")
+    try {
+      val env = (mLastEnv match {
+        case Some(last) => last.withPrinter(output).withInputSource(input)
+        case None => new Environment(fijiUri, output, fijiSystem, input, List(), false)
+      })
+      mLastEnv = Some(new InputProcessor(throwOnErr=true)
+          .processUserInput(new StringBuilder(), env))
+    } finally {
+      ResourceUtils.closeOrLog(output)
+      ResourceUtils.closeOrLog(input)
+    }
+  }
+
+  /**
+   * Returns any console output generated by the last statement executed. Multiple
+   * calls to executeUpdate(), etc will overwrite this data.
+   *
+   * @return the 'stdout' text associated with the most recent call to executeUpdate()
+   */
+  def getLastOutput(): String = {
+    return mStdoutBytes.toString("UTF-8")
+  }
+
+  /**
+   * Close resources used by the DDL system. This method must be called
+   * when you are done with the client.
+   */
+  def close(): Unit = {
+    fijiSystem.shutdown()
+  }
+}
+
+object Client {
+  /**
+   * Create a new instance of a Client object.
+   * <p>Java programs should call Client.newInstance(uri).</p>
+   *
+   * @param uri the Fiji URI to connect to. This must specify a Fiji instance, not an
+   *     HBase cluster URI. (e.g., `fiji://.env/myinstance`.)
+   * @return a new instance of a Client object.
+   */
+  def newInstance(uri: FijiURI): Client = {
+    return new Client(uri, new FijiSystem)
+  }
+
+  /**
+   * Create a new instance of a Client object.
+   *
+   * package-private method for internal testing use, allowing the user to override the
+   * FijiSystem implementation used. End-users should not try to pass a non-default argument
+   * for the FijiSystem implementation and should use `newInstance` instead.
+   *
+   * @param uri the Fiji URI to connect to. This must specify a Fiji instance, not an
+   *     HBase cluster URI. (e.g., `fiji://.env/myinstance`.)
+   * @param sys the AbstractFijiSystem implementation to use.
+   * @return a new instance of a Client object.
+   */
+  private[shell] def newInstanceWithSystem(uri: FijiURI, sys: AbstractFijiSystem): Client = {
+    return new Client(uri, sys)
+  }
+}

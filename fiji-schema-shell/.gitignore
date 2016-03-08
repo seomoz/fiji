@@ -1,0 +1,9 @@
+*~
+*.swp
+/target
+/build
+.classpath
+.project
+.idea
+fiji-schema-shell.iml
+.settings

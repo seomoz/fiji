@@ -1,0 +1,6 @@
+{
+  "columnFamily": "user",
+  "columnQualifier": "name",
+  "value": "a_name",
+  "timestamp": 1000
+}

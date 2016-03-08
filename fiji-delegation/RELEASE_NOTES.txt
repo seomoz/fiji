@@ -1,0 +1,13 @@
+
+                              Fiji-Delgation Release Notes
+
+Version 1.1.0
+ * POM-40. Require JDK 7 to compile Fiji projects.
+
+Version 1.0.1
+ * SCHEMA-432. Allow delegation through properties files.
+      Adds ConfiguredLookup (Lookups.getConfigured()).
+      Also adds the @AutoLookup and Delegation.init() functions.
+
+Version 1.0.0-rc5
+  * SCHEMA-260. Add NamedLookup and NamedProvider.

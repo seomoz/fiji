@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+  <!--
+    (c) Copyright 2012 WibiData, Inc.
+
+    See the NOTICE file distributed with this work for additional
+    information regarding copyright ownership.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+  -->
+<FindBugsFilter>
+
+  <!--
+    Bugs we don't care about globally.
+  -->
+  <Match>
+    <Or>
+      <!-- We never use Java Serialization, so ignore any Serializable findbugs warnings. -->
+      <Bug pattern="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE" />
+      <Bug pattern="EI_EXPOSE_REP" />
+      <Bug pattern="EI_EXPOSE_REP2" />
+    </Or>
+  </Match>
+  <Match>
+    <!-- Bugs in auto-generated Avro sources -->
+    <Class name="~org[.]fiji[.]schema[.]avro[.].*" />
+  </Match>
+
+  <!--
+    Other one-off exclusions.
+  -->
+  <Match>
+    <!-- I really do want to return the same array every time, for performance. -->
+    <Class name="com.moz.fiji.schema.FijiColumnName" />
+    <Or>
+      <Method name="getFamilyBytes" />
+      <Method name="getQualifierBytes" />
+    </Or>
+    <Bug pattern="EI_EXPOSE_REP" />
+  </Match>
+  <Match>
+    <!-- I really do want to return the same array every time, for performance. -->
+    <Class name="com.moz.fiji.schema.HBaseColumnName" />
+    <Or>
+      <Bug pattern="EI_EXPOSE_REP" />
+      <Bug pattern="EI_EXPOSE_REP2" />
+    </Or>
+  </Match>
+  <Match>
+    <!-- For performance, code returning the same array every time is correct. -->
+    <Class name="com.moz.fiji.schema.mapreduce.FijiTableSplit" />
+    <Or>
+      <Bug pattern="EI_EXPOSE_REP" />
+      <Bug pattern="EI_EXPOSE_REP2" />
+      <Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS" />
+    </Or>
+  </Match>
+  <Match>
+    <!--
+       InMemoryTableKeyValueDatabase.getValue() distinguishes between null (missing table)
+       and a zero-length byte array value for a given key.
+    -->
+    <Class name="com.moz.fiji.schema.impl.InMemoryTableKeyValueDatabase" />
+    <Bug pattern="PZLA_PREFER_ZERO_LENGTH_ARRAYS" />
+  </Match>
+
+  <!-- Do not conflate null and the empty byte array: -->
+  <Match>
+    <Or>
+      <Class name="~org[.]fiji[.]schema[.]impl[.]HashedEntityId" />
+      <Class name="~org[.]fiji[.]schema[.]impl[.]HashPrefixedEntityId" />
+      <!-- null indicates a missing cell and is different from a cell with no bytes -->
+      <Class name="~org[.]fiji[.]schema[.]impl[.]hbase[.]HBaseFijiRowData" />
+      <Class name="~org[.]fiji[.]schema[.]filter[.]FijiColumnRangeFilter" />
+      <Class name="~org[.]fiji[.]schema[.]impl[.]cassandra[.]CassandraFijiRowData" />
+      <Class name="~org[.]fiji[.]schema[.]impl[.]cassandra[.]CassandraSystemTable" />
+    </Or>
+    <Bug pattern="PZLA_PREFER_ZERO_LENGTH_ARRAYS" />
+  </Match>
+
+  <Match>
+    <!-- This is used to create an immutable array -->
+    <Class name="com.moz.fiji.schema.impl.hbase.HBaseFiji" />
+    <Bug pattern="ITA_INEFFICIENT_TO_ARRAY" />
+  </Match>
+  <Match>
+    <!-- mTableURI is initialized through flags with FlagParser.parse() -->
+    <Class name="com.moz.fiji.schema.tools.SynthesizeUserDataTool" />
+    <Bug pattern="UWF_NULL_FIELD" />
+  </Match>
+
+  <Match>
+    <!-- These fields get populated by the flag parser. -->
+    <Class name="com.moz.fiji.schema.tools.LayoutTool" />
+    <Or>
+      <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" />
+      <Bug pattern="UWF_NULL_FIELD" />
+    </Or>
+  </Match>
+
+  <Match>
+    <!-- These fields get populated by the flag parser. -->
+    <Class name="com.moz.fiji.schema.tools.DeleteTool" />
+    <Bug pattern="UWF_NULL_FIELD" />
+  </Match>
+
+  <Match>
+    <!-- An absolute path to a ZooKeeper node is fine. -->
+    <Or>
+      <Class name="com.moz.fiji.schema.layout.impl.ZooKeeperMonitor" />
+      <Class name="com.moz.fiji.schema.zookeeper.ZooKeeperUtils" />
+    </Or>
+    <Bug pattern="DMI_HARDCODED_ABSOLUTE_FILENAME" />
+  </Match>
+
+  <Match>
+    <!-- Individual array elements are not mutated. -->
+    <Class name="com.moz.fiji.schema.layout.impl.ZooKeeperMonitor$LayoutTracker" />
+    <Bug pattern="VO_VOLATILE_REFERENCE_TO_ARRAY" />
+  </Match>
+
+  <Match>
+    <!-- Anonymous class is more compact. -->
+    <Class name="com.moz.fiji.schema.cassandra.util.SessionCache$CachedSession$1" />
+    <Bug pattern="SIC_INNER_SHOULD_BE_STATIC_ANON" />
+  </Match>
+
+  <Match>
+    <!-- FindBugs has a bug: http://sourceforge.net/p/findbugs/bugs/1139/
+
+         FindBugs is overly restrictive about nullable/notnull declarations on Guava's Function
+          class.
+     -->
+    <Or>
+      <Class name="com.moz.fiji.schema.impl.AvroCellEncoder$1" />
+      <Class name="com.moz.fiji.schema.layout.AvroSchemaResolver" />
+      <Class name="com.moz.fiji.schema.layout.SchemaTableAvroResolver" />
+      <Class name="com.moz.fiji.schema.layout.AvroSchemaIdResolver" />
+      <Class name="com.moz.fiji.schema.zookeeper.ZooKeeperUtils$1" />
+      <Class name="com.moz.fiji.schema.impl.hbase.HBasePagedFijiResult$PagedColumnIterable$1" />
+      <Class name="com.moz.fiji.schema.impl.hbase.ResultDecoders$GroupFamilyDecoder" />
+      <Class name="com.moz.fiji.schema.impl.hbase.ResultDecoders$MapFamilyDecoder" />
+      <Class name="com.moz.fiji.schema.impl.hbase.ResultDecoders$QualifiedColumnDecoder" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.CassandraFijiResult$1" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.CassandraFijiResult$2" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.CassandraFijiResultScanner$3" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.CassandraFijiResultScanner$5" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.CassandraFijiResultScanner$6" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$1" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$2" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$GroupFamilyDecoder" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$MapFamilyDecoder" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$MaxTimestampPredicate" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$MaxVersionsPredicate" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$MinTimestampPredicate" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$QualifiedColumnDecoder" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$RawRowKeyDecoder" />
+      <Class name="com.moz.fiji.schema.impl.cassandra.RowDecoders$RowKeyComponentsToEntityId" />
+      <Class name="com.moz.fiji.schema.cassandra.util.SessionCache$1" />
+    </Or>
+    <Bug pattern="NP_PARAMETER_MUST_BE_NONNULL_BUT_MARKED_AS_NULLABLE" />
+  </Match>
+
+</FindBugsFilter>

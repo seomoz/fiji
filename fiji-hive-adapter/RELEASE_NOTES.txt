@@ -1,0 +1,78 @@
+
+
+                        Fiji Hive Adapter Release Notes
+
+Version 0.14.0
+  * POM-40. Require JDK 7 to compile Fiji projects.
+
+Version 0.9.2
+  * KIJIHIVE-24. bento-hive.sh now will use an existing Hive installation
+      when present(running on an existing cluster).
+
+Version 0.9.1
+  * KIJIHIVE-43. Fixed an issue where data requests were not being properly
+      serialized when multiple tables were used in one query(joins).
+  * KIJIHIVE-44. bento-hive.sh also supports launching a HiveServer for
+      submitting requests to Hive remotely.
+
+Version 0.9.0
+  * KIJIHIVE-40. Escape all column names to avoid Hive reserved words in DDL
+      statement generation.
+  * KIJIHIVE-34. Added support for qualifier and cell level paging.  See
+      README.md for usage.
+
+Version 0.7.1
+  * KIJIHIVE-40. Escape all inferred class names from complex types to avoid
+      Hive reserved words in DDL statement generation.
+  * Fixed misconfiguration where intermediate results were not persisted in a
+      usable location for subsequent jobs.
+
+Version 0.7.0
+  * KIJIHIVE-35. Fixed an NPE when fetching a non-primitive value from a map
+      type family.
+  * KIJIHIVE-2. Improved the generation of CREATE EXTERNAL TABLE statements.
+      Complex data types should now be supported, and this functionality can be
+      invoked as part of the fiji CLI tool, or via the bento-hive.sh script.
+  * KIJIHIVE-39. Force user classes to take precedence in MapReduce jobs
+      created from within Hive.
+
+Version 0.6.0
+  * KIJIHIVE-33. Fixed a ClassCastException issue when reading from a
+      SpecificRecord.  Thanks Scott!
+  * KIJIHIVE-32. Added support for reading Avro enumerations as Strings.
+
+Version 0.5.0
+  * KIJIHIVE-29. Updated FijiTableInputFormat to use Fiji interfaces for
+      determining split information.
+  * KIJIHIVE-20. Fiji Hive Adapter now supports writing of primitive types.
+      Any tables that already exist in the Hive metastore need to be recreated
+      in order to take advantage of the new classes.  See README.md for more
+      details.
+
+Version 0.4.1
+  * KIJIHIVE-26. Default to HBaseRowKey when EntityId components aren't present.
+
+Version 0.4.0
+  * KIJIHIVE-23. Updates to Fiji Hive Adapter to become compatible with 
+      FijiSchema 1.1.x.
+      - Fiji Hive Adapter now uses Hive 0.11, which is included in CDH 4.2.1.
+      - Refactored Fiji Hive Adapter to use Hadoop Writable objects internally
+        for transferring data around within Hive, this eliminates the need to
+        track the schema table for decoding of HBaseResults in evaluation.
+
+Version 0.3.0
+  * KIJIHIVE-19. Allow ability to read entity ids up through to Hive. 
+      Thanks Jeff!
+  * KIJIHIVE-18. Removed dead code that was causing NPEs while decoding
+      nullable fields within complex types.
+
+Version 0.2.0
+  * KIJIHIVE-7. Add support for Avro unions.
+  * KIJIHIVE-8. Fixed conversion issue for decoding complex Avro types.
+  * KIJIHIVE-9. Fixed issue where only the most recent version of data was
+      returned.
+  * KIJIHIVE-10. Added in support for map type families.
+
+Version 0.1.0
+  * Initial Release
+

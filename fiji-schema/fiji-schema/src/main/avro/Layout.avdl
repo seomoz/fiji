@@ -1,0 +1,706 @@
+/**
+ * (c) Copyright 2012 WibiData, Inc.
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// Fiji table layout.
+
+@namespace("com.moz.fiji.schema.avro")
+protocol FijiTableLayoutRecords {
+
+  /** Type of compression for the data within a locality group. */
+  enum CompressionType {
+    NONE,
+    GZ,
+    LZO,
+    SNAPPY
+  }
+
+  /** Type of schema for column data. */
+  enum SchemaType {
+    /**
+     * Column contains data encoded as specified inline.
+     *
+     * Note: Not used in table layout >= 1.3.
+     */
+    INLINE,
+
+    /**
+     * Column contains Avro records with the specified class name.
+     *
+     * Note: Not used in table layout >= 1.3.
+     */
+    CLASS,
+
+    /** Column contains counters. */
+    COUNTER,
+
+    /**
+     * Column contains registered writer and reader schemas.
+     *
+     * Note: Schema type 'AVRO' requires table layout version >= 1.3.
+     */
+    AVRO,
+
+    /**
+     * Column contains raw bytes.
+     *
+     * Requires table layout version >= 1.3.
+     */
+    RAW_BYTES,
+
+    /**
+     * Column contains serialized protocol buffers.
+     *
+     * Requires table layout version >= 1.4.
+     */
+    PROTOBUF
+  }
+
+  /** How schemas get encoded in cells. */
+  enum SchemaStorage {
+    /** Data is prepended with the schema hash. */
+    HASH,
+
+    /** Data is prepended with the schema unique ID. */
+    UID,
+
+    /** Schema is immutable and not stored in the cell. */
+    FINAL
+  }
+
+  /**
+   * Descriptor of an Avro schema.
+   *
+   * Exactly one of uid and json must be set.
+   */
+  record AvroSchema {
+    /**
+     * Compact, non portable, schema descriptor.
+     * This descriptor is very compact but specific to a given Fiji instance.
+     */
+    union { null, long } uid = null;
+
+    /**
+     * Portable schema descriptor.
+     * This descriptor is portable but very verbose (full JSON representation).
+     */
+    union { null, string } json = null;
+  }
+
+  /** How Avro cells are validated. */
+  enum AvroValidationPolicy {
+    /**
+     * Performs schema validation on write. Non-registered writer schemas will fail to pass
+     * validation in all cases.
+     */
+    STRICT,
+
+    /**
+     * Automatically registers writer schemas on write (if possible) and restricts the table
+     * so that it only has one registered reade schema.
+     */
+    DEVELOPER,
+
+    /**
+     * Perform schema validation with the same semantics that were used in FijiSchema 1.0.x.
+     * This will validate primitive schemas, but not class based schemas.
+     *
+     * Note: This validation mode is deprecated and may be removed in table layout versions
+     *     >= 1.4.
+     */
+    SCHEMA_1_0,
+
+    /** No schema validation will occur on write. */
+    NONE
+  }
+
+  /** Schema of a Fiji cell. */
+  record CellSchema {
+    /** Schema encoding in cells. Unused if type is COUNTER. */
+    SchemaStorage storage = "HASH";
+
+    /**
+     * Type of schema.
+     *
+     * Note: Schema type 'AVRO' requires table layout version >= 1.3.
+     */
+    SchemaType type;
+
+    /**
+     * Schema value, whose interpretation depends on the schema type:
+     *  - INLINE : immediate Avro schema description, eg. "string";
+     *  - CLASS : Avro schema class name, eg. "com.moz.fiji.avro.Node";
+     *  - COUNTER : unused, must be null.
+     *  - AVRO : unused, must be null.
+     *
+     * Note: This field is ignored for table layout >= 1.3
+     */
+    union { null, string } value = null;
+
+    /**
+     * Depends on schema type:
+     *  - INLINE/CLASS/COUNTER : unused.
+     *  - AVRO : Validation policy to use when writing cells.
+     *
+     * Note: This field is only valid when using a table layout with a version >= 1.3.
+     */
+    AvroValidationPolicy avro_validation_policy = "SCHEMA_1_0";
+
+    /**
+     * Depends on schema type:
+     *  - INLINE/CLASS/COUNTER : unused, must be null.
+     *  - AVRO : Contains the fully qualified class name of this cell's specific compiled Avro
+     *        record. This field is only valid if the schema of this cell is a record schema.
+     *
+     * Note: This field is only valid when using a table layout with a version >= 1.3. This field
+     *     is used to provide compatibility with the behavior of FijiSchema 1.0.x (when the user
+     *     doesn't specify a reader schema explicitly).
+     */
+    union { null, string } specific_reader_schema_class = null;
+
+    /**
+     * Depends on schema type:
+     *  - INLINE/CLASS/COUNTER : unused, must be null.
+     *  - AVRO : Contains an UID that addresses the default reader schema for this cell.
+     *
+     * Note: This field is only valid when using a table layout with a version >= 1.3.
+     */
+    union { null, AvroSchema } default_reader = null;
+
+    /**
+     * Depends on schema type:
+     *  - INLINE/CLASS/COUNTER : unused, must be null.
+     *  - AVRO : Registered reader schema UIDs for this cell.
+     *
+     * Note: This field is only valid when using a table layout with a version >= 1.3.
+     */
+    union { null, array<AvroSchema> } readers = null;
+
+    /**
+     * Depends on schema type:
+     *  - INLINE/CLASS/COUNTER : unused, must be null.
+     *  - AVRO : UIDs addressing schemas that have already been used to write to this cell's column.
+     *
+     * Note: This field is only valid when using a table layout with a version >= 1.3.
+     */
+    union { null, array<AvroSchema> } written = null;
+
+    /**
+     * Depends on schema type:
+     *  - INLINE/CLASS/COUNTER : unused, must be null.
+     *  - AVRO : Registered writer schema UIDs for this cell.
+     *
+     * Note: This field is only valid when using a table layout with a version >= 1.3.
+     */
+    union { null, array<AvroSchema> } writers = null;
+
+    /**
+     * Full name of the protocol buffer encoded in this column.
+     * For columns encoded as protocol buffers only.
+     *
+     * Note: This field is only valid when using a table layout with a version >= 1.4.
+     */
+    union { null, string } protobuf_full_name = null;
+
+    /**
+     * Fully-qualified Java class name of the protocol buffer.
+     * For columns encoded as protocol buffers only.
+     *
+     * Note: This field is only valid when using a table layout with a version >= 1.4.
+     */
+    union { null, string } protobuf_class_name = null;
+  }
+
+  /** Column descriptor. */
+  record ColumnDesc {
+    /** Column ID. Not visible to the user. 0 means unset. */
+    int @internal("true") id = 0;
+
+    /** Column primary name ([a-zA-Z_][a-zA-Z0-9_]*). */
+    string name;
+
+    /** Column name aliases. */
+    array<string> aliases = [];
+
+    /** When false, the column is not visible or usable. */
+    boolean enabled = true;
+
+    /** User description of the column. */
+    string description = "";
+
+    /** Schema for the cell values. */
+    CellSchema column_schema;
+
+    // Fields below are used to apply a diff against a reference family layout:
+
+    /** When true, applying this layout deletes the column. */
+    boolean @diff("true") delete = false;
+
+    /** Reference primary name of the column, when renaming the column. */
+    union { null, string } @diff("true") renamed_from = null;
+  }
+
+  /** Descriptor for a group of columns. */
+  record FamilyDesc {
+    /** Family ID. Not visible to the user. 0 means unset. */
+    int @internal("true") id = 0;
+
+    /** Column family primary name ([a-zA-Z_][a-zA-Z0-9_]*). */
+    string name;
+
+    /** Column family name aliases. */
+    array<string> aliases = [];
+
+    /** When false, the family and its columns are not visible/usable. */
+    boolean enabled = true;
+
+    /** User description of the column family. */
+    string description = "";
+
+    /** Cell schema for map-type families. Null for group-type families. */
+    union { null, CellSchema } map_schema = null;
+
+    /** Columns, for group-type families only. Empty for map-type families. */
+    array<ColumnDesc> columns = [];
+
+    // Fields below are used to apply a diff against a reference family layout:
+
+    /** When true, applying this layout deletes the family. */
+    boolean @diff("true") delete = false;
+
+    /** Reference primary name of the family, when renaming the family. */
+    union { null, string } @diff("true") renamed_from = null;
+  }
+
+  /**
+   * Type of bloom filtering to use.
+   * Applies on LocalityGroups (HBase column families) only.
+   *
+   * For more details, see:
+   * http://hbase.apache.org/book/perf.schema.html#schema.bloom
+   */
+  enum BloomType {
+    /** Bloom filters disabled. */
+    NONE,
+
+    /** Bloom enabled with Table row as Key. */
+    ROW,
+
+    /** Bloom enabled with Table row & column (family+qualifier) as Key. */
+    ROWCOL
+  }
+
+  /** A group of Fiji column families stored together in a table. */
+  record LocalityGroupDesc {
+    /** Locality group ID. Not visible to the user. 0 means unset. */
+    int @internal("true") id = 0;
+
+    /** Locality group primary name ([a-zA-Z_][a-zA-Z0-9_]*). */
+    string name;
+
+    /** Locality group name aliases. */
+    array<string> aliases = [];
+
+    /** When false, the locality group and its famillies are not visible. */
+    boolean enabled = true;
+
+    /** User description of the locality group. */
+    string description = "";
+
+    /** Reduce latency by forcing all data to be kept in memory. */
+    boolean in_memory;
+
+    /** Maximum number of the most recent cell versions to retain. */
+    int max_versions;
+
+    /** Length of time in seconds to retain cells. */
+    int ttl_seconds;
+
+    /**
+     * Block size.
+     * Leave null for HBase's default value.
+     *
+     * For more details, see:
+     * http://hbase.apache.org/apidocs/org/apache/hadoop/hbase/HColumnDescriptor.html#BLOCKSIZE
+     */
+    union { null, int } block_size = null;
+
+    /**
+     * Type of bloom filtering to use.
+     * Leave null for HBase's default value.
+     *
+     * For more details, see:
+     * http://hbase.apache.org/book/perf.schema.html#schema.bloom
+     */
+    union { null, BloomType } bloom_type = null;
+
+    /** Data compression type. */
+    CompressionType compression_type;
+
+    /** Column family descriptors. */
+    array<FamilyDesc> families = [];
+
+    // Fields below are used against a reference locality group layout:
+
+    /** When true, applying this layout deletes the locality group. */
+    boolean @diff("true") delete = false;
+
+    /** Reference primary name of the locality group, when renaming. */
+    union { null, string } @diff("true") renamed_from = null;
+  }
+
+
+  /** Hashing methods. */
+  enum HashType {
+    /** MD5 hashing (16 bytes). */
+    MD5
+  }
+
+  /**
+   * Row keys can either be raw bytes, hash, hash-prefixed or be formatted.
+   * Formatted row keys are composed of one or more primitive types (string, int, long).
+   * By default they are prefixed by an 128 bits MD5 hash of the first component.
+   */
+  enum RowKeyEncoding {
+    /** raw bytes */
+    RAW,
+
+    /**
+     * Deprecated, use FORMATTED. Row keys are the hash of one string component.
+     * Requires RowKeyFormat below.
+     */
+    HASH,
+
+    /**
+     * Deprecated, use FORMATTED. Row keys are one string component with a hash prefix.
+     * Requires RowKeyFormat below.
+     */
+    HASH_PREFIX,
+
+    /**
+     * User specified format. The key may be composed of one or more primitive types (string,
+     * int, long) prefixed by the hash of the first k components, 1 <= k < numComponents, where k
+     * can be specified using range_scan_start_index in RowKeyFormat2 below.
+     * This requires the user to use RowKeyFormat2 below.
+     */
+    FORMATTED
+  }
+
+  /**
+   * Fiji column names go through a translation layer before they are written to HBase.  By default
+   * column names are shortened to avoid disk bloat.  These shortened names are meaningless without
+   * translation, so for compatibility with other HBase tools, this translation can be effectively
+   * disabled with an identity mapping.
+   */
+  enum ColumnNameTranslator {
+    /**
+     * Fiji column name shortening. (default)
+     *
+     * Relies on a custom base-64 encoding to map Fiji names to bytes based on the id.
+     */
+    SHORT,
+
+    /**
+     * Identity mapping for writing a Fiji table that other HBase clients can utilize.
+     *
+     * Fiji locality groups become HBase families.
+     * Fiji column families and qualfiers become HBase qualifiers.
+     */
+    IDENTITY,
+
+    /**
+     * Native HBase mapping for reading existing HBase tables within Fiji.
+     *
+     * Fiji locality groups and Fiji column families become HBase families and must be the same.
+     * Fiji column qualifiers become HBase qualifiers.
+     */
+    HBASE_NATIVE
+  }
+
+  /**
+   * The HashSpec contains details about the type of hashing algorithm, hash
+   * size, and whether or not the hbase key will include the actual component.
+   */
+  record HashSpec {
+    /** Hashing algorithm used. */
+    HashType hash_type = "MD5";
+
+    /**
+     * Size of the hash, in bytes. If used for salting purposes, i.e. the hash is not the sole
+     * component of the key, use a smaller hash size.
+     *
+     * <p>This defaults to 16 so that if you suppress key materialization, you don't inadvertently
+     * lose precision. But users of materialized keys (i.e., most use cases) should set this to
+     * a much more conservative value: 1 or 2 bytes of hash prefix.</p>
+     */
+    int hash_size = 16;
+
+    /**
+     * If true, strips actual key data from the HBase row key. Only the hash is stored in HBase.
+     *
+     * <p>Use with caution! Under normal circumstances, an HBase row key is created as
+     * a hash prefix followed by the actual component that is hashed. Setting this to
+     * true enables the user to store only the hash. (making the distinction between HASHED
+     * and HASH_PREFIXED). This means that there is a non-zero possibility for collisions.</p>
+     */
+    boolean suppress_key_materialization = false;
+  }
+
+  /**
+   * Deprecated! Use RowKeyFormat2 instead.
+   * The specification for the row key. Fields have default values for suggested usage.
+   * Encoding cannot be FORMATTED if you use this record.
+   */
+  record RowKeyFormat {
+
+    /** Encoding of the row key. */
+    RowKeyEncoding encoding;
+
+    /** Type of hashing used, if any. */
+    union { null, HashType } hash_type = null;
+
+    /**
+     * Size of the hash, in bytes.
+     *  - unused when encoding is RAW.
+     *  - smaller than the hash size used for HASH or HASH_PREFIX.
+     */
+    int hash_size = 0;
+  }
+
+  /**
+   * Types of row key components supported in FORMATTED encoding.
+   */
+  enum ComponentType {
+    STRING,
+    INTEGER,
+    LONG
+  }
+
+  /**
+   * Specifies a single element of the row key.
+   */
+  record RowKeyComponent {
+    /**
+     * Name of element. This name must match the regular expression for
+     * identifiers: [A-Za-z_][A-Za-z0-9_].
+     */
+    string name;
+
+    /** Primitive type of the component. */
+    ComponentType type;
+  }
+
+  /**
+   * The specification for the row key. Fields have default values for suggested usage.
+   * Only RAW and FORMATTED encoding can be used with this record.
+   */
+  record RowKeyFormat2 {
+    /** Whether the row key is raw bytes or composed of one or more primitive types. */
+    RowKeyEncoding encoding;
+
+    /**
+     * Specification for hashing. Hashing is left prefixed.
+     *
+     * <p>SCHEMA-335: If not specified, this will default to two bytes of MD5 hash prefix.
+     * This field may only be set to null if <tt>encoding</tt> is <tt>RowKeyEncoding.RAW</tt>.
+     * </p>
+     */
+     union { HashSpec, null } salt =
+         { "hash_type" : "MD5", "hash_size" : 2, "suppress_key_materialization" : false };
+
+    /**
+     * The first component index from which point we support range scans. This means
+     * only components to the left of this will be included in the hash. IOW, you
+     * are able to perform range scans over this component and components that follow.
+     * It is invalid to make the first component of key support range scans.
+     * 0 indexed. Set to components.size to hash over the entire key.
+     */
+    int range_scan_start_index = 1;
+
+    /**
+     * The component at this index, and all following components can take null values.
+     * A row key with a null component must ensure that all the components following it
+     * are also null, in order to comply with ordering constraints. It is invalid to make
+     * the first component of a key nullable.
+     * 0 indexed. Set to components.size to disallow nulls.
+     * nullable_start_index can be < range_scan_start_index, in which case the missing
+     * components will not be included in the hash calculation.
+     */
+    int nullable_start_index = 1;
+
+    /**
+     * An ordered list of the individual components that make up this key. Must contain
+     * at least one component.
+     */
+    array<RowKeyComponent> components = [];
+  }
+
+  /** Layout of a Fiji table. */
+  record TableLayoutDesc {
+    /** Name of the table ([a-zA-Z0-9_]+). */
+    string name;
+
+    /**
+     * Max file size of an HBase region.
+     * Leave null for HBase's default value.
+     *
+     * For more details, see:
+     * http://hbase.apache.org/apidocs/org/apache/hadoop/hbase/HTableDescriptor.html#setMaxFileSize(long)
+     */
+    union { null, long } max_filesize = null;
+
+    /**
+     * Maximum size of the hbase memstore.
+     * Leave null for HBase's default value.
+     *
+     * For more details, see:
+     * http://hbase.apache.org/apidocs/org/apache/hadoop/hbase/HTableDescriptor.html#setMemStoreFlushSize(long)
+     */
+    union { null, long } memstore_flushsize = null;
+
+    /** User description of the table. */
+    string description = "";
+
+    /**
+     * The format of row keys for the table. Please use RowKeyFormat2 as
+     * RowKeyFormat is deprecated.
+     */
+    union { RowKeyFormat, RowKeyFormat2 } keys_format;
+
+    /** Locality groups in the table. */
+    array<LocalityGroupDesc> locality_groups = [];
+
+    /** Column name translator (introduced in layout-1.5). */
+    ColumnNameTranslator column_name_translator = "SHORT";
+
+    /** Data layout version (eg. "layout-1.2"). */
+    string version;
+
+    /** ID of the layout. */
+    union { null, string } layout_id = null;
+
+    /** Reference to the base layout this descriptor builds on. */
+    union { null, string } reference_layout = null;
+  }
+
+  // ---------------------------------------------------------------------------
+  // Backup records
+
+  /** An MD5 hash. */
+  fixed MD5Hash(16);
+
+  /** An entry from the SystemTable inside a metadata backup file. */
+  record SystemTableEntry {
+    /** Entry Key */
+    string key;
+
+    /** Entry Value */
+    bytes value;
+  }
+
+  /** An entry from the SchemaTable inside a metadata backup file. */
+  record SchemaTableEntry {
+    /** Schema ID: positive integers only. */
+    long id;
+
+    /** 128 bits (16 bytes) hash of the schema JSON representation. */
+    MD5Hash hash;
+
+    /** JSON representation of the schema. */
+    string avro_schema;
+  }
+
+  /** Entry to backup a table layout update. */
+  record TableLayoutBackupEntry {
+    /** Time Stamp. */
+    long timestamp;
+
+    /**
+     * Table layout update, as specified by the submitter/user.
+     * Except for the first one, the update builds on the previous layout.
+     */
+    union { TableLayoutDesc, null } update = null;
+
+    /** Effective table layout, after applying the update. */
+    TableLayoutDesc layout;
+  }
+
+  /** Record that contains the layouts information for a table backup. */
+  record TableLayoutsBackup {
+    /** Sequence of layouts in the layout history for the specified table, in order. */
+    array<TableLayoutBackupEntry> layouts = [];
+  }
+
+  /** Entry to backup user defined meta data. */
+  record KeyValueBackupEntry {
+    /** Time Stamp. */
+    long timestamp;
+
+    /** Key. */
+    string key;
+
+    /** Value. */
+    bytes value;
+  }
+
+  /** Record that contains the user defined keyvalue metadata information for a table. */
+  record KeyValueBackup {
+    /** Sequence of user defined key-value pairs for the specified table, in order. */
+    array<KeyValueBackupEntry> key_values = [];
+  }
+
+  /** Table backup, ie. everything needed to restore a table. */
+  record TableBackup {
+    /** Table name. */
+    string name;
+
+    /** Backup of the table layouts. */
+    TableLayoutsBackup table_layouts_backup;
+
+    /** Backup of the key-value metadata of the table. */
+    KeyValueBackup key_value_backup = [];
+  }
+
+  record SystemTableBackup {
+    array<SystemTableEntry> entries = [];
+  }
+
+  record SchemaTableBackup {
+    array<SchemaTableEntry> entries = [];
+  }
+
+  record MetaTableBackup {
+    map<TableBackup> tables = {};
+  }
+
+  /** Record that encapsulates all Fiji metadata, for backup purposes. */
+  record MetadataBackup {
+    /** Layout version (eg. "layout-1.0"). */
+    string layout_version;
+
+    /** System table backup. */
+    SystemTableBackup system_table;
+
+    /** Schema table backup. */
+    SchemaTableBackup schema_table;
+
+    /** Meta table backup. */
+    MetaTableBackup meta_table;
+  }
+
+}

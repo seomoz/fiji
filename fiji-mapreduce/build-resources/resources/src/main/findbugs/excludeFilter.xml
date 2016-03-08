@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+  <!--
+    (c) Copyright 2012 WibiData, Inc.
+
+    See the NOTICE file distributed with this work for additional
+    information regarding copyright ownership.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+  -->
+<FindBugsFilter>
+
+  <!--
+    Bugs we don't care about globally.
+  -->
+  <Match>
+    <Or>
+      <!-- We never use Java Serialization, so ignore any Serializable findbugs warnings. -->
+      <Bug pattern="SE_COMPARATOR_SHOULD_BE_SERIALIZABLE" />
+      <Bug pattern="EI_EXPOSE_REP" />
+      <Bug pattern="EI_EXPOSE_REP2" />
+    </Or>
+  </Match>
+  <!-- Suppress bugs in Avro generated classes. -->
+  <Match>
+    <Class name="~org[.]fiji[.]mapreduce[.]avro[.]generated[.].*" />
+  </Match>
+  <Match>
+    <!-- Mappers/Reducers/Gatherers/Producers/Tools initialize in setup() so it's okay if their
+         constructors don't initialize an instance variable. -->
+    <Or>
+      <Class name="~org[.]fiji[.]mapreduce[.]bulkimport[.]impl[.].*Mapper" />
+      <Class name="~org[.]fiji[.]mapreduce[.]gather[.]impl[.].*Mapper" />
+      <Class name="~org[.]fiji[.]mapreduce[.]produce[.]impl[.].*Mapper" />
+    </Or>
+    <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" />
+  </Match>
+  <Match>
+    <!-- Command-line flags are initialized with FlagParser.parse(). -->
+    <Class name="~org[.]fiji[.]mapreduce[.]tools[.]FijiBulkLoad" />
+    <Bug pattern="UWF_NULL_FIELD" />
+  </Match>
+  <Match>
+    <!-- For performance, code returning the same array every time is correct. -->
+    <Class name="com.moz.fiji.mapreduce.impl.FijiTableSplit" />
+    <Or>
+      <Bug pattern="EI_EXPOSE_REP" />
+      <Bug pattern="EI_EXPOSE_REP2" />
+      <Bug pattern="EQ_DOESNT_OVERRIDE_EQUALS" />
+    </Or>
+  </Match>
+  <Match>
+    <!-- Disable the equals check for HFileKeyValue -->
+    <Class name="com.moz.fiji.mapreduce.framework.HFileKeyValue" />
+    <Bug pattern="EQ_COMPARETO_USE_OBJECT_EQUALS" />
+  </Match>
+  <Match>
+    <Class name="com.moz.fiji.mapreduce.framework.HBaseFijiTableInputFormat$FijiTableRecordReader" />
+    <Bug pattern="BC_UNCONFIRMED_CAST" />
+  </Match>
+  <Match>
+    <Or>
+      <Class name="com.moz.fiji.mapreduce.framework.ConsistentHostOrderPolicy$1"/>
+      <Class name="com.moz.fiji.mapreduce.framework.CassandraSubSplitCombiner$1"/>
+    </Or>
+    <Bug pattern="SIC_INNER_SHOULD_BE_STATIC_ANON" />
+  </Match>
+</FindBugsFilter>

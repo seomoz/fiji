@@ -1,0 +1,75 @@
+
+                              Fiji Schema Shell Release Notes
+
+Version 1.4.0
+  * POM-40. Require JDK 7 to compile Fiji projects.
+
+Version 1.2.1
+  * DDLSHELL-51. Adds a security module.  You can use the module with the command:
+       MODULE 'fork';
+  * DDLSHELL-38. Support for validated reader/writer schemas in layout-1.3
+    ** Adds "ALTER TABLE.. { ADD | DROP } [ [DEFAULT] READER | WRITER ]
+       SCHEMA.. FOR { COLUMN | FAMILY }" command
+    ** CREATE TABLE now accepts a VALIDATION property with values:
+       { NONE | LEGACY | DEVELOPER | STRICT }
+    ** Adds "DESCRIBE TABLE t COLUMN c SHOW [n] { READER | WRITER } SCHEMAS"
+
+Version 1.2.0
+  * DDLSHELL-47. Plugin modules can now provide 'help' text.
+  * DDLSHELL-36. Fix link to reference manual in 'help' command.
+  * DDLSHELL-44. Plugins can now define commands that execute Java subprocesses.
+      You can run a Java subprocess with the following commands:
+      MODULE 'fork';
+      FORK JVM 'com.example.MyMainClass' 'arg1' 'arg2' 'arg3...';
+  * DDLSHELL-43. Add 'USE JAR INFILE...' command to add a collection of paths
+      to jar libraries to the environment. These will be provided to Java
+      subprocesses.
+  * DDLSHELL-45. Support extended environment attributes for dynamically-loaded
+      modules through EnvironmentPlugin.
+
+Version 1.1.0
+  * DDLSHELL-33. DROP INSTANCE and DROP TABLE commands run on the shell require
+      the user to type 'yes' at a prompt. API usage and scripts are not
+      affected.
+  * DDLSHELL-20. Add CREATE INSTANCE <instance> and DROP INSTANCE <instance>
+      commands.
+  * DDLSHELL-19. Prevent program crash when you operate on a Fiji instance
+      that doesn't exist.
+  * DDLSHELL-24. Add support for NUMREGIONS table property, specifying
+      the initial region count.
+  * DDLSHELL-28. Add support for Layout version 1.2 features.
+      Supports properties added in https://jira.fiji.org/browse/SCHEMA-283.
+  * Requires FijiSchema 1.1.0+.
+
+Version 1.0.0
+  * DDLSHELL-27. Add audience and stability annotations.
+  * DDLSHELL-25. Support for language plugin modules.
+
+Version 1.0.0-rc5
+  * DDLSHELL-26. Fix bug in classpath formation.
+  * DDLSHELL-21. Shell refuses to modify table layouts created by
+      newer versions of FijiSchema.
+  * DDLSHELL-22. Change default row key format to HASH PREFIXED(2).
+  * DDLSHELL-17. Improve default top-level error message.
+  * DDLSHELL-15. Support for composite, formatted row keys.
+  * DDLSHELL-18. Refactor to use Avro builders throughout.
+
+Version 1.0.0-rc4
+  * DDLSHELL-16. Fix link to layout definition language.
+  * SCHEMA-197. Update layout protocol to 'layout-1.1'.
+  * DDLSHELL-11. Add Client API object to enable programmatic access.
+      See org.fiji.schema.shell.api.Client.
+  * DDLSHELL-14. COUNTER schema spec should have null schema value.
+  * SCHEMA-10. The --fiji flag now specifies a Fiji instance as a URI.
+  * Updated to match FijiSchema 1.0.0-rc4 API
+    SCHEMA-109, SCHEMA-143, SCHEMA-155, SCHEMA-168, SCHEMA-3.
+
+Version 1.0.0-rc3
+  * SCHEMA-154. Update to FijiSchema 1.0.0-rc3 API (Fiji.getAdmin())
+  * SCHEMA-50. Update to FijiSchema 1.0.0-rc3 API (Fiji.release(), retain())
+  * SCHEMA-97. Update to 1.0.0-rc3 API (Fiji.open() -> Fiji.Factory.open())
+  * DDLSHELL-6. Improve shell 'help' command.
+  * DDLSHELL-5. Adds RELEASE_NOTES.txt
+
+Version 1.0.0-rc2
+  * DDLSHELL-3. Use Fiji artifacts instead of odiago/wibi artifacts.

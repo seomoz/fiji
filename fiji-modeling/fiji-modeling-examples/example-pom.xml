@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.moz.fiji.modeling</groupId>
+  <artifactId>fiji-modeling-examples</artifactId>
+  <version>0.4.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <inceptionYear>2013</inceptionYear>
+
+  <properties>
+    <fiji-express.version>1.0.1</fiji-express.version>
+    <fiji-schema.version>1.3.4</fiji-schema.version>
+    <fiji-schema-shell.version>1.3.1</schema-shell.version>
+    <log4j.version>1.2.16</log4j.version>
+    <scala-library.version>2.10.3</scala-library.version>
+
+    <maven-assembly-plugin.version>2.3</maven-assembly-plugin.version>
+    <maven-jar-plugin.version>2.3.1</maven-jar-plugin.version>
+    <scala-maven-plugin.version>3.1.6</scala-maven-plugin.version>
+  </properties>
+
+  <repositories>
+    <!-- Fiji repositories -->
+    <repository>
+      <id>fiji-repos</id>
+      <name>fiji-repos</name>
+      <url>https://repo.wibidata.com/artifactory/fiji</url>
+    </repository>
+    <repository>
+      <id>fiji-nightly</id>
+      <name>fiji-nightly</name>
+      <url>https://repo.wibidata.com/artifactory/fiji-nightly</url>
+    </repository>
+  </repositories>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala-library</artifactId>
+      <version>${scala-library.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.moz.fiji.modeling</groupId>
+      <artifactId>fiji-modeling</artifactId>
+      <version>${project.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.moz.fiji.express</groupId>
+      <artifactId>fiji-express</artifactId>
+      <version>${fiji-express.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.moz.fiji.schema</groupId>
+      <artifactId>fiji-schema</artifactId>
+      <version>${fiji-schema.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <scope>provided</scope>
+      <version>${log4j.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>${maven-jar-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>${maven-assembly-plugin.version}</version>
+      </plugin>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <version>${scala-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <id>compilation</id>
+            <goals>
+              <goal>compile</goal>
+              <goal>testCompile</goal>
+            </goals>
+            <configuration>
+              <sendJavaToScalac>false</sendJavaToScalac>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
+

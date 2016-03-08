@@ -1,0 +1,8 @@
+*~
+*.swp
+/target
+/.settings
+/.project
+/.classpath
+/TAGS
+/.taglist

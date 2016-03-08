@@ -1,0 +1,93 @@
+
+                              FijiREST Release Notes
+
+Version 1.5.0
+  * REST-144. Split the standard plugin into its own module to allow for the
+      "/v1" endpoint to be removed/disabled.
+  * POM-40. Require JDK 7 to compile Fiji projects.
+  * REST-135. Support bulk gets
+  * REST-147. Fix the startup script to make the logs directory and
+       ensure logs are written there.
+
+Version 1.4.0
+  * REST-133. Make Fiji/FijiTable connection expiration configurable
+  * REST-105. Add endpoint to gracefully (or forcefully) shut down server.
+  * REST-137. Fiji-REST now supports DELETE commands
+  * REST-98.  Re-introduce control on Fiji instance visibility in FijiREST
+
+Version 1.2.2
+  * REST-90. Allow FijiREST to be started in foreground mode, via the
+      'foreground' command line option.
+
+Version 1.2.0
+  * REST-62. Implements counter cell incrementation and decrementation.
+  * REST-41. Supports optional cross-origin resource sharing (CORS).
+  * REST-89. Refresh instances automatically. Removes instance visibility
+      configuration parameter. All instances on target cluster are visible.
+      Manual refreshes can be triggered with a POST to the admin task
+      /tasks/refresh_instances.
+
+Version 1.1.0
+  * REST-85. Add archetype for creating Fiji Rest plugins.
+  * REST-63. FijiREST should have a mode to serve all Fiji instances in a cluster.
+  * REST-84. fiji-rest script should allow specifying JVM arguments.
+  * REST-76. FijiREST logging locations must be fully configurable
+  * REST-79. Don't close the underlying Fiji instance.
+  * REST-80. Correctly use KIJI_REST_CONF_DIR for location of conf directory.
+  * REST-69. Modularizes FijiREST in preparation for custom endpoints.
+
+Version 1.0.1
+  * REST-50. Fix a performance issue that was causing massive slowdowns.
+
+Version 1.0.0
+  * REST-66. Incorporates native json formatted entity ids in POST.
+      Cleans up row key specification language.
+  * REST-64. Fix the exception handling to ensure that all exceptions
+      are converted to JSON objects, stacktraces included and logged
+      to the application log file on the server.
+  * REST-48. Adds start_eid/end_eid and removes start_rk/end_rk.
+  * REST-60. Removes the entityId endpoint of tables.
+  * REST-50. Check that the table still exists before returning it in
+      ManagedFijiClient.
+  * REST-59. Ensure that if the writer_schema is JSON, that the server will
+     accept the schema and parse it properly.
+
+Version 0.6.0
+  * REST-55. Remove an old servlet dependency. Also change the release artifact
+     to not contain a single fat jar but house the runtime dependencies in the
+     lib/ directory.
+  * REST-54. Supports per-request freshening parameters.
+  * REST-53. Remove the row endpoint. Can be accessed by /rows?eid=.
+  * REST-32. Supports scanning with partially specified entity ids.
+  * REST-49. Adds freshening/scoring parameter to FijiREST.
+
+Version 0.5.0
+  * REST-44. Remove the rowkey element from the output of the row.
+  * REST-45. Output the writer schema_id on GET. Force the specification of the
+      writer schema (either id or JSON) on POST to ensure that data specified can
+      be written without throwing exceptions because of data being written
+      according to the wrong writer schema.
+
+Version 0.4.0
+  * REST-40. Bugfix: Fix the issue where /instances/<instance> threw a
+      500 error. This was due to an issue in converting Avro to JSON using
+      the generic writer. Specific writers are now used when serializing a
+      specific record.
+
+Version 0.3.0
+  * REST-21. Implements batch POST.
+  * REST-33. Bugfix: instances/<instance>/ throws an error retrieving metadata.
+  * REST-23. Expose methods to read and write REST row models.
+  * REST-12. Emit JSON that is properly navigable instead of a list of cells.
+  * REST-8. Allow for the installation of custom HBase configuration via either
+      $BASEDIR/conf or the KIJI_REST_CONF_DIR environment variable.
+
+Version 0.2.0
+  * REST-20. Update FijiREST to depend on FijiSchema v1.1.0.
+  * REST-10. Ensure that the /rows resource streams properly in all cases.
+  * REST-18. Adds KIJI_CLASSPATH to FijiREST classpath.
+  * REST-9. Allows users to GET with timerange=all.
+  * REST-11. Ignore cells with negative timestamps when POSTing.
+
+Version 0.1.0
+  * Initial code commit.

@@ -1,0 +1,46 @@
+# Basic configuration to get started.
+
+########## FijiREST Configuration ##########
+# The cluster property defines the URI of the Fiji cluster.
+
+cluster: "fiji://.env/"
+cors: false
+cacheTimeout: 10 # default amount of time in minutes to wait before clearing cache of instances and tables.
+remote-shutdown: true    # enable/disable admin command that allows the server to be shut down via REST
+#instances:              # list the instances that you want make visible to track via REST
+#  - default             # if no instances are listed, all will be available
+
+########## Dropwizard Configuration ##########
+# Set default port and path to REST URI and let logs divert to ./logs/ instead of
+# printing to the console. This is recommended for production systems. For more
+# information on Dropwizard logging options and defaults, see
+# http://dropwizard.io/manual/configuration.html
+
+server:
+  applicationConnectors:
+    - type: http
+      port: 8080
+  adminConnectors:
+    - type: http
+      port: 8081
+  requestLog:
+    timeZone: UTC
+    appenders:
+      - type: file
+        currentLogFilename: logs/requests.log
+        archive: true
+        archivedLogFilenamePattern: logs/archive/requests-%d.log
+        archivedFileCount: 7 # 1 week
+
+logging:
+  level: INFO
+  loggers:
+    org.apache.zookeeper: WARN
+    org.apache.curator: WARN
+  appenders:
+    - type: file
+      currentLogFilename: logs/app.log
+      archive: true
+      archivedLogFilenamePattern: logs/archive/app-%d.log
+      archivedFileCount: 7 # 1 week
+      timeZone: UTC

@@ -1,0 +1,10 @@
+
+* Add docs for API.
+
+* ROW KEY FORMAT should support different hash types (md5, etc) when FijiSchema does..
+
+* When 'enabled' is real:
+** support ALTER TABLE ENABLE/DISABLE FAMILY/COLUMN/LOCALITY GROUP for the enabled flag.
+** DESCRIBE should only show enabled data, unless extended is true.
+** DUMP DDL should only dump enabled data, until we can set disabled to true.
+

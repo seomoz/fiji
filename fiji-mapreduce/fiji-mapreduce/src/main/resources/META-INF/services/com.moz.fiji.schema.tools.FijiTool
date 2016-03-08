@@ -1,0 +1,7 @@
+com.moz.fiji.mapreduce.tools.FijiBulkImport
+com.moz.fiji.mapreduce.tools.FijiBulkLoad
+com.moz.fiji.mapreduce.tools.FijiGather
+com.moz.fiji.mapreduce.tools.FijiJobHistory
+com.moz.fiji.mapreduce.tools.FijiLaunchMapReduce
+com.moz.fiji.mapreduce.tools.FijiPivot
+com.moz.fiji.mapreduce.tools.FijiProduce

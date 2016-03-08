@@ -1,0 +1,18 @@
+
+
+                              FijiMR Library Release Notes
+
+Version 1.2.0
+  * POM-40. Require JDK 7 to compile Fiji projects.
+
+Version 1.0.0-rc62
+  * KIJIMR-32. Separate bulk importer SPIs from implementation more cleanly.
+  * KIJIMRLIB-18. Upgrade to FijiSchema 1.1.0 and FijiMR 1.0.0-rc62.
+
+Version 1.0.0-rc6
+  * KIJIMR-169. Import Wibi's graph library.
+  * KIJIMRLIB-14. Add XML bulk importer.
+  * DDLSHELL-23. Added extension for FijiSchema shell to support bulk imports.
+
+Version 1.0.0-rc5
+  * Initial release.

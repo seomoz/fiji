@@ -1,0 +1,400 @@
+/**
+ * (c) Copyright 2013 WibiData, Inc.
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.moz.fiji.schema.shell
+
+import scala.collection.JavaConversions._
+
+import org.specs2.mutable._
+import org.apache.hadoop.hbase.HBaseConfiguration
+
+import com.moz.fiji.schema.avro.FamilyDesc
+import com.moz.fiji.schema.hbase.HBaseFactory
+import com.moz.fiji.schema.hbase.FijiManagedHBaseTableName
+import com.moz.fiji.schema.layout.FijiTableLayout
+import com.moz.fiji.schema.shell.ddl.TableProperties
+import com.moz.fiji.schema.shell.util.FijiTestHelpers
+import com.moz.fiji.schema.FijiURI
+import com.moz.fiji.schema.shell.input.NullInputSource
+
+/**
+ * Tests that FijiSystem will connect to the correct Fiji instance and will actually create,
+ * modify, and drop tables.
+ */
+class IntegrationTestFijiSystem
+    extends SpecificationWithJUnit
+    with TableProperties
+    with FijiTestHelpers {
+  "FijiSystem" should {
+    "create a table correctly" in {
+      val uri = getNewInstanceURI()
+      installFiji(uri)
+      val environment = env(uri)
+      val parser = getParser(environment)
+      val res = parser.parseAll(parser.statement, """
+CREATE TABLE foo WITH DESCRIPTION 'some data'
+ROW KEY FORMAT HASHED
+WITH LOCALITY GROUP default WITH DESCRIPTION 'main storage' (
+  MAXVERSIONS = INFINITY,
+  TTL = FOREVER,
+  INMEMORY = false,
+  COMPRESSED WITH GZIP,
+  FAMILY info WITH DESCRIPTION 'basic information' (
+    name "string" WITH DESCRIPTION 'The user\'s name',
+    email "string",
+    age "int"),
+  MAP TYPE FAMILY integers COUNTER
+);""")
+      res.successful mustEqual true
+      val env2 = res.get.exec()
+
+      // Print the table description to the log for debugging purposes.
+      val parser2 = getParser(env2)
+      val res2 = parser2.parseAll(parser2.statement, "DESCRIBE foo;")
+      res2.successful mustEqual true
+      val env3 = res2.get.exec()
+
+      // Programmatically test proper table creation.
+      // Check that we have created as many locgroups, map families, and group families
+      // as we expect to be here.
+      val maybeLayout = env3.fijiSystem.getTableLayout(uri, "foo")
+      maybeLayout must beSome[FijiTableLayout]
+      val layout = maybeLayout.get.getDesc
+      val locGroups = layout.getLocalityGroups()
+      locGroups.size mustEqual 1
+      val defaultLocGroup = locGroups.head
+      defaultLocGroup.getName().toString() mustEqual "default"
+      defaultLocGroup.getFamilies().size mustEqual 2
+
+      (defaultLocGroup.getFamilies().filter({grp => grp.getName().toString() == "integers"})
+          .size mustEqual 1)
+      val maybeInfo = defaultLocGroup.getFamilies().find({ grp =>
+          grp.getName().toString() == "info" })
+      maybeInfo must beSome[FamilyDesc]
+      maybeInfo.get.getColumns().size mustEqual 3
+
+      environment.fijiSystem.shutdown()
+
+      ok("Completed test")
+    }
+
+    "create and drop a table" in {
+      val uri = getNewInstanceURI()
+      installFiji(uri)
+      val environment = env(uri)
+      val parser = getParser(environment)
+      val res = parser.parseAll(parser.statement, """
+CREATE TABLE foo WITH DESCRIPTION 'some data'
+ROW KEY FORMAT HASHED
+WITH LOCALITY GROUP default WITH DESCRIPTION 'main storage' (
+  MAXVERSIONS = INFINITY,
+  TTL = FOREVER,
+  INMEMORY = false,
+  COMPRESSED WITH GZIP,
+  FAMILY info WITH DESCRIPTION 'basic information' (
+    name "string" WITH DESCRIPTION 'The user\'s name',
+    email "string",
+    age "int")
+);""")
+      res.successful mustEqual true
+      val env2 = res.get.exec()
+
+      // Verify that it's there.
+      val maybeLayout = env2.fijiSystem.getTableLayout(uri, "foo")
+      maybeLayout must beSome[FijiTableLayout]
+
+      // Drop the table.
+      val parser2 = getParser(env2)
+      val res2 = parser2.parseAll(parser2.statement, "DROP TABLE foo;")
+      res2.successful mustEqual true
+      val env3 = res2.get.exec()
+
+      // Programmatically test that the table no longer exists.
+      val maybeLayout2 = env3.fijiSystem.getTableLayout(uri, "foo")
+      maybeLayout2 must beNone
+
+      environment.fijiSystem.shutdown()
+
+      ok("Completed test")
+    }
+
+    "create and alter a table" in {
+      val uri = getNewInstanceURI()
+      installFiji(uri)
+      val environment = env(uri)
+      val parser = getParser(environment)
+      val res = parser.parseAll(parser.statement, """
+CREATE TABLE foo WITH DESCRIPTION 'some data'
+ROW KEY FORMAT HASHED
+WITH LOCALITY GROUP default WITH DESCRIPTION 'main storage' (
+  MAXVERSIONS = INFINITY,
+  TTL = FOREVER,
+  INMEMORY = false,
+  COMPRESSED WITH GZIP,
+  FAMILY info WITH DESCRIPTION 'basic information' (
+    name "string" WITH DESCRIPTION 'The user\'s name',
+    email "string",
+    age "int"),
+  MAP TYPE FAMILY integers COUNTER
+);""")
+      res.successful mustEqual true
+      val env2 = res.get.exec()
+
+      // Print the table description to the log for debugging purposes.
+      val parser2 = getParser(env2)
+      val res2 = parser2.parseAll(parser2.statement, "DESCRIBE foo;")
+      res2.successful mustEqual true
+      val env3 = res2.get.exec()
+
+      // Programmatically test proper table creation.
+      // Check that we have created as many locgroups, map families, and group families
+      // as we expect to be here.
+      val maybeLayout = env3.fijiSystem.getTableLayout(uri, "foo")
+      maybeLayout must beSome[FijiTableLayout]
+      val layout = maybeLayout.get.getDesc
+      val locGroups = layout.getLocalityGroups()
+      locGroups.size mustEqual 1
+      val defaultLocGroup = locGroups.head
+      defaultLocGroup.getName().toString() mustEqual "default"
+      defaultLocGroup.getFamilies().size mustEqual 2
+      (defaultLocGroup.getFamilies().find({ fam => fam.getName().toString == "integers"})
+          must beSome[FamilyDesc])
+      (defaultLocGroup.getFamilies().find({ fam => fam.getName().toString == "info" })
+          .get.getColumns.size mustEqual 3)
+
+      // Now, drop the map-type family, and verify that this worked correctly.
+      val parser3 = getParser(env3)
+      val res3 = parser3.parseAll(parser3.statement, "ALTER TABLE foo DROP FAMILY integers;")
+      res3.successful mustEqual true
+      val env4 = res3.get.exec()
+
+      println("Describing the table again, for debugging purposes.")
+      val parser3a = getParser(env4)
+      val res3a = parser3a.parseAll(parser3a.statement, "DESCRIBE foo;")
+      res3a.successful mustEqual true
+      val env4a = res3a.get.exec()
+
+      // Programmatically inspect the modified layout, verify that
+      // 'integers' is not present, but 'info' is.
+      val maybeLayout2 = env4.fijiSystem.getTableLayout(uri, "foo")
+      maybeLayout2 must beSome[FijiTableLayout]
+      val layout2 = maybeLayout2.get.getDesc
+      val locGroups2 = layout2.getLocalityGroups()
+      locGroups2.size mustEqual 1
+      val defaultLocGroup2 = locGroups2.head
+      defaultLocGroup2.getName().toString() mustEqual "default"
+      defaultLocGroup2.getFamilies().size mustEqual 1
+      defaultLocGroup2.getFamilies().head.getName().toString() mustEqual "info"
+
+      // Now make a second edit to the same table. Make sure that the appropriate reference
+      // id for the parent layout is being used.
+      val parser4 = getParser(env4)
+      val res4 = parser4.parseAll(parser4.statement, "ALTER TABLE foo SET DESCRIPTION = 'ohai';")
+      res4.successful mustEqual true
+      val env5 = res4.get.exec()
+
+      // Inspect the modified layout. Verify the table description has been changed.
+      val maybeLayout3 = env5.fijiSystem.getTableLayout(uri, "foo")
+      maybeLayout3 must beSome[FijiTableLayout]
+      val layout3 = maybeLayout3.get.getDesc
+      layout3.getDescription().toString mustEqual "ohai"
+
+      environment.fijiSystem.shutdown()
+
+      ok("Completed test")
+    }
+
+    "create a multi-region table" in {
+      val uri = getNewInstanceURI()
+      installFiji(uri)
+      val environment = env(uri)
+      val parser = getParser(environment)
+      val res = parser.parseAll(parser.statement, """
+CREATE TABLE foo WITH DESCRIPTION 'some data'
+ROW KEY FORMAT HASHED
+PROPERTIES ( NUMREGIONS = 10 )
+WITH LOCALITY GROUP default WITH DESCRIPTION 'main storage' (
+  MAXVERSIONS = INFINITY,
+  TTL = FOREVER,
+  INMEMORY = false,
+  COMPRESSED WITH GZIP,
+  FAMILY info WITH DESCRIPTION 'basic information' (
+    name "string" WITH DESCRIPTION 'The user\'s name',
+    email "string",
+    age "int")
+);""")
+      res.successful mustEqual true
+      val env2 = res.get.exec()
+
+      // Verify that it's there.
+      val maybeLayout = env2.fijiSystem.getTableLayout(uri, "foo")
+      maybeLayout must beSome[FijiTableLayout]
+
+      // And verify the region count is accurate.
+      val hbaseTableName = FijiManagedHBaseTableName.getFijiTableName(
+          uri.getInstance(), "foo").toBytes()
+      val hbaseFactory = HBaseFactory.Provider.get()
+      val hbaseAdmin = hbaseFactory.getHBaseAdminFactory(uri).create(HBaseConfiguration.create())
+      hbaseAdmin.getTableRegions(hbaseTableName).size mustEqual 10
+      hbaseAdmin.close()
+
+      // Verify that we properly set the initial region count in the meta table.
+      val regionCount: Option[String] = environment.fijiSystem.getMeta(uri, "foo",
+         RegionCountMetaKey /* from TableProperties */)
+      regionCount must beSome[String]
+      regionCount.get mustEqual "10"
+
+      environment.fijiSystem.shutdown()
+
+      ok("Completed test")
+    }
+
+    "refuse to create a multi-region RAW table" in {
+      val uri = getNewInstanceURI()
+      installFiji(uri)
+      val environment = env(uri)
+      val parser = getParser(environment)
+      val res = parser.parseAll(parser.statement, """
+CREATE TABLE foo WITH DESCRIPTION 'some data'
+ROW KEY FORMAT RAW
+PROPERTIES ( NUMREGIONS = 10 )
+WITH LOCALITY GROUP default WITH DESCRIPTION 'main storage' (
+  MAXVERSIONS = INFINITY,
+  TTL = FOREVER,
+  INMEMORY = false,
+  COMPRESSED WITH GZIP,
+  FAMILY info WITH DESCRIPTION 'basic information' (
+    name "string" WITH DESCRIPTION 'The user\'s name',
+    email "string",
+    age "int")
+);""")
+      res.successful mustEqual true
+      res.get.exec() must throwAn[Exception]
+
+      // Verify that it's not there.
+      val maybeLayout = environment.fijiSystem.getTableLayout(uri, "foo")
+      maybeLayout must beNone
+
+      environment.fijiSystem.shutdown()
+
+      ok("Completed test")
+    }
+
+    "create, use, and drop an instance" in {
+      val uri = getNewInstanceURI()
+      val instanceName = uri.getInstance()
+      val environment = env(uri)
+      val parser = getParser(environment)
+
+      println("Creating instance: " + uri.getInstance())
+      val res = parser.parseAll(parser.statement, "CREATE INSTANCE '" + instanceName + "';")
+      res.successful mustEqual true
+      val env2 = res.get.exec()
+
+      env2.fijiSystem.listInstances.contains(instanceName) mustEqual true
+
+      // Print the instance list to the log for debugging purposes.
+      println("Listing available instances...")
+      val parser2 = getParser(env2)
+      val res2 = parser2.parseAll(parser2.statement, "SHOW INSTANCES;")
+      res2.successful mustEqual true
+      val env3 = res2.get.exec()
+
+      // Programmatically test proper table creation.
+      // Check that we have created as many locgroups, map families, and group families
+      // as we expect to be here.
+      println("Creating a table (tblfoo)...")
+      val parser3 = getParser(env3)
+      val res3 = parser3.parseAll(parser3.statement,
+          "CREATE TABLE tblfoo WITH LOCALITY GROUP lg;")
+      res3.successful mustEqual true
+      val env4 = res3.get.exec()
+
+      // Print the table list to the log for debugging purposes.
+      println("Listing available tables")
+      val parser4 = getParser(env4)
+      val res4 = parser4.parseAll(parser4.statement, "SHOW TABLES;")
+      res4.successful mustEqual true
+      val env5 = res4.get.exec()
+
+      // Create another instance; this implicitly switches to it.
+      val alternateInstance = instanceName + "ALT"
+      println("Creating alternate instance: " + alternateInstance)
+      val parser5 = getParser(env5)
+      val res5 = parser5.parseAll(parser5.statement,
+          "CREATE INSTANCE '" + alternateInstance + "';")
+      res5.successful mustEqual true
+      val env6 = res5.get.exec()
+
+      // Now remove the original instance.
+      println("Dropping instance '" + instanceName + "'")
+      val parser6 = getParser(env6)
+      val res6 = parser6.parseAll(parser6.statement,
+          "DROP INSTANCE '" + instanceName + "';")
+      res5.successful mustEqual true
+      val env7 = res6.get.exec()
+
+      env7.fijiSystem.listInstances.contains(instanceName) mustEqual false
+
+      println("Listing available instances one last time.")
+      val parser7 = getParser(env7)
+      val res7 = parser7.parseAll(parser7.statement, "SHOW INSTANCES;")
+      res7.successful mustEqual true
+      val env8 = res7.get.exec()
+
+      environment.fijiSystem.shutdown()
+      env8.fijiSystem.shutdown()
+
+      ok("Completed test")
+    }
+
+    "use metatable entries correctly." in {
+      // We want to set and retrieve metatable key/value pairs here.
+      // We explicitly depend on the ability to set and retrieve these for tables that do
+      // not (yet) exist.
+      val uri = getNewInstanceURI()
+      installFiji(uri)
+
+      val environment = env(uri)
+
+      environment.fijiSystem.getMeta(uri, "AnyTable", "AnyKey") must beNone
+      environment.fijiSystem.setMeta(uri, "AnyTable", "AnyKey", "AWellDefinedValue")
+      val ret: Option[String] = environment.fijiSystem.getMeta(uri, "AnyTable", "AnyKey")
+      ret must beSome[String]
+      ret.get mustEqual "AWellDefinedValue"
+
+      environment.fijiSystem.shutdown()
+
+      ok("Completed test")
+    }
+  }
+
+  /**
+   * Get an Environment instance.
+   */
+  def env(instanceURI: FijiURI): Environment = {
+    new Environment(
+      instanceURI,
+      System.out,
+      new FijiSystem,
+      new NullInputSource(),
+      List(),
+      false)
+  }
+}

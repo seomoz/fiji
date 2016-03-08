@@ -1,0 +1,207 @@
+
+                             Fiji Express Release Notes
+
+Version 2.1.0
+  * POM-40. Require JDK 7 to compile Fiji projects.
+  * EXP-451. Revamps express.py to cut external dependencies on python-base.
+  * EXP-470. Adds ability to generate bin counters for histograms profiling tuple sizes
+      and processing times within a job.
+
+Version 2.0.2
+  * EXP-432. Protocol Buffer is now a provided scope dependency for better compatibility.
+      This assumes that protobuf jars will be on your classpath from some other source,
+      e.g. HBase.
+
+Version 2.0.1
+  * EXP-417. Bash script is now deprecated, please use the python script instead.
+  * EXP-424. Explicitly added all used, but undeclared dependancies in pom files.
+  * EXP-431. Fiji Express now uses Scalding 0.9.1!
+
+Version 1.0.2
+  * EXP-418. InvalidFijiTapException now optionally takes a cause.
+
+Version 1.0.0
+  * EXP-340. Adds RowSpec and RowFilterSpec to specify row-level selection criteria in FijiInput.
+  * EXP-394. Provide groupByQualifier function for Seq[FlowCell[_]].
+  * EXP-355. Added Express key-value stores.
+  * EXP-388. Use buffered writer for direct fiji output.
+  * EXP-350. Support multiple HFile output taps in a single flow.
+  * EXP-353. Renamed utility classes to be suffixed with Util.
+
+Version 0.14.0
+  * EXP-360. ColumnOutputSpec factory methods have been replaced with ColumnOutputSpec.Builder.
+      Case class style apply and unapply methods are now hidden to protect binary compatiblity of
+      FijiExpress updates.
+  * EXP-335. Move fiji-express-examples repo into fiji-express as a submodule.
+  * EXP-334 & EXP-257. Pull repl out into a submodule of Express. Move repl-
+      specific functionality out of FijiPipe and into a new FijiPipeTool class.
+  * EXP-345. Rename root to fiji-express-root and flow module to fiji-express.
+  * EXP-331. Made fiji-express a multi-module project. Existing code
+      moved to the fiji-express-flow module.
+
+Version 0.13.0
+  * EXP-316. memory leak when reading from cells with many versions
+
+Version 0.12.0
+  * EXP-221. Improve the FijiSlice and PagedFijiSlice APIs.
+  * EXP-275. Removed default values option. Columns with missing values
+      will instead be represented with an emtpy slice.
+  * EXP-286. Rename ColumnRequestInput#schema -> schemaSpec.
+  * EXP-282. Cannot pack to specific objects with snake_case fields.
+  * EXP-279. Change paging options to use PagingSpec.
+  * EXP-222. Improve generic Avro APIs.
+
+Version 0.11.0
+  * EXP-249. Refactor the Model Lifecycle into a separate
+      project: fiji-modeling.
+
+Version 0.10.0
+  * EXP-129. Add evaluation phase to model environment.
+  * EXP-128. Add evaluation phase to model definition.
+  * EXP-153. Support joining pipes on entity_ids and add a factory method
+      to create a hashed entityId.
+  * EXP-220. Finalize FijiOutput API for 1.0 release.
+  * EXP-185. Extractor in ScoreProducer is now optional.
+  * EXP-219. Finalize FijiInput API for 1.0 release.
+  * EXP-223. Make constructors for generic AvroValues public.
+  * EXP-197. Adds support for sequence file based flow sources.
+  * EXP-207. EntityIds can now be accessed from extractors/scorers.
+  * EXP-52. Adds support for text file based key-value stores.
+
+Version 0.9.0
+  * EXP-105. When writing to a Fiji table using layout < v1.3,
+      FijiExpress uses the default reader schema for writing generic
+      values to the table.  The user can also specify a writer schema
+      using Column("family:qualifier").withSchemaId(12). This schema
+      ID can be retrieved from the fiji schema table. See
+      WriterSchemaSuite for an example.
+  * EXP-105. The DSL syntax for FijiOutput has changed from
+      FijiOutput(Map(Column("family:qualifier") -> 'fieldname)) to
+      FijiOutput(Map('fieldname -> Column("family:qualifier"))) in
+      order to match the syntax for FijiOutput('fieldname -> "fam:qual").
+
+Version 0.8.1
+  * EXP-186. Update Scalding version used by FijiExpress. This fixes
+      some Scalding bugs in the matrix API.
+
+Version 0.8.0
+  * EXP-168. Normalizes the names of modeling Avro classes. The names
+      of Avro records for columns and filters have been changed from
+      '*Spec' style to 'Avro*' to match other classes and distinguish
+      from records like 'AvroInputSpec' (which legitimately should
+      end in 'Spec').
+  * EXP-160. Extractors can now be configured on the appropriate
+      lifecycle phases.
+  * EXP-165. All model lifecycle phases are optional.
+  * EXP-125. Adds the train phase to model environments.
+  * EXP-176. Avoids clobbering mapred.child.java.opts in the express
+      script. This will allow users to pick up a value for
+      mapred.child.java.opts from mapred-site.xml, or set a value from
+      the command line.
+
+Version 0.7.0
+  * EXP-162. Environment class now expose case classes as public fields
+      instead of Avro classes.
+  * EXP-121. Adds support for the prepare phase of the model lifecycle.
+  * EXP-87. An EntityId no longer needs to be constructed using a
+      a Fiji URI. Users should now need to only specify the EntityId
+      components when creating an EntityId. For example,
+      EntityId("myEntityIdComponent").
+  * EXP-154. The modules org.fiji.express.flow.DSL and
+      org.fiji.express.flow.TimeRange have been merged into the module
+      org.fiji.express.flow. Users should now only import
+      org.fiji.express.flow._ to write Scalding flows against Fiji
+      tables using FijiExpress.
+  * EXP-107. Package reorganization across the project. In particular,
+      users should import org.fiji.express.flow._,
+      org.fiji.express.flow.DSL._, and org.fiji.express.flow.TimeRange._
+      to write applications using the FijiExpress Flow API. User code
+      will need to be updated to agree with the package reorganization.
+  * EXP-151. Stop bundling FijiSchema in the tarball. This will
+      use the FijiSchema jar from $KIJI_HOME/lib.
+  * EXP-146. Fall back to $HADOOP_HOME/lib/native/ for native libraries.
+      Correctly detect native libraries in CDH 4.2 and CDH 4.3 packaging.
+  * EXP-62. Adds support for column filters defined in a
+      ModelEnvironment.
+
+Version 0.6.0
+  * EXP-89. Allows users to specify qualifiers for columns in a
+      map-type column family which need not start with an alphabetic
+      character.
+  * EXP-83. Adds additional methods to ColumnRequest that allow users
+      to better specify default values for missing columns when
+      reading rows from a Fiji table.
+  * EXP-94. Allows users to write empty Avro lists or maps to Fiji.
+  * EXP-95. Provides additional factory methods for creating an
+      AvroRecord. An AvroRecord can now be created by calling the
+      factory method AvroRecord, which may now accept a Map or a
+      collection of tuples to use to populate the Avro record created.
+  * EXP-96. Ensures that Fiji instances, tables, and columns used when
+      authoring a MapReduce flow exist before launching any jobs.
+  * EXP-93. Fixes a bug that prevented users from writing null values
+      to columns of a Fiji table, where the schema permits it.
+  * EXP-78. Ensures that all validation errors that exist in a model
+      definition and environment are reported to the user at once.
+
+Version 0.5.0
+  * EXP-77. Allows Hadoop -D configuration flags to be passed from the
+      command line when running scripts and compiled jobs.
+  * EXP-85. Fixes a bug in which the packAvro method used an incorrect
+      type conversion while building Avro records.
+  * EXP-4. Adds the ability to write to map-type column families using
+      a qualifier specified through a tuple field.
+  * EXP-46. Adds a fiji-schema-shell extension which can be launched
+      using the command `express schema-shell`. This extension can be
+      used to run model lifecycle phases. This commit also completes the
+      initial implementation of the FijiExpress model lifecycle.
+
+Version 0.4.0
+  * EXP-48. AvroRecords can be created with the apply method on a map, for example:
+      AvroRecord("fieldname1" -> "stringvalue", "fieldname2" -> 2L)
+  * EXP-23. A Scala-friendly interface is provided for FijiMR key-value stores, for use with the
+      FijiExpress modeling SPI.
+  * EXP-37. Avro-generated Java classes are no longer required on the classpath to read Avro
+      records from Fiji.  Avro records from Fiji are now read into a generic AvroRecord instead of
+      the specific class; the treatment of non-records read from Fiji have not changed.  See the
+      scaladocs for AvroList, AvroMap, and AvroRecord for syntax to access their elements, values,
+      and fields.
+
+Version 0.3.0
+  * EXP-30. Allow users to run FijiSchema DDL Shell from FijiExpress Shell.
+      From inside the FijiExpress Shell, the command :schema-shell will run a FijiSchema DDL Shell.
+  * EXP-34.  There is now a FijiExpress Shell.
+      A Scala shell preloaded for FijiExpress can now be run with the command "express shell
+      --local" or "express shell --hdfs".  Once a pipe is fully specified from input to output,
+      it can be run with "pipe.run".
+  * EXP-25. Fixes EntityId's toJavaEntityId method.
+      EntityId.getJavaEntityId has been renamed to EntityId.toJavaEntityId.
+      Creating a HashedEntityId no longer errors. Components of HashedEntityIds cannot be accessed.
+
+Version 0.2.0
+  * CHOP-70. Deprecated the EXPRESS_CLASSPATH variable.
+      Currently when specifying any third-party dependencies (job jar, dependency
+      jars etc) when running the express command, the user must set the
+      EXPRESS_CLASSPATH variable ahead of time. Now that variable is deprecated in
+      favor of a command line option (--libjars) where the user can specify a colon
+      separated list of dependency jars.
+  * CHOP-63. Add a series of descriptive stats methods to FijiSlice.
+      The following methods now exist on the FijiSlice class:
+      ** min/max
+      ** mean
+      ** standard deviation
+      ** variance
+      There are two versions of each method:
+      ** One that requires a function argument that returns a numeric value in case the
+         underlying FijiSlice cell is a complex Avro type.
+      ** One that assumes the underlying FijiSlice cell value is numeric (a convenience
+         version of the above. Code won't compile if the underlying cell type is not numeric).
+  * CHOP-22. Design how users interact with Entity IDs.
+      EntityIds can be constructed by calling EntityId("fiji://my/table/uri", "component1", 2L, ...)
+      This includes all types of entity ids, including composite.
+  * CHOP-102. Scripts no longer need to import Scalding and FijiExpress.
+      The following are now automatically imported when running a FijiExpress script:
+      ** com.twitter.scalding._
+      ** org.fiji.express._
+      ** org.fiji.express.DSL._
+  * CHOP-60. Fixes the build on OS X.
+      Increased the heap size for the scala test to 2048m as a way to get the tests to pass.

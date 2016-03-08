@@ -1,0 +1,5 @@
+com.moz.fiji.schema.shell.modules.SecurityParserPluginFactory
+com.moz.fiji.schema.shell.spi.PluginFactoryImpl1
+com.moz.fiji.schema.shell.spi.PluginFactoryImpl2
+com.moz.fiji.schema.shell.spi.EnvPluginFactoryImpl
+com.moz.fiji.schema.shell.util.ForkTestPluginFactoryImpl

@@ -1,0 +1,101 @@
+/**
+ * (c) Copyright 2012 WibiData, Inc.
+ *
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+{
+  name : "table",
+  keys_format : {
+    encoding : "FORMATTED",
+    salt : {
+      hash_size : 2
+    },
+    components : [ {
+      name : "dummy",
+      type : "STRING"
+    }]
+  },
+  locality_groups : [ {
+    name : "default",
+    in_memory : false,
+    max_versions : 2147483647,
+    ttl_seconds : 2147483647,
+    compression_type : "GZ",
+    families : [ {
+      name : "family",
+      columns : [ {
+        name : "column1",
+        column_schema : {
+          type : "INLINE",
+          value : '{"type": "fixed", "size": 16, "name": "md5"}'
+        }
+      }, {
+        name : "column2",
+        column_schema : {
+          type : "INLINE",
+          value : '"bytes"'
+        }
+      }, {
+        name : "double_column",
+        column_schema : {
+          type : "INLINE",
+          value : '"double"'
+        }
+      }, {
+        name : "column3",
+        column_schema : {
+          type : "CLASS",
+          value : "com.moz.fiji.schema.avro.HashSpec"
+        }
+      }, {
+        name : "column4",
+        column_schema : {
+          type : "INLINE",
+          value : '{"type": "record", "name": "stringcontainer", "doc": "A simple inline record that contains a string", "fields": [{"name": "contained_string", "type": "string", "id": "int"}]}'
+        }
+      }, {
+        name : "column5",
+        description: "A class that does not exist on the classpath, for testing purposes.",
+        column_schema : {
+          type : "CLASS",
+          value : "com.moz.fiji.nonexistent.class"
+        }
+      }, {
+        name : "simple",
+        column_schema : {
+          avro_validation_policy : "SCHEMA_1_0",
+          type : "INLINE",
+          value : "{\"type\":\"record\",\"name\":\"SimpleRecord\",\"namespace\":\"com.moz.fiji.express.avro\",\"fields\":[{\"name\":\"l\",\"type\":\"long\"},{\"name\":\"s\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"}},{\"name\":\"o\",\"type\":{\"type\":\"string\",\"avro.java.string\":\"String\"},\"default\":\"default-value\"}]}"
+        }
+      }]
+    }, {
+      name : "searches",
+      description : "A map-type column family",
+      map_schema : {
+        type: "INLINE",
+        value: '"int"'
+      }
+    }, {
+      name : "animals",
+      description : "A map-type column family for testing numeric-initial strings",
+      map_schema : {
+        type: "INLINE",
+        value: '"string"'
+      }
+    }]
+  } ],
+  version : "layout-1.1.0"
+}

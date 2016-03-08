@@ -1,0 +1,114 @@
+
+
+                              FijiMR Release Notes
+
+Version 1.3.0
+  * KIJIMR-298. [Breaking Change] Remove hadoop1 compatibility.
+  * POM-40. Require JDK 7 to compile Fiji projects.
+
+Version 1.2.6
+  * KIJIMR-268. Updates many ApiStability annotations. In particular, all
+      job builders and contexts are now 'Stable.'
+
+Version 1.2.3
+  * KIJIMR-163. Introduce FijiPivoter map-only jobs that read rows from
+      a FijiTable and write arbitrary cells to a potentially different
+      output FijiTable.
+
+Version 1.2.1
+  * KIJIMR-244. Make KeyValueStoreReader's open method threadsafe for
+      concurrent opens.
+  * KIJIMR-242. Fix NPE on region servers with missing timestamp.
+
+Version 1.1.1
+  * SCHEMA-234. Bugfix: --lib argument cannot process "." as a directory name.
+  * SCHEMA-485. Add profiling pointcuts for HBase reads/writes.
+
+Version 1.1.0
+  * KIJIMR-227. HFileLoader cannot use HBaseFijiTable.getHTable() anymore.
+  * KIJIMR-226. Update dependency on internal HBaseFijiTable.getHTable().
+
+Version 1.0.2
+  * KIJIMR-222. Support for profiling. Use enable-profiling.sh in the BentoBox
+      to switch to a profiling-enabled jar.
+  * KIJIMR-219. Support for CDH 4.3.
+
+Version 1.0.1
+  * KIJIMR-215. Fix bug deserializing AvroKVRecordKeyValueStore instances.
+  * KIJIMR-210. All calls to Fiji.Factory.open() now allow parameterization
+      via the current Configuration object and through CLI "-Dprop=val" flags.
+  * KIJIMR-182. Add basic maven archetype for FijiMR-based projects.
+
+Version 1.0.0
+  * Added stability annotations to all public/framework classes.
+  * KIJIMR-121. KeyValueStoreConfiguration's constructors have been
+      made private. The static factory method createInConfiguration()
+      can now be used to create KeyValueStoreConfigurations.
+  * KIJIMR-209. MapReduceJobOutput constructors are now package private
+      and accessible via org.fiji.mapreduce.output.MapReduceJobOutputs
+      static methods.
+  * KIJIMR-205. FijiTableKeyValueStore now uses a FijiRowKeyComponents
+      object for its key. The static method getTableForReader() is no
+      longer required and has been removed.
+  * KIJIMR-208. Buffer writes to Fiji tables coming from MapReduce jobs.
+  * KIJIMR-204. Adds time range metadata to Fiji-generated HFiles. This
+      fixes a NPE in HBase 0.94.2.
+  * KIJIMR-199. Adds an InMemoryMapKeyValueStore. This KVStore can be
+      used for passing small amounts of information to FijiProducers,
+      FijiGatherers, etc.
+  * KIJIMR-104. Bulk loads can now load either a full directory or the
+      individual partition within.
+  * KIJIMR-115. Improves API of AvroMapReader. read() renamed to reload().
+      Avro "map" automatically loaded when AvroMapReader created. Fixes
+      several bugs in this class.
+  * KIJIMR-174. fiji-avro dependency moved to lib/distribution/hadoop*/.
+      This dependency is loaded on a Hadoop distribution-specific basis.
+  * KIJIMR-197. Publish sources and javadoc jars via Maven build.
+  * KIJIMR-107. Removes the FijiDataRequester interface. FijiGatherer,
+      FijiProducer, etc. no longer implement this interface.
+  * KIJIMR-123. MapReduceJobInput constructors are now package private
+      and accessible via org.fiji.mapreduce.input.MapReduceJobInputs
+      static methods.
+
+Version 1.0.0-rc62
+  * KIJIMR-132. Removes exists() and isNullFn() from util.Lists.
+  * KIJIMR-183. Adds ability to retrieve entity id from a FijiTableKeyValueStore
+      reader. Call 'FijiTableKeyValueStore.getTableForReader(reader)' to get the
+      underlying FijiTable object.
+  * KIJIMR-181. Document default values for KeyValueStores.
+  * KIJIMR-171. Reorganize project structure for multiple Hadoop distributions.
+      FijiMR jars are now placed in $KIJI_MR_HOME/lib/distribution/hadoop2/.
+      You can now optionally specify <classifier>hadoop2</classifer> on the
+      FijiMR artifact to make your distribution requirement explicit.
+
+Version 1.0.0-rc61
+  * KIJIMR-180. Removes deprecated getEntityId() from ProducerContext.
+  * KIJIMR-52. FijiTableKeyValueStore reader looks up by EntityId, not by
+      String. (Incompatible change.)
+  * KIJIMR-114. Declare various methods of MapReduceJobBuilder as 'final'.
+  * KIJIMR-165. XML configuration of file-backed KeyValueStores did not
+      properly load Hadoop default properties.
+  * KIJIMR-166. Add HBase jars to MapReduce task classpath.
+  * KIJIMR-167. Print better status messages indicating whether jobs succeed
+      or fail.
+  * KIJIMR-64. Serialize row filters & start/limit row keys for MapReduce jobs.
+  * KIJIMR-151. Pass Configuration to Fiji in HFileMapReduceJobOutput.
+
+Version 1.0.0-rc6
+  * KIJIMRLIB-14. Add XML input format.
+  * KIJIMR-162. Remove InterruptedException from FijiContext.getStores().
+  * KIJIMR-112. Collapses MapReduceJob into FijiMapReduceJob.  Users should
+      change instances of MapReduceJob in their code to FijiMapReduceJob.
+  * KIJIMR-135. JobIOSpecParseException now extends RuntimeException.
+  * KIJIMR-157. Removes --install option from job-history tool.
+      Updates job-history.
+  * KIJIMR-108. Moves forName methods from FijiMapper, FijiReducer,
+      FijiGatherer, FijiProducer, FijiBulkImporter to impl package utility
+      classes.
+  * KIJIMR-138. Command-line arguments --start-row and --limit-row understand
+      entity IDs.
+  * KIJIMR-109. Add FijiTableContext.getEntityIdFactory().
+    Deprecates ProducerContext.getEntityId(); use FijiRowData.getEntityId().
+
+Version 1.0.0-rc5
+  * Initial release.

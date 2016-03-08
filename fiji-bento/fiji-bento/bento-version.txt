@@ -1,0 +1,25 @@
+# Fiji BentoBox version information
+# www.fiji.org
+
+bento-name: ${codename}
+version: ${project.version}
+release-date: ${timestamp}
+
+# This SDK version includes the following components:
+
+bento-cluster: ${bento-cluster.version}
+fiji-express: ${fiji-express.version}
+fiji-express-examples: ${fiji-express-examples.version}
+fiji-express-music: ${fiji-express-music.version}
+fiji-express-tools: ${fiji-express-tools.version}
+fiji-hive-adapter: ${fiji-hive-adapter.version}
+fiji-mapreduce: ${fiji-mapreduce.version}
+fiji-mapreduce-lib: ${fiji-mapreduce-lib.version}
+fiji-model-repository: ${fiji-model-repository.version}
+fiji-modeling: ${fiji-modeling.version}
+fiji-music: ${fiji-music.version}
+fiji-phonebook: ${fiji-phonebook.version}
+fiji-rest: ${fiji-rest.version}
+fiji-schema: ${fiji-schema.version}
+fiji-schema-shell: ${fiji-schema-shell.version}
+fiji-scoring: ${fiji-scoring.version}

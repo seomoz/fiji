@@ -1,0 +1,32 @@
+<div class="side-toc">
+    <div class="side-toc-inner">
+      <h3>{{ title }}</h3>
+      <ul>
+        {% for counter in pages %}
+          {% assign index = forloop.index %}
+          {% for subpage in pages %}
+            {% if index == subpage.order %}
+              {% if subpage.categories == page.categories %}
+                <li>
+                  {% if subpage.url == page.url %}
+                    <b>{{ subpage.title }}</b>
+                  {% else %}
+                    <a href="{{ BASE_PATH }}{{ subpage.url }}">{{ subpage.title }}</a>
+                  {% endif %}
+                </li>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </ul>
+      <h3>Need Help?</h3>
+      <ul>
+        <li>
+      <a class="btn btn-info"  href="https://groups.google.com/a/fiji.org/forum/?fromgroups#!forum/user">User Group Mailing List</a>
+        </li>
+        <li>
+      <a class="btn btn-warning" href="https://jira.fiji.org/secure/CreateIssueDetails!init.jspa?pid=10004&issuetype=1&priority=3&components=10010&summary=Reported%20Docs%20Error:%20{{ page.title }}&description=Please%20describe%20the%20issue.%0a%0aurl:%20{{ page.url }}"> Report an Error in Docs </a> 
+        </li>
+    </ul>
+    </div>
+</div>
