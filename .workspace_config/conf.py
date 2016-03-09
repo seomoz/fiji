@@ -33,7 +33,7 @@ scalastyle_version = "0.6.0"
 
 
 # Version of the Java source code:
-java_source_version = "1.8"
+java_source_version = "1.7"
 
 # Version of the JVM bytecode to produce (from Java and Scala source code):
-jvm_target_version = "1.8"
+jvm_target_version = "1.7"
