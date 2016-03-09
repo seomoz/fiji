@@ -127,7 +127,7 @@ final private[express] class HFileFijiScheme(
       sinkCall: SinkCall[HFileFijiSinkContext, OutputCollector[HFileKeyValue, NullWritable]]) {
 
     val conf = flow.getConfigCopy
-    val uri: FijiURI = FijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_OUTPUT_TABLE_URI)).build()
+    val uri: FijiURI = FijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_OUTPUT_TABLE_URI)).build()
 
     val fiji: Fiji = Fiji.Factory.open(uri, conf)
 

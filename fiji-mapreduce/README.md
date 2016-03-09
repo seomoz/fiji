@@ -10,7 +10,7 @@ For more information about FijiSchema, see
 Further documentation is available at the Fiji project
 [Documentation Portal](http://docs.fiji.org)
 
-Issues are being tracked at [the Fiji JIRA instance](https://jira.fiji.org/browse/KIJIMR).
+Issues are being tracked at [the Fiji JIRA instance](https://jira.fiji.org/browse/FIJIMR).
 
 CDH5.0.3 Notes
 --------------

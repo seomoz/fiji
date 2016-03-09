@@ -88,7 +88,7 @@ public final class MapReduceJobOutputFactory {
       return MapReduceJobOutputs.newAvroKeyMapReduceJobOutput();
     case AVRO_KV:
       return MapReduceJobOutputs.newAvroKeyValueMapReduceJobOutput();
-    case KIJI:
+    case FIJI:
       return MapReduceJobOutputs.newDirectFijiTableMapReduceJobOutput();
     case HFILE:
       return MapReduceJobOutputs.newHFileMapReduceJobOutput();

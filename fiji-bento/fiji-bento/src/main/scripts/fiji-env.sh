@@ -21,24 +21,24 @@
 #   MapReduce, and HBase clusters started by the bento-cluster included with
 #   fiji-bento. Use:
 #
-#   bash> source $KIJI_HOME/bin/fiji-env.sh
+#   bash> source $FIJI_HOME/bin/fiji-env.sh
 #
 #   to configure your environment. The environment variables set are:
 #
-#   KIJI_HOME           Set to the parent of the directory this script is contained in.
+#   FIJI_HOME           Set to the parent of the directory this script is contained in.
 #                       This should be the root of a fiji-bento distribution.
 #
-#   KIJI_MR_HOME        Set to the parent of the directory this script is contained in.
+#   FIJI_MR_HOME        Set to the parent of the directory this script is contained in.
 #                       This should be the root of a fiji-bento distribution.
 #
-#   SCHEMA_SHELL_HOME   Set to the $KIJI_HOME/schema-shell directory, which should
+#   SCHEMA_SHELL_HOME   Set to the $FIJI_HOME/schema-shell directory, which should
 #                       contain a fiji-schema-shell distribution.
 #
-#   EXPRESS_HOME        Set to the $KIJI_HOME/express directory, which should contain
+#   EXPRESS_HOME        Set to the $FIJI_HOME/express directory, which should contain
 #                       a fiji-express distribution.
 #
-#   PATH                The $PATH is modified so that $KIJI_HOME/bin,
-#                       $KIJI_HOME/schema-shell/bin, and $EXPRESS_HOME/bin
+#   PATH                The $PATH is modified so that $FIJI_HOME/bin,
+#                       $FIJI_HOME/schema-shell/bin, and $EXPRESS_HOME/bin
 #                       are on it.
 #
 #   If using a bento cluster, source the bento-env.sh script for the bento instance
@@ -49,27 +49,27 @@
 bin="$( cd "$( dirname "${BASH_SOURCE:-$0}" )" && pwd )"
 
 # The script is inside a fiji-bento distribution.
-KIJI_HOME="${bin}/.."
-export KIJI_HOME
-echo "Set KIJI_HOME=${KIJI_HOME}"
+FIJI_HOME="${bin}/.."
+export FIJI_HOME
+echo "Set FIJI_HOME=${FIJI_HOME}"
 
-KIJI_MR_HOME="${KIJI_HOME}"
-export KIJI_MR_HOME
-echo "Set KIJI_MR_HOME=${KIJI_MR_HOME}"
+FIJI_MR_HOME="${FIJI_HOME}"
+export FIJI_MR_HOME
+echo "Set FIJI_MR_HOME=${FIJI_MR_HOME}"
 
-SCHEMA_SHELL_HOME="${KIJI_HOME}/schema-shell"
+SCHEMA_SHELL_HOME="${FIJI_HOME}/schema-shell"
 export SCHEMA_SHELL_HOME
 echo "Set SCHEMA_SHELL_HOME=${SCHEMA_SHELL_HOME}"
 
-EXPRESS_HOME="${KIJI_HOME}/express"
+EXPRESS_HOME="${FIJI_HOME}/express"
 export EXPRESS_HOME
 echo "Set EXPRESS_HOME=${EXPRESS_HOME}"
 
-MODELING_HOME="${KIJI_HOME}/modeling"
+MODELING_HOME="${FIJI_HOME}/modeling"
 export MODELING_HOME
 echo "Set MODELING_HOME=${MODELING_HOME}"
 
-PATH="${KIJI_HOME}/bin:${KIJI_HOME}/schema-shell/bin:${EXPRESS_HOME}/bin:${PATH}"
+PATH="${FIJI_HOME}/bin:${FIJI_HOME}/schema-shell/bin:${EXPRESS_HOME}/bin:${PATH}"
 export PATH
 echo "Added fiji, fiji-mr, fiji-schema-shell, and fiji-express binaries to PATH."
 

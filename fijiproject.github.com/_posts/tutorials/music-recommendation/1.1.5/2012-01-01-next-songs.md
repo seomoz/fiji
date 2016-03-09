@@ -195,7 +195,7 @@ fiji mapreduce \
     --mapper=org.fiji.examples.music.map.IdentityMapper \
     --reducer=org.fiji.examples.music.reduce.TopNextSongsReducer \
     --input="format=avrokv file=output.sequentialPlayCount" \
-    --output="format=fiji table=${KIJI}/songs nsplits=1" \
+    --output="format=fiji table=${FIJI}/songs nsplits=1" \
     --lib=${LIBS_DIR}
 {% endhighlight %}
 </div>
@@ -206,7 +206,7 @@ to inspect our Fiji tables.
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/songs/info:top_next_songs --max-rows=3
+fiji scan ${FIJI}/songs/info:top_next_songs --max-rows=3
 {% endhighlight %}
 </div>
 

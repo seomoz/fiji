@@ -40,7 +40,7 @@ do this:
 {% highlight java %}
 GenericTableMapReduceUtil.addAllDependencyJars(job);
 DistributedCacheJars.addJarsToDistributedCache(job,
-    new File(System.getenv("KIJI_HOME"), "lib"));
+    new File(System.getenv("FIJI_HOME"), "lib"));
 job.setUserClassesTakesPrecedence(true);
 {% endhighlight %}
 
@@ -54,7 +54,7 @@ final Address address = row.getMostRecentValue(Fields.INFO_FAMILY, Fields.ADDRES
 Address is the same Avro type you read about on the
 [Phonebook Importer](../phonebook-import/) page. The JSON
 description for it can be found at
-`$KIJI_HOME/examples/phonebook/src/main/avro/Address.avsc`. More information
+`$FIJI_HOME/examples/phonebook/src/main/avro/Address.avsc`. More information
 about Avro types can be found
 [here](http://avro.apache.org/docs/current/spec.html).
 
@@ -67,13 +67,13 @@ mWriter.put(entityId, Fields.DERIVED_FAMILY, Fields.ZIP, address.getZip());
 
 ### Running the Example
 We assume that you have already imported the contacts from
-`$KIJI_HOME/examples/phonebook/input-data.txt` into the phonebook Fiji table by this point.
+`$FIJI_HOME/examples/phonebook/input-data.txt` into the phonebook Fiji table by this point.
 You can execute this example using the `fiji jar` command with the class name:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji jar \
-    $KIJI_HOME/examples/phonebook/lib/fiji-phonebook-{{site.phonebook_devel_version}}.jar \
+$FIJI_HOME/bin/fiji jar \
+    $FIJI_HOME/examples/phonebook/lib/fiji-phonebook-{{site.phonebook_devel_version}}.jar \
     org.fiji.examples.phonebook.AddressFieldExtractor
 {% endhighlight %}
 </div>
@@ -83,7 +83,7 @@ You can use the following command to see if your contacts' address data was succ
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji scan fiji://.env/default/phonebook/derived
+$FIJI_HOME/bin/fiji scan fiji://.env/default/phonebook/derived
 {% endhighlight %}
 </div>
 

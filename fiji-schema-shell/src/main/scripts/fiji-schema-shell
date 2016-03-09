@@ -22,9 +22,9 @@ bin=`dirname $0`
 bin=`cd ${bin} && pwd`
 
 # Set the directory where libraries for Fiji shell live.
-KIJI_SCHEMA_SHELL_LIB_DIR="${bin}/../lib/"
+FIJI_SCHEMA_SHELL_LIB_DIR="${bin}/../lib/"
 # Set the directory where configuration files for Fiji shell live.
-KIJI_SCHEMA_SHELL_CONF_DIR="${bin}/../conf/"
+FIJI_SCHEMA_SHELL_CONF_DIR="${bin}/../conf/"
 # Set the main class used to run the custom fiji-schema-shell
 MAIN_CLASS="com.moz.fiji.schema.shell.ShellMain"
 
@@ -68,21 +68,21 @@ case "`uname`" in
 esac
 
 # Constructing Fiji Shell classpath.
-KIJI_SCHEMA_SHELL_CLASSPATH=""
+FIJI_SCHEMA_SHELL_CLASSPATH=""
 # Add files in conf dir to Fiji shell classpath.
-for ext in "$KIJI_SCHEMA_SHELL_CONF_DIR"/* ; do
-    if [ -z "$KIJI_SCHEMA_SHELL_CLASSPATH" ] ; then
-        KIJI_SCHEMA_SHELL_CLASSPATH="$ext"
+for ext in "$FIJI_SCHEMA_SHELL_CONF_DIR"/* ; do
+    if [ -z "$FIJI_SCHEMA_SHELL_CLASSPATH" ] ; then
+        FIJI_SCHEMA_SHELL_CLASSPATH="$ext"
     else
-        KIJI_SCHEMA_SHELL_CLASSPATH="$KIJI_SCHEMA_SHELL_CLASSPATH:$ext"
+        FIJI_SCHEMA_SHELL_CLASSPATH="$FIJI_SCHEMA_SHELL_CLASSPATH:$ext"
     fi
 done
 # Add entries in lib dir.
-for ext in "$KIJI_SCHEMA_SHELL_LIB_DIR"/* ; do
-    if [ -z "$KIJI_SCHEMA_SHELL_CLASSPATH" ] ; then
-        KIJI_SCHEMA_SHELL_CLASSPATH="$ext"
+for ext in "$FIJI_SCHEMA_SHELL_LIB_DIR"/* ; do
+    if [ -z "$FIJI_SCHEMA_SHELL_CLASSPATH" ] ; then
+        FIJI_SCHEMA_SHELL_CLASSPATH="$ext"
     else
-        KIJI_SCHEMA_SHELL_CLASSPATH="$KIJI_SCHEMA_SHELL_CLASSPATH:$ext"
+        FIJI_SCHEMA_SHELL_CLASSPATH="$FIJI_SCHEMA_SHELL_CLASSPATH:$ext"
     fi
 done
 
@@ -93,7 +93,7 @@ if $cygwin; then
     else
         format=windows
     fi
-    KIJI_SCHEMA_SHELL_CLASSPATH=`cygpath --path --$format "$KIJI_SCHEMA_SHELL_CLASSPATH"`
+    FIJI_SCHEMA_SHELL_CLASSPATH=`cygpath --path --$format "$FIJI_SCHEMA_SHELL_CLASSPATH"`
     case "$TERM" in
         rxvt* | xterm*)
             stty -icanon min 1 -echo
@@ -151,27 +151,27 @@ if [ -z "$JAVACMD" -a -n "$JAVA_HOME" -a -x "$JAVA_HOME/bin/java" ]; then
     JAVACMD="$JAVA_HOME/bin/java"
 fi
 
-if [ -z "$KIJICMD" ]; then
+if [ -z "$FIJICMD" ]; then
     # If the fiji script command is not defined look for it.
-    if [ -z "$KIJICMD" -a -n "$KIJI_HOME" -a -x "$KIJI_HOME/bin/fiji" ]; then
-        # If KIJI_HOME is set, check it for the fiji script.
-        KIJICMD="$KIJI_HOME/bin/fiji"
-    elif [ -z "$KIJI_HOME" -a -x "${bin}/../../bin/fiji" ]; then
-        # If KIJI_HOME is not set, we might be running inside a bundled
+    if [ -z "$FIJICMD" -a -n "$FIJI_HOME" -a -x "$FIJI_HOME/bin/fiji" ]; then
+        # If FIJI_HOME is set, check it for the fiji script.
+        FIJICMD="$FIJI_HOME/bin/fiji"
+    elif [ -z "$FIJI_HOME" -a -x "${bin}/../../bin/fiji" ]; then
+        # If FIJI_HOME is not set, we might be running inside a bundled
         # fiji distribution. Check two levels up for bin/fiji.
-        KIJICMD="${bin}/../../bin/fiji"
+        FIJICMD="${bin}/../../bin/fiji"
     else
-        echo "To run Fiji DDL Shell the environment variable KIJI_HOME must be set and must point to "
+        echo "To run Fiji DDL Shell the environment variable FIJI_HOME must be set and must point to "
         echo "the root directory of a Fiji distribution."
         exit 1
     fi
 fi
-KIJI_CLASSPATH=`$KIJICMD classpath`
+FIJI_CLASSPATH=`$FIJICMD classpath`
 
 "${JAVACMD:=java}" \
   $JAVA_OPTS \
   "${java_args[@]}" \
-  -classpath "${TOOL_CLASSPATH}:${KIJI_CLASSPATH}:${KIJI_SCHEMA_SHELL_CLASSPATH}" \
+  -classpath "${TOOL_CLASSPATH}:${FIJI_CLASSPATH}:${FIJI_SCHEMA_SHELL_CLASSPATH}" \
   -Dscala.usejavacp=true \
   -Denv.emacs="$EMACS" \
   $CYGWIN_JLINE_TERMINAL \

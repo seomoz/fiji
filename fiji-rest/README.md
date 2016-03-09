@@ -15,14 +15,14 @@ Further documentation is available at the Fiji project
 Installing FijiREST (requires root privileges)
 --------------------------------
 
-* It's assumed that where FijiREST is unpacked is called $KIJI\_REST\_HOME By default, this is
-assumed to be /opt/wibi/fiji-rest. This can be changed by modifying the KIJI\_REST\_HOME variable
+* It's assumed that where FijiREST is unpacked is called $FIJI\_REST\_HOME By default, this is
+assumed to be /opt/wibi/fiji-rest. This can be changed by modifying the FIJI\_REST\_HOME variable
 in bin/fiji-rest.initd script.
 * Create a non-privileged user called "fiji" which will be used to run the service. This can be
-changed by modifying the KIJI\_REST\_USER variable in bin/fiji-rest.initd script.
+changed by modifying the FIJI\_REST\_USER variable in bin/fiji-rest.initd script.
   * sudo useradd fiji
-* Copy $KIJI\_REST\_HOME/bin/fiji-rest.initd as /etc/init.d/fiji-rest
-  * sudo cp $KIJI\_REST\_HOME/bin/fiji-rest.initd /etc/init.d/fiji-rest
+* Copy $FIJI\_REST\_HOME/bin/fiji-rest.initd as /etc/init.d/fiji-rest
+  * sudo cp $FIJI\_REST\_HOME/bin/fiji-rest.initd /etc/init.d/fiji-rest
 * chkconfig --add fiji-rest
 
 Starting a local FijiREST server
@@ -31,15 +31,15 @@ Starting a local FijiREST server
 Any relevant Avro classes that are necessary for interaction of FijiREST with the underlying Fiji
 tables must be included on the classpath upon instantiation
 of the server. This is done by placing the jar containing the necessary Avro classes in the
-$KIJI\_REST\_HOME/lib folder.
+$FIJI\_REST\_HOME/lib folder.
 
-$ cd $KIJI\_REST\_HOME
+$ cd $FIJI\_REST\_HOME
 
 $ ./bin/fiji-rest start
 
 This will launch the service in the background with the pid of the process located in
-$KIJI\_REST\_HOME/fiji-rest.pid. The application and request logs can be found
-under $KIJI\_REST\_HOME/logs.
+$FIJI\_REST\_HOME/fiji-rest.pid. The application and request logs can be found
+under $FIJI\_REST\_HOME/logs.
 
 ### Alternatively as root:
 $ /sbin/service fiji-rest start
@@ -48,7 +48,7 @@ Stopping a local FijiREST server
 --------------------------------
 
 ### If run as non-root:
-$ cat $KIJI\_REST\_HOME/fiji-rest.pid | xargs kill
+$ cat $FIJI\_REST\_HOME/fiji-rest.pid | xargs kill
 
 ### As root:
 $ /sbin/service fiji-rest stop
@@ -56,7 +56,7 @@ $ /sbin/service fiji-rest stop
 Setting up configuration.yml
 ----------------------------
 
-The configuration.yml file (located in $KIJI\_REST\_HOME/conf/configuration.yml) is a YAML file used
+The configuration.yml file (located in $FIJI\_REST\_HOME/conf/configuration.yml) is a YAML file used
 to configure the FijiREST server. The following key is required:
 
 - "cluster" is the base cluster's fiji URI.

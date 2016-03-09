@@ -159,7 +159,7 @@ public final class HelpTool extends Configured implements FijiTool {
     } else {
       System.out.println("");
       System.out.println("  To add additional jars to the classpath when running a tool,");
-      System.out.println("  specify them in the KIJI_CLASSPATH environmental variable.");
+      System.out.println("  specify them in the FIJI_CLASSPATH environmental variable.");
       System.out.println("  For more about Fiji environment variables, "
           + "type 'fiji help --verbose'.");
     }

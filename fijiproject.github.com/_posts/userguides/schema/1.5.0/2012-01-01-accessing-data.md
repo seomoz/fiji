@@ -274,7 +274,7 @@ Job job = new Job(conf);
 job.setJarByClass(YourClassHere.class);
 GenericTableMapReduceUtil.addAllDependencyJars(job);
 DistributedCacheJars.addJarsToDistributedCache(job,
-    new File(System.getenv("KIJI_HOME"), "lib"));
+    new File(System.getenv("FIJI_HOME"), "lib"));
 job.setUserClassesTakesPrecedence(true);
 // *
 
@@ -313,7 +313,7 @@ Job job = new Job(conf);
 job.setJarByClass(YourClassHere.class);
 GenericTableMapReduceUtil.addAllDependencyJars(job);
 DistributedCacheJars.addJarsToDistributedCache(job,
-    new File(System.getenv("KIJI_HOME"), "lib"));
+    new File(System.getenv("FIJI_HOME"), "lib"));
 job.setUserClassesTakesPrecedence(true);
 
 // Setup the OutputFormat.

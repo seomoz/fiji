@@ -453,7 +453,7 @@
 
     <p>You have just run out of minutes on your phone plan and want to find the person responsible
 for inconveniencing you this way. Luckily, we have provided you with a phone log with the
-time spent per phone call at <code>$KIJI_HOME/examples/phonebook/input-phone-log.txt</code>. You want to
+time spent per phone call at <code>$FIJI_HOME/examples/phonebook/input-phone-log.txt</code>. You want to
 be able to get the total time spent talking to each of your contacts this month.</p>
 
 <p>To support operations like this Fiji provides atomic counter type cells like HBase that
@@ -506,7 +506,7 @@ that we depend on during the <em>map</em> task. Here\'s how we do this:</p>
 
 <div class="highlight"><pre><code class="java"><span class="n">GenericTableMapReduceUtil</span><span class="o">.</span><span class="na">addAllDependencyJars</span><span class="o">(</span><span class="n">job</span><span class="o">);</span>
 <span class="n">DistributedCacheJars</span><span class="o">.</span><span class="na">addJarsToDistributedCache</span><span class="o">(</span><span class="n">job</span><span class="o">,</span>
-    <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getenv</span><span class="o">(</span><span class="s">&quot;KIJI_HOME&quot;</span><span class="o">),</span> <span class="s">&quot;lib&quot;</span><span class="o">));</span>
+    <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getenv</span><span class="o">(</span><span class="s">&quot;FIJI_HOME&quot;</span><span class="o">),</span> <span class="s">&quot;lib&quot;</span><span class="o">));</span>
 <span class="n">job</span><span class="o">.</span><span class="na">setUserClassesTakesPrecedence</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
 </code></pre></div>
 
@@ -542,7 +542,7 @@ command.</p>
 <div class="userinput">
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$HADOOP_HOME</span>/bin/hadoop fs -copyFromLocal <span class="se">\</span>
-    <span class="nv">$KIJI_HOME</span>/examples/phonebook/input-phone-log.txt /tmp
+    <span class="nv">$FIJI_HOME</span>/examples/phonebook/input-phone-log.txt /tmp
 </code></pre></div>
 
 </div>
@@ -553,8 +553,8 @@ to the file in hdfs.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
-    <span class="nv">$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.3.jar <span class="se">\</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
+    <span class="nv">$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.3.jar <span class="se">\</span>
     org.fiji.examples.phonebook.IncrementTalkTime /tmp/input-phone-log.txt
 </code></pre></div>
 
@@ -567,7 +567,7 @@ to the file in hdfs.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji get fiji://.env/default/phonebook/stats <span class="se">\</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji get fiji://.env/default/phonebook/stats <span class="se">\</span>
     --entity-id<span class="o">=</span><span class="s1">&#39;&quot;John,Doe&quot;&#39;</span>
 </code></pre></div>
 

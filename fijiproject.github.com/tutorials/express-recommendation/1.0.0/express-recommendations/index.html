@@ -590,8 +590,8 @@ next song to play:</p>
 <div class="userinput">
 
 <div class="highlight"><pre><code class="bash">express job <span class="k">${</span><span class="nv">MUSIC_EXPRESS_HOME</span><span class="k">}</span>/lib/fiji-express-music-1.0.0.jar <span class="se">\</span>
-    org.fiji.express.music.SongRecommender --songs-table <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/songs <span class="se">\</span>
-    --users-table <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/users
+    org.fiji.express.music.SongRecommender --songs-table <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/songs <span class="se">\</span>
+    --users-table <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/users
 </code></pre></div>
 
 </div>
@@ -603,7 +603,7 @@ next song to play:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/users --max-rows<span class="o">=</span>2
+<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/users --max-rows<span class="o">=</span>2
 </code></pre></div>
 
 </div>

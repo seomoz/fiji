@@ -46,14 +46,14 @@ if [[ ! -d "${release_dir}" ]]; then
 fi
 release="$(cd "${release_dir}" && pwd -P)"
 
-# If $KIJI_HOME is set to the development base, retarget it to the actual release dir.
-if [[ ! -z "${KIJI_HOME:-}" ]]; then
-  canonical_fiji_home=`cd ${KIJI_HOME} && pwd`
+# If $FIJI_HOME is set to the development base, retarget it to the actual release dir.
+if [[ ! -z "${FIJI_HOME:-}" ]]; then
+  canonical_fiji_home=`cd ${FIJI_HOME} && pwd`
   canonical_parent=`cd ${bin}/../ && pwd`
 
   if [[ "${canonical_fiji_home}" == "${canonical_parent}" ]]; then
-    # Set KIJI_HOME to the release dir.
-    export KIJI_HOME="${release}"
+    # Set FIJI_HOME to the release dir.
+    export FIJI_HOME="${release}"
   fi
 fi
 

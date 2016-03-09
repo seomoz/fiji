@@ -37,7 +37,7 @@ public class CommandLogger {
 
   private static final Logger LOG = LoggerFactory.getLogger(CommandLogger.class);
   private URI mCheckinServerUri = null;
-  private static final String KIJI_CHECKIN_SERVER = "BENTO_CHECKIN_SERVER";
+  private static final String FIJI_CHECKIN_SERVER = "BENTO_CHECKIN_SERVER";
 
   /**
    * Thread class to allow for asynchronous logging of commands.
@@ -68,7 +68,7 @@ public class CommandLogger {
    */
   public CommandLogger() {
     // Environment variable set by script in fiji or bento.
-    String checkinServerUrl = System.getenv(KIJI_CHECKIN_SERVER);
+    String checkinServerUrl = System.getenv(FIJI_CHECKIN_SERVER);
     if (checkinServerUrl != null) {
       try {
         // TODO: BENTO-37: environment variable should be a base URI

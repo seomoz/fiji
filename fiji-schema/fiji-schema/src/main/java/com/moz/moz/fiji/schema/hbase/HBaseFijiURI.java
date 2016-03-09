@@ -329,7 +329,7 @@ public final class HBaseFijiURI extends FijiURI {
    */
   public static HBaseFijiURIBuilder newBuilder(final String uri) {
     final String uriWithScheme;
-    if (uri.startsWith(KIJI_SCHEME) || uri.startsWith(HBASE_SCHEME)) {
+    if (uri.startsWith(FIJI_SCHEME) || uri.startsWith(HBASE_SCHEME)) {
       uriWithScheme = uri;
     } else {
       uriWithScheme = String.format("%s/%s/", KConstants.DEFAULT_HBASE_URI, uri);

@@ -510,8 +510,8 @@ make sure your environment will behave the same way as a BentoBox:</li>
     <code>MR</code> distribution, and that MapReduce is started.</li>
 <li>Make sure HBase is installed, that <code>HBASE_HOME</code> is set to your <code>hbase</code>
     distribution, and that HBase is started.</li>
-<li>Export <code>KIJI_HOME</code> to the root of your <code>fiji</code> distribution.</li>
-<li>Export <code>PATH=${PATH}:${KIJI_HOME}/bin</code>.</li>
+<li>Export <code>FIJI_HOME</code> to the root of your <code>fiji</code> distribution.</li>
+<li>Export <code>PATH=${PATH}:${FIJI_HOME}/bin</code>.</li>
 <li>Export <code>EXPRESS_HOME</code> to the root of your <code>fiji-express</code> distribution.</li>
 <li>Export <code>PATH=${PATH}:${EXPRESS_HOME}/bin</code></li>
 </ol>
@@ -525,20 +525,20 @@ Fiji cluster appropriately.</p>
 <h3>Set Tutorial-Specific Environment Variables</h3>
 
 <ul>
-<li>Define an environment variable named <code>KIJI</code> that holds a Fiji URI to the Fiji
+<li>Define an environment variable named <code>FIJI</code> that holds a Fiji URI to the Fiji
 instance we'll use during this tutorial:</li>
 </ul>
 
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">KIJI</span><span class="o">=</span>fiji://.env/fiji_express_music
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">FIJI</span><span class="o">=</span>fiji://.env/fiji_express_music
 </code></pre></div>
 
 </div>
 
 
-<p>The code for this tutorial is located in the <code>${KIJI_HOME}/examples/express-music/</code> directory.
+<p>The code for this tutorial is located in the <code>${FIJI_HOME}/examples/express-music/</code> directory.
 Commands in this tutorial will depend on this location.</p>
 
 <ul>
@@ -548,7 +548,7 @@ Commands in this tutorial will depend on this location.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">MUSIC_EXPRESS_HOME</span><span class="o">=</span><span class="k">${</span><span class="nv">KIJI_HOME</span><span class="k">}</span>/examples/express-music
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">MUSIC_EXPRESS_HOME</span><span class="o">=</span><span class="k">${</span><span class="nv">FIJI_HOME</span><span class="k">}</span>/examples/express-music
 </code></pre></div>
 
 </div>
@@ -563,7 +563,7 @@ Commands in this tutorial will depend on this location.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash">fiji install --fiji<span class="o">=</span><span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>
+<div class="highlight"><pre><code class="bash">fiji install --fiji<span class="o">=</span><span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>
 </code></pre></div>
 
 </div>
@@ -588,7 +588,7 @@ Commands in this tutorial will depend on this location.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash">fiji-schema-shell --fiji<span class="o">=</span><span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span> --file<span class="o">=</span><span class="k">${</span><span class="nv">MUSIC_EXPRESS_HOME</span><span class="k">}</span>/music-schema.ddl
+<div class="highlight"><pre><code class="bash">fiji-schema-shell --fiji<span class="o">=</span><span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span> --file<span class="o">=</span><span class="k">${</span><span class="nv">MUSIC_EXPRESS_HOME</span><span class="k">}</span>/music-schema.ddl
 </code></pre></div>
 
 </div>
@@ -606,7 +606,7 @@ for more information on the FijiSchema DDL.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash">fiji ls <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>
+<div class="highlight"><pre><code class="bash">fiji ls <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>
 </code></pre></div>
 
 </div>

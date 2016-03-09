@@ -61,8 +61,8 @@ public class FijiTableOutputFormat
     implements HiveOutputFormat<ImmutableBytesWritable, FijiRowDataWritable> {
   private static final Logger LOG = LoggerFactory.getLogger(FijiTableOutputFormat.class);
 
-  public static final String CONF_KIJI_DATA_REQUEST = "fiji.data.request";
-  public static final String CONF_KIJI_TABLE_URI = "fiji.table.uri";
+  public static final String CONF_FIJI_DATA_REQUEST = "fiji.data.request";
+  public static final String CONF_FIJI_TABLE_URI = "fiji.table.uri";
 
   /**
    * Gets the name of the fiji table this input format will read from.
@@ -71,10 +71,10 @@ public class FijiTableOutputFormat
    * @return The name of the fiji table this input format will read from.
    */
   private static FijiURI getFijiURI(Configuration conf) {
-    final String fijiURIString = conf.get(FijiTableInfo.KIJI_TABLE_URI);
+    final String fijiURIString = conf.get(FijiTableInfo.FIJI_TABLE_URI);
     if (null == fijiURIString) {
       throw new RuntimeException("FijiTableOutputFormat needs to be configured. "
-          + "Please specify " + FijiTableInfo.KIJI_TABLE_URI + " in the configuration.");
+          + "Please specify " + FijiTableInfo.FIJI_TABLE_URI + " in the configuration.");
     }
     FijiURI fijiURI = FijiURI.newBuilder(fijiURIString).build();
     return fijiURI;

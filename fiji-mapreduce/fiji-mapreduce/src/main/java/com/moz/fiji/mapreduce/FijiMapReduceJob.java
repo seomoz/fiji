@@ -47,7 +47,7 @@ public final class FijiMapReduceJob {
 
   /** The wrapped Hadoop Job. */
   private final Job mJob;
-  // TODO(KIJIMR-92): Versions of Hadoop after 20.x add the ability to get start and
+  // TODO(FIJIMR-92): Versions of Hadoop after 20.x add the ability to get start and
   // end times directly from a Job, making these superfluous.
   /** Used to track when the job's execution begins. */
   private long mJobStartTime;
@@ -167,14 +167,14 @@ public final class FijiMapReduceJob {
   private void recordJobHistory() {
     final Configuration conf = getHadoopJob().getConfiguration();
     final Set<FijiURI> instanceURIs = Sets.newHashSet();
-    if (conf.get(FijiConfKeys.KIJI_INPUT_TABLE_URI) != null) {
-        instanceURIs.add(FijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_INPUT_TABLE_URI))
+    if (conf.get(FijiConfKeys.FIJI_INPUT_TABLE_URI) != null) {
+        instanceURIs.add(FijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_INPUT_TABLE_URI))
             .withTableName(null)
             .withColumnNames(Collections.<String>emptyList())
             .build());
     }
-    if (conf.get(FijiConfKeys.KIJI_OUTPUT_TABLE_URI) != null) {
-        instanceURIs.add(FijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_OUTPUT_TABLE_URI))
+    if (conf.get(FijiConfKeys.FIJI_OUTPUT_TABLE_URI) != null) {
+        instanceURIs.add(FijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_OUTPUT_TABLE_URI))
             .withTableName(null)
             .withColumnNames(Collections.<String>emptyList())
             .build());
@@ -234,7 +234,7 @@ public final class FijiMapReduceJob {
     mCompletionPollingThread = new Thread() {
       // Polling interval in milliseconds.
       private final int mPollInterval =
-          mJob.getConfiguration().getInt(FijiConfKeys.KIJI_MAPREDUCE_POLL_INTERVAL, 1000);
+          mJob.getConfiguration().getInt(FijiConfKeys.FIJI_MAPREDUCE_POLL_INTERVAL, 1000);
 
       public void run() {
         try {

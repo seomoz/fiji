@@ -175,7 +175,7 @@ public class FijiCellRewriter extends FijiPivoter {
           avroDSL.schemaToString(fromSchema),
           avroDSL.schemaToString(toSchema));
     }
-    // TODO(KIJIMR-264) Validate the requested conversion. In particular, detect cycles.
+    // TODO(FIJIMR-264) Validate the requested conversion. In particular, detect cycles.
   }
 
   /** {@inheritDoc} */

@@ -88,7 +88,7 @@ public class IncrementTalkTime extends Configured implements Tool {
       final Configuration conf = hadoopContext.getConfiguration();
       FijiURI tableURI;
       try {
-        tableURI = FijiURI.newBuilder(conf.get(FijiConfKeys.OUTPUT_KIJI_TABLE_URI)).build();
+        tableURI = FijiURI.newBuilder(conf.get(FijiConfKeys.OUTPUT_FIJI_TABLE_URI)).build();
       } catch (FijiURIException kue) {
         throw new IOException(kue);
       }
@@ -168,14 +168,14 @@ public class IncrementTalkTime extends Configured implements Tool {
     // Direct the job output to the phonebook table.
     final FijiURI tableURI =
         FijiURI.newBuilder(String.format("fiji://.env/default/%s", TABLE_NAME)).build();
-    job.getConfiguration().set(FijiConfKeys.OUTPUT_KIJI_TABLE_URI, tableURI.toString());
+    job.getConfiguration().set(FijiConfKeys.OUTPUT_FIJI_TABLE_URI, tableURI.toString());
 
     // Tell Hadoop where the java dependencies are located, so they
     // can be shipped to the cluster during execution.
     job.setJarByClass(IncrementTalkTime.class);
     GenericTableMapReduceUtil.addAllDependencyJars(job);
     DistributedCacheJars.addJarsToDistributedCache(
-        job, new File(System.getenv("KIJI_HOME"), "lib"));
+        job, new File(System.getenv("FIJI_HOME"), "lib"));
     FijiMRPlatformBridge.get().setUserClassesTakesPrecedence(job, true);
 
     // Run the job.

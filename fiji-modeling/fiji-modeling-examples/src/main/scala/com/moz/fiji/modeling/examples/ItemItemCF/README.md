@@ -32,7 +32,7 @@ In the fiji-modeling-examples project, run:
 Setup
 -----
     export MOVIES_HOME=path/to/fiji-modeling/fiji-modeling-examples
-    export KIJI_CLASSPATH=${MOVIES_HOME}/target/fiji-modeling-examples-${project.version}.jar
+    export FIJI_CLASSPATH=${MOVIES_HOME}/target/fiji-modeling-examples-${project.version}.jar
 
 Download the MovieLens 100k dataset from http://grouplens.org/datasets/movielens and unzip, then:
 
@@ -40,8 +40,8 @@ Download the MovieLens 100k dataset from http://grouplens.org/datasets/movielens
 
 Install a Fiji instance.
 
-    export KIJI=fiji://.env/item_item_cf
-    fiji install --fiji=${KIJI}
+    export FIJI=fiji://.env/item_item_cf
+    fiji install --fiji=${FIJI}
 
 
 Create the tables
@@ -56,11 +56,11 @@ The `movies.ddl` file contains the DDL instructions for creating three tables:
 
 We create the tables with the following command:
 
-    fiji-schema-shell --fiji=${KIJI} --file=$MOVIES_HOME/src/main/layouts/movielens/movies.ddl
+    fiji-schema-shell --fiji=${FIJI} --file=$MOVIES_HOME/src/main/layouts/movielens/movies.ddl
 
 We then make sure that the table actually exists:
 
-    ~MOVIES_HOME $ fiji-schema-shell --fiji=${KIJI}
+    ~MOVIES_HOME $ fiji-schema-shell --fiji=${FIJI}
     Fiji schema shell v1.3.1
     Enter 'help' for instructions (without quotes).
     Enter 'quit' to quit.
@@ -100,7 +100,7 @@ Next we run one job to import the user data into our Fiji table:
     express job target/fiji-modeling-examples-${project.version}.jar \
         org.fiji.modeling.examples.ItemItemCF.MovieImporter \
         --ratings item_item_cf/u.data \
-        --table-uri ${KIJI}/user_ratings \
+        --table-uri ${FIJI}/user_ratings \
         --hdfs
 
 And another to import the movie titles:
@@ -108,13 +108,13 @@ And another to import the movie titles:
     express job target/fiji-modeling-examples-${project.version}.jar \
         org.fiji.modeling.examples.ItemItemCF.TitlesImporter \
         --titles item_item_cf/u.item \
-        --table-uri ${KIJI}/movie_titles \
+        --table-uri ${FIJI}/movie_titles \
         --hdfs
 
 And then check that the data actually showed up:
 
-    fiji scan ${KIJI}/user_ratings --max-rows=1
-    fiji scan ${KIJI}/movie_titles --max-rows=1
+    fiji scan ${FIJI}/user_ratings --max-rows=1
+    fiji scan ${FIJI}/movie_titles --max-rows=1
 
 
 Create the item-item similarity list
@@ -127,8 +127,8 @@ most-similar items for a given item, sort them, and store them as a vector in ou
 
     express job target/fiji-modeling-examples-${project.version}.jar \
         org.fiji.modeling.examples.ItemItemCF.ItemSimilarityCalculator \
-        --ratings-table-uri ${KIJI}/user_ratings \
-        --similarity-table-uri ${KIJI}/item_item_similarities \
+        --ratings-table-uri ${FIJI}/user_ratings \
+        --similarity-table-uri ${FIJI}/item_item_similarities \
         --model-size 50 \
         --hdfs
 
@@ -142,9 +142,9 @@ similar items the user has rated.
 
     express job target/fiji-modeling-examples-${project.version}.jar \
         org.fiji.modeling.examples.ItemItemCF.ItemScorer \
-        --ratings-table-uri ${KIJI}/user_ratings \
-        --similarity-table-uri ${KIJI}/item_item_similarities \
-        --titles-table-uri ${KIJI}/movie_titles \
+        --ratings-table-uri ${FIJI}/user_ratings \
+        --similarity-table-uri ${FIJI}/item_item_similarities \
+        --titles-table-uri ${FIJI}/movie_titles \
         --users-and-items 744:132 \
         --k 20 \
         --output-mode run \
@@ -165,8 +165,8 @@ of similar items across all items in the cart.
 
     express job target/fiji-modeling-examples-${project.version}.jar \
         org.fiji.modeling.examples.ItemItemCF.ItemRecommender \
-        --similarity-table-uri ${KIJI}/item_item_similarities \
-        --titles-table-uri ${KIJI}/movie_titles \
+        --similarity-table-uri ${FIJI}/item_item_similarities \
+        --titles-table-uri ${FIJI}/movie_titles \
         --items 132 \
         --hdfs
 

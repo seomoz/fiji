@@ -341,10 +341,10 @@ bento start
 
 <p>After Bento starts, it will display ports you will need to complete this tutorial. It will be useful to know the address of the MapReduce JobTracker webapp (<a href='http://localhost:50030'>http://localhost:50030</a> by default) while working through this tutorial.</p>
 
-<p>It will be useful to define an environment variable named <code>KIJI</code> that holds a Fiji URI to the Fiji instance we&#8217;ll use during this tutorial.</p>
+<p>It will be useful to define an environment variable named <code>FIJI</code> that holds a Fiji URI to the Fiji instance we&#8217;ll use during this tutorial.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>KIJI</span><span class='o'>=</span>fiji://.env/fiji_express_music
+<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>FIJI</span><span class='o'>=</span>fiji://.env/fiji_express_music
 </code></pre></div>
 
 </div>
@@ -352,7 +352,7 @@ bento start
 <div class='userinput'>
 
 <div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>EXPRESS_CLASSPATH</span><span class='o'>=</span><span class='k'>${</span><span class='nv'>MUSIC_EXPRESS_HOME</span><span class='k'>}</span>/lib/*
-<span class='nb'>export </span><span class='nv'>KIJI_CLASSPATH</span><span class='o'>=</span><span class='k'>${</span><span class='nv'>EXPRESS_CLASSPATH</span><span class='k'>}</span>
+<span class='nb'>export </span><span class='nv'>FIJI_CLASSPATH</span><span class='o'>=</span><span class='k'>${</span><span class='nv'>EXPRESS_CLASSPATH</span><span class='k'>}</span>
 </code></pre></div>
 
 </div>
@@ -361,14 +361,14 @@ bento start
 <p>Install your Fiji instance:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji install --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>
+<div class='highlight'><pre><code class='bash'>fiji install --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>
 </code></pre></div>
 
 </div>
 <p>Create the Fiji music tables that have layouts described in <code>music-schema.ddl</code>.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji-schema-shell --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span> --file<span class='o'>=</span><span class='k'>${</span><span class='nv'>MUSIC_EXPRESS_HOME</span><span class='k'>}</span>/music-schema.ddl
+<div class='highlight'><pre><code class='bash'>fiji-schema-shell --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span> --file<span class='o'>=</span><span class='k'>${</span><span class='nv'>MUSIC_EXPRESS_HOME</span><span class='k'>}</span>/music-schema.ddl
 </code></pre></div>
 
 </div>

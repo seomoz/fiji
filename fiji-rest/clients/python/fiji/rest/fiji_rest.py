@@ -603,7 +603,7 @@ class FijiRestServer(object):
     # Build environment for the FijiREST daemon:
     env = dict(os.environ)
 
-    fiji_classpath = env.get('KIJI_CLASSPATH')
+    fiji_classpath = env.get('FIJI_CLASSPATH')
     if fiji_classpath is None:
       jar_paths = self._jar_paths
     else:
@@ -617,10 +617,10 @@ class FijiRestServer(object):
         'http://%s:%d' % self.admin_address)
 
     env.update(
-        KIJI_CLASSPATH=':'.join(jar_paths),
-        KIJI_REST_CONF_DIR=self._conf_dir,
-        KIJI_REST_JAVA_ARGUMENTS=' '.join(self._jvm_args),
-        KIJI_REST_LOGS_DIR=self._logs_dir,
+        FIJI_CLASSPATH=':'.join(jar_paths),
+        FIJI_REST_CONF_DIR=self._conf_dir,
+        FIJI_REST_JAVA_ARGUMENTS=' '.join(self._jvm_args),
+        FIJI_REST_LOGS_DIR=self._logs_dir,
         PIDFILE=self._pid_file_path,
     )
     cmd = command.Command(

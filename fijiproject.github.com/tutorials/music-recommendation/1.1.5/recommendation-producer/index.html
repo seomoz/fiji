@@ -320,7 +320,7 @@ implement KeyValueStoreClient. This interface requires that you implement getReq
 The value that you must return from getRequiredStores is a map from the name of a KeyValueStore to
 the default implementation.</p>
 
-<p>For reasons pertaining to <a href="https://jira.fiji.org/browse/KIJIMR-91">FijiMR-91</a> we leave our default
+<p>For reasons pertaining to <a href="https://jira.fiji.org/browse/FIJIMR-91">FijiMR-91</a> we leave our default
 implementation unconfigured.</p>
 
 <div class="highlight"><pre><code class="java">  <span class="kd">public</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">KeyValueStore</span><span class="o">&lt;?,</span> <span class="o">?&gt;&gt;</span> <span class="n">getRequiredStores</span><span class="o">()</span> <span class="o">{</span>
@@ -397,7 +397,7 @@ withStore() method of JobBuilders.</p>
 <p>When we run this example, we again need to specify which
 <a href="http://api-docs.fiji.org/fiji-schema/1.4.0/org/fiji/schema/FijiTable.html"><code>FijiTable</code></a> we want to use to back our
 KeyValueStore. This time, we will override the KeyValueStore binding from
-the command line using an XML configuration file (located at ${KIJI_HOME}/examples/music/KVStoreConfig.xml).
+the command line using an XML configuration file (located at ${FIJI_HOME}/examples/music/KVStoreConfig.xml).
 The contents of the file are displayed below. If you are not using BentoBox, you may need to modify this
 XML file so that the URI points to the songs table you would like to use.</p>
 
@@ -426,8 +426,8 @@ XML file so that the URI points to the songs table you would like to use.</p>
 
 <div class="highlight"><pre><code class="bash">fiji produce <span class="se">\</span>
     --producer<span class="o">=</span>org.fiji.examples.music.produce.NextSongRecommender <span class="se">\</span>
-    --input<span class="o">=</span><span class="s2">&quot;format=fiji table=${KIJI}/users&quot;</span> <span class="se">\</span>
-    --output<span class="o">=</span><span class="s2">&quot;format=fiji table=${KIJI}/users nsplits=2&quot;</span> <span class="se">\</span>
+    --input<span class="o">=</span><span class="s2">&quot;format=fiji table=${FIJI}/users&quot;</span> <span class="se">\</span>
+    --output<span class="o">=</span><span class="s2">&quot;format=fiji table=${FIJI}/users nsplits=2&quot;</span> <span class="se">\</span>
     --lib<span class="o">=</span><span class="k">${</span><span class="nv">LIBS_DIR</span><span class="k">}</span> <span class="se">\</span>
     --kvstores<span class="o">=</span><span class="k">${</span><span class="nv">MUSIC_HOME</span><span class="k">}</span>/KVStoreConfig.xml
 </code></pre></div>
@@ -442,7 +442,7 @@ and the KeyValueStores are specified by the KVStoreConfig.xml file.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/users/info:next_song_rec --max-rows<span class="o">=</span>3
+<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/users/info:next_song_rec --max-rows<span class="o">=</span>3
 </code></pre></div>
 
 

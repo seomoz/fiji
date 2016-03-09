@@ -117,7 +117,7 @@ The JpmmlScoreFunction attempts to convert pmml data types into corresponding av
         jar cf /path/to/empty-jar.jar empty-file
         rm empty-file
 
-5. Deploy the generated model container. The deps-resolver flag must be specified here even though it won't get used ([KIJIREPO-47](https://jira.fiji.org/browse/KIJIREPO-47)):
+5. Deploy the generated model container. The deps-resolver flag must be specified here even though it won't get used ([FIJIREPO-47](https://jira.fiji.org/browse/FIJIREPO-47)):
 
         fiji model-repo deploy nameOfModelInPmmlFile /path/to/empty-jar.jar \
             --fiji=fiji://my-model-repo/instance \

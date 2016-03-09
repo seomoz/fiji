@@ -44,7 +44,7 @@ public final class FijiPivoters {
    */
   public static FijiPivoter create(Configuration conf) throws IOException {
     final Class<? extends FijiPivoter> tableMapperClass =
-        conf.getClass(FijiConfKeys.KIJI_PIVOTER_CLASS, null, FijiPivoter.class);
+        conf.getClass(FijiConfKeys.FIJI_PIVOTER_CLASS, null, FijiPivoter.class);
     if (null == tableMapperClass) {
       throw new IOException("Unable to load pivoter class");
     }

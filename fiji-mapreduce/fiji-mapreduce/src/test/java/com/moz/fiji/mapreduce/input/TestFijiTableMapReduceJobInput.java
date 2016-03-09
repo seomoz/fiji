@@ -102,18 +102,18 @@ public class TestFijiTableMapReduceJobInput extends FijiClientTest {
     final Configuration conf = job.getConfiguration();
     assertEquals(
         mTable.getURI(),
-        FijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_INPUT_TABLE_URI)).build());
+        FijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_INPUT_TABLE_URI)).build());
 
     final FijiDataRequest decoded =
         (FijiDataRequest) SerializationUtils.deserialize(
-            Base64.decodeBase64(conf.get(FijiConfKeys.KIJI_INPUT_DATA_REQUEST)));
+            Base64.decodeBase64(conf.get(FijiConfKeys.FIJI_INPUT_DATA_REQUEST)));
     assertEquals(dataRequest, decoded);
 
     final String confStartRow = Base64.encodeBase64String(startRow.getHBaseRowKey());
     final String confLimitRow = Base64.encodeBase64String(limitRow.getHBaseRowKey());
-    assertEquals(confStartRow, conf.get(FijiConfKeys.KIJI_START_ROW_KEY));
-    assertEquals(confLimitRow, conf.get(FijiConfKeys.KIJI_LIMIT_ROW_KEY));
+    assertEquals(confStartRow, conf.get(FijiConfKeys.FIJI_START_ROW_KEY));
+    assertEquals(confLimitRow, conf.get(FijiConfKeys.FIJI_LIMIT_ROW_KEY));
 
-    assertEquals(filter.toJson().toString(), conf.get(FijiConfKeys.KIJI_ROW_FILTER));
+    assertEquals(filter.toJson().toString(), conf.get(FijiConfKeys.FIJI_ROW_FILTER));
   }
 }

@@ -147,8 +147,8 @@ class Tutorial(object):
     self._env.update({
         'MUSIC_HOME': self._fiji_music_dir,
         'LIBS_DIR': fiji_music_lib_dir,
-        'KIJI': self._fiji_instance_uri,
-        'KIJI_CLASSPATH':
+        'FIJI': self._fiji_instance_uri,
+        'FIJI_CLASSPATH':
             ':'.join(glob.glob(os.path.join(fiji_music_lib_dir, '*'))),
         'HDFS_BASE': self._hdfs_base,
     })
@@ -184,7 +184,7 @@ class Tutorial(object):
 
     # --------------------------------------------------------------------------
 
-    install = self.Command('fiji install --fiji=${KIJI}')
+    install = self.Command('fiji install --fiji=${FIJI}')
     assert (install.exit_code == 0)
     assert ('Successfully created fiji instance: ' in install.output_text)
 
@@ -192,7 +192,7 @@ class Tutorial(object):
 
     create_table = self.Command("""
         fiji-schema-shell \
-            --fiji=${KIJI} \
+            --fiji=${FIJI} \
             --file=${MUSIC_HOME}/music_schema.ddl
     """)
     assert (create_table.exit_code == 0)
@@ -220,7 +220,7 @@ class Tutorial(object):
 
     # --------------------------------------------------------------------------
 
-    list_tables = self.Command('fiji ls ${KIJI}')
+    list_tables = self.Command('fiji ls ${FIJI}')
     assert (list_tables.exit_code == 0)
     assert ('songs' in list_tables.output_text), (
         'Missing table "songs": %s' % list_tables.output_lines)
@@ -246,7 +246,7 @@ class Tutorial(object):
         --input="format=text \
                  file=${HDFS_BASE}/fiji-mr-tutorial/song-metadata.json" \
         --output="format=fiji \
-                  table=${KIJI}/songs \
+                  table=${FIJI}/songs \
                   nsplits=1"
     """)
     assert (bulk_import.exit_code == 0)
@@ -256,7 +256,7 @@ class Tutorial(object):
 
     # --------------------------------------------------------------------------
 
-    list_rows = self.Command('fiji scan ${KIJI}/songs --max-rows=3')
+    list_rows = self.Command('fiji scan ${FIJI}/songs --max-rows=3')
     assert (list_rows.exit_code == 0)
 
     # --------------------------------------------------------------------------
@@ -279,7 +279,7 @@ ${HDFS_BASE}/fiji-mr-tutorial/song-plays-import-descriptor.json \
       --input="format=text \
                file=${HDFS_BASE}/fiji-mr-tutorial/song-plays.json" \
       --output="format=fiji \
-                table=${KIJI}/users \
+                table=${FIJI}/users \
                 nsplits=1" \
       --lib=${LIBS_DIR}
     """)
@@ -290,7 +290,7 @@ ${HDFS_BASE}/fiji-mr-tutorial/song-plays-import-descriptor.json \
 
     # --------------------------------------------------------------------------
 
-    list_rows = self.Command('fiji scan ${KIJI}/users --max-rows=3')
+    list_rows = self.Command('fiji scan ${FIJI}/users --max-rows=3')
     assert (list_rows.exit_code == 0)
     assert (list_rows.output_lines[0].startswith('Scanning fiji table: fiji://'))
     assert (len(list_rows.output_lines) >= 3 * 3 + 1), len(list_rows.output_lines)
@@ -317,7 +317,7 @@ ${HDFS_BASE}/fiji-mr-tutorial/song-plays-import-descriptor.json \
     fiji gather \
         --gatherer=com.moz.fiji.examples.music.gather.SongPlayCounter \
         --reducer=com.moz.fiji.mapreduce.lib.reduce.LongSumReducer \
-        --input="format=fiji table=${KIJI}/users" \
+        --input="format=fiji table=${FIJI}/users" \
         --output="format=text \
                   file=${HDFS_BASE}/output.txt_file \
                   nsplits=2" \
@@ -348,7 +348,7 @@ ${HDFS_BASE}/fiji-mr-tutorial/song-plays-import-descriptor.json \
     fiji gather \
         --gatherer=com.moz.fiji.examples.music.gather.SequentialPlayCounter \
         --reducer=com.moz.fiji.examples.music.reduce.SequentialPlayCountReducer \
-        --input="format=fiji table=${KIJI}/users" \
+        --input="format=fiji table=${FIJI}/users" \
         --output="format=avrokv \
                   file=${HDFS_BASE}/output.sequentialPlayCount \
                   nsplits=2" \

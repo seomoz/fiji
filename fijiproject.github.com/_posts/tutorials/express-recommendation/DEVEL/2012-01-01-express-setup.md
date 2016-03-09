@@ -54,8 +54,8 @@ useful for this tutorial.
 <li>If you are planning to use HBase with Fiji, make sure HBase is installed, that
   <code>HBASE_HOME</code> is set to your <code>hbase</code> distribution, and that HBase is
   started.</li>
-<li>Export <code>KIJI_HOME</code> to the root of your <code>fiji</code> distribution.</li>
-<li>Export <code>PATH=${PATH}:${KIJI_HOME}/bin</code>.</li>
+<li>Export <code>FIJI_HOME</code> to the root of your <code>fiji</code> distribution.</li>
+<li>Export <code>PATH=${PATH}:${FIJI_HOME}/bin</code>.</li>
 <li>Export <code>EXPRESS_HOME</code> to the root of your <code>fiji-express</code> distribution.</li>
 <li>Export <code>PATH=${PATH}:${EXPRESS_HOME}/bin</code></li>
 </ol>
@@ -67,12 +67,12 @@ Fiji cluster appropriately.
 
 ### Set Tutorial-Specific Environment Variables
 
-Define an environment variable named `KIJI` that holds a Fiji URI to the Fiji
+Define an environment variable named `FIJI` that holds a Fiji URI to the Fiji
 instance we'll use during this tutorial.  For an HBase-backed Fiji instance:
 
 <div class="userinput">
 {% highlight bash %}
-export KIJI=fiji://.env/fiji_express_music
+export FIJI=fiji://.env/fiji_express_music
 {% endhighlight %}
 </div>
 
@@ -80,18 +80,18 @@ And for a Cassandra-backed Fiji instance:
 
 <div class="userinput">
 {% highlight bash %}
-export KIJI=fiji-cassandra://localhost:2181/localhost:9042/fiji_express_music
+export FIJI=fiji-cassandra://localhost:2181/localhost:9042/fiji_express_music
 {% endhighlight %}
 </div>
 
-The code for this tutorial is located in the `${KIJI_HOME}/examples/express-music/` directory.
+The code for this tutorial is located in the `${FIJI_HOME}/examples/express-music/` directory.
 Commands in this tutorial will depend on this location.
 
 Next, set a variable for the tutorial location:
 
 <div class="userinput">
 {% highlight bash %}
-export MUSIC_EXPRESS_HOME=${KIJI_HOME}/examples/express-music
+export MUSIC_EXPRESS_HOME=${FIJI_HOME}/examples/express-music
 {% endhighlight %}
 </div>
 
@@ -101,7 +101,7 @@ Install your Fiji instance:
 
 <div class="userinput">
 {% highlight bash %}
-fiji install --fiji=${KIJI}
+fiji install --fiji=${FIJI}
 {% endhighlight %}
 </div>
 
@@ -119,7 +119,7 @@ Create the Fiji music tables that have layouts described in `music-schema.ddl`.
 
 <div class="userinput">
 {% highlight bash %}
-${KIJI_HOME}/schema-shell/bin/fiji-schema-shell --fiji=${KIJI} --file=${MUSIC_EXPRESS_HOME}/music-schema.ddl
+${FIJI_HOME}/schema-shell/bin/fiji-schema-shell --fiji=${FIJI} --file=${MUSIC_EXPRESS_HOME}/music-schema.ddl
 {% endhighlight %}
 </div>
 
@@ -132,7 +132,7 @@ Verify the Fiji music tables were correctly created:
 
 <div class="userinput">
 {% highlight bash %}
-fiji ls ${KIJI}
+fiji ls ${FIJI}
 {% endhighlight %}
 </div>
 

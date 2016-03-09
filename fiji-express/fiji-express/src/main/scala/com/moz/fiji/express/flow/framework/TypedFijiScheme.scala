@@ -127,7 +127,7 @@ class TypedFijiScheme private[express] (
     BaseFijiScheme.configureFijiRowScan(uri, conf, rowRangeSpec, rowFilterSpec)
     // Set data request.
     conf.set(
-        FijiConfKeys.KIJI_INPUT_DATA_REQUEST,
+        FijiConfKeys.FIJI_INPUT_DATA_REQUEST,
         Base64.encodeBase64String(SerializationUtils.serialize(request)))
   }
 

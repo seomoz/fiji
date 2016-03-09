@@ -159,7 +159,7 @@ public final class FijiGatherJobBuilder extends FijiTableInputJobBuilder<FijiGat
     final Configuration conf = job.getConfiguration();
 
     // Serialize the gatherer class name into the job configuration.
-    conf.setClass(FijiConfKeys.KIJI_GATHERER_CLASS, mGathererClass, FijiGatherer.class);
+    conf.setClass(FijiConfKeys.FIJI_GATHERER_CLASS, mGathererClass, FijiGatherer.class);
 
     if ((getJobOutput() instanceof HFileMapReduceJobOutput) && (null == mReducerClass)) {
       mReducerClass = IdentityReducer.class;

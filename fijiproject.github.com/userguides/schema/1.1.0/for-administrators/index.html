@@ -497,13 +497,13 @@
 
 <p>After downloading either the BentoBox (<code>fiji-bento-version-release.tar.gz</code>) or FijiSchema (<code>fiji-schema-version-release.tar.gz</code>), unzip the archive with the command <code>tar vzxf filename</code>. This will create to a directory named <code>fiji-bento-version/</code> or <code>fiji-schema-version/</code>.</p>
 
-<p>For convenience, <code>$KIJI_HOME</code> should be set to this directory. For example:</p>
-<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span><span class='nb'>export </span><span class='nv'>KIJI_HOME</span><span class='o'>=</span>/path/to/fiji-bento-<span class='o'>(</span>version<span class='o'>)</span>
+<p>For convenience, <code>$FIJI_HOME</code> should be set to this directory. For example:</p>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span><span class='nb'>export </span><span class='nv'>FIJI_HOME</span><span class='o'>=</span>/path/to/fiji-bento-<span class='o'>(</span>version<span class='o'>)</span>
 </code></pre></div>
 <p>You should edit your <code>.bashrc</code> file to contain this line so that it&#8217;s incorporated in your environment for future bash sessions.</p>
 
 <p>If you&#8217;re using the BentoBox edition, you can set up your environment as follows:</p>
-<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span><span class='nb'>source</span> <span class='nv'>$KIJI_HOME</span>/bin/fiji-env.sh
+<div class='highlight'><pre><code class='bash'><span class='nv'>$ </span><span class='nb'>source</span> <span class='nv'>$FIJI_HOME</span>/bin/fiji-env.sh
 <span class='nv'>$ </span>bento start
 </code></pre></div>
 <p>This starts the bento mini cluster and updates your environment variables to use it. After a few seconds you should be able to view the status page of your own mini HBase cluster at <a href='http://localhost:60010/'>http://localhost:60010/</a>. (If you don&#8217;t see it right away, wait 10 seconds and reload the page.) You&#8217;re now ready to proceed with installing Fiji onto your cluster.</p>

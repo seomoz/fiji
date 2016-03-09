@@ -34,13 +34,13 @@ Setup
 
 Install a Fiji instance.
 
-    export KIJI=fiji://.env/fiji_music
-    fiji install --fiji=${KIJI}
+    export FIJI=fiji://.env/fiji_music
+    fiji install --fiji=${FIJI}
 
 Export libs.
 
     export LIBS_DIR=$MUSIC_EXPRESS_HOME/lib
-    export KIJI_CLASSPATH="${LIBS_DIR}/*"
+    export FIJI_CLASSPATH="${LIBS_DIR}/*"
 
 
 Create the Fiji music tables
@@ -48,7 +48,7 @@ Create the Fiji music tables
 
 The layouts for the tables are described in `music_schema.ddl`.
 
-    fiji-schema-shell --fiji=${KIJI} --file=$MUSIC_EXPRESS_HOME/music_schema.ddl
+    fiji-schema-shell --fiji=${FIJI} --file=$MUSIC_EXPRESS_HOME/music_schema.ddl
 
 
 Upload data to HDFS
@@ -66,14 +66,14 @@ Import the song metadata into a `songs` table.
     express job fiji-express-music-${project.version}.jar \
     org.fiji.express.music.SongMetadataImporter \
     --input express-tutorial/song-metadata.json \
-    --table-uri ${KIJI}/songs --hdfs
+    --table-uri ${FIJI}/songs --hdfs
 
 Import the users' listening history into a `users` table.
 
     express job target/fiji-express-music-${project.version}.jar \
     org.fiji.express.music.SongPlaysImporter \
     --input express-tutorial/song-plays.json \
-    --table-uri ${KIJI}/users --hdfs
+    --table-uri ${FIJI}/users --hdfs
 
 
 Count the number of times a song was played
@@ -85,7 +85,7 @@ is written to a text file in HDFS.
 
     express job fiji-express-music-${project.version}.jar \
     org.fiji.express.music.SongPlayCounter \
-    --table-uri ${KIJI}/users \
+    --table-uri ${FIJI}/users \
     --output express-tutorial/songcount-output --hdfs
 
 
@@ -97,8 +97,8 @@ This kind of model can eventually be used to write a song recommender.
 
     express job fiji-express-music-${project.version}.jar \
     org.fiji.express.music.TopNextSongs \
-    --users-table ${KIJI}/users \
-    --songs-table ${KIJI}/songs --hdfs
+    --users-table ${FIJI}/users \
+    --songs-table ${FIJI}/songs --hdfs
 
 
 Stop the BentoBox

@@ -417,8 +417,8 @@
 <div class='userinput'>
 
 <div class='highlight'><pre><code class='bash'>express job <span class='k'>${</span><span class='nv'>MUSIC_EXPRESS_HOME</span><span class='k'>}</span>/lib/fiji-express-music-0.4.0.jar <span class='se'>\</span>
-    org.fiji.express.music.SongRecommender --songs-table <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/songs <span class='se'>\</span>
-    --users-table <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/users
+    org.fiji.express.music.SongRecommender --songs-table <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/songs <span class='se'>\</span>
+    --users-table <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/users
 </code></pre></div>
 
 </div>
@@ -429,8 +429,8 @@
 
 <div class='highlight'><pre><code class='bash'>express job --libjars <span class='s2'>&quot;${MUSIC_EXPRESS_HOME}/lib/*&quot;</span> <span class='se'>\</span>
     <span class='k'>${</span><span class='nv'>MUSIC_EXPRESS_HOME</span><span class='k'>}</span>/lib/fiji-express-music-0.4.0.jar <span class='se'>\</span>
-    org.fiji.express.music.SongRecommender --songs-table <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/songs <span class='se'>\</span>
-    --users-table <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/users
+    org.fiji.express.music.SongRecommender --songs-table <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/songs <span class='se'>\</span>
+    --users-table <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/users
 </code></pre></div>
 
 </div>
@@ -439,7 +439,7 @@
 <p>You can verify the output by scanning the <code>users-table</code>.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/users --max-rows<span class='o'>=</span>2
+<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/users --max-rows<span class='o'>=</span>2
 </code></pre></div>
 
 </div>

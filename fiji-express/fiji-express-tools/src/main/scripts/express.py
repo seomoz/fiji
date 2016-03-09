@@ -46,10 +46,10 @@ EXPRESS_TOOL = "com.moz.fiji.express.flow.ExpressTool"
 EXPRESS_HOME = "EXPRESS_HOME"
 HADOOP_HOME = "HADOOP_HOME"
 HBASE_HOME = "HBASE_HOME"
-KIJI_HOME = "KIJI_HOME"
+FIJI_HOME = "FIJI_HOME"
 SCHEMA_SHELL_HOME = "SCHEMA_SHELL_HOME"
 
-KIJI_CLASSPATH = "KIJI_CLASSPATH"
+FIJI_CLASSPATH = "FIJI_CLASSPATH"
 
 
 class Error(Exception):
@@ -319,7 +319,7 @@ class HBaseTool(HomedTool):
 class FijiTool(HomedTool):
     @property
     def home_env_key(self):
-        return "KIJI_HOME"
+        return "FIJI_HOME"
 
     @property
     def tool(self):
@@ -407,8 +407,8 @@ class ExpressTool(object):
         return self._fiji
 
     def _list_classpath_entries(self):
-        if KIJI_CLASSPATH in self._env:
-            user_classpath = self._env[KIJI_CLASSPATH].split(":")
+        if FIJI_CLASSPATH in self._env:
+            user_classpath = self._env[FIJI_CLASSPATH].split(":")
             yield from user_classpath
 
         yield os.path.join(self.home_dir, "conf")
@@ -525,7 +525,7 @@ Environment Variables:
   EXPRESS_JAVA_OPTS: Extra arguments to pass to the FijiExpress's JVM.
   JAVA_LIBRARY_PATH: Colon-separated paths to additional native libs.
   JAVA_OPTS: Java args to append to java command and sent to JVM.
-  KIJI_CLASSPATH: Colon-separated jars for classpath and distributed cache.
+  FIJI_CLASSPATH: Colon-separated jars for classpath and distributed cache.
 """
 
 
@@ -875,8 +875,8 @@ class ExpressCLI(object):
 
         env = dict(self.env)
 
-        classpath = env.get(KIJI_CLASSPATH, "").split(":") + list(self.express.get_classpath())
-        env[KIJI_CLASSPATH] = ":".join(classpath)
+        classpath = env.get(FIJI_CLASSPATH, "").split(":") + list(self.express.get_classpath())
+        env[FIJI_CLASSPATH] = ":".join(classpath)
 
         java_opts = env.get("JAVA_OPTS", "")
         # FIXME: I cannot find any trace of the Java system property "express.tmpjars"!
@@ -887,9 +887,9 @@ class ExpressCLI(object):
         env["JAVA_OPTS"] = java_opts
 
         cmd = [schema_shell_script]
-        logging.debug("Launching fiji-schema shell with:\n%s\with KIJI_CLASSPATH:\n%s",
+        logging.debug("Launching fiji-schema shell with:\n%s\with FIJI_CLASSPATH:\n%s",
                       " \\\n\t".join(map(repr, cmd)), "\n".join(map(tab_indent, classpath)))
-        logging.debug("Computed KIJI_CLASSPATH:")
+        logging.debug("Computed FIJI_CLASSPATH:")
         proc = subprocess.Popen(cmd, env=env)
         try:
             return proc.wait()

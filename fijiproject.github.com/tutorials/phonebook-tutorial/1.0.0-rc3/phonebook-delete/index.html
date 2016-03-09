@@ -373,7 +373,7 @@
 <p>This example interactively queries the user for the first and last names of the contact to delete. First, verify that the contact entry for Renuka Apte exists in your phonebook table:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji ls --table<span class='o'>=</span>phonebook --entity-id<span class='o'>=</span><span class='s2'>&quot;Renuka,Apte&quot;</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji ls --table<span class='o'>=</span>phonebook --entity-id<span class='o'>=</span><span class='s2'>&quot;Renuka,Apte&quot;</span>
 </code></pre></div>
 
 </div>
@@ -391,8 +391,8 @@
 <p>Next, to perform the deletion of this contact using DeleteEntry:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc3.jar <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc3.jar <span class='se'>\</span>
     org.fiji.examples.phonebook.DeleteEntry
 </code></pre></div>
 
@@ -405,7 +405,7 @@ Last name: Apte</code></pre>
 <p>To verify that the row has been deleted, run the following command ensuring that the phonebook entry for Renuka does not get printed:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji ls --table<span class='o'>=</span>phonebook --entity-id<span class='o'>=</span><span class='s2'>&quot;Renuka,Apte&quot;</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji ls --table<span class='o'>=</span>phonebook --entity-id<span class='o'>=</span><span class='s2'>&quot;Renuka,Apte&quot;</span>
 </code></pre></div>
 
 </div>
@@ -442,8 +442,8 @@ Last name: Apte</code></pre>
 <p>You can run the DeleteEntriesByState MapReduce job by running:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc3.jar <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc3.jar <span class='se'>\</span>
     org.fiji.examples.phonebook.DeleteEntriesByState --state<span class='o'>=</span>CA
 </code></pre></div>
 
@@ -453,7 +453,7 @@ Last name: Apte</code></pre>
 <p>To verify that the contacts have been deleted, run the following command ensuring that no phonebook entries from California get printed.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji ls --table<span class='o'>=</span>phonebook --columns<span class='o'>=</span><span class='s2'>&quot;derived:state&quot;</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji ls --table<span class='o'>=</span>phonebook --columns<span class='o'>=</span><span class='s2'>&quot;derived:state&quot;</span>
 </code></pre></div>
 
 </div>

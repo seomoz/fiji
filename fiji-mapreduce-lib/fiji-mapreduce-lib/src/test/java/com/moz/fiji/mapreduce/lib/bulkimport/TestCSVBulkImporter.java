@@ -252,7 +252,7 @@ public class TestCSVBulkImporter extends FijiClientTest {
     final Configuration conf = getConf();
     conf.set(DescribedInputTextBulkImporter.CONF_FILE, descriptorFile.getCanonicalPath());
     conf.set(CSVBulkImporter.CONF_FIELD_DELIMITER, "!");
-    conf.set(FijiConfKeys.KIJI_OUTPUT_TABLE_URI, mTable.getURI().toString());
+    conf.set(FijiConfKeys.FIJI_OUTPUT_TABLE_URI, mTable.getURI().toString());
     CSVBulkImporter csvbi = new CSVBulkImporter();
     csvbi.setConf(conf);
     try {

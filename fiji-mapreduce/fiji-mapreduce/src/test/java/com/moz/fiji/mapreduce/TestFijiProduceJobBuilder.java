@@ -123,7 +123,7 @@ public class TestFijiProduceJobBuilder extends FijiClientTest {
     assertEquals(HBaseFijiTableInputFormat.class, job.getInputFormatClass());
     assertEquals(ProduceMapper.class, job.getMapperClass());
     assertEquals(MyProducer.class,
-        job.getConfiguration().getClass(FijiConfKeys.KIJI_PRODUCER_CLASS, null));
+        job.getConfiguration().getClass(FijiConfKeys.FIJI_PRODUCER_CLASS, null));
     assertEquals(10, job.getNumReduceTasks());
     assertEquals(FijiHFileOutputFormat.class, job.getOutputFormatClass());
   }

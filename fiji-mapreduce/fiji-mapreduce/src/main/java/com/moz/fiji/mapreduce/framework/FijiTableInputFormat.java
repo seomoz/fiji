@@ -58,7 +58,7 @@ public abstract class FijiTableInputFormat
     public static FijiTableInputFormatFactory get(FijiURI uri) {
       FijiTableInputFormatFactory instance;
       String scheme = uri.getScheme();
-      if (scheme.equals(FijiURI.KIJI_SCHEME)) {
+      if (scheme.equals(FijiURI.FIJI_SCHEME)) {
         scheme = HBaseFijiURI.HBASE_SCHEME;
       }
       synchronized (Fiji.Factory.class) {
@@ -104,18 +104,18 @@ public abstract class FijiTableInputFormat
     // Write all the required values to the job's configuration object.
     final String serializedRequest =
         Base64.encodeBase64String(SerializationUtils.serialize(dataRequest));
-    conf.set(FijiConfKeys.KIJI_INPUT_DATA_REQUEST, serializedRequest);
-    conf.set(FijiConfKeys.KIJI_INPUT_TABLE_URI, tableURI.toString());
+    conf.set(FijiConfKeys.FIJI_INPUT_DATA_REQUEST, serializedRequest);
+    conf.set(FijiConfKeys.FIJI_INPUT_TABLE_URI, tableURI.toString());
     if (null != startRow) {
-      conf.set(FijiConfKeys.KIJI_START_ROW_KEY,
+      conf.set(FijiConfKeys.FIJI_START_ROW_KEY,
           Base64.encodeBase64String(startRow.getHBaseRowKey()));
     }
     if (null != endRow) {
-      conf.set(FijiConfKeys.KIJI_LIMIT_ROW_KEY,
+      conf.set(FijiConfKeys.FIJI_LIMIT_ROW_KEY,
           Base64.encodeBase64String(endRow.getHBaseRowKey()));
     }
     if (null != filter) {
-      conf.set(FijiConfKeys.KIJI_ROW_FILTER, filter.toJson().toString());
+      conf.set(FijiConfKeys.FIJI_ROW_FILTER, filter.toJson().toString());
     }
   }
 }

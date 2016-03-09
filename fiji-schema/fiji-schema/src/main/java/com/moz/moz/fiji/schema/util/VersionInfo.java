@@ -48,10 +48,10 @@ public final class VersionInfo {
   /** Fallback software version ID, in case the properties file is not generated/reachable. */
   public static final String DEFAULT_DEVELOPMENT_VERSION = "development";
 
-  private static final String KIJI_SCHEMA_PROPERTIES_RESOURCE =
+  private static final String FIJI_SCHEMA_PROPERTIES_RESOURCE =
       "com/moz/fiji/schema/fiji-schema.properties";
 
-  private static final String KIJI_SCHEMA_VERSION_PROP_NAME = "fiji-schema-version";
+  private static final String FIJI_SCHEMA_VERSION_PROP_NAME = "fiji-schema-version";
 
   /**
    * Loads fiji schema properties.
@@ -61,7 +61,7 @@ public final class VersionInfo {
    */
   private static Properties loadFijiSchemaProperties() throws IOException {
     final InputStream istream =
-        VersionInfo.class.getClassLoader().getResourceAsStream(KIJI_SCHEMA_PROPERTIES_RESOURCE);
+        VersionInfo.class.getClassLoader().getResourceAsStream(FIJI_SCHEMA_PROPERTIES_RESOURCE);
     try {
       final Properties properties = new Properties();
       properties.load(istream);
@@ -131,7 +131,7 @@ public final class VersionInfo {
 
     // Most likely a development version:
     final Properties fijiProps = loadFijiSchemaProperties();
-    return fijiProps.getProperty(KIJI_SCHEMA_VERSION_PROP_NAME, DEFAULT_DEVELOPMENT_VERSION);
+    return fijiProps.getProperty(FIJI_SCHEMA_VERSION_PROP_NAME, DEFAULT_DEVELOPMENT_VERSION);
   }
 
   /**
@@ -246,7 +246,7 @@ public final class VersionInfo {
   static boolean areInstanceVersionsCompatible(
       ProtocolVersion clientVersion, ProtocolVersion clusterVersion) {
 
-    if (Objects.equal(clusterVersion, Versions.SYSTEM_KIJI_1_0_DEPRECATED)) {
+    if (Objects.equal(clusterVersion, Versions.SYSTEM_FIJI_1_0_DEPRECATED)) {
       // The "fiji-1.0" version is equivalent to "system-1.0" in compatibility tests.
       clusterVersion = Versions.SYSTEM_1_0;
     }

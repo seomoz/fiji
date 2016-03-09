@@ -84,7 +84,7 @@ public class NextSongRecommender extends FijiProducer implements KeyValueStoreCl
   /** {@inheritDoc} */
   @Override
   public Map<String, KeyValueStore<?, ?>> getRequiredStores() {
-    // We set the default KVStore to be unconfigured; see https://jira.fiji.org/browse/KIJIMR-91
+    // We set the default KVStore to be unconfigured; see https://jira.fiji.org/browse/FIJIMR-91
     // We will have to supply a KVStore in an .xml file from the command line
     // when running this producer.
     return RequiredStores.just("nextPlayed", UnconfiguredKeyValueStore.builder().build());

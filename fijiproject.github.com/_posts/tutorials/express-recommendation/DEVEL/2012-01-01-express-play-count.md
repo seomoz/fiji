@@ -152,7 +152,7 @@ Run the SongPlayCounter job:
 express.py job --jars="${MUSIC_EXPRESS_HOME}/lib/*" \
     --class=org.fiji.express.music.SongPlayCounter \
     --mode=hdfs \
-    --table-uri ${KIJI}/users \
+    --table-uri ${FIJI}/users \
     --output express-tutorial/songcount-output
 {% endhighlight %}
 </div>

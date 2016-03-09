@@ -169,7 +169,7 @@ public final class HFileKeyValue implements WritableComparable<HFileKeyValue> {
     return FijiMRPlatformBridge.get().compareKeyValues(mKeyValue, other.mKeyValue);
   }
 
-  // TODO(KIJIMR-85): Add equals() and hashCode() here. Remove findBugs exclusion
+  // TODO(FIJIMR-85): Add equals() and hashCode() here. Remove findBugs exclusion
   // and javadoc warning.
 
   /** {@inheritDoc} */

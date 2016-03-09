@@ -162,9 +162,9 @@ final private[express] class HFileFijiTap(
     FileOutputFormat.setOutputPath(conf, new Path(hFileOutput, "hfiles"))
     DeprecatedOutputFormatWrapper.setOutputFormat(classOf[FijiHFileOutputFormat], conf)
     val hfContext = classOf[HFileWriterContext].getName
-    conf.set(FijiConfKeys.KIJI_TABLE_CONTEXT_CLASS, hfContext)
+    conf.set(FijiConfKeys.FIJI_TABLE_CONTEXT_CLASS, hfContext)
     // Store the output table.
-    conf.set(FijiConfKeys.KIJI_OUTPUT_TABLE_URI, tableUri)
+    conf.set(FijiConfKeys.FIJI_OUTPUT_TABLE_URI, tableUri)
 
     super.sinkConfInit(flow, conf)
   }

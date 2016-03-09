@@ -103,7 +103,7 @@ public abstract class DescribedInputTextBulkImporter extends FijiBulkImporter<Lo
 
   public static final String CONF_LOG_RATE = "fiji.import.text.log.rate";
 
-  private static final ImmutableMap<String, Class<?>> KIJI_CELL_TYPE_TO_CLASS_MAP =
+  private static final ImmutableMap<String, Class<?>> FIJI_CELL_TYPE_TO_CLASS_MAP =
       new ImmutableMap.Builder<String, Class<?>>()
           .put("\"boolean\"", Boolean.class)
           .put("\"int\"", Integer.class)
@@ -113,7 +113,7 @@ public abstract class DescribedInputTextBulkImporter extends FijiBulkImporter<Lo
           .put("\"string\"", String.class)
           .build();
 
-  private static final ImmutableMap<Schema.Type, Class<?>> KIJI_AVRO_TYPE_TO_CLASS_MAP =
+  private static final ImmutableMap<Schema.Type, Class<?>> FIJI_AVRO_TYPE_TO_CLASS_MAP =
       new ImmutableMap.Builder<Schema.Type, Class<?>>()
           .put(Schema.Type.BOOLEAN, Boolean.class)
           .put(Schema.Type.INT, Integer.class)
@@ -165,7 +165,7 @@ public abstract class DescribedInputTextBulkImporter extends FijiBulkImporter<Lo
     final Configuration conf = getConf();
     Preconditions.checkNotNull(mTableImportDescriptor);
 
-    final FijiURI uri = FijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_OUTPUT_TABLE_URI)).build();
+    final FijiURI uri = FijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_OUTPUT_TABLE_URI)).build();
 
     final Fiji fiji = Fiji.Factory.open(uri, conf);
     final FijiSchemaTable schemaTable = fiji.getSchemaTable();
@@ -200,17 +200,17 @@ public abstract class DescribedInputTextBulkImporter extends FijiBulkImporter<Lo
             } else {
               throw new IOException("Schema is not a UID or JSON type.");
             }
-            if (KIJI_AVRO_TYPE_TO_CLASS_MAP.containsKey(schemaType)) {
+            if (FIJI_AVRO_TYPE_TO_CLASS_MAP.containsKey(schemaType)) {
               columnNameClassMap.put(fijiColumnName,
-                KIJI_AVRO_TYPE_TO_CLASS_MAP.get(schemaType));
+                FIJI_AVRO_TYPE_TO_CLASS_MAP.get(schemaType));
             } else {
               throw new IOException("Unsupported described output type: " + cellSchema.getValue());
             }
             break;
           case INLINE:
-            if (KIJI_CELL_TYPE_TO_CLASS_MAP.containsKey(cellSchema.getValue())) {
+            if (FIJI_CELL_TYPE_TO_CLASS_MAP.containsKey(cellSchema.getValue())) {
               columnNameClassMap.put(fijiColumnName,
-                KIJI_CELL_TYPE_TO_CLASS_MAP.get(cellSchema.getValue()));
+                FIJI_CELL_TYPE_TO_CLASS_MAP.get(cellSchema.getValue()));
             } else {
               throw new IOException("Unsupported described output type: " + cellSchema.getValue());
             }
@@ -264,10 +264,10 @@ public abstract class DescribedInputTextBulkImporter extends FijiBulkImporter<Lo
     }
     mIncompleteLineCounter++;
 
-    //TODO(KIJIMRLIB-9) Abort this bulk importer job early if incomplete records exceed a threshold
+    //TODO(FIJIMRLIB-9) Abort this bulk importer job early if incomplete records exceed a threshold
     context.incrementCounter(JobHistoryCounters.BULKIMPORTER_RECORDS_INCOMPLETE);
 
-    //TODO(KIJIMRLIB-4) Add a strict mode where we reject incomplete lines
+    //TODO(FIJIMRLIB-4) Add a strict mode where we reject incomplete lines
   }
 
   /**
@@ -284,10 +284,10 @@ public abstract class DescribedInputTextBulkImporter extends FijiBulkImporter<Lo
     }
     mRejectedLineCounter++;
 
-    //TODO(KIJIMRLIB-9) Abort this bulk importer job early if rejected records exceed a threshold
+    //TODO(FIJIMRLIB-9) Abort this bulk importer job early if rejected records exceed a threshold
     context.incrementCounter(JobHistoryCounters.BULKIMPORTER_RECORDS_REJECTED);
 
-    //TODO(KIJIMRLIB-4) Allow this to emit to a rejected output so that import can be reattempted.
+    //TODO(FIJIMRLIB-4) Allow this to emit to a rejected output so that import can be reattempted.
   }
 
   /**

@@ -292,7 +292,7 @@ do this:</p>
 
 <div class="highlight"><pre><code class="java"><span class="n">GenericTableMapReduceUtil</span><span class="o">.</span><span class="na">addAllDependencyJars</span><span class="o">(</span><span class="n">job</span><span class="o">);</span>
 <span class="n">DistributedCacheJars</span><span class="o">.</span><span class="na">addJarsToDistributedCache</span><span class="o">(</span><span class="n">job</span><span class="o">,</span>
-    <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getenv</span><span class="o">(</span><span class="s">&quot;KIJI_HOME&quot;</span><span class="o">),</span> <span class="s">&quot;lib&quot;</span><span class="o">));</span>
+    <span class="k">new</span> <span class="nf">File</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">getenv</span><span class="o">(</span><span class="s">&quot;FIJI_HOME&quot;</span><span class="o">),</span> <span class="s">&quot;lib&quot;</span><span class="o">));</span>
 <span class="n">job</span><span class="o">.</span><span class="na">setUserClassesTakesPrecedence</span><span class="o">(</span><span class="kc">true</span><span class="o">);</span>
 </code></pre></div>
 
@@ -307,7 +307,7 @@ It extracts the address field from each row as follows:</p>
 <p>Address is the same Avro type you read about on the
 <a href="../phonebook-import/">Phonebook Importer</a> page. The JSON
 description for it can be found at
-<code>$KIJI_HOME/examples/phonebook/src/main/avro/Address.avsc</code>. More information
+<code>$FIJI_HOME/examples/phonebook/src/main/avro/Address.avsc</code>. More information
 about Avro types can be found
 <a href="http://avro.apache.org/docs/current/spec.html">here</a>.</p>
 
@@ -321,13 +321,13 @@ example, the zip code can be extracted from the Address object and written as fo
 <h3>Running the Example</h3>
 
 <p>We assume that you have already imported the contacts from
-<code>$KIJI_HOME/examples/phonebook/input-data.txt</code> into the phonebook Fiji table by this point.
+<code>$FIJI_HOME/examples/phonebook/input-data.txt</code> into the phonebook Fiji table by this point.
 You can execute this example using the <code>fiji jar</code> command with the class name:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
-    <span class="nv">$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.4.jar <span class="se">\</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
+    <span class="nv">$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.4.jar <span class="se">\</span>
     org.fiji.examples.phonebook.AddressFieldExtractor
 </code></pre></div>
 
@@ -340,7 +340,7 @@ You can execute this example using the <code>fiji jar</code> command with the cl
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook/derived
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook/derived
 </code></pre></div>
 
 </div>

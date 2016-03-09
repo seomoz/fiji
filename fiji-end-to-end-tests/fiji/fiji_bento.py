@@ -124,7 +124,7 @@ class FijiBento(object):
 
   def GetMostRecentVersion(self):
     """Reports the most recent version of FijiBento from the SNAPSHOT repo."""
-    snapshot_repo = maven_repo.RemoteRepository(maven_repo.KIJI_SNAPSHOT_REPO)
+    snapshot_repo = maven_repo.RemoteRepository(maven_repo.FIJI_SNAPSHOT_REPO)
     bento_versions = list(snapshot_repo.ListVersions(group='com.moz.fiji.fiji-bento',
                                                      artifact='fiji-bento'))
 
@@ -160,8 +160,8 @@ class FijiBento(object):
     assert not self.installed
     repo = maven_repo.MavenRepository(
         remotes=[
-            maven_repo.KIJI_PUBLIC_REPO,
-            maven_repo.KIJI_SNAPSHOT_REPO,
+            maven_repo.FIJI_PUBLIC_REPO,
+            maven_repo.FIJI_SNAPSHOT_REPO,
         ],
     )
     if version is None:

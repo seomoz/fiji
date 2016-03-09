@@ -19,7 +19,7 @@ write to the phonebook table.
 
 ### AddEntry.java
 The class `AddEntry.java` is included in the phonebook example source (located under
-`$KIJI_HOME/examples/phonebook/src/main/java/org/fiji/examples/phonebook/`). It implements a command-line tool
+`$FIJI_HOME/examples/phonebook/src/main/java/org/fiji/examples/phonebook/`). It implements a command-line tool
 that asks a user for contact information and then uses that information to populate
 the columns in a row in the Fiji table `phonebook` for that contact.
 To start, `AddEntry.java` loads an HBase configuration.
@@ -100,10 +100,10 @@ You run the class `AddEntry` with the `fiji` command-line tool as follows:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji jar \
-    $KIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar \
+$FIJI_HOME/bin/fiji jar \
+    $FIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar \
     org.fiji.examples.phonebook.AddEntry \
-    --fiji=${KIJI}
+    --fiji=${FIJI}
 {% endhighlight %}
 </div>
 
@@ -138,7 +138,7 @@ already done so, put the phonebook jar file on your Fiji classpath:
 
 <div class="userinput">
 {% highlight bash %}
-export KIJI_CLASSPATH="$KIJI_HOME/examples/phonebook/lib/*"
+export FIJI_CLASSPATH="$FIJI_HOME/examples/phonebook/lib/*"
 {% endhighlight %}
 </div>
 
@@ -146,7 +146,7 @@ Now use `fiji scan`:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji scan ${KIJI}/phonebook
+$FIJI_HOME/bin/fiji scan ${FIJI}/phonebook
 {% endhighlight %}
 </div>
 
@@ -167,7 +167,7 @@ Or run `fiji get`:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji get ${KIJI}/phonebook --entity-id="['Renuka,Apte']"
+$FIJI_HOME/bin/fiji get ${FIJI}/phonebook --entity-id="['Renuka,Apte']"
 {% endhighlight %}
 </div>
 
@@ -239,10 +239,10 @@ You can run the following command to perform a lookup using the `Lookup.java` ex
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji jar \
-    $KIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar \
+$FIJI_HOME/bin/fiji jar \
+    $FIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar \
     org.fiji.examples.phonebook.Lookup \
-    --fiji=${KIJI} \
+    --fiji=${FIJI} \
     --first=Renuka --last=Apte
 {% endhighlight %}
 </div>

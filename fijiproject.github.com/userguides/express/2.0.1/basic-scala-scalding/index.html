@@ -459,9 +459,9 @@ of the Scala Args class to collect the command-line parameters:</p>
 
 <p>  The command line would include an option <code>--users-table</code> where the URI of the Fiji
   table would follow that option, often employing an environment variable (in this case,
-  <code>{KIJI}</code>) to indicate the location of the table:</p>
+  <code>{FIJI}</code>) to indicate the location of the table:</p>
 
-<pre><code>  express job &lt;jarfile&gt; &lt;class&gt; --users-table ${KIJI}/users
+<pre><code>  express job &lt;jarfile&gt; &lt;class&gt; --users-table ${FIJI}/users
 </code></pre></li>
 <li><p>It produces a data stream that includes each row in the Fiji table as a tuple; each
 column (and map-type column family) appears as an entry in the tuple. Because the source
@@ -777,7 +777,7 @@ example file:</p>
 
 <p>These Scala files are here:</p>
 
-<pre><code>${KIJI_HOME}/examples/express-music/src/main/scala/org/fiji/express/music/
+<pre><code>${FIJI_HOME}/examples/express-music/src/main/scala/org/fiji/express/music/
 </code></pre>
 
 

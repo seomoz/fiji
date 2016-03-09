@@ -90,7 +90,7 @@ public final class HFileWriterContext
     super(hadoopContext);
     final Configuration conf = new Configuration(hadoopContext.getConfiguration());
     final FijiURI outputURI =
-        FijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_OUTPUT_TABLE_URI)).build();
+        FijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_OUTPUT_TABLE_URI)).build();
     mFiji = Fiji.Factory.open(outputURI, conf);
     mTable = mFiji.openTable(outputURI.getTable());
     mReader = mTable.openTableReader();

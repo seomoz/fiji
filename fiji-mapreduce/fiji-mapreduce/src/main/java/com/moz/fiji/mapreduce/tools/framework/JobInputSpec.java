@@ -63,7 +63,7 @@ public final class JobInputSpec {
     /** Text files from a file system. */
     TEXT("text"),
     /** A Fiji table. */
-    KIJI("fiji"),
+    FIJI("fiji"),
     /** XML files from a file system. */
     XML("xml");
 
@@ -125,14 +125,14 @@ public final class JobInputSpec {
   private String[] mLocations;
 
   /**
-   * Constructor.  The KIJI and HTABLE formats must specify exactly one input location.
+   * Constructor.  The FIJI and HTABLE formats must specify exactly one input location.
    * All other formats may specify multiple input locations.
    *
    * @param format The format of the input data.
    * @param locations The locations of the input data.
    */
   private JobInputSpec(Format format, String... locations) {
-    if ((Format.KIJI == format || Format.HTABLE == format) && locations.length != 1) {
+    if ((Format.FIJI == format || Format.HTABLE == format) && locations.length != 1) {
       throw new UnsupportedOperationException("Format " + format.toString()
           + " only supports a single input location."
           + "  You specified: " + Arrays.toString(locations));
@@ -142,7 +142,7 @@ public final class JobInputSpec {
   }
 
   /**
-   * Creates a new job input specification.  When created with formats KIJI or HTABLE only one
+   * Creates a new job input specification.  When created with formats FIJI or HTABLE only one
    * input location may be specified. Otherwise multiple input locations may be given.
    *
    * @param format is the format of the input data.

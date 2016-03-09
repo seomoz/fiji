@@ -363,7 +363,7 @@
 
 <h3 id='addentryjava'>AddEntry.java</h3>
 
-<p>The class <code>AddEntry.java</code> is included in the phonebook example source (located under <code>$KIJI_HOME/examples/phonebook/src/main/java</code>). It implements a command-line tool that asks a user for contact information and then uses that information to populate the columns in a row in the Fiji table <code>phonebook</code> for that contact. To start, <code>AddEntry.java</code> loads an HBase configuration.</p>
+<p>The class <code>AddEntry.java</code> is included in the phonebook example source (located under <code>$FIJI_HOME/examples/phonebook/src/main/java</code>). It implements a command-line tool that asks a user for contact information and then uses that information to populate the columns in a row in the Fiji table <code>phonebook</code> for that contact. To start, <code>AddEntry.java</code> loads an HBase configuration.</p>
 <div class='highlight'><pre><code class='java'><span class='n'>setConf</span><span class='o'>(</span><span class='n'>HBaseConfiguration</span><span class='o'>.</span><span class='na'>addHbaseResources</span><span class='o'>(</span><span class='n'>getConf</span><span class='o'>()));</span>
 </code></pre></div>
 <p>The code then connects to Fiji and opens the phonebook table for writing. The <code>FijiConfiguration.DEFAULT_INSTANCE_NAME</code> is <code>default</code>.</p>
@@ -392,8 +392,8 @@
 <p>You run the class <code>AddEntry</code> with the <code>fiji</code> command-line tool as follows:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc3.jar <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc3.jar <span class='se'>\</span>
     org.fiji.examples.phonebook.AddEntry
 </code></pre></div>
 
@@ -423,14 +423,14 @@ Zip: 94110
 <p>Beforehand, you must tell <code>fiji ls</code> where the <code>org.fiji.examples.phonebook.Address</code> Avro record class (mentioned in the DDL and used by <code>AddEntry</code>) is. If you have not already done so, put the phonebook jar file on your Fiji classpath:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>KIJI_CLASSPATH</span><span class='o'>=</span><span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-*.jar
+<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>FIJI_CLASSPATH</span><span class='o'>=</span><span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-*.jar
 </code></pre></div>
 
 </div>
 <p>Now use <code>fiji ls</code>:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji ls --table<span class='o'>=</span>phonebook
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji ls --table<span class='o'>=</span>phonebook
 </code></pre></div>
 
 </div>
@@ -482,8 +482,8 @@ U\x1EP\xC1\xF2c$7\xCC\xBA\xCB\x16\x10\x0F\x11\xDB [1352831108322] info:address
 <p>You can run the following command to perform a lookup using the <code>Lookup.java</code> example:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc3.jar <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc3.jar <span class='se'>\</span>
     org.fiji.examples.phonebook.Lookup --first<span class='o'>=</span>Renuka --last<span class='o'>=</span>Apte
 </code></pre></div>
 

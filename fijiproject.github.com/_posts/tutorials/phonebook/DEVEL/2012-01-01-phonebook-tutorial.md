@@ -11,11 +11,11 @@ We assume that our incredibly popular user, **you**, needs a big-data solution
 for your phone book. We will thus walk you through the process of defining a
 layout for your phone book, creating a Fiji table with this layout and looking
 up an entry. The current text file you have been using to store your contacts
-resides at `$KIJI_HOME/examples/phonebook/input-data.txt` and we also show you how
+resides at `$FIJI_HOME/examples/phonebook/input-data.txt` and we also show you how
 to bulk load this into your Fiji table.
 
 Example code for a more in depth look at these use cases exist in the directory
-`$KIJI_HOME/examples/phonebook/src/main/java`.  Instructions for how to build and use this
+`$FIJI_HOME/examples/phonebook/src/main/java`.  Instructions for how to build and use this
 example code can be found in the next section of this tutorial,
 [Setup]({{site.tutorial_phonebook_devel}}/phonebook-setup).
 

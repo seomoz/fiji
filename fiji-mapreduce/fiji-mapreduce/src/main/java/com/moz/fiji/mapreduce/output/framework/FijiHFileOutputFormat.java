@@ -265,7 +265,7 @@ public final class FijiHFileOutputFormat
         hfileWriter.appendFileInfo(StoreFile.MAJOR_COMPACTION_KEY, toBytes(true));
 
         // Write out a timerange.
-        // See: HBASE-8055 and KIJIMR-204.
+        // See: HBASE-8055 and FIJIMR-204.
         hfileWriter.appendFileInfo(StoreFile.TIMERANGE_KEY,
             WritableUtils.toByteArray(mTimeRangeTracker));
 
@@ -314,7 +314,7 @@ public final class FijiHFileOutputFormat
       mOutputDir = oformat.getDefaultWorkFile(mContext, OUTPUT_EXTENSION);
       mFileSystem = mOutputDir.getFileSystem(mConf);
 
-      mTableURI = FijiURI.newBuilder(mConf.get(FijiConfKeys.KIJI_OUTPUT_TABLE_URI)).build();
+      mTableURI = FijiURI.newBuilder(mConf.get(FijiConfKeys.FIJI_OUTPUT_TABLE_URI)).build();
 
       final Fiji fiji = Fiji.Factory.open(mTableURI, mConf);
       final FijiTable table = fiji.openTable(mTableURI.getTable());

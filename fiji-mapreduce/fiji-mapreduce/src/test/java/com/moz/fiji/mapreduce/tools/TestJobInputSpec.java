@@ -57,7 +57,7 @@ public class TestJobInputSpec {
       JobInputSpec.parse("fiji:foo,bar"); // Only one table may be specified as input.
       fail("Should have thrown an UnsupportedOperationException.");
     } catch (UnsupportedOperationException uoe) {
-      assertEquals("Format KIJI only supports a single input location.  You specified: [foo, bar]",
+      assertEquals("Format FIJI only supports a single input location.  You specified: [foo, bar]",
       uoe.getMessage());
     }
   }

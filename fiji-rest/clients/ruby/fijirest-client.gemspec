@@ -25,8 +25,8 @@ Gem::Specification.new do |spec|
   spec.version       = FijiRest::VERSION
   spec.authors       = ["wibidata"]
   spec.email         = ["dev@fiji.org"]
-  spec.description   = %q{Client for the KIJI REST server}
-  spec.summary       = %q{Client for the KIJI REST server}
+  spec.description   = %q{Client for the FIJI REST server}
+  spec.summary       = %q{Client for the FIJI REST server}
   spec.homepage      = "http://www.fiji.org"
   spec.license       = "Apache"
 

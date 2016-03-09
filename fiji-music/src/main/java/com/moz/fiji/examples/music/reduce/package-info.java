@@ -26,7 +26,7 @@
  * --mapper=com.moz.fiji.examples.music.map.IdentityMapper \
  *  --reducer=com.moz.fiji.examples.music.reduce.TopNextSongsReducer \
  *  --input="format=avrokv file=${HDFS_ROOT}/output.sequentialPlayCount" \
- *  --output="format=fiji table=${KIJI}/songs nsplits=1" \
+ *  --output="format=fiji table=${FIJI}/songs nsplits=1" \
  *  --lib=${LIBS_DIR}
  */
 package com.moz.fiji.examples.music.reduce;

@@ -9,7 +9,7 @@ description: Use atomic increment in the Phonebook example to calculate talktime
 
 You have just run out of minutes on your phone plan and want to find the person responsible
 for inconveniencing you this way. Luckily, we have provided you with a phone log with the
-time spent per phone call at `$KIJI_HOME/examples/phonebook/input-phone-log.txt`. You want to
+time spent per phone call at `$FIJI_HOME/examples/phonebook/input-phone-log.txt`. You want to
 be able to get the total time spent talking to each of your contacts this month.
 
 To support operations like this Fiji provides atomic counter type cells like HBase that
@@ -62,7 +62,7 @@ that we depend on during the *map* task. Here\'s how we do this:
 {% highlight java %}
 GenericTableMapReduceUtil.addAllDependencyJars(job);
 DistributedCacheJars.addJarsToDistributedCache(job,
-    new File(System.getenv("KIJI_HOME"), "lib"));
+    new File(System.getenv("FIJI_HOME"), "lib"));
 job.setUserClassesTakesPrecedence(true);
 {% endhighlight %}
 
@@ -97,7 +97,7 @@ command.
 <div class="userinput">
 {% highlight bash %}
 $HADOOP_HOME/bin/hadoop fs -copyFromLocal \
-    $KIJI_HOME/examples/phonebook/input-phone-log.txt /tmp
+    $FIJI_HOME/examples/phonebook/input-phone-log.txt /tmp
 {% endhighlight %}
 </div>
 
@@ -106,8 +106,8 @@ to the file in hdfs.
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji jar \
-    $KIJI_HOME/examples/phonebook/lib/fiji-phonebook-{{site.phonebook_devel_version}}.jar \
+$FIJI_HOME/bin/fiji jar \
+    $FIJI_HOME/examples/phonebook/lib/fiji-phonebook-{{site.phonebook_devel_version}}.jar \
     org.fiji.examples.phonebook.IncrementTalkTime /tmp/input-phone-log.txt
 {% endhighlight %}
 </div>
@@ -117,7 +117,7 @@ Now we can look up the derived talktime value from the stats column for the user
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji get fiji://.env/default/phonebook/stats \
+$FIJI_HOME/bin/fiji get fiji://.env/default/phonebook/stats \
     --entity-id='"John,Doe"'
 {% endhighlight %}
 </div>

@@ -186,8 +186,8 @@ Finally, we create entity IDs using the `first_song` field and put it in the `en
 express.py job --libjars="${MUSIC_EXPRESS_HOME}/lib/*" \
     --user-jar=${MUSIC_EXPRESS_HOME}/lib/fiji-express-music-2.0.1.jar \
     --job-name=org.fiji.express.music.TopNextSongs --mode=hdfs \
-    --users-table ${KIJI}/users \
-    --songs-table ${KIJI}/songs
+    --users-table ${FIJI}/users \
+    --songs-table ${FIJI}/songs
 {% endhighlight %}
 </div>
 
@@ -197,7 +197,7 @@ express.py job --libjars="${MUSIC_EXPRESS_HOME}/lib/*" \
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/songs --max-rows=2
+fiji scan ${FIJI}/songs --max-rows=2
 {% endhighlight %}
 </div>
 

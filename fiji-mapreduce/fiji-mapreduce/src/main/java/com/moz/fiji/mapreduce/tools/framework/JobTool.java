@@ -44,7 +44,7 @@ import com.moz.fiji.schema.tools.BaseTool;
 @Inheritance.Extensible
 public abstract class JobTool<B extends MapReduceJobBuilder> extends BaseTool {
 
-  // TODO(KIJIMR-62): Better usage doc:
+  // TODO(FIJIMR-62): Better usage doc:
   @Flag(name="input",
       usage="Job input specification: --input=\"format=<input-format> ...\".")
   protected String mInputFlag = "";

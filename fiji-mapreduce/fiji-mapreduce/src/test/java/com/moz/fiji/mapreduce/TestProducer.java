@@ -230,7 +230,7 @@ public class TestProducer extends FijiClientTest {
     assertEquals(2, counters.findCounter(JobHistoryCounters.PRODUCER_ROWS_PROCESSED).getValue());
   }
 
-  // TODO(KIJI-359): Missing tests :
+  // TODO(FIJI-359): Missing tests :
   //  - Outputting to wrong column qualifier
   //  - producing an HFile and bulk-loading
   //  - multi-threaded producer/mapper

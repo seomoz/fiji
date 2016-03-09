@@ -35,8 +35,8 @@ SCHEMA_FLAT_VER=1_5_0
 SCHEMA_VER=1.5.0
 
 # FijiMR version
-KIJIMR_FLAT_VER=1_2_9
-KIJIMR_VER=1.2.9
+FIJIMR_FLAT_VER=1_2_9
+FIJIMR_VER=1.2.9
 
 # FijiMR Library version
 MRLIB_FLAT_VER=1_1_8
@@ -99,11 +99,11 @@ fix_released_versions() {
 
   # Reify references to module documentation.
   find . -name "*.md" -exec sed -i -e "s/api_mrlib_devel/api_mrlib_$MRLIB_FLAT_VER/g" {} \;
-  find . -name "*.md" -exec sed -i -e "s/api_mr_devel/api_mr_$KIJIMR_FLAT_VER/g" {} \;
+  find . -name "*.md" -exec sed -i -e "s/api_mr_devel/api_mr_$FIJIMR_FLAT_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e "s/api_schema_devel/api_schema_$SCHEMA_FLAT_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e "s/api_express_devel/api_express_$EXPRESS_FLAT_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e \
-      "s/userguide_mapreduce_devel/userguide_mapreduce_$KIJIMR_FLAT_VER/g" {} \;
+      "s/userguide_mapreduce_devel/userguide_mapreduce_$FIJIMR_FLAT_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e \
       "s/userguide_schema_devel/userguide_schema_$SCHEMA_FLAT_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e \
@@ -121,7 +121,7 @@ fix_released_versions() {
   find . -name "*.md" -exec sed -i -e \
       's/{{site.schema_devel_branch}}/'"fiji-schema-root-$SCHEMA_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e \
-      's/{{site.mr_devel_branch}}/'"fiji-mapreduce-root-$KIJIMR_VER/g" {} \;
+      's/{{site.mr_devel_branch}}/'"fiji-mapreduce-root-$FIJIMR_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e \
       's/{{site.mrlib_devel_branch}}/'"fiji-mapreduce-lib-root-$MRLIB_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e \
@@ -137,7 +137,7 @@ fix_released_versions() {
   find . -name "*.md" -exec sed -i -e \
       "s|schema/DEVEL|schema/$SCHEMA_VER|g" {} \;
   find . -name "*.md" -exec sed -i -e \
-      "s|mapreduce/DEVEL|mapreduce/$KIJIMR_VER|g" {} \;
+      "s|mapreduce/DEVEL|mapreduce/$FIJIMR_VER|g" {} \;
   find . -name "*.md" -exec sed -i -e \
       "s|phonebook/DEVEL|phonebook/$PHONEBOOK_VER|g" {} \;
   find . -name "*.md" -exec sed -i -e \
@@ -153,7 +153,7 @@ fix_released_versions() {
   find . -name "*.md" -exec sed -i -e \
       's/{{site.schema_devel_version}}/'"$SCHEMA_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e \
-      's/{{site.mr_devel_version}}/'"$KIJIMR_VER/g" {} \;
+      's/{{site.mr_devel_version}}/'"$FIJIMR_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e \
       's/{{site.mrlib_devel_version}}/'"$MRLIB_VER/g" {} \;
   find . -name "*.md" -exec sed -i -e \
@@ -197,24 +197,24 @@ if [ ! -d "userguides/schema/$SCHEMA_VER" ]; then
   popd
 fi
 
-if [ ! -d "userguides/mapreduce/$KIJIMR_VER" ]; then
+if [ ! -d "userguides/mapreduce/$FIJIMR_VER" ]; then
   # Create new FijiMR documentation
-  echo "Creating new FijiMR user guide: $KIJIMR_VER"
-  cp -a "userguides/mapreduce/DEVEL" "userguides/mapreduce/$KIJIMR_VER"
+  echo "Creating new FijiMR user guide: $FIJIMR_VER"
+  cp -a "userguides/mapreduce/DEVEL" "userguides/mapreduce/$FIJIMR_VER"
 
-  pushd "userguides/mapreduce/$KIJIMR_VER"
+  pushd "userguides/mapreduce/$FIJIMR_VER"
 
   # Replace devel versioning with macros that reflect the release version.
   find . -name "*.md" -exec sed -i -e \
-      "s/version: devel/version: $KIJIMR_VER/" {} \;
+      "s/version: devel/version: $FIJIMR_VER/" {} \;
   find . -name "*.md" -exec sed -i -e \
-      "s/mapreduce, devel]/mapreduce, $KIJIMR_VER]/" {} \;
+      "s/mapreduce, devel]/mapreduce, $FIJIMR_VER]/" {} \;
 
   fix_released_versions
 
-  echo "api_mr_$KIJIMR_FLAT_VER : $API/fiji-mapreduce/$KIJIMR_VER/org/fiji/mapreduce" \
+  echo "api_mr_$FIJIMR_FLAT_VER : $API/fiji-mapreduce/$FIJIMR_VER/org/fiji/mapreduce" \
       >> "$top/_config.yml"
-  echo "userguide_mapreduce_$KIJIMR_FLAT_VER : /userguides/mapreduce/$KIJIMR_VER" \
+  echo "userguide_mapreduce_$FIJIMR_FLAT_VER : /userguides/mapreduce/$FIJIMR_VER" \
       >> "$top/_config.yml"
 
   popd

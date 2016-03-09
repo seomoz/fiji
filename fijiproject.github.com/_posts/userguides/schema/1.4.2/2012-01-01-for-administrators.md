@@ -37,11 +37,11 @@ After downloading either the BentoBox
 command `tar vzxf filename`. This will create to a directory named
 `fiji-bento-version/` or `fiji-schema-version/`.
 
-For convenience, `$KIJI_HOME` should be set to this directory. For
+For convenience, `$FIJI_HOME` should be set to this directory. For
 example:
 
 {% highlight bash %}
-$ export KIJI_HOME=/path/to/fiji-bento-(version)
+$ export FIJI_HOME=/path/to/fiji-bento-(version)
 {% endhighlight %}
 
 You should edit your `.bashrc` file to contain this line so that it's
@@ -51,7 +51,7 @@ If you're using the BentoBox edition, you can set up your environment as
 follows:
 
 {% highlight bash %}
-$ source $KIJI_HOME/bin/fiji-env.sh
+$ source $FIJI_HOME/bin/fiji-env.sh
 $ bento start
 {% endhighlight %}
 

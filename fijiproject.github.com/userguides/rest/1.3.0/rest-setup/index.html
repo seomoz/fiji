@@ -229,20 +229,20 @@ the necessary Fiji libraries required to access the cluster remotely.</p>
 
 <h3>Set up</h3>
 
-<p>If you are using a BentoBox, set the environment variable <code>${KIJI_REST_HOME}</code> to point to the <code>rest</code> directory
+<p>If you are using a BentoBox, set the environment variable <code>${FIJI_REST_HOME}</code> to point to the <code>rest</code> directory
 within your BentoBox installation:</p>
 
-<pre><code>export KIJI_REST_HOME=/path/to/bento/box/rest
+<pre><code>export FIJI_REST_HOME=/path/to/bento/box/rest
 </code></pre>
 
 <p>If you are not using a BentoBox, download the FijiREST tarball from the Fiji
-<a href="http://www.fiji.org/getstarted/#Downloads">Downloads</a> page, untar the archive, and set <code>${KIJI_REST_HOME}</code> to
+<a href="http://www.fiji.org/getstarted/#Downloads">Downloads</a> page, untar the archive, and set <code>${FIJI_REST_HOME}</code> to
 point to the root directory:</p>
 
-<pre><code>export KIJI_REST_HOME=/path/to/tarball/fiji-rest-1.3.0
+<pre><code>export FIJI_REST_HOME=/path/to/tarball/fiji-rest-1.3.0
 </code></pre>
 
-<p>Within <code>${KIJI_REST_HOME}</code>, you should see the following:</p>
+<p>Within <code>${FIJI_REST_HOME}</code>, you should see the following:</p>
 
 <dl>
 <dt>  bin/ </dt>
@@ -268,7 +268,7 @@ through one of the <a href="http://docs.fiji.org/tutorials.html">Fiji tutorials<
 <h3>Startup with Basic Configuration</h3>
 
 <p>The FijiREST configuration parameters are located in
-<code>${KIJI_REST_HOME}/conf/configuration.yml</code>
+<code>${FIJI_REST_HOME}/conf/configuration.yml</code>
 (<code>rest/conf/configuration.yml</code> for BentoBox users). This file is divided into
 two major sections:
 * The top portion of the file configures FijiREST
@@ -278,7 +278,7 @@ two major sections:
 
 <ol>
 <li><p>Start HBase and Hadoop with a configured Fiji environment. Make sure necessary Avro
-classes are accessible either in <code>$KIJI_CLASSPATH</code> or in the <code>${KIJI_REST_HOME}/lib/</code> directory.</p>
+classes are accessible either in <code>$FIJI_CLASSPATH</code> or in the <code>${FIJI_REST_HOME}/lib/</code> directory.</p>
 
 <p>  If you are running a BentoBox, start Hadoop and HBase with <code>bento start</code>.</p></li>
 <li><p>Set the cluster key in <code>configuration.yml</code> to the URI of our Fiji
@@ -299,7 +299,7 @@ through the REST service, for example <code>default</code>, <code>prod_instance<
 </code></pre>
 
 <p>The default <code>configuration.yml</code> file sets up the REST service through port 8080
-and writes all logs to the <code>${KIJI_REST_HOME}/logs</code>
+and writes all logs to the <code>${FIJI_REST_HOME}/logs</code>
 directory. The process will run in the background.</p></li>
 <li><p>Check that FijiREST is running correctly.</p>
 
@@ -307,12 +307,12 @@ directory. The process will run in the background.</p></li>
  Fiji REST is running. PID is 1234
 </code></pre>
 
-<p> (You can also find the process ID in the <code>${KIJI_REST_HOME}/fiji-rest.pid</code> file.)</p>
+<p> (You can also find the process ID in the <code>${FIJI_REST_HOME}/fiji-rest.pid</code> file.)</p>
 
-<p> If FijiREST is not running, consult the logs in <code>${KIJI_REST_HOME}/logs</code>.  Often if your FijiREST process
+<p> If FijiREST is not running, consult the logs in <code>${FIJI_REST_HOME}/logs</code>.  Often if your FijiREST process
  stops during this stage in the setup, the reason is that FijiREST cannot find the Fiji instances
- described in <code>${KIJI_REST_HOME}/conf/configuration.yml</code>.  You will then see something similar to the
- following in <code>${KIJI_REST_HOME}/logs/console.out</code>:</p>
+ described in <code>${FIJI_REST_HOME}/conf/configuration.yml</code>.  You will then see something similar to the
+ following in <code>${FIJI_REST_HOME}/logs/console.out</code>:</p>
 
 <pre><code>     Exception in thread "main" org.fiji.schema.FijiNotInstalledException: Fiji instance
      fiji://localhost:2181/default/ is not installed.

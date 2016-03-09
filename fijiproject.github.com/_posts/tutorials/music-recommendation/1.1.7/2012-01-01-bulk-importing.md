@@ -109,7 +109,7 @@ Run the bulk import tool by specifying `SongMetadataBulkImporter` as the importe
 fiji bulk-import \
     --importer=org.fiji.examples.music.bulkimport.SongMetadataBulkImporter \
     --lib=${LIBS_DIR} \
-    --output="format=fiji table=${KIJI}/songs nsplits=1" \
+    --output="format=fiji table=${FIJI}/songs nsplits=1" \
     --input="format=text file=fiji-mr-tutorial/song-metadata.json"
 {% endhighlight %}
 </div>
@@ -126,7 +126,7 @@ Verify that the `songs` table records were added properly by executing:
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/songs --max-rows=3
+fiji scan ${FIJI}/songs --max-rows=3
 {% endhighlight %}
 </div>
 
@@ -207,7 +207,7 @@ as the output, and `song-plays.json` as the input with the following command:
 fiji bulk-import \
     -Dfiji.import.text.input.descriptor.path=fiji-mr-tutorial/song-plays-import-descriptor.json \
     --importer=org.fiji.mapreduce.lib.bulkimport.JSONBulkImporter \
-    --output="format=fiji table=${KIJI}/users nsplits=1" \
+    --output="format=fiji table=${FIJI}/users nsplits=1" \
     --input="format=text file=fiji-mr-tutorial/song-plays.json" \
     --lib=${LIBS_DIR}
 {% endhighlight %}
@@ -219,7 +219,7 @@ Verify that the `users` table records were added properly by executing:
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/users --max-rows=3
+fiji scan ${FIJI}/users --max-rows=3
 {% endhighlight %}
 </div>
 

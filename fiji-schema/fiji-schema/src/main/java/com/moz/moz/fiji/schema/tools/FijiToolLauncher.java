@@ -71,9 +71,9 @@ public final class FijiToolLauncher extends Configured {
       System.err.println("No tool available with name [" + toolName + "]");
       System.err.println("Try running 'fiji help' to see the available tools.");
 
-      if (!System.getenv().containsKey("KIJI_MR_HOME")) {
-        System.err.println("\nNote that you do not have the environment variable KIJI_MR_HOME");
-        System.err.println("set. Set KIJI_MR_HOME to the path to a fiji-mapreduce distribution");
+      if (!System.getenv().containsKey("FIJI_MR_HOME")) {
+        System.err.println("\nNote that you do not have the environment variable FIJI_MR_HOME");
+        System.err.println("set. Set FIJI_MR_HOME to the path to a fiji-mapreduce distribution");
         System.err.println("to make fiji-mapreduce tools available.");
       }
       return 1;

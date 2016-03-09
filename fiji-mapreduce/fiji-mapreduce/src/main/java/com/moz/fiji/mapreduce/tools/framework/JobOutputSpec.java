@@ -50,7 +50,7 @@ public final class JobOutputSpec {
    */
   public static enum Format {
     /** A Fiji table. */
-    KIJI("fiji"),
+    FIJI("fiji"),
     /** Text files in a file system. */
     TEXT("text"),
     /** Sequence files in a file system. */

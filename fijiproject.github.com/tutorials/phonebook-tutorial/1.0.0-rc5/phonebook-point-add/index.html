@@ -363,7 +363,7 @@
 
 <h3 id='addentryjava'>AddEntry.java</h3>
 
-<p>The class <code>AddEntry.java</code> is included in the phonebook example source (located under <code>$KIJI_HOME/examples/phonebook/src/main/java</code>). It implements a command-line tool that asks a user for contact information and then uses that information to populate the columns in a row in the Fiji table <code>phonebook</code> for that contact. To start, <code>AddEntry.java</code> loads an HBase configuration.</p>
+<p>The class <code>AddEntry.java</code> is included in the phonebook example source (located under <code>$FIJI_HOME/examples/phonebook/src/main/java</code>). It implements a command-line tool that asks a user for contact information and then uses that information to populate the columns in a row in the Fiji table <code>phonebook</code> for that contact. To start, <code>AddEntry.java</code> loads an HBase configuration.</p>
 <div class='highlight'><pre><code class='java'><span class='n'>setConf</span><span class='o'>(</span><span class='n'>HBaseConfiguration</span><span class='o'>.</span><span class='na'>addHbaseResources</span><span class='o'>(</span><span class='n'>getConf</span><span class='o'>()));</span>
 </code></pre></div>
 <p>The code then connects to Fiji and opens the phonebook table for writing. A <a href='http://api-docs.fiji.org/fiji-schema/1.0.0-rc5/org/fiji/schema/Fiji.html'><code>Fiji</code></a> instance is specified by a <a href='http://api-docs.fiji.org/fiji-schema/1.0.0-rc5/org/fiji/schema/FijiURI.html'><code>FijiURI</code></a>. A Fiji URI specifies an HBase cluster to connect to (identified by its Zookeeper quorum) and a Fiji instance name. The value of <code>KConstants.DEFAULT_INSTANCE_NAME</code> is <code>&quot;default&quot;</code>. For example, if ZooKeeper is running on <code>zkhost:2181</code>, the name of the default Fiji instance on the cluster would be <code>fiji://zkhost:2181/default</code>.</p>
@@ -405,8 +405,8 @@
 <p>You run the class <code>AddEntry</code> with the <code>fiji</code> command-line tool as follows:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc5.jar <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc5.jar <span class='se'>\</span>
     org.fiji.examples.phonebook.AddEntry
 </code></pre></div>
 
@@ -436,14 +436,14 @@ Zip: 94110
 <p>Beforehand, you must tell <code>fiji scan</code> where the <code>org.fiji.examples.phonebook.Address</code> Avro record class (mentioned in the DDL and used by <code>AddEntry</code>) is. If you have not already done so, put the phonebook jar file on your Fiji classpath:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>KIJI_CLASSPATH</span><span class='o'>=</span><span class='s2'>&quot;$KIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar&quot;</span>
+<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>FIJI_CLASSPATH</span><span class='o'>=</span><span class='s2'>&quot;$FIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar&quot;</span>
 </code></pre></div>
 
 </div>
 <p>Now use <code>fiji scan</code>:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
 </code></pre></div>
 
 </div>
@@ -498,8 +498,8 @@ entity-id=hbase=hex:3927ac19991c6e3d49cdd1d48e135083 [1363224175538] info:addres
 <p>You can run the following command to perform a lookup using the <code>Lookup.java</code> example:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc5.jar <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc5.jar <span class='se'>\</span>
     org.fiji.examples.phonebook.Lookup --first<span class='o'>=</span>Renuka --last<span class='o'>=</span>Apte
 </code></pre></div>
 

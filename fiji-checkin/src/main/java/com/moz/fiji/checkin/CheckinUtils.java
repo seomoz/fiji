@@ -45,7 +45,7 @@ public final class CheckinUtils {
       "com.moz.fiji.checkin.CheckinUtils.disable_checkin";
 
   /** Name of folder containing fiji checkin specific files. */
-  private static final String HIDDEN_KIJI_DIR = ".fiji";
+  private static final String HIDDEN_FIJI_DIR = ".fiji";
 
   /**
    * Cannot instantiate this utility class.
@@ -77,7 +77,7 @@ public final class CheckinUtils {
    * @return the hidden fiji directory.
    */
   public static File getHiddenFijiDirectory() {
-    return new File(getHomeDirectory(), HIDDEN_KIJI_DIR);
+    return new File(getHomeDirectory(), HIDDEN_FIJI_DIR);
   }
 
   /**
@@ -137,7 +137,7 @@ public final class CheckinUtils {
 
   /**
    * Returns whether or not the checkin ability is disabled or not. This
-   * is true if the user has touched the {@link #DISABLE_CHECKIN} file in ~/{@link #HIDDEN_KIJI_DIR}
+   * is true if the user has touched the {@link #DISABLE_CHECKIN} file in ~/{@link #HIDDEN_FIJI_DIR}
    * folder OR the system property {@link #DISABLE_CHECKIN_PROP} is set to "true".
    *
    * @return boolean indicating whether or not the checkin feature has been disabled or not.

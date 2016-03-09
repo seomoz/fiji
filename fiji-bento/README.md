@@ -66,7 +66,7 @@ Installation
 ### Untar fiji-bento
 Untar your fiji-bento distribution into a location convenient for
 you. We suggest your home directory. In the future we'll call the
-path to your fiji-bento distribution `$KIJI_HOME`.
+path to your fiji-bento distribution `$FIJI_HOME`.
 
 ### Configure your system to use fiji-bento.
 fiji-bento includes a script that will configure your
@@ -74,7 +74,7 @@ environment to use the HDFS, MapReduce and HBase clusters managed by
 the included bento-cluster distribution, as well as fiji and
 fiji-schema-shell. To configure your environment, run:
 
-> `source $KIJI_HOME/bin/fiji-env.sh`
+> `source $FIJI_HOME/bin/fiji-env.sh`
 
 Add this line to your `~/.bashrc` file to ensure your environment is
 always configured for fiji-bento.

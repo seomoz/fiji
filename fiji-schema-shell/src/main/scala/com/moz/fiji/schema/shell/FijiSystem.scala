@@ -229,7 +229,7 @@ final class FijiSystem extends AbstractFijiSystem {
   override def listInstances(): Set[String] = {
     def parseInstanceName(fijiTableName: String): Option[String] = {
       val parts: Seq[String] = fijiTableName.split('.')
-      if (parts.length < 3 || !FijiURI.KIJI_SCHEME.equals(parts.head)) {
+      if (parts.length < 3 || !FijiURI.FIJI_SCHEME.equals(parts.head)) {
         None
       } else {
         Some(parts(1))

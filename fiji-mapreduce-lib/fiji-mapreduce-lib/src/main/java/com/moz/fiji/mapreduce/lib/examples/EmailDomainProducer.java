@@ -34,7 +34,7 @@ import com.moz.fiji.schema.FijiRowData;
  * <p>To run this from the command line:</p>
  *
  * <pre>
- * $ $KIJI_HOME/bin/fiji produce \
+ * $ $FIJI_HOME/bin/fiji produce \
  * &gt;   --input=fiji:tablename \
  * &gt;   --producer=com.moz.fiji.mapreduce.lib.examples.EmailDomainProducer
  * &gt;   --output=fiji \

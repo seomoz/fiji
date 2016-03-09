@@ -127,8 +127,8 @@ express.py job \
     --jars="${MUSIC_EXPRESS_HOME}/lib/*" \
     --class=org.fiji.express.music.SongRecommender \
     --mode=hdfs \
-    --songs-table ${KIJI}/songs \
-    --users-table ${KIJI}/users
+    --songs-table ${FIJI}/songs \
+    --users-table ${FIJI}/users
 {% endhighlight %}
 </div>
 
@@ -138,7 +138,7 @@ You can verify the output in an HBase-backed Fiji instance by scanning the `user
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/users --max-rows=2
+fiji scan ${FIJI}/users --max-rows=2
 {% endhighlight %}
 </div>
 
@@ -159,7 +159,7 @@ And if using Cassandra:
 
 <div class="userinput">
 {% highlight bash %}
-fiji get ${KIJI}/users --entity-id="['user-41']"
+fiji get ${FIJI}/users --entity-id="['user-41']"
 {% endhighlight %}
 </div>
 

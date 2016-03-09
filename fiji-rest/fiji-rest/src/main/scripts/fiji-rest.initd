@@ -33,20 +33,20 @@ LOCKDIR="/var/lock/subsys"
 LOCKFILE="$LOCKDIR/fiji-rest"
 DESC="Fiji REST"
 
-KIJI_REST_USER="fiji"
-KIJI_REST_HOME="/opt/wibi/fiji-rest"
-KIJI_REST_CONF_DIR="${KIJI_REST_HOME}/conf"
-KIJI_REST_LOGS_DIR="${RUNDIR}/logs"
+FIJI_REST_USER="fiji"
+FIJI_REST_HOME="/opt/wibi/fiji-rest"
+FIJI_REST_CONF_DIR="${FIJI_REST_HOME}/conf"
+FIJI_REST_LOGS_DIR="${RUNDIR}/logs"
 
 #Setup some directories
 mkdir -p ${RUNDIR}
 
 # ${LOCKDIR} is not a standard Linux directory, doesn't exist by default in Ubuntu
 mkdir -p ${LOCKDIR}
-chown -R ${KIJI_REST_USER} ${RUNDIR}
+chown -R ${FIJI_REST_USER} ${RUNDIR}
 
 check_for_app() {
-  if [ ! -e ${KIJI_REST_HOME} ]; then
+  if [ ! -e ${FIJI_REST_HOME} ]; then
     echo 'Fiji REST not installed!'
     exit 1
   fi
@@ -89,10 +89,10 @@ checkstatus(){
 execute_command() {
   command_name=$1
   su -s /bin/bash -c "PIDFILE=${PIDFILE} \
-      KIJI_REST_HOME=${KIJI_REST_HOME} \
-      KIJI_REST_CONF_DIR=${KIJI_REST_CONF_DIR} \
-      KIJI_REST_LOGS_DIR=${KIJI_REST_LOGS_DIR} \
-      ${KIJI_REST_HOME}/bin/fiji-rest ${command_name}" ${KIJI_REST_USER}
+      FIJI_REST_HOME=${FIJI_REST_HOME} \
+      FIJI_REST_CONF_DIR=${FIJI_REST_CONF_DIR} \
+      FIJI_REST_LOGS_DIR=${FIJI_REST_LOGS_DIR} \
+      ${FIJI_REST_HOME}/bin/fiji-rest ${command_name}" ${FIJI_REST_USER}
 }
 
 check_for_root() {

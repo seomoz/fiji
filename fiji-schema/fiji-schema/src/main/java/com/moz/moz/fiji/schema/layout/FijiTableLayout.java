@@ -1044,7 +1044,7 @@ public final class FijiTableLayout {
    */
   private static ProtocolVersion computeLayoutVersion(String version) {
     final ProtocolVersion pversion = ProtocolVersion.parse(version);
-    if (Objects.equal(pversion, Versions.LAYOUT_KIJI_1_0_0_DEPRECATED)) {
+    if (Objects.equal(pversion, Versions.LAYOUT_FIJI_1_0_0_DEPRECATED)) {
       // Deprecated "fiji-1.0" is compatible with "layout-1.0.0"
       return Versions.LAYOUT_1_0_0;
     } else {
@@ -1075,18 +1075,18 @@ public final class FijiTableLayout {
     if (!Objects.equal(LAYOUT_PROTOCOL_NAME, mLayoutVersion.getProtocolName())) {
       final String exceptionMessage;
       if (Objects.equal(
-          Versions.LAYOUT_KIJI_1_0_0_DEPRECATED.getProtocolName(),
+          Versions.LAYOUT_FIJI_1_0_0_DEPRECATED.getProtocolName(),
           mLayoutVersion.getProtocolName())) {
         // Warn the user if they tried a version number like 'fiji-0.9' or 'fiji-1.1'.
         exceptionMessage =
             String.format("Deprecated layout version protocol '%s' only valid for version '%s',"
                 + " but received version '%s'. You should specify a layout version protocol"
                 + " as '%s-x.y', not '%s-x.y'.",
-                Versions.LAYOUT_KIJI_1_0_0_DEPRECATED.getProtocolName(),
-                Versions.LAYOUT_KIJI_1_0_0_DEPRECATED,
+                Versions.LAYOUT_FIJI_1_0_0_DEPRECATED.getProtocolName(),
+                Versions.LAYOUT_FIJI_1_0_0_DEPRECATED,
                 mLayoutVersion,
                 LAYOUT_PROTOCOL_NAME,
-                Versions.LAYOUT_KIJI_1_0_0_DEPRECATED.getProtocolName());
+                Versions.LAYOUT_FIJI_1_0_0_DEPRECATED.getProtocolName());
       } else {
         exceptionMessage = String.format("Invalid version protocol: '%s'. Expected '%s'.",
             mLayoutVersion.getProtocolName(),

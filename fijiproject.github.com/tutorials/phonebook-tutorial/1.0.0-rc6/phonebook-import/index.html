@@ -331,7 +331,7 @@
 
 <h4 id='parsing_the_delimited_phonebook_entries'>Parsing the Delimited Phonebook Entries</h4>
 
-<p>First, let&#8217;s take a closer look at the data we want to import. In <code>$KIJI_HOME/examples/phonebook/input-data.txt</code> you will see records like:</p>
+<p>First, let&#8217;s take a closer look at the data we want to import. In <code>$FIJI_HOME/examples/phonebook/input-data.txt</code> you will see records like:</p>
 
 <blockquote>
 <p>John|Doe|johndoe@gmail.com|202-555-9876|{&#8220;addr1&#8221;:&#8221;1600 Pennsylvania Ave&#8221;,&#8221;apt&#8221;:null,&#8221;addr2&#8221;:null,&#8221;city&#8221;:&#8221;Washington&#8221;,&#8221;state&#8221;:&#8221;DC&#8221;,&#8221;zip&#8221;:99999}</p>
@@ -376,10 +376,10 @@
 <p>You can execute <code>StandalonePhonebookImporter</code> just like you would the <code>AddEntry</code> example - using the <code>fiji jar</code> command.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc6.jar <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc6.jar <span class='se'>\</span>
     org.fiji.examples.phonebook.StandalonePhonebookImporter <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/input-data.txt
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/input-data.txt
 </code></pre></div>
 
 </div>
@@ -390,7 +390,7 @@
 <p>Verify that the user records were added properly by executing:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
 </code></pre></div>
 
 </div>
@@ -451,15 +451,15 @@
 <div class='userinput'>
 
 <div class='highlight'><pre><code class='bash'><span class='nv'>$HADOOP_HOME</span>/bin/hadoop fs -copyFromLocal <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/input-data.txt /tmp
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/input-data.txt /tmp
 </code></pre></div>
 
 </div>
 <p>You can then use the <code>fiji jar</code> command to execute the MapReduce job. To use the jar command, specify the jar file the <code>PhonebookImporter</code> class and the path to the <code>input-data.txt</code> file in HDFS.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc6.jar <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc6.jar <span class='se'>\</span>
     org.fiji.examples.phonebook.PhonebookImporter <span class='se'>\</span>
     /tmp/input-data.txt
 </code></pre></div>
@@ -472,11 +472,11 @@
 <p>The <code>BulkImportJobBuilder</code> allows you to programmatically configure and launch a bulk import MapReduce job. FijiMR extends Fiji with a <code>bulkimport</code> command-line tool that can perform substantially the same steps. The following command would run the same bulk import job without requiring that you write a &#8221;<code>main()</code>&#8221; method:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji bulk-import <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji bulk-import <span class='se'>\</span>
     --importer<span class='o'>=</span><span class='s1'>&#39;org.fiji.examples.phonebook.PhonebookImporter$PhonebookBulkImporter&#39;</span> <span class='se'>\</span>
     --input<span class='o'>=</span><span class='s2'>&quot;format=text file=/tmp/input-data.txt&quot;</span> <span class='se'>\</span>
     --output<span class='o'>=</span><span class='s2'>&quot;format=fiji nsplits=1 table=fiji://.env/default/phonebook&quot;</span> <span class='se'>\</span>
-    --lib<span class='o'>=</span><span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib
+    --lib<span class='o'>=</span><span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib
 </code></pre></div>
 
 </div>
@@ -487,7 +487,7 @@
 <p>Verify that the user records were added properly by executing:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
 </code></pre></div>
 
 </div>

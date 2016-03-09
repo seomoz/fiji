@@ -34,11 +34,11 @@
 # - JAVA_HOME : path of the JDK/JRE installation. Required.
 # - HADOOP_HOME : path of the Hadoop installation. Required.
 # - HBASE_HOME : path of the HBase installation. Required.
-# - KIJI_HOME : path of the Fiji installation. Required.
-# - KIJI_MR_HOME : path of the Fiji MapReduce installation. Optional.
+# - FIJI_HOME : path of the Fiji installation. Required.
+# - FIJI_MR_HOME : path of the Fiji MapReduce installation. Optional.
 #
-# - KIJI_CLASSPATH : extra classpath entries prepended to the actual classpath.
-# - KIJI_JAVA_OPTS : extra options passed to the JVM.
+# - FIJI_CLASSPATH : extra classpath entries prepended to the actual classpath.
+# - FIJI_JAVA_OPTS : extra options passed to the JVM.
 # - JAVA_LIBRARY_PATH : extra paths of directories containing native libraries.
 #
 # - DEBUG : Run the script in debugging mode.
@@ -137,40 +137,40 @@ fiji_bin_path=$(resolve_symlink "${fiji_bin_path}")
 fiji_bin=$(dirname "${fiji_bin_path}")
 fiji_bin=$(cd "${fiji_bin}" && pwd -P)
 
-if [[ -z "${KIJI_HOME:-}" ]]; then
-  warn "KIJI_HOME environment variable is not set."
-  KIJI_HOME=$(cd "${fiji_bin}/.."; pwd -P)
-  if [[ ! -x "${KIJI_HOME}/bin/fiji" ]]; then
-    error "Unable to infer KIJI_HOME."
-    error "Please set the KIJI_HOME environment variable."
+if [[ -z "${FIJI_HOME:-}" ]]; then
+  warn "FIJI_HOME environment variable is not set."
+  FIJI_HOME=$(cd "${fiji_bin}/.."; pwd -P)
+  if [[ ! -x "${FIJI_HOME}/bin/fiji" ]]; then
+    error "Unable to infer FIJI_HOME."
+    error "Please set the FIJI_HOME environment variable."
     exit 1
   fi
-  warn "Using KIJI_HOME=${KIJI_HOME}"
+  warn "Using FIJI_HOME=${FIJI_HOME}"
 fi
 
-if [[ ! -f "${KIJI_HOME}/conf/fiji-schema.version" ]]; then
-  error "Invalid KIJI_HOME=${KIJI_HOME}"
-  error "Cannot find \${KIJI_HOME}/conf/fiji-schema.version"
+if [[ ! -f "${FIJI_HOME}/conf/fiji-schema.version" ]]; then
+  error "Invalid FIJI_HOME=${FIJI_HOME}"
+  error "Cannot find \${FIJI_HOME}/conf/fiji-schema.version"
   exit 1
 fi
-fiji_schema_version=$(cat "${KIJI_HOME}/conf/fiji-schema.version")
+fiji_schema_version=$(cat "${FIJI_HOME}/conf/fiji-schema.version")
 
 export BENTO_CHECKIN_SERVER=${BENTO_CHECKIN_SERVER:-"https://updates.fiji.org/api/1.0.0/"}
 
-# If KIJI_MR_HOME is set, jars that are part of the fiji-mapreduce distribution
+# If FIJI_MR_HOME is set, jars that are part of the fiji-mapreduce distribution
 # will be added to the classpath.
-KIJI_MR_HOME=${KIJI_MR_HOME:-""}
+FIJI_MR_HOME=${FIJI_MR_HOME:-""}
 
 # Any user code you want to add to the fiji classpath may be done via this env var.
-KIJI_CLASSPATH=${KIJI_CLASSPATH:-""}
+FIJI_CLASSPATH=${FIJI_CLASSPATH:-""}
 
 # Any arguments you want to pass to fiji's java may be done via this env var.
-KIJI_JAVA_OPTS=${KIJI_JAVA_OPTS:-""}
+FIJI_JAVA_OPTS=${FIJI_JAVA_OPTS:-""}
 
 # This is a workaround for OS X Lion, where a bug in JRE 1.6
 # creates a lot of 'SCDynamicStore' errors.
 if [[ "$(uname)" = "Darwin" ]]; then
-  KIJI_JAVA_OPTS="${KIJI_JAVA_OPTS} -Djava.security.krb5.realm= -Djava.security.krb5.kdc="
+  FIJI_JAVA_OPTS="${FIJI_JAVA_OPTS} -Djava.security.krb5.realm= -Djava.security.krb5.kdc="
 fi
 
 # An existing set of directories to use for the java.library.path property
@@ -281,12 +281,12 @@ fi
 # Fiji base classpath.
 # When running as part of a Bento distribution, this contains most Fiji
 # components (including FijiSchema, FijiMR, FijiScoring and their dependencies).
-fijis_cp="${KIJI_HOME}/lib/*"
+fijis_cp="${FIJI_HOME}/lib/*"
 
-# Add FijiMR classpath, if bundled separately ie. if KIJI_HOME != KIJI_MR_HOME:
+# Add FijiMR classpath, if bundled separately ie. if FIJI_HOME != FIJI_MR_HOME:
 fijimr_cp=""
-if [[ ! -z "${KIJI_MR_HOME}" && "${KIJI_HOME}" != "${KIJI_MR_HOME}" ]]; then
-  fijimr_cp="${KIJI_MR_HOME}/lib/*"
+if [[ ! -z "${FIJI_MR_HOME}" && "${FIJI_HOME}" != "${FIJI_MR_HOME}" ]]; then
+  fijimr_cp="${FIJI_MR_HOME}/lib/*"
 fi
 
 # ------------------------------------------------------------------------------
@@ -311,20 +311,20 @@ fi
 # warnings.  The FijiSchema jar filename will be either a "normal" FijiSchema
 # jar, or one compiled with profiling enabled, denoted by ...-profiling.jar.
 # Select the appropriate jar filename here:
-if [[ -f "${KIJI_HOME}/lib/fiji-schema-${fiji_schema_version}-profiling.jar" ]]; then
+if [[ -f "${FIJI_HOME}/lib/fiji-schema-${fiji_schema_version}-profiling.jar" ]]; then
   info "Using profiling JARs"
-  schema_jar="${KIJI_HOME}/lib/fiji-schema-${fiji_schema_version}-profiling.jar"
+  schema_jar="${FIJI_HOME}/lib/fiji-schema-${fiji_schema_version}-profiling.jar"
 else
-  schema_jar="${KIJI_HOME}/lib/fiji-schema-${fiji_schema_version}.jar"
+  schema_jar="${FIJI_HOME}/lib/fiji-schema-${fiji_schema_version}.jar"
 fi
 
 # Note that we put the Fiji lib jars before the hbase jars,
 # in case there are conflicts.
-fiji_conf="${KIJI_HOME}/conf"
+fiji_conf="${FIJI_HOME}/conf"
 
 # By decreasing priority:
 fiji_cp="${schema_jar}"  # FijiSchema (profiling or normal JAR)
-fiji_cp="${fiji_cp}:${KIJI_CLASSPATH}"  # KIJI_CLASSPATH overrides
+fiji_cp="${fiji_cp}:${FIJI_CLASSPATH}"  # FIJI_CLASSPATH overrides
 fiji_cp="${fiji_cp}:${fiji_conf}"
 fiji_cp="${fiji_cp}:${fijimr_cp}"
 fiji_cp="${fiji_cp}:${fijis_cp}"
@@ -442,20 +442,20 @@ function check_environment() {
   fi
 
   log "Checking Fiji environment:"
-  info "KIJI_HOME=${KIJI_HOME}"
-  info "KIJI_MR_HOME=${KIJI_MR_HOME}"
-  info "KIJI_CLASSPATH=${KIJI_CLASSPATH}"
-  info "KIJI_JAVA_OPTS=${KIJI_JAVA_OPTS}"
+  info "FIJI_HOME=${FIJI_HOME}"
+  info "FIJI_MR_HOME=${FIJI_MR_HOME}"
+  info "FIJI_CLASSPATH=${FIJI_CLASSPATH}"
+  info "FIJI_JAVA_OPTS=${FIJI_JAVA_OPTS}"
   info "JAVA_LIBRARY_PATH=${JAVA_LIBRARY_PATH}"
-  if [[ ! -x "${KIJI_HOME}/bin/fiji" ]]; then
+  if [[ ! -x "${FIJI_HOME}/bin/fiji" ]]; then
     error "Inconsistent Fiji environment: "
-    error "KIJI_HOME=${KIJI_HOME} but Fiji tool not found."
-    error "${KIJI_HOME}/bin/fiji is missing or not executable."
+    error "FIJI_HOME=${FIJI_HOME} but Fiji tool not found."
+    error "${FIJI_HOME}/bin/fiji is missing or not executable."
     code=1
   fi
-  if [[ "${fiji_bin_path}" != "${KIJI_HOME}/bin/fiji" ]]; then
+  if [[ "${fiji_bin_path}" != "${FIJI_HOME}/bin/fiji" ]]; then
     error "Inconsistent Fiji environment: "
-    error "Fiji tool ${fiji_bin_path} is external to KIJI_HOME=${KIJI_HOME}"
+    error "Fiji tool ${fiji_bin_path} is external to FIJI_HOME=${FIJI_HOME}"
     code=1
   fi
 
@@ -524,9 +524,9 @@ if [[ -z "${class}" ]]; then
   exit 1
 fi
 
-# Do NOT quote ${KIJI_JAVA_OPTS} as we want to expand it into many arguments.
+# Do NOT quote ${FIJI_JAVA_OPTS} as we want to expand it into many arguments.
 exec "${java_bin_path}" \
   -classpath "${fiji_cp}" \
   -Djava.library.path="${JAVA_LIBRARY_PATH}" \
-  ${KIJI_JAVA_OPTS} \
+  ${FIJI_JAVA_OPTS} \
   "${class}" "$@"

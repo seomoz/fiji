@@ -384,8 +384,8 @@
 <div class='userinput'>
 
 <div class='highlight'><pre><code class='bash'>express job <span class='k'>${</span><span class='nv'>MUSIC_EXPRESS_HOME</span><span class='k'>}</span>/lib/fiji-express-music-0.1.0.jar <span class='se'>\</span>
-    org.fiji.express.music.TopNextSongs --users-table <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/users <span class='se'>\</span>
-    --songs-table <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/songs --hdfs
+    org.fiji.express.music.TopNextSongs --users-table <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/users <span class='se'>\</span>
+    --songs-table <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/songs --hdfs
 </code></pre></div>
 
 </div>
@@ -399,7 +399,7 @@
 <h3 id='verify_the_output'>Verify the Output</h3>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/songs --max-rows<span class='o'>=</span>2
+<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/songs --max-rows<span class='o'>=</span>2
 </code></pre></div>
 
 </div>

@@ -33,7 +33,7 @@ Version 1.1.0
   * REST-84. fiji-rest script should allow specifying JVM arguments.
   * REST-76. FijiREST logging locations must be fully configurable
   * REST-79. Don't close the underlying Fiji instance.
-  * REST-80. Correctly use KIJI_REST_CONF_DIR for location of conf directory.
+  * REST-80. Correctly use FIJI_REST_CONF_DIR for location of conf directory.
   * REST-69. Modularizes FijiREST in preparation for custom endpoints.
 
 Version 1.0.1
@@ -80,12 +80,12 @@ Version 0.3.0
   * REST-23. Expose methods to read and write REST row models.
   * REST-12. Emit JSON that is properly navigable instead of a list of cells.
   * REST-8. Allow for the installation of custom HBase configuration via either
-      $BASEDIR/conf or the KIJI_REST_CONF_DIR environment variable.
+      $BASEDIR/conf or the FIJI_REST_CONF_DIR environment variable.
 
 Version 0.2.0
   * REST-20. Update FijiREST to depend on FijiSchema v1.1.0.
   * REST-10. Ensure that the /rows resource streams properly in all cases.
-  * REST-18. Adds KIJI_CLASSPATH to FijiREST classpath.
+  * REST-18. Adds FIJI_CLASSPATH to FijiREST classpath.
   * REST-9. Allows users to GET with timerange=all.
   * REST-11. Ignore cells with negative timestamps when POSTing.
 

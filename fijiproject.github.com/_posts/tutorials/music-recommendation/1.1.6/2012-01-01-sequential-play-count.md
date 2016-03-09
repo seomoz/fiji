@@ -235,7 +235,7 @@ in a limited way using a KeyValueStoreReader.
 fiji gather \
     --gatherer=org.fiji.examples.music.gather.SequentialPlayCounter \
     --reducer=org.fiji.examples.music.reduce.SequentialPlayCountReducer \
-    --input="format=fiji table=${KIJI}/users" \
+    --input="format=fiji table=${FIJI}/users" \
     --output="format=avrokv file=output.sequentialPlayCount nsplits=2" \
     --lib=${LIBS_DIR}
 {% endhighlight %}

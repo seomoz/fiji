@@ -38,7 +38,7 @@ import org.apache.jmeter.samplers.SampleResult;
  * Sampler to time POST requests on rows endpoint.
  */
 public class PostRequestSampler extends GetRequestSampler {
-  private static final String KIJI_REST_ROW_FORMAT = "{\"entityId\":[%s],"
+  private static final String FIJI_REST_ROW_FORMAT = "{\"entityId\":[%s],"
       + "\"cells\":{\"info\":{\"email\":[{\"value\":\"%s\",\"timestamp\":%d,\"writer_schema\":0}],"
       + "\"name\":[{\"value\":\"%s\",\"timestamp\":%d,\"writer_schema\":0}]}}}";
 
@@ -85,7 +85,7 @@ public class PostRequestSampler extends GetRequestSampler {
     long timestamp = RANDOM.nextLong();
     timestamp = (timestamp < 0) ? -1 * (timestamp + 1) : timestamp;
 
-    return String.format(KIJI_REST_ROW_FORMAT,
+    return String.format(FIJI_REST_ROW_FORMAT,
         RANDOM.nextInt(USER_ID_MAX),
         "amerigo.vespucci@genoa.it",
         timestamp, "Amerigo Vespucci",

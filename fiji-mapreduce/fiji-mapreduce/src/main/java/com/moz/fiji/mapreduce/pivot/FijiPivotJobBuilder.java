@@ -188,7 +188,7 @@ public final class FijiPivotJobBuilder
     }
 
     // Serialize the pivoter class name into the job configuration.
-    conf.setClass(FijiConfKeys.KIJI_PIVOTER_CLASS, mPivoterClass, FijiPivoter.class);
+    conf.setClass(FijiConfKeys.FIJI_PIVOTER_CLASS, mPivoterClass, FijiPivoter.class);
 
     // Producers should output to HFiles.
     mMapper = new PivoterMapper();

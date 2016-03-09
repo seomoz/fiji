@@ -10,7 +10,7 @@ will need to run `mvn install` in that project first.
 Running
 =======
 
-* Export `$KIJI_HOME` to point to your FijiSchema installation.
+* Export `$FIJI_HOME` to point to your FijiSchema installation.
 * Run `bin/fiji-schema-shell`
 
 This command takes a few options (e.g., to load a script out of a file).

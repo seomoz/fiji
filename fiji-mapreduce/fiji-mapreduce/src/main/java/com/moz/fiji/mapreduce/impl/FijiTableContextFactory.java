@@ -44,11 +44,11 @@ public final class FijiTableContextFactory {
   public static FijiTableContext create(TaskInputOutputContext taskContext)
       throws IOException {
     final Configuration conf = taskContext.getConfiguration();
-    final String className = conf.get(FijiConfKeys.KIJI_TABLE_CONTEXT_CLASS);
+    final String className = conf.get(FijiConfKeys.FIJI_TABLE_CONTEXT_CLASS);
     if (className == null) {
       throw new IOException(String.format(
           "FijiTableContext class missing from configuration (key '%s').",
-          FijiConfKeys.KIJI_TABLE_CONTEXT_CLASS));
+          FijiConfKeys.FIJI_TABLE_CONTEXT_CLASS));
     }
 
     Throwable throwable = null;

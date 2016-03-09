@@ -87,7 +87,7 @@ public class TestJsonEntityIdParser {
     final String recoveredComponent = Bytes.toString(
         Bytes.toBytesBinary(
             resolvedEid.toShellString().substring(
-                ToolUtils.KIJI_ROW_KEY_SPEC_PREFIX.length())));
+                ToolUtils.FIJI_ROW_KEY_SPEC_PREFIX.length())));
     assertEquals(UNUSUAL_STRING_EID, recoveredComponent);
     assertEquals(resolvedEid, restEid4.getEntityId());
   }
@@ -124,7 +124,7 @@ public class TestJsonEntityIdParser {
     final String recoveredComponent = Bytes.toString(
         Bytes.toBytesBinary(
             resolvedEid.toShellString().substring(
-                ToolUtils.KIJI_ROW_KEY_SPEC_PREFIX.length())));
+                ToolUtils.FIJI_ROW_KEY_SPEC_PREFIX.length())));
     assertEquals(UNUSUAL_STRING_EID, recoveredComponent);
     assertEquals(resolvedEid, restEid4.getEntityId());
   }

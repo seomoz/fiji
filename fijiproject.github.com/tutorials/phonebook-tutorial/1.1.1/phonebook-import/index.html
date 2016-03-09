@@ -465,7 +465,7 @@ for every user, but is still suboptimal because you are using one machine to per
 <h4>Parsing the Delimited Phonebook Entries</h4>
 
 <p>First, let's take a closer look at the data we want to import.  In
-<code>$KIJI_HOME/examples/phonebook/input-data.txt</code> you will see records like:</p>
+<code>$FIJI_HOME/examples/phonebook/input-data.txt</code> you will see records like:</p>
 
 <blockquote><p>John|Doe|johndoe@gmail.com|202-555-9876|{"addr1":"1600 Pennsylvania Ave","apt":null,"addr2":null,"city":"Washington","state":"DC","zip":99999}</p></blockquote>
 
@@ -527,10 +527,10 @@ example - using the <code>fiji jar</code> command.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
-    <span class="nv">$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.1.jar <span class="se">\</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
+    <span class="nv">$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.1.jar <span class="se">\</span>
     org.fiji.examples.phonebook.StandalonePhonebookImporter <span class="se">\</span>
-    <span class="nv">$KIJI_HOME</span>/examples/phonebook/input-data.txt
+    <span class="nv">$FIJI_HOME</span>/examples/phonebook/input-data.txt
 </code></pre></div>
 
 </div>
@@ -544,7 +544,7 @@ example - using the <code>fiji jar</code> command.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
 </code></pre></div>
 
 </div>
@@ -650,7 +650,7 @@ You can do this by using the HDFS <code>-copyFromLocal</code> command:</p>
 <div class="userinput">
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$HADOOP_HOME</span>/bin/hadoop fs -copyFromLocal <span class="se">\</span>
-    <span class="nv">$KIJI_HOME</span>/examples/phonebook/input-data.txt /tmp
+    <span class="nv">$FIJI_HOME</span>/examples/phonebook/input-data.txt /tmp
 </code></pre></div>
 
 </div>
@@ -662,8 +662,8 @@ path to the <code>input-data.txt</code> file in HDFS.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
-    <span class="nv">$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.1.jar <span class="se">\</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
+    <span class="nv">$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.1.jar <span class="se">\</span>
     org.fiji.examples.phonebook.PhonebookImporter <span class="se">\</span>
     /tmp/input-data.txt
 </code></pre></div>
@@ -682,11 +682,11 @@ run the same bulk import job without requiring that you write a "<code>main()</c
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji bulk-import <span class="se">\</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji bulk-import <span class="se">\</span>
     --importer<span class="o">=</span><span class="s1">&#39;org.fiji.examples.phonebook.PhonebookImporter$PhonebookBulkImporter&#39;</span> <span class="se">\</span>
     --input<span class="o">=</span><span class="s2">&quot;format=text file=/tmp/input-data.txt&quot;</span> <span class="se">\</span>
     --output<span class="o">=</span><span class="s2">&quot;format=fiji nsplits=1 table=fiji://.env/default/phonebook&quot;</span> <span class="se">\</span>
-    --lib<span class="o">=</span><span class="nv">$KIJI_HOME</span>/examples/phonebook/lib
+    --lib<span class="o">=</span><span class="nv">$FIJI_HOME</span>/examples/phonebook/lib
 </code></pre></div>
 
 </div>
@@ -703,7 +703,7 @@ objects as are created programmatically in this example.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook
 </code></pre></div>
 
 </div>

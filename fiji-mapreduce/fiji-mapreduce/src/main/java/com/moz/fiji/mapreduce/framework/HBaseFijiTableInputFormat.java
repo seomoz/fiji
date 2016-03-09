@@ -120,7 +120,7 @@ public final class HBaseFijiTableInputFormat
   public List<InputSplit> getSplits(JobContext context) throws IOException {
     final Configuration conf = context.getConfiguration();
     final FijiURI inputTableURI =
-        FijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_INPUT_TABLE_URI)).build();
+        FijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_INPUT_TABLE_URI)).build();
     final Fiji fiji = Fiji.Factory.open(inputTableURI, conf);
     try {
       final FijiTable table = fiji.openTable(inputTableURI.getTable());
@@ -128,12 +128,12 @@ public final class HBaseFijiTableInputFormat
         final byte[] htableName = getHBaseTableName(table);
         final List<InputSplit> splits = Lists.newArrayList();
         byte[] scanStartKey = HConstants.EMPTY_START_ROW;
-        if (null != conf.get(FijiConfKeys.KIJI_START_ROW_KEY)) {
-          scanStartKey = Base64.decodeBase64(conf.get(FijiConfKeys.KIJI_START_ROW_KEY));
+        if (null != conf.get(FijiConfKeys.FIJI_START_ROW_KEY)) {
+          scanStartKey = Base64.decodeBase64(conf.get(FijiConfKeys.FIJI_START_ROW_KEY));
         }
         byte[] scanLimitKey = HConstants.EMPTY_END_ROW;
-        if (null != conf.get(FijiConfKeys.KIJI_LIMIT_ROW_KEY)) {
-          scanLimitKey = Base64.decodeBase64(conf.get(FijiConfKeys.KIJI_LIMIT_ROW_KEY));
+        if (null != conf.get(FijiConfKeys.FIJI_LIMIT_ROW_KEY)) {
+          scanLimitKey = Base64.decodeBase64(conf.get(FijiConfKeys.FIJI_LIMIT_ROW_KEY));
         }
 
         for (FijiRegion region : table.getRegions()) {
@@ -153,7 +153,7 @@ public final class HBaseFijiTableInputFormat
               && regionEndKey.length > 0)
               ? regionEndKey : scanLimitKey;
 
-            // TODO(KIJIMR-65): For now pick the first available location (ie. region server),
+            // TODO(FIJIMR-65): For now pick the first available location (ie. region server),
             // if any.
             final String location =
               region.getLocations().isEmpty() ? null : region.getLocations().iterator().next();
@@ -201,7 +201,7 @@ public final class HBaseFijiTableInputFormat
      */
     private FijiTableRecordReader(Configuration conf) {
       // Get data request from the job configuration.
-      final String dataRequestB64 = conf.get(FijiConfKeys.KIJI_INPUT_DATA_REQUEST);
+      final String dataRequestB64 = conf.get(FijiConfKeys.FIJI_INPUT_DATA_REQUEST);
       Preconditions.checkNotNull(dataRequestB64, "Missing data request in job configuration.");
       final byte[] dataRequestBytes = Base64.decodeBase64(Bytes.toBytes(dataRequestB64));
       mDataRequest = (FijiDataRequest) SerializationUtils.deserialize(dataRequestBytes);
@@ -216,7 +216,7 @@ public final class HBaseFijiTableInputFormat
 
       final Configuration conf = context.getConfiguration();
       final FijiURI inputURI =
-          FijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_INPUT_TABLE_URI)).build();
+          FijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_INPUT_TABLE_URI)).build();
 
       // When using Fiji tables as an input to MapReduce jobs, turn off block caching.
       final HBaseScanOptions hBaseScanOptions = new HBaseScanOptions();
@@ -235,7 +235,7 @@ public final class HBaseFijiTableInputFormat
           .setStartRow(HBaseEntityId.fromHBaseRowKey(mSplit.getStartRow()))
           .setStopRow(HBaseEntityId.fromHBaseRowKey(mSplit.getEndRow()))
           .setHBaseScanOptions(hBaseScanOptions);
-      final String filterJson = conf.get(FijiConfKeys.KIJI_ROW_FILTER);
+      final String filterJson = conf.get(FijiConfKeys.FIJI_ROW_FILTER);
       if (null != filterJson) {
         final FijiRowFilter filter = FijiRowFilter.toFilter(filterJson);
         scannerOptions.setFijiRowFilter(filter);

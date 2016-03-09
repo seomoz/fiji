@@ -152,7 +152,7 @@ This code shows the entire pipeline put together:
 express.py job --libjars="${MUSIC_EXPRESS_HOME}/lib/*" \
     --user-jar=${MUSIC_EXPRESS_HOME}/lib/fiji-express-music-2.0.2.jar \
     --job-name=org.fiji.express.music.SongPlayCounter --mode=hdfs \
-    --table-uri ${KIJI}/users \
+    --table-uri ${FIJI}/users \
     --output express-tutorial/songcount-output
 {% endhighlight %}
 </div>

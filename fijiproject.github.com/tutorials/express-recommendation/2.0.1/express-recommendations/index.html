@@ -396,8 +396,8 @@ next song to play:</p>
 <div class="highlight"><pre><code class="bash">express.py job <span class="se">\</span>
     --user-jar<span class="o">=</span><span class="k">${</span><span class="nv">MUSIC_EXPRESS_HOME</span><span class="k">}</span>/lib/fiji-express-music-2.0.1.jar <span class="se">\</span>
     --job-name<span class="o">=</span>org.fiji.express.music.SongRecommender --mode<span class="o">=</span>hdfs <span class="se">\</span>
-    --songs-table <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/songs <span class="se">\</span>
-    --users-table <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/users
+    --songs-table <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/songs <span class="se">\</span>
+    --users-table <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/users
 </code></pre></div>
 
 </div>
@@ -409,7 +409,7 @@ next song to play:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/users --max-rows<span class="o">=</span>2
+<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/users --max-rows<span class="o">=</span>2
 </code></pre></div>
 
 </div>

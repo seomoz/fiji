@@ -28,7 +28,7 @@ columns are details particular to each concrete subclass of
 FijiMR includes standard bulk importers in its library. It also includes an extension for
 the FijiSchema Shell that allows you to run bulk imports using a SQL-like syntax.
 If you downloaded the Bento Box, the FijiMR library and the shell extensions are already
-included in your `$KIJI_HOME/lib` directory.
+included in your `$FIJI_HOME/lib` directory.
 
 To use a bulk importer, you should first enter the schema shell, then load the `bulkimport`
 module.

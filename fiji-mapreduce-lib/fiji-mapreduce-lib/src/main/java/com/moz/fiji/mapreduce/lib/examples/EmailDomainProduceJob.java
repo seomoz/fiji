@@ -40,7 +40,7 @@ import com.moz.fiji.schema.FijiURI;
  * <p>To run this job from the command line:</p>
  *
  * <pre>
- * $ java -cp `$KIJI_HOME/bin/fiji classpath` \
+ * $ java -cp `$FIJI_HOME/bin/fiji classpath` \
  * &gt;   com.moz.fiji.mapreduce.lib.examples.EmailDomainProduceJob \
  * &gt;   instance-name table-name
  * </pre>

@@ -408,7 +408,7 @@
 <div class='highlight'><pre><code class='bash'>fiji bulk-import <span class='se'>\</span>
     --importer<span class='o'>=</span>org.fiji.examples.music.bulkimport.SongMetadataBulkImporter <span class='se'>\</span>
     --lib<span class='o'>=</span><span class='k'>${</span><span class='nv'>LIBS_DIR</span><span class='k'>}</span> <span class='se'>\</span>
-    --output<span class='o'>=</span><span class='s2'>&quot;format=fiji table=${KIJI}/songs nsplits=1&quot;</span> <span class='se'>\</span>
+    --output<span class='o'>=</span><span class='s2'>&quot;format=fiji table=${FIJI}/songs nsplits=1&quot;</span> <span class='se'>\</span>
     --input<span class='o'>=</span><span class='s2'>&quot;format=text file=fiji-mr-tutorial/song-metadata.json&quot;</span>
 </code></pre></div>
 
@@ -420,7 +420,7 @@
 <p>Verify that the <code>user</code> table records were added properly by executing:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji ls --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/songs --max-rows<span class='o'>=</span>3
+<div class='highlight'><pre><code class='bash'>fiji ls --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/songs --max-rows<span class='o'>=</span>3
 </code></pre></div>
 
 </div>
@@ -485,7 +485,7 @@ entity-id=&#39;song-36&#39; [1361561116684] info:metadata
 <div class='highlight'><pre><code class='bash'>fiji bulk-import <span class='se'>\</span>
     -Dfiji.import.text.input.descriptor.path<span class='o'>=</span>fiji-mr-tutorial/song-plays-import-descriptor.json <span class='se'>\</span>
     --importer<span class='o'>=</span>org.fiji.mapreduce.lib.bulkimport.JSONBulkImporter <span class='se'>\</span>
-    --output<span class='o'>=</span><span class='s2'>&quot;format=fiji table=${KIJI}/users nsplits=1&quot;</span> <span class='se'>\</span>
+    --output<span class='o'>=</span><span class='s2'>&quot;format=fiji table=${FIJI}/users nsplits=1&quot;</span> <span class='se'>\</span>
     --input<span class='o'>=</span><span class='s2'>&quot;format=text file=fiji-mr-tutorial/song-plays.json&quot;</span> <span class='se'>\</span>
     --lib<span class='o'>=</span><span class='k'>${</span><span class='nv'>LIBS_DIR</span><span class='k'>}</span>
 </code></pre></div>
@@ -496,7 +496,7 @@ entity-id=&#39;song-36&#39; [1361561116684] info:metadata
 <p>Verify that the <code>user</code> table records were added properly by executing:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji ls --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/users --max-rows<span class='o'>=</span>3
+<div class='highlight'><pre><code class='bash'>fiji ls --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/users --max-rows<span class='o'>=</span>3
 </code></pre></div>
 
 </div>

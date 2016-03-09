@@ -118,7 +118,7 @@ Version 0.7.0
       to write applications using the FijiExpress Flow API. User code
       will need to be updated to agree with the package reorganization.
   * EXP-151. Stop bundling FijiSchema in the tarball. This will
-      use the FijiSchema jar from $KIJI_HOME/lib.
+      use the FijiSchema jar from $FIJI_HOME/lib.
   * EXP-146. Fall back to $HADOOP_HOME/lib/native/ for native libraries.
       Correctly detect native libraries in CDH 4.2 and CDH 4.3 packaging.
   * EXP-62. Adds support for column filters defined in a

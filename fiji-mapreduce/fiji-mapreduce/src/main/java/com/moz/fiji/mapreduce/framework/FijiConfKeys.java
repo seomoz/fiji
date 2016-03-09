@@ -28,46 +28,46 @@ import com.moz.fiji.annotations.ApiStability;
 public final class FijiConfKeys {
 
   /** URI of the input table to read from. */
-  public static final String KIJI_INPUT_TABLE_URI = "fiji.input.table.uri";
+  public static final String FIJI_INPUT_TABLE_URI = "fiji.input.table.uri";
 
   /** URI of the output Fiji table to write to. */
-  public static final String KIJI_OUTPUT_TABLE_URI = "fiji.output.table.uri";
+  public static final String FIJI_OUTPUT_TABLE_URI = "fiji.output.table.uri";
 
   /** Name of the FijiTableContext class to use. */
-  public static final String KIJI_TABLE_CONTEXT_CLASS = "fiji.table.context.class";
+  public static final String FIJI_TABLE_CONTEXT_CLASS = "fiji.table.context.class";
 
   /** Serialized input data request. */
-  public static final String KIJI_INPUT_DATA_REQUEST = "fiji.input.data.request";
+  public static final String FIJI_INPUT_DATA_REQUEST = "fiji.input.data.request";
 
   /** HBase start row key. */
-  public static final String KIJI_START_ROW_KEY = "fiji.input.start.key";
+  public static final String FIJI_START_ROW_KEY = "fiji.input.start.key";
 
   /** HBase limit row key. */
-  public static final String KIJI_LIMIT_ROW_KEY = "fiji.input.limit.key";
+  public static final String FIJI_LIMIT_ROW_KEY = "fiji.input.limit.key";
 
   /** Serialized FijiRowFilter. */
-  public static final String KIJI_ROW_FILTER = "fiji.input.row.filter";
+  public static final String FIJI_ROW_FILTER = "fiji.input.row.filter";
 
   /** Fully qualified name of the {@link com.moz.fiji.mapreduce.tools.FijiGather} class to run. */
-  public static final String KIJI_GATHERER_CLASS = "fiji.gatherer.class";
+  public static final String FIJI_GATHERER_CLASS = "fiji.gatherer.class";
 
   /** Fully qualified name of the {@link com.moz.fiji.mapreduce.produce.FijiProducer} class to run. */
-  public static final String KIJI_PRODUCER_CLASS = "fiji.producer.class";
+  public static final String FIJI_PRODUCER_CLASS = "fiji.producer.class";
 
   /**
    * Fully qualified name of the {@link com.moz.fiji.mapreduce.bulkimport.FijiBulkImporter} class to
    * run.
    **/
-  public static final String KIJI_BULK_IMPORTER_CLASS = "fiji.bulk.importer.class";
+  public static final String FIJI_BULK_IMPORTER_CLASS = "fiji.bulk.importer.class";
 
   /** Fully qualified name of the {@link com.moz.fiji.mapreduce.pivot.FijiPivoter} class to run. */
-  public static final String KIJI_PIVOTER_CLASS = "fiji.pivoter.class";
+  public static final String FIJI_PIVOTER_CLASS = "fiji.pivoter.class";
 
   /** Fiji Instance Name. */
-  public static final String KIJI_INSTANCE_NAME = "fiji.instance.name";
+  public static final String FIJI_INSTANCE_NAME = "fiji.instance.name";
 
   /** Polling interval in milliseconds for Fiji MapReduce jobs. */
-  public static final String KIJI_MAPREDUCE_POLL_INTERVAL = "fiji.mapreduce.poll.interval";
+  public static final String FIJI_MAPREDUCE_POLL_INTERVAL = "fiji.mapreduce.poll.interval";
 
   /** Utility class may not be instantiated. */
   private FijiConfKeys() {

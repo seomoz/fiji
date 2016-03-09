@@ -519,7 +519,7 @@ fiji bulk-load <span class='se'>\</span>
 
 <p>Writing HFiles relies on the MapReduce shuffle-sort phase to order the cells correctly in the generated HFiles. If you need to run a mapper or gatherer with a custom table reducer and want to generate HFiles, another extra MapReduce is required to sort the cells before actually writing the HFiles.</p>
 
-<p>This scenario is not fully supported yet. The helper MapReduce job <code>org.fiji.mapreduce.testlib.HFileReduceJob</code> is not included yet in the FijiMR distribution. See <a href='https://jira.fiji.org/browse/KIJIMR-100'>KIJIMR-100</a> for more details on this work.</p>
+<p>This scenario is not fully supported yet. The helper MapReduce job <code>org.fiji.mapreduce.testlib.HFileReduceJob</code> is not included yet in the FijiMR distribution. See <a href='https://jira.fiji.org/browse/FIJIMR-100'>FIJIMR-100</a> for more details on this work.</p>
 
 <p>Below is an example of the workflow required when writing HFiles from a table reducer:</p>
 <div class='highlight'><pre><code class='bash'><span class='c'># Run the bulk importer configured to write HFiles.</span>

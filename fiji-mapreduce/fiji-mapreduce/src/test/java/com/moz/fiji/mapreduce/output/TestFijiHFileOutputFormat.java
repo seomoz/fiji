@@ -196,7 +196,7 @@ public class TestFijiHFileOutputFormat {
     mDefaultLGId = mLayout.getLocalityGroupMap().get("default").getId();
     mInMemoryLGId = mLayout.getLocalityGroupMap().get("inMemory").getId();
 
-    mConf.set(FijiConfKeys.KIJI_OUTPUT_TABLE_URI, mTableURI.toString());
+    mConf.set(FijiConfKeys.FIJI_OUTPUT_TABLE_URI, mTableURI.toString());
 
     mFormat = new FijiHFileOutputFormat();
   }

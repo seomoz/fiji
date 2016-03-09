@@ -219,7 +219,7 @@ public class TestFijiMapReduceJobBuilder {
 
   @Test
   public void testLocalPathJarDir() {
-    // Tests of MapReduceJobBuilder.addJarDirectory() (For KIJIMR-234)
+    // Tests of MapReduceJobBuilder.addJarDirectory() (For FIJIMR-234)
 
     FijiMapReduceJobBuilder builder = FijiMapReduceJobBuilder.create();
     builder.addJarDirectory(new File("/tmp"));

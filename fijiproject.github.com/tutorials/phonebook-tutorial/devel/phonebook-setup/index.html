@@ -249,11 +249,11 @@ useful for this tutorial.</p>
 <h3>Compiling</h3>
 
 <p>If you have downloaded the Fiji Standalone BentoBox, the code for this tutorial
-is already compiled and located in the <code>$KIJI_HOME/examples/phonebook/lib/</code> directory.
+is already compiled and located in the <code>$FIJI_HOME/examples/phonebook/lib/</code> directory.
 You can skip to the <a href="#ref.install_fiji_instance">Install Fiji Instance</a> section to
 continue with the environment setup for playing with the example code.</p>
 
-<p>The source code for this tutorial can be found in <code>$KIJI_HOME/examples/phonebook</code>.
+<p>The source code for this tutorial can be found in <code>$FIJI_HOME/examples/phonebook</code>.
 The source is included along with a Maven project. To get started using Maven,
 consult <a href="http://www.fiji.org/get-started-with-maven">Getting started With Maven</a> or
 the <a href="http://maven.apache.org/">Apache Maven Homepage</a>.</p>
@@ -266,19 +266,19 @@ the <a href="http://maven.apache.org/">Apache Maven Homepage</a>.</p>
 </ul>
 
 
-<p>To compile, run <code>mvn package</code> from <code>$KIJI_HOME/examples/phonebook</code>. The build
-artifacts (jars) will be placed in the <code>$KIJI_HOME/examples/phonebook/target/</code>
+<p>To compile, run <code>mvn package</code> from <code>$FIJI_HOME/examples/phonebook</code>. The build
+artifacts (jars) will be placed in the <code>$FIJI_HOME/examples/phonebook/target/</code>
 directory. This tutorial assumes you are using the pre-built jars included with
-the phonebook example under <code>$KIJI_HOME/examples/phonebook/lib/</code>. If you wish to
+the phonebook example under <code>$FIJI_HOME/examples/phonebook/lib/</code>. If you wish to
 use jars of example code that you have built, you should adjust the command
-lines in this tutorial to use the jars in <code>$KIJI_HOME/examples/phonebook/target/</code>.</p>
+lines in this tutorial to use the jars in <code>$FIJI_HOME/examples/phonebook/target/</code>.</p>
 
-<p>If you are using the Bento Box, <code>fiji-env.sh</code> will have set <code>$KIJI_HOME</code> for you
+<p>If you are using the Bento Box, <code>fiji-env.sh</code> will have set <code>$FIJI_HOME</code> for you
 already. If not, you should set that yourself in your environment:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">KIJI_HOME</span><span class="o">=</span>/path/to/fiji-schema
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">FIJI_HOME</span><span class="o">=</span>/path/to/fiji-schema
 </code></pre></div>
 
 </div>
@@ -289,15 +289,15 @@ already. If not, you should set that yourself in your environment:</p>
 <p>We refer to Fiji instances, Fiji tables, and even columns within a Fiji table with Fiji URIs.  Let's
 define a Fiji URI for a new Fiji instance that we shall use for the rest of this tutorial.  If you
 want to use HBase (and you started your BentoBox with the <code>bento start</code> command), define an
-environment variable to contain a URI for an HBase-backed KIJI instance:</p>
+environment variable to contain a URI for an HBase-backed FIJI instance:</p>
 
-<pre><code>export KIJI=fiji://localhost:2181/phonebook
+<pre><code>export FIJI=fiji://localhost:2181/phonebook
 </code></pre>
 
 <p>If you want to use Cassandra (and you started your BentoBox with <code>cassandra-bento start</code>), instead
 define your URI as follows:</p>
 
-<pre><code>export KIJI=fiji-cassandra://localhost:2181/localhost:9042/phonebook
+<pre><code>export FIJI=fiji-cassandra://localhost:2181/localhost:9042/phonebook
 </code></pre>
 
 <h3>Install Fiji Instance</h3>
@@ -308,7 +308,7 @@ define your URI as follows:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash">fiji install --fiji<span class="o">=</span><span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>
+<div class="highlight"><pre><code class="bash">fiji install --fiji<span class="o">=</span><span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>
 </code></pre></div>
 
 </div>
@@ -322,7 +322,7 @@ classpath. You can add your artifacts to the Fiji classpath by running:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">KIJI_CLASSPATH</span><span class="o">=</span><span class="s2">&quot;$KIJI_HOME/examples/phonebook/lib/*&quot;</span>
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">FIJI_CLASSPATH</span><span class="o">=</span><span class="s2">&quot;$FIJI_HOME/examples/phonebook/lib/*&quot;</span>
 </code></pre></div>
 
 </div>

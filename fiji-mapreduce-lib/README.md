@@ -24,5 +24,5 @@ an existing release of FijiSchema and FijiMR and follow
 the FijiMR Library.
 
 Issues are being tracked at 
-[the FijiMR Library JIRA instance](https://jira.fiji.org/browse/KIJIMRLIB).
+[the FijiMR Library JIRA instance](https://jira.fiji.org/browse/FIJIMRLIB).
 

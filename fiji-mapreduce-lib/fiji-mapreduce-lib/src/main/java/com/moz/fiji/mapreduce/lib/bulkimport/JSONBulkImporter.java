@@ -84,7 +84,7 @@ public final class JSONBulkImporter extends DescribedInputTextBulkImporter {
    * element isn't found.  This uses a period '.' delimited syntax similar to JSONPath
    * ({@linktourl http://goessner.net/articles/JsonPath/}).
    *
-   * TODO(KIJIMRLIB-5) Use an enhanced JSONPath library for this functionality.
+   * TODO(FIJIMRLIB-5) Use an enhanced JSONPath library for this functionality.
    *
    * @param head JsonObject that is the head of the current JSON tree.
    * @param path delimited by periods

@@ -97,7 +97,7 @@ public class DirectFijiTableMapReduceJobOutput extends FijiTableMapReduceJobOutp
 
     // Fiji table context:
     conf.setClass(
-        FijiConfKeys.KIJI_TABLE_CONTEXT_CLASS,
+        FijiConfKeys.FIJI_TABLE_CONTEXT_CLASS,
         DirectFijiTableWriterContext.class,
         FijiTableContext.class);
 

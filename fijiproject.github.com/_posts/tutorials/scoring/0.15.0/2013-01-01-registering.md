@@ -19,7 +19,7 @@ To install the provided policy and score function, run the following command:
 <div class="userinput">
 {% highlight bash %}
 fiji fresh \
-${KIJI}/users/info:next_song_rec \
+${FIJI}/users/info:next_song_rec \
 --do=register \
 --policy-class=org.fiji.scoring.music.NextSongRecommenderFreshnessPolicy \
 --score-function-class=org.fiji.scoring.music.NextSongRecommenderScoreFunction \

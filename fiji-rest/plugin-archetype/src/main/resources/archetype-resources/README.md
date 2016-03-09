@@ -28,5 +28,5 @@ see:
 It contains a source folder for an example plugin that sits on the endpoint /exampleplugin and
 outputs "Hello World!"
 
-To use this plugin put in into the lib/ folder of your fiji-rest installation($KIJI_HOME/rest/lib 
+To use this plugin put in into the lib/ folder of your fiji-rest installation($FIJI_HOME/rest/lib 
 by default) and start FijiRest as normal.

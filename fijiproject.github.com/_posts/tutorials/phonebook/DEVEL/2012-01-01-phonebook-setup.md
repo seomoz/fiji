@@ -99,11 +99,11 @@ safe to ignore these warnings.
 ### Compiling
 
 If you have downloaded the Fiji Standalone BentoBox, the code for this tutorial
-is already compiled and located in the `$KIJI_HOME/examples/phonebook/lib/` directory.
+is already compiled and located in the `$FIJI_HOME/examples/phonebook/lib/` directory.
 You can skip to the [Install Fiji Instance](#ref.install_fiji_instance) section to
 continue with the environment setup for playing with the example code.
 
-The source code for this tutorial can be found in `$KIJI_HOME/examples/phonebook`.
+The source code for this tutorial can be found in `$FIJI_HOME/examples/phonebook`.
 The source is included along with a Maven project. To get started using Maven,
 consult [Getting started With Maven]({{site.fiji_url}}/get-started-with-maven) or
 the [Apache Maven Homepage](http://maven.apache.org/).
@@ -113,19 +113,19 @@ The following tools are required to compile this project:
 * Maven 3.x
 * Java 7
 
-To compile, run `mvn package` from `$KIJI_HOME/examples/phonebook`. The build
-artifacts (jars) will be placed in the `$KIJI_HOME/examples/phonebook/target/`
+To compile, run `mvn package` from `$FIJI_HOME/examples/phonebook`. The build
+artifacts (jars) will be placed in the `$FIJI_HOME/examples/phonebook/target/`
 directory. This tutorial assumes you are using the pre-built jars included with
-the phonebook example under `$KIJI_HOME/examples/phonebook/lib/`. If you wish to
+the phonebook example under `$FIJI_HOME/examples/phonebook/lib/`. If you wish to
 use jars of example code that you have built, you should adjust the command
-lines in this tutorial to use the jars in `$KIJI_HOME/examples/phonebook/target/`.
+lines in this tutorial to use the jars in `$FIJI_HOME/examples/phonebook/target/`.
 
-If you are using the Bento Box, `fiji-env.sh` will have set `$KIJI_HOME` for you
+If you are using the Bento Box, `fiji-env.sh` will have set `$FIJI_HOME` for you
 already. If not, you should set that yourself in your environment:
 
 <div class="userinput">
 {% highlight bash %}
-export KIJI_HOME=/path/to/fiji-schema
+export FIJI_HOME=/path/to/fiji-schema
 {% endhighlight %}
 </div>
 
@@ -135,14 +135,14 @@ export KIJI_HOME=/path/to/fiji-schema
 We refer to Fiji instances, Fiji tables, and even columns within a Fiji table with Fiji URIs.  Let's
 define a Fiji URI for a new Fiji instance that we shall use for the rest of this tutorial.  If you
 want to use HBase (and you started your BentoBox with the `bento start` command), define an
-environment variable to contain a URI for an HBase-backed KIJI instance:
+environment variable to contain a URI for an HBase-backed FIJI instance:
 
-    export KIJI=fiji://localhost:2181/phonebook
+    export FIJI=fiji://localhost:2181/phonebook
 
 If you want to use Cassandra (and you started your BentoBox with `cassandra-bento start`), instead
 define your URI as follows:
 
-    export KIJI=fiji-cassandra://localhost:2181/localhost:9042/phonebook
+    export FIJI=fiji-cassandra://localhost:2181/localhost:9042/phonebook
 
 ### Install Fiji Instance
 <a name="ref.install_fiji_instance" id="ref.install_fiji_instance"> </a>
@@ -151,7 +151,7 @@ Install your Fiji instance. Running `fiji install` with no `--fiji` flag install
 
 <div class="userinput">
 {% highlight bash %}
-fiji install --fiji=${KIJI}
+fiji install --fiji=${FIJI}
 {% endhighlight %}
 </div>
 
@@ -163,7 +163,7 @@ classpath. You can add your artifacts to the Fiji classpath by running:
 
 <div class="userinput">
 {% highlight bash %}
-export KIJI_CLASSPATH="$KIJI_HOME/examples/phonebook/lib/*"
+export FIJI_CLASSPATH="$FIJI_HOME/examples/phonebook/lib/*"
 {% endhighlight %}
 </div>
 

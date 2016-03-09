@@ -25,7 +25,7 @@
  *   fiji gather \
  *   --gatherer=com.moz.fiji.examples.music.gather.SongPlayCounter \
  *   --reducer=com.moz.fiji.mapreduce.lib.reduce.LongSumReducer \
- *   --input="format=fiji table=${KIJI}/users" \
+ *   --input="format=fiji table=${FIJI}/users" \
  *   --output="format=seq file=${HDFS_ROOT}/output.sequence_file nsplits=2" \
  *   --lib=target/fiji-music-0.1-SNAPSHOT-release/fiji-music-0.1-SNAPSHOT/lib/
  * </pre>

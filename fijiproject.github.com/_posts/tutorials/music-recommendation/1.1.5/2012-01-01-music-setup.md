@@ -31,12 +31,12 @@ useful for this tutorial.
 ### Compiling
 
 If you have downloaded the standalone Fiji BentoBox, the code for this tutorial
-is already compiled and located in the `${KIJI_HOME}/examples/music/` directory.
+is already compiled and located in the `${FIJI_HOME}/examples/music/` directory.
 Commands in this tutorial will depend on this location:
 
 <div class="userinput">
 {% highlight bash %}
-export MUSIC_HOME=${KIJI_HOME}/examples/music
+export MUSIC_HOME=${FIJI_HOME}/examples/music
 {% endhighlight %}
 </div>
 
@@ -68,12 +68,12 @@ After Bento starts, it will display ports you will need to complete this tutoria
 to know the address of the MapReduce JobTracker webapp
 ([http://localhost:50030](http://localhost:50030) by default) while working through this tutorial.
 
-It will be useful to define an environment variable named `KIJI` that holds a Fiji URI to the Fiji
+It will be useful to define an environment variable named `FIJI` that holds a Fiji URI to the Fiji
 instance we'll use during this tutorial.
 
 <div class="userinput">
 {% highlight bash %}
-export KIJI=fiji://.env/fiji_music
+export FIJI=fiji://.env/fiji_music
 {% endhighlight %}
 </div>
 
@@ -84,7 +84,7 @@ classpath. You can add your artifacts to the Fiji classpath by running:
 <div class="userinput">
 {% highlight bash %}
 export LIBS_DIR=${MUSIC_HOME}/lib
-export KIJI_CLASSPATH="${LIBS_DIR}/*"
+export FIJI_CLASSPATH="${LIBS_DIR}/*"
 {% endhighlight %}
 </div>
 
@@ -94,7 +94,7 @@ Install your Fiji instance:
 
 <div class="userinput">
 {% highlight bash %}
-fiji install --fiji=${KIJI}
+fiji install --fiji=${FIJI}
 {% endhighlight %}
 </div>
 
@@ -102,7 +102,7 @@ Create the Fiji music tables:
 
 <div class="userinput">
 {% highlight bash %}
-fiji-schema-shell --fiji=${KIJI} --file=${MUSIC_HOME}/music_schema.ddl
+fiji-schema-shell --fiji=${FIJI} --file=${MUSIC_HOME}/music_schema.ddl
 {% endhighlight %}
 </div>
 

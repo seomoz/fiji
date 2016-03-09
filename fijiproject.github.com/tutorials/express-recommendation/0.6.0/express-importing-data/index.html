@@ -372,7 +372,7 @@
     <span class='k'>${</span><span class='nv'>MUSIC_EXPRESS_HOME</span><span class='k'>}</span>/lib/fiji-express-music-0.6.0.jar <span class='se'>\</span>
     org.fiji.express.music.SongMetadataImporter <span class='se'>\</span>
     --input express-tutorial/song-metadata.json <span class='se'>\</span>
-    --table-uri <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/songs --hdfs
+    --table-uri <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/songs --hdfs
 </code></pre></div>
 
 </div>
@@ -385,7 +385,7 @@
     <span class='k'>${</span><span class='nv'>MUSIC_EXPRESS_HOME</span><span class='k'>}</span>/lib/fiji-express-music-0.6.0.jar <span class='se'>\</span>
     org.fiji.express.music.SongPlaysImporter <span class='se'>\</span>
     --input express-tutorial/song-plays.json <span class='se'>\</span>
-    --table-uri <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/users --hdfs
+    --table-uri <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/users --hdfs
 </code></pre></div>
 
 </div>
@@ -396,7 +396,7 @@
 </ul>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/songs --max-rows<span class='o'>=</span>5
+<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/songs --max-rows<span class='o'>=</span>5
 </code></pre></div>
 
 </div>
@@ -423,7 +423,7 @@ entity-id=[&#39;song-8&#39;] [1365548282382] info:metadata
 </ul>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/users --max-rows<span class='o'>=</span>2 --max-versions<span class='o'>=</span>5
+<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/users --max-rows<span class='o'>=</span>2 --max-versions<span class='o'>=</span>5
 </code></pre></div>
 
 </div>

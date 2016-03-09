@@ -673,7 +673,7 @@ a FijiTableReader is used to read the records in question.</p>
     --mapper<span class="o">=</span>org.fiji.examples.music.map.IdentityMapper <span class="se">\</span>
     --reducer<span class="o">=</span>org.fiji.examples.music.reduce.TopNextSongsReducer <span class="se">\</span>
     --input<span class="o">=</span><span class="s2">&quot;format=avrokv file=output.sequentialPlayCount&quot;</span> <span class="se">\</span>
-    --output<span class="o">=</span><span class="s2">&quot;format=fiji table=${KIJI}/songs nsplits=1&quot;</span> <span class="se">\</span>
+    --output<span class="o">=</span><span class="s2">&quot;format=fiji table=${FIJI}/songs nsplits=1&quot;</span> <span class="se">\</span>
     --lib<span class="o">=</span><span class="k">${</span><span class="nv">LIBS_DIR</span><span class="k">}</span>
 </code></pre></div>
 
@@ -687,7 +687,7 @@ to inspect our Fiji tables.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/songs/info:top_next_songs --max-rows<span class="o">=</span>3
+<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/songs/info:top_next_songs --max-rows<span class="o">=</span>3
 </code></pre></div>
 
 </div>

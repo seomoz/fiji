@@ -208,7 +208,7 @@ write to the phonebook table.</p>
 <h3>AddEntry.java</h3>
 
 <p>The class <code>AddEntry.java</code> is included in the phonebook example source (located under
-<code>$KIJI_HOME/examples/phonebook/src/main/java/org/fiji/examples/phonebook/</code>). It implements a command-line tool
+<code>$FIJI_HOME/examples/phonebook/src/main/java/org/fiji/examples/phonebook/</code>). It implements a command-line tool
 that asks a user for contact information and then uses that information to populate
 the columns in a row in the Fiji table <code>phonebook</code> for that contact.
 To start, <code>AddEntry.java</code> loads an HBase configuration.</p>
@@ -292,10 +292,10 @@ resources when its reference count drops to 0.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
-    <span class="nv">$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.7.jar <span class="se">\</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
+    <span class="nv">$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.7.jar <span class="se">\</span>
     org.fiji.examples.phonebook.AddEntry <span class="se">\</span>
-    --fiji<span class="o">=</span><span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>
+    --fiji<span class="o">=</span><span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>
 </code></pre></div>
 
 </div>
@@ -335,7 +335,7 @@ already done so, put the phonebook jar file on your Fiji classpath:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">KIJI_CLASSPATH</span><span class="o">=</span><span class="s2">&quot;$KIJI_HOME/examples/phonebook/lib/*&quot;</span>
+<div class="highlight"><pre><code class="bash"><span class="nb">export </span><span class="nv">FIJI_CLASSPATH</span><span class="o">=</span><span class="s2">&quot;$FIJI_HOME/examples/phonebook/lib/*&quot;</span>
 </code></pre></div>
 
 </div>
@@ -345,7 +345,7 @@ already done so, put the phonebook jar file on your Fiji classpath:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji scan <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/phonebook
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji scan <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/phonebook
 </code></pre></div>
 
 </div>
@@ -368,7 +368,7 @@ entity-id=['Renuka,Apte'] [1384235579766] info:address
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji get <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/phonebook --entity-id<span class="o">=</span><span class="s2">&quot;[&#39;Renuka,Apte&#39;]&quot;</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji get <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/phonebook --entity-id<span class="o">=</span><span class="s2">&quot;[&#39;Renuka,Apte&#39;]&quot;</span>
 </code></pre></div>
 
 </div>
@@ -449,10 +449,10 @@ the data read from the table.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
-    <span class="nv">$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.7.jar <span class="se">\</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji jar <span class="se">\</span>
+    <span class="nv">$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.1.7.jar <span class="se">\</span>
     org.fiji.examples.phonebook.Lookup <span class="se">\</span>
-    --fiji<span class="o">=</span><span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span> <span class="se">\</span>
+    --fiji<span class="o">=</span><span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span> <span class="se">\</span>
     --first<span class="o">=</span>Renuka --last<span class="o">=</span>Apte
 </code></pre></div>
 

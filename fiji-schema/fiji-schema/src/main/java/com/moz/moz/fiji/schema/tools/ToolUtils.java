@@ -76,7 +76,7 @@ public final class ToolUtils {
   public static final String HBASE_ROW_KEY_SPEC_PREFIX = "hbase=";
 
   /** Optional prefix to specify a Fiji row key from the command-line. */
-  public static final String KIJI_ROW_KEY_SPEC_PREFIX = "fiji=";
+  public static final String FIJI_ROW_KEY_SPEC_PREFIX = "fiji=";
 
   /**
    * Parses a command-line flag specifying an entity ID.
@@ -104,8 +104,8 @@ public final class ToolUtils {
 
     } else {
       // Fiji row key specification
-      final String fijiSpec = entityFlag.startsWith(KIJI_ROW_KEY_SPEC_PREFIX)
-          ? entityFlag.substring(KIJI_ROW_KEY_SPEC_PREFIX.length())
+      final String fijiSpec = entityFlag.startsWith(FIJI_ROW_KEY_SPEC_PREFIX)
+          ? entityFlag.substring(FIJI_ROW_KEY_SPEC_PREFIX.length())
           : entityFlag;
 
       return parseFijiRowKey(fijiSpec, factory, layout);

@@ -44,7 +44,7 @@ public final class Versions {
    * Deprecated version from old 1.0.0-rc releases that used 'fiji-1.0' as the instance format
    * version. This version is now equivalent to 'system-1.0'.
    */
-  public static final ProtocolVersion SYSTEM_KIJI_1_0_DEPRECATED =
+  public static final ProtocolVersion SYSTEM_FIJI_1_0_DEPRECATED =
       ProtocolVersion.parse("fiji-1.0");
 
   // -----------------------------------------------------------------------------------------------
@@ -85,7 +85,7 @@ public final class Versions {
    * Deprecated layout version from old 1.0.0-rc releases.
    * This is now equivalent to 'layout-1.0.0'.
    */
-  public static final ProtocolVersion LAYOUT_KIJI_1_0_0_DEPRECATED =
+  public static final ProtocolVersion LAYOUT_FIJI_1_0_0_DEPRECATED =
       ProtocolVersion.parse("fiji-1.0.0");
 
   // -----------------------------------------------------------------------------------------------

@@ -63,12 +63,12 @@ public class FijiTableSerDe implements SerDe {
 
   // Property specifying a list of Hive columns which represent the EntityId.
   // Cannot be specified at the same time as ENTITY_ID_SHELL_STRING.
-  // TODO(KIJIHIVE-30): this feature isn't yet supported, but can come as a later patch.
+  // TODO(FIJIHIVE-30): this feature isn't yet supported, but can come as a later patch.
   // Make a ticket and prioritize it accordingly.
   public static final String LIST_ENTITY_ID_COMPONENTS = "fiji.entity.id.columns";
 
-  public static final String KIJI_QUALIFIER_PAGING_PREFIX = "fiji.qualifier.paging.";
-  public static final String KIJI_CELL_PAGING_PREFIX = "fiji.cell.paging.";
+  public static final String FIJI_QUALIFIER_PAGING_PREFIX = "fiji.qualifier.paging.";
+  public static final String FIJI_CELL_PAGING_PREFIX = "fiji.cell.paging.";
 
   /**
    * This contains all the information about a Hive table we need to interact with a Fiji table.
@@ -102,7 +102,7 @@ public class FijiTableSerDe implements SerDe {
     String entityIdShellString = properties.getProperty(ENTITY_ID_SHELL_STRING);
 
     Map<String, String> qualifierPagingMap =
-        readPrefixedPropertyMap(properties, KIJI_QUALIFIER_PAGING_PREFIX);
+        readPrefixedPropertyMap(properties, FIJI_QUALIFIER_PAGING_PREFIX);
     // Validate that everything in the qualifier paging map is not fully qualified and is thus a
     // family.
     for (String qualifierPagingColumn : qualifierPagingMap.keySet()) {
@@ -113,7 +113,7 @@ public class FijiTableSerDe implements SerDe {
     }
 
     Map<String, String> cellPagingMap =
-        readPrefixedPropertyMap(properties, KIJI_CELL_PAGING_PREFIX);
+        readPrefixedPropertyMap(properties, FIJI_CELL_PAGING_PREFIX);
     // Validate that no fully qualified cell paging columns override a family cell paging
     // configuration.
     for (String cellPagingColumn : qualifierPagingMap.keySet()) {
@@ -141,7 +141,7 @@ public class FijiTableSerDe implements SerDe {
     }
 
     final String hiveName = properties.getProperty("name");
-    final String dataRequestParameter = FijiTableInputFormat.CONF_KIJI_DATA_REQUEST_PREFIX
+    final String dataRequestParameter = FijiTableInputFormat.CONF_FIJI_DATA_REQUEST_PREFIX
         + hiveName;
     try {
       if (null == conf) {

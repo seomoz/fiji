@@ -338,9 +338,9 @@ bento start
 </div>
 <h3 id='compiling'>Compiling</h3>
 
-<p>If you have downloaded the Fiji Standalone BentoBox, the code for this tutorial is already compiled and located in the <code>$KIJI_HOME/examples/phonebook/lib/</code> directory. You can skip to <a href='/tutorials/phonebook-tutorial/1.0.0-rc5/phonebook-create'>Create a Table</a> if you want to get started playing with the example code.</p>
+<p>If you have downloaded the Fiji Standalone BentoBox, the code for this tutorial is already compiled and located in the <code>$FIJI_HOME/examples/phonebook/lib/</code> directory. You can skip to <a href='/tutorials/phonebook-tutorial/1.0.0-rc5/phonebook-create'>Create a Table</a> if you want to get started playing with the example code.</p>
 
-<p>The source code for this tutorial can be found in <code>$KIJI_HOME/examples/phonebook</code>. The source is included along with a Maven project. To get started using Maven, consult <a href='http://www.fiji.org/get-started-with-maven'>Getting started With Maven</a> or the <a href='http://maven.apache.org/'>Apache Maven Homepage</a>.</p>
+<p>The source code for this tutorial can be found in <code>$FIJI_HOME/examples/phonebook</code>. The source is included along with a Maven project. To get started using Maven, consult <a href='http://www.fiji.org/get-started-with-maven'>Getting started With Maven</a> or the <a href='http://maven.apache.org/'>Apache Maven Homepage</a>.</p>
 
 <p>The following tools are required to compile this project:</p>
 
@@ -350,12 +350,12 @@ bento start
 <li>Java 6</li>
 </ul>
 
-<p>To compile, run <code>mvn package</code> from <code>$KIJI_HOME/examples/phonebook</code>. The build artifacts (jars) will be placed in the <code>$KIJI_HOME/examples/phonebook/target/</code> directory. This tutorial assumes you are using the pre-built jars included with the phonebook example under <code>$KIJI_HOME/examples/phonebook/lib/</code>. If you wish to use jars of example code that you have built, you should adjust the command lines in this tutorial to use the jars in <code>$KIJI_HOME/examples/phonebook/target/</code>.</p>
+<p>To compile, run <code>mvn package</code> from <code>$FIJI_HOME/examples/phonebook</code>. The build artifacts (jars) will be placed in the <code>$FIJI_HOME/examples/phonebook/target/</code> directory. This tutorial assumes you are using the pre-built jars included with the phonebook example under <code>$FIJI_HOME/examples/phonebook/lib/</code>. If you wish to use jars of example code that you have built, you should adjust the command lines in this tutorial to use the jars in <code>$FIJI_HOME/examples/phonebook/target/</code>.</p>
 
-<p>If you are using the Bento Box, <code>fiji-env.sh</code> will have set <code>$KIJI_HOME</code> for you already. If not, you should set that yourself in your environment:</p>
+<p>If you are using the Bento Box, <code>fiji-env.sh</code> will have set <code>$FIJI_HOME</code> for you already. If not, you should set that yourself in your environment:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>KIJI_HOME</span><span class='o'>=</span>/path/to/fiji-schema
+<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>FIJI_HOME</span><span class='o'>=</span>/path/to/fiji-schema
 </code></pre></div>
 
 </div>
@@ -369,7 +369,7 @@ bento start
 <p>To work through this tutorial, various Fiji tools will require that Avro data type definitions particular to the working phonebook example be on the classpath. You can add your artifacts to the Fiji classpath by running:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>KIJI_CLASSPATH</span><span class='o'>=</span><span class='s2'>&quot;$KIJI_HOME/examples/phonebook/lib/*&quot;</span>
+<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>FIJI_CLASSPATH</span><span class='o'>=</span><span class='s2'>&quot;$FIJI_HOME/examples/phonebook/lib/*&quot;</span>
 </code></pre></div>
 
 </div>

@@ -49,7 +49,7 @@ table:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji get ${KIJI}/phonebook --entity-id="['Renuka,Apte']"
+$FIJI_HOME/bin/fiji get ${FIJI}/phonebook --entity-id="['Renuka,Apte']"
 {% endhighlight %}
 </div>
 
@@ -69,8 +69,8 @@ Next, to perform the deletion of this contact using DeleteEntry:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji jar \
-    $KIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar \
+$FIJI_HOME/bin/fiji jar \
+    $FIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar \
     org.fiji.examples.phonebook.DeleteEntry
 {% endhighlight %}
 </div>
@@ -84,7 +84,7 @@ entry for Renuka does not get printed:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji get ${KIJI}/phonebook --entity-id="['Renuka,Apte']"
+$FIJI_HOME/bin/fiji get ${FIJI}/phonebook --entity-id="['Renuka,Apte']"
 {% endhighlight %}
 </div>
 

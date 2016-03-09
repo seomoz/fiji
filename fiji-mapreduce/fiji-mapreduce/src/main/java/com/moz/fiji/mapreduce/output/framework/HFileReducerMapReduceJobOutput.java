@@ -51,7 +51,7 @@ public final class HFileReducerMapReduceJobOutput extends MapReduceJobOutput {
   /** {@inheritDoc} */
   @Override
   public void initialize(Map<String, String> params) throws IOException {
-    // TODO(KIJIMR-63): this is ugly and should be fixed
+    // TODO(FIJIMR-63): this is ugly and should be fixed
     throw new UnsupportedOperationException();
   }
 
@@ -70,11 +70,11 @@ public final class HFileReducerMapReduceJobOutput extends MapReduceJobOutput {
     super.configure(job);  // sets the Hadoop output format
 
     final Configuration conf = job.getConfiguration();
-    conf.set(FijiConfKeys.KIJI_OUTPUT_TABLE_URI, mJobOutput.getOutputTableURI().toString());
+    conf.set(FijiConfKeys.FIJI_OUTPUT_TABLE_URI, mJobOutput.getOutputTableURI().toString());
 
     // Fiji table context:
     conf.setClass(
-        FijiConfKeys.KIJI_TABLE_CONTEXT_CLASS,
+        FijiConfKeys.FIJI_TABLE_CONTEXT_CLASS,
         HFileWriterContext.class,
         FijiTableContext.class);
 

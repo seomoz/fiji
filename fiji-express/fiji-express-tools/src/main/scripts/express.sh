@@ -79,7 +79,7 @@ EXPRESS_JAVA_OPTS=${EXPRESS_JAVA_OPTS:-""}
 
 # Any user code you want to add to the fiji classpath may be done via this env var.
 # Jar files here will also be copied to the distributed cache for mapreduce jobs.
-KIJI_CLASSPATH=${KIJI_CLASSPATH:-""}
+FIJI_CLASSPATH=${FIJI_CLASSPATH:-""}
 
 # This is a workaround for OS X Lion, where a bug in JRE 1.6
 # creates a lot of 'SCDynamicStore' errors.
@@ -177,14 +177,14 @@ function mutate_classpath () {
 }
 
 # Detect and extract the current Hadoop version number. e.g. "Hadoop 2.x-..." -> "2" You can
-# override this with $KIJI_HADOOP_DISTRO_VER (e.g. "hadoop1" or "hadoop2").
+# override this with $FIJI_HADOOP_DISTRO_VER (e.g. "hadoop1" or "hadoop2").
 function extract_hadoop_major_version() {
   hadoop_major_version=$(${HADOOP_HOME}/bin/hadoop version | head -1 | cut -c 8)
-  if [ -z "${hadoop_major_version}" -a -z "${KIJI_HADOOP_DISTRO_VER}" ]; then
+  if [ -z "${hadoop_major_version}" -a -z "${FIJI_HADOOP_DISTRO_VER}" ]; then
     echo "Warning: Unknown Hadoop version. May not be able to load all Fiji jars."
-    echo "Set KIJI_HADOOP_DISTRO_VER to 'hadoop1' or 'hadoop2' to load these."
+    echo "Set FIJI_HADOOP_DISTRO_VER to 'hadoop1' or 'hadoop2' to load these."
   else
-    KIJI_HADOOP_DISTRO_VER=${KIJI_HADOOP_DISTRO_VER:-"hadoop${hadoop_major_version}"}
+    FIJI_HADOOP_DISTRO_VER=${FIJI_HADOOP_DISTRO_VER:-"hadoop${hadoop_major_version}"}
   fi
 }
 
@@ -206,16 +206,16 @@ function extract_classpath() {
   done
   COMMAND_ARGS=${return_args}
 
-  # Append KIJI_CLASSPATH to libjars.
-  libjars_cp="${libjars_cp}:${KIJI_CLASSPATH}"
+  # Append FIJI_CLASSPATH to libjars.
+  libjars_cp="${libjars_cp}:${FIJI_CLASSPATH}"
 
   # Gather the express dependency jars.
-  if [ -z "${KIJI_HOME}" -o ! -d "${KIJI_HOME}" ]; then
-   echo "Please set your KIJI_HOME environment variable."
+  if [ -z "${FIJI_HOME}" -o ! -d "${FIJI_HOME}" ]; then
+   echo "Please set your FIJI_HOME environment variable."
    exit 1
   fi
-  if [ -z "${KIJI_MR_HOME}" -o ! -d "${KIJI_MR_HOME}" ]; then
-   echo "Please set your KIJI_MR_HOME environment variable."
+  if [ -z "${FIJI_MR_HOME}" -o ! -d "${FIJI_MR_HOME}" ]; then
+   echo "Please set your FIJI_MR_HOME environment variable."
    exit 1
   fi
 
@@ -229,7 +229,7 @@ function extract_classpath() {
     schema_shell_libjars="${SCHEMA_SHELL_HOME}/lib/*"
   fi
   # We may have Hadoop distribution-specific jars to load in
-  # $KIJI_HOME/lib/distribution/hadoopN, where N is the major digit of the Hadoop
+  # $FIJI_HOME/lib/distribution/hadoopN, where N is the major digit of the Hadoop
   # version. Only load at most one such set of jars.
   extract_hadoop_major_version
 
@@ -242,17 +242,17 @@ function extract_classpath() {
   fi
 
   # Add FijiMR distribution specific jars.
-  if [[ -n "${KIJI_MR_HOME}" && "${KIJI_HOME}" != "${KIJI_MR_HOME}" ]]; then
-    mr_libjars="${KIJI_MR_HOME}/lib/*"
-    mr_distrodirs="${KIJI_MR_HOME}/lib/distribution/${KIJI_HADOOP_DISTRO_VER}"
+  if [[ -n "${FIJI_MR_HOME}" && "${FIJI_HOME}" != "${FIJI_MR_HOME}" ]]; then
+    mr_libjars="${FIJI_MR_HOME}/lib/*"
+    mr_distrodirs="${FIJI_MR_HOME}/lib/distribution/${FIJI_HADOOP_DISTRO_VER}"
     if [ -d "${mr_distrodirs}" ]; then
       mr_distrojars="${mr_distrodirs}/*"
     fi
   fi
 
   # Add FijiSchema distribution specific jars.
-  schema_libjars="${libjars}:${KIJI_HOME}/lib/*"
-  schema_distrodir="$KIJI_HOME/lib/distribution/$KIJI_HADOOP_DISTRO_VER"
+  schema_libjars="${libjars}:${FIJI_HOME}/lib/*"
+  schema_distrodir="$FIJI_HOME/lib/distribution/$FIJI_HADOOP_DISTRO_VER"
   if [ -d "${schema_distrodir}" ]; then
     schema_distrojars="${schema_distrodir}/*"
   fi
@@ -361,12 +361,12 @@ function print_env_usage() {
   echo "  EXPRESS_JAVA_OPTS   Should contain extra arguments to pass to the JVM used to run"
   echo "                      FijiExpress. By default, EXPRESS_JAVA_OPTS is empty."
   echo
-  echo "  KIJI_CLASSPATH      Should contain a colon-separated list of jar files you want to"
+  echo "  FIJI_CLASSPATH      Should contain a colon-separated list of jar files you want to"
   echo "                      add to the classpath."
   echo "                      These files will also get copied to the distributed cache for"
   echo "                      MapReduce tasks that get launched.  Files specified with the"
-  echo "                      --libjars flag take precedence over KIJI_CLASSPATH.  By default"
-  echo "                      KIJI_CLASSPATH is empty."
+  echo "                      --libjars flag take precedence over FIJI_CLASSPATH.  By default"
+  echo "                      FIJI_CLASSPATH is empty."
   echo
   echo "  JAVA_LIBRARY_PATH   Should contain a colon-separated list of paths to additional native"
   echo "                      libraries to pass to the JVM (through the java.library.path"
@@ -422,9 +422,9 @@ case ${command} in
     fi
     extract_classpath "${@}"
     schema_shell_script="${SCHEMA_SHELL_HOME}/bin/fiji-schema-shell"
-    # We'll add express dependencies to KIJI_CLASSPATH so that they are picked up by
+    # We'll add express dependencies to FIJI_CLASSPATH so that they are picked up by
     # fiji-schema-shell.
-    export KIJI_CLASSPATH="${KIJI_CLASSPATH}:${express_cp}"
+    export FIJI_CLASSPATH="${FIJI_CLASSPATH}:${express_cp}"
     # Pass tmpjars to fiji-schema-shell using a JVM property, which express's fiji-schema-shell
     # module knows to read and use to populate tmpjars for launched jobs.
     JAVA_OPTS="${JAVA_OPTS} -Dexpress.tmpjars=${tmpjars}"

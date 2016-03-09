@@ -68,7 +68,7 @@ public interface FijiURIParser extends NamedProvider {
      */
     public static FijiURIBuilder get(URI uri) {
       String scheme = uri.getScheme();
-      if (scheme.equals(FijiURI.KIJI_SCHEME)) {
+      if (scheme.equals(FijiURI.FIJI_SCHEME)) {
         scheme = HBaseFijiURI.HBASE_SCHEME;
       }
 

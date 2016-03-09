@@ -117,7 +117,7 @@ public class TestFijiBulkImportJobBuilder extends FijiClientTest {
     assertEquals(TextInputFormat.class, job.getInputFormatClass());
     assertEquals(BulkImportMapper.class, job.getMapperClass());
     assertEquals(NoopBulkImporter.class,
-        job.getConfiguration().getClass(FijiConfKeys.KIJI_BULK_IMPORTER_CLASS, null));
+        job.getConfiguration().getClass(FijiConfKeys.FIJI_BULK_IMPORTER_CLASS, null));
     assertEquals(IdentityReducer.class, job.getReducerClass());
     assertEquals(10, job.getNumReduceTasks());
     assertEquals(FijiHFileOutputFormat.class, job.getOutputFormatClass());
@@ -140,7 +140,7 @@ public class TestFijiBulkImportJobBuilder extends FijiClientTest {
     assertEquals(TextInputFormat.class, job.getInputFormatClass());
     assertEquals(BulkImportMapper.class, job.getMapperClass());
     assertEquals(KVStoreBulkImporter.class,
-        job.getConfiguration().getClass(FijiConfKeys.KIJI_BULK_IMPORTER_CLASS, null));
+        job.getConfiguration().getClass(FijiConfKeys.FIJI_BULK_IMPORTER_CLASS, null));
     assertEquals(IdentityReducer.class, job.getReducerClass());
     assertEquals(10, job.getNumReduceTasks());
     assertEquals(FijiHFileOutputFormat.class, job.getOutputFormatClass());

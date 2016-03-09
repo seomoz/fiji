@@ -95,7 +95,7 @@ public class TestFijiTableRecordReader extends FijiClientTest {
 
     FijiDataRequest fijiDataRequest = FijiDataRequest.create("info", "name");
     mConf.set(FijiTableSerDe.HIVE_TABLE_NAME_PROPERTY, TABLE_NAME);
-    mConf.set(FijiTableInputFormat.CONF_KIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
+    mConf.set(FijiTableInputFormat.CONF_FIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
         FijiDataRequestSerializer.serialize(fijiDataRequest));
 
     FijiTableRecordReader tableRecordReader = new FijiTableRecordReader(tableInputSplit, mConf);
@@ -138,7 +138,7 @@ public class TestFijiTableRecordReader extends FijiClientTest {
         .build();
 
     mConf.set(FijiTableSerDe.HIVE_TABLE_NAME_PROPERTY, TABLE_NAME);
-    mConf.set(FijiTableInputFormat.CONF_KIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
+    mConf.set(FijiTableInputFormat.CONF_FIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
         FijiDataRequestSerializer.serialize(fijiDataRequest));
 
     FijiTableRecordReader tableRecordReader = new FijiTableRecordReader(tableInputSplit, mConf);
@@ -189,7 +189,7 @@ public class TestFijiTableRecordReader extends FijiClientTest {
         .build();
 
     mConf.set(FijiTableSerDe.HIVE_TABLE_NAME_PROPERTY, TABLE_NAME);
-    mConf.set(FijiTableInputFormat.CONF_KIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
+    mConf.set(FijiTableInputFormat.CONF_FIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
         FijiDataRequestSerializer.serialize(fijiDataRequest));
 
     FijiTableRecordReader tableRecordReader = new FijiTableRecordReader(tableInputSplit, mConf);
@@ -223,7 +223,7 @@ public class TestFijiTableRecordReader extends FijiClientTest {
       fijiTableWriter.put(entityId, "jobs", "foo4", TIMESTAMP, "bar4");
       fijiTableWriter.put(entityId, "jobs", "foo5", TIMESTAMP, "bar5");
 
-      // To test KIJIHIVE-54. Let's add another row of data that has no "jobs" data
+      // To test FIJIHIVE-54. Let's add another row of data that has no "jobs" data
       // in order to test that we aren't trying to request paged data from a non-existent column
       // in that row.
       entityId = mTable.getEntityId("zbar");
@@ -244,7 +244,7 @@ public class TestFijiTableRecordReader extends FijiClientTest {
         .build();
 
     mConf.set(FijiTableSerDe.HIVE_TABLE_NAME_PROPERTY, TABLE_NAME);
-    mConf.set(FijiTableInputFormat.CONF_KIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
+    mConf.set(FijiTableInputFormat.CONF_FIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
         FijiDataRequestSerializer.serialize(fijiDataRequest));
 
     // Initialize FijiTableRecordReader
@@ -300,7 +300,7 @@ public class TestFijiTableRecordReader extends FijiClientTest {
         .build();
 
     mConf.set(FijiTableSerDe.HIVE_TABLE_NAME_PROPERTY, TABLE_NAME);
-    mConf.set(FijiTableInputFormat.CONF_KIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
+    mConf.set(FijiTableInputFormat.CONF_FIJI_DATA_REQUEST_PREFIX + TABLE_NAME,
         FijiDataRequestSerializer.serialize(fijiDataRequest));
 
     FijiTableRecordReader tableRecordReader = new FijiTableRecordReader(tableInputSplit, mConf);

@@ -76,7 +76,7 @@ public class FijiTableRecordReader
 
     final String hiveName = conf.get(FijiTableSerDe.HIVE_TABLE_NAME_PROPERTY);
     final String dataRequestParameter =
-        FijiTableInputFormat.CONF_KIJI_DATA_REQUEST_PREFIX + hiveName;
+        FijiTableInputFormat.CONF_FIJI_DATA_REQUEST_PREFIX + hiveName;
 
     try {
       final String dataRequestString = conf.get(dataRequestParameter);

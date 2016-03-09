@@ -23,8 +23,8 @@
  * NextSongRecommender can be run from the command-line:
  * fiji produce \
  * --producer=com.moz.fiji.examples.music.produce.NextSongRecommender \
- *  --input="format=fiji table=$KIJI/users" \
- *  --output="format=fiji table=$KIJI/users nsplits=2" \
+ *  --input="format=fiji table=$FIJI/users" \
+ *  --output="format=fiji table=$FIJI/users nsplits=2" \
  *  --lib=${LIBS_DIR} \
  *  --kvstores=KVStoreConfig.xml
  */

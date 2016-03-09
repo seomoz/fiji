@@ -83,7 +83,7 @@ public abstract class FijiTableMapReduceJobOutput extends MapReduceJobOutput {
     super.configure(job);
 
     final Configuration conf = job.getConfiguration();
-    conf.set(FijiConfKeys.KIJI_OUTPUT_TABLE_URI, mTableURI.toString());
+    conf.set(FijiConfKeys.FIJI_OUTPUT_TABLE_URI, mTableURI.toString());
 
     job.setNumReduceTasks(getNumReduceTasks());
 

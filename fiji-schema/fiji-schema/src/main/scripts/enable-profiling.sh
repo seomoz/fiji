@@ -26,9 +26,9 @@
 #
 # Run the command as follows before running any fiji commands
 #
-# $KIJI_HOME/bin/profiling/enable-profiling.sh
+# $FIJI_HOME/bin/profiling/enable-profiling.sh
 # fiji <command> etc...
-# $KIJI_HOME/bin/profiling/disable-profiling.sh
+# $FIJI_HOME/bin/profiling/disable-profiling.sh
 
 # ------------------------------------------------------------------------------
 
@@ -43,24 +43,24 @@ fi
 
 # ------------------------------------------------------------------------------
 
-if [[ -z "${KIJI_HOME}" ]]; then
-  echo "Please set the KIJI_HOME enviroment variable before you enable profiling."
+if [[ -z "${FIJI_HOME}" ]]; then
+  echo "Please set the FIJI_HOME enviroment variable before you enable profiling."
   exit 1
 fi
 
-if [[ ! -f "${KIJI_HOME}/conf/fiji-schema.version" ]]; then
-  error "Invalid KIJI_HOME=${KIJI_HOME}"
-  error "Cannot find \${KIJI_HOME}/conf/fiji-schema.version"
+if [[ ! -f "${FIJI_HOME}/conf/fiji-schema.version" ]]; then
+  error "Invalid FIJI_HOME=${FIJI_HOME}"
+  error "Cannot find \${FIJI_HOME}/conf/fiji-schema.version"
   exit 1
 fi
-fiji_schema_version=$(cat "${KIJI_HOME}/conf/fiji-schema.version")
+fiji_schema_version=$(cat "${FIJI_HOME}/conf/fiji-schema.version")
 
-if [[ ! -f "${KIJI_HOME}/conf/fiji-mapreduce.version" ]]; then
-  error "Invalid KIJI_HOME=${KIJI_HOME}"
-  error "Cannot find \${KIJI_HOME}/conf/fiji-mapreduce.version"
+if [[ ! -f "${FIJI_HOME}/conf/fiji-mapreduce.version" ]]; then
+  error "Invalid FIJI_HOME=${FIJI_HOME}"
+  error "Cannot find \${FIJI_HOME}/conf/fiji-mapreduce.version"
   exit 1
 fi
-fiji_mr_version=$(cat "${KIJI_HOME}/conf/fiji-mapreduce.version")
+fiji_mr_version=$(cat "${FIJI_HOME}/conf/fiji-mapreduce.version")
 
 if [[ -z "${HADOOP_HOME}" ]]; then
   echo "Please set the HADOOP_HOME environment variable before you enable profiling."
@@ -79,7 +79,7 @@ fiji_mr_jar_name="fiji-mapreduce-${fiji_mr_version}.jar"
 
 # Create a directory to move the non-profiling jars to, so we can install
 # profiling-enabled jars in their normal place
-orig_dir="${KIJI_HOME}/lib/original_jars"
+orig_dir="${FIJI_HOME}/lib/original_jars"
 
 # Name of the aspectj jar
 aspectj_jar_name="aspectjrt-1.7.2.jar"
@@ -92,52 +92,52 @@ mkdir -p "${orig_dir}"
 inconsistent_state="false"
 
 # Move FijiSchema jar out of the way
-if [[ -f "${KIJI_HOME}/lib/${fiji_schema_jar_name}" ]]; then
+if [[ -f "${FIJI_HOME}/lib/${fiji_schema_jar_name}" ]]; then
   echo "Moving the non-profiled FijiSchema jar from "\
-  "${KIJI_HOME}/lib/${fiji_schema_jar_name} to ${orig_dir}"
-  mv "${KIJI_HOME}/lib/${fiji_schema_jar_name}" "${orig_dir}"
+  "${FIJI_HOME}/lib/${fiji_schema_jar_name} to ${orig_dir}"
+  mv "${FIJI_HOME}/lib/${fiji_schema_jar_name}" "${orig_dir}"
 else
-  echo "${KIJI_HOME}/lib/${fiji_schema_jar_name} does not exist. Is profiling enabled?"
+  echo "${FIJI_HOME}/lib/${fiji_schema_jar_name} does not exist. Is profiling enabled?"
   inconsistent_state="true"
 fi
 
-# Copy profiling FijiSchema jar into the $KIJI_HOME/lib directory
-if [[ ! -f "${KIJI_HOME}/lib/${profiling_fiji_schema_jar_name}" ]]; then
+# Copy profiling FijiSchema jar into the $FIJI_HOME/lib directory
+if [[ ! -f "${FIJI_HOME}/lib/${profiling_fiji_schema_jar_name}" ]]; then
   echo "Moving the profiling enabled FijiSchema jar from " \
-  "${KIJI_HOME}/lib/profiling/${profiling_fiji_schema_jar_name} to ${KIJI_HOME}/lib"
-  cp "${KIJI_HOME}/lib/profiling/${profiling_fiji_schema_jar_name}" "${KIJI_HOME}/lib"
+  "${FIJI_HOME}/lib/profiling/${profiling_fiji_schema_jar_name} to ${FIJI_HOME}/lib"
+  cp "${FIJI_HOME}/lib/profiling/${profiling_fiji_schema_jar_name}" "${FIJI_HOME}/lib"
 else
-  echo "Profiling enabled jar already exists in ${KIJI_HOME}/lib. Not overwriting."
+  echo "Profiling enabled jar already exists in ${FIJI_HOME}/lib. Not overwriting."
   inconsistent_state="true"
 fi
 
-# Copy the aspectj jar into the $KIJI_HOME/lib directory
-if [[ ! -f "${KIJI_HOME}/lib/${aspectj_jar_name}" ]]; then
+# Copy the aspectj jar into the $FIJI_HOME/lib directory
+if [[ ! -f "${FIJI_HOME}/lib/${aspectj_jar_name}" ]]; then
   echo "Moving the aspectj jar from " \
-  "${KIJI_HOME}/lib/profiling/${aspectj_jar_name} to ${KIJI_HOME}/lib"
-  cp "${KIJI_HOME}/lib/profiling/${aspectj_jar_name}" "${KIJI_HOME}/lib"
+  "${FIJI_HOME}/lib/profiling/${aspectj_jar_name} to ${FIJI_HOME}/lib"
+  cp "${FIJI_HOME}/lib/profiling/${aspectj_jar_name}" "${FIJI_HOME}/lib"
 else
-  echo "Aspectj jar already exists in ${KIJI_HOME}/lib. Not overwriting."
+  echo "Aspectj jar already exists in ${FIJI_HOME}/lib. Not overwriting."
   inconsistent_state="true"
 fi
 
 # Move Fiji MapReduce jar out of the way
-if [[ -f "${KIJI_HOME}/lib/${fiji_mr_jar_name}" ]]; then
+if [[ -f "${FIJI_HOME}/lib/${fiji_mr_jar_name}" ]]; then
   echo "Moving the non-profiled Fiji MapReduce jar from "\
-  "${KIJI_HOME}/lib/${fiji_mr_jar_name} to ${orig_dir}"
-  mv "${KIJI_HOME}/lib/${fiji_mr_jar_name}" "${orig_dir}"
+  "${FIJI_HOME}/lib/${fiji_mr_jar_name} to ${orig_dir}"
+  mv "${FIJI_HOME}/lib/${fiji_mr_jar_name}" "${orig_dir}"
 else
-  echo "${KIJI_HOME}/lib/${fiji_mr_jar_name} does not exist. Is profiling enabled?"
+  echo "${FIJI_HOME}/lib/${fiji_mr_jar_name} does not exist. Is profiling enabled?"
   inconsistent_state="true"
 fi
 
-# Copy profiling Fiji MapReduce jar into the $KIJI_HOME/lib directory
-if [[ ! -f "${KIJI_HOME}/lib/${profiling_fiji_mr_jar_name}" ]]; then
+# Copy profiling Fiji MapReduce jar into the $FIJI_HOME/lib directory
+if [[ ! -f "${FIJI_HOME}/lib/${profiling_fiji_mr_jar_name}" ]]; then
   echo "Moving the profiling enabled Fiji MapReduce jar from " \
-  "${KIJI_HOME}/lib/profiling/${profiling_fiji_mr_jar_name} to ${KIJI_HOME}/lib"
-  cp "${KIJI_HOME}/lib/profiling/${profiling_fiji_mr_jar_name}" "${KIJI_HOME}/lib"
+  "${FIJI_HOME}/lib/profiling/${profiling_fiji_mr_jar_name} to ${FIJI_HOME}/lib"
+  cp "${FIJI_HOME}/lib/profiling/${profiling_fiji_mr_jar_name}" "${FIJI_HOME}/lib"
 else
-  echo "Profiling enabled jar already exists in ${KIJI_HOME}/lib. Not overwriting."
+  echo "Profiling enabled jar already exists in ${FIJI_HOME}/lib. Not overwriting."
   inconsistent_state="true"
 fi
 

@@ -51,7 +51,7 @@ public final class FijiBulkImporters {
   @SuppressWarnings("unchecked")
   public static <K, V> FijiBulkImporter<K, V> create(Configuration conf) throws IOException {
     final Class<? extends FijiBulkImporter> bulkImporterClass =
-        conf.getClass(FijiConfKeys.KIJI_BULK_IMPORTER_CLASS, null, FijiBulkImporter.class);
+        conf.getClass(FijiConfKeys.FIJI_BULK_IMPORTER_CLASS, null, FijiBulkImporter.class);
     if (null == bulkImporterClass) {
       throw new IOException("Unable to load bulk importer class");
     }

@@ -138,7 +138,7 @@ final class FijiTap(
     MapredInputFormatWrapper.setInputFormat(inputFormat.getClass, conf)
 
     // Store the input table.
-    conf.set(FijiConfKeys.KIJI_INPUT_TABLE_URI, tableUri)
+    conf.set(FijiConfKeys.FIJI_INPUT_TABLE_URI, tableUri)
 
     initializeTokens(conf)
     super.sourceConfInit(flow, conf)
@@ -157,7 +157,7 @@ final class FijiTap(
     conf.setOutputFormat(classOf[NullOutputFormat[_, _]])
 
     // Store the output table.
-    conf.set(FijiConfKeys.KIJI_OUTPUT_TABLE_URI, tableUri)
+    conf.set(FijiConfKeys.FIJI_OUTPUT_TABLE_URI, tableUri)
 
     initializeTokens(conf)
     super.sinkConfInit(flow, conf)
@@ -183,7 +183,7 @@ final class FijiTap(
       flow: FlowProcess[JobConf],
       recordReader: RecordReader[Container[JEntityId], Container[FijiRowData]]
   ): TupleEntryIterator = {
-    val modifiedFlow = if (flow.getStringProperty(FijiConfKeys.KIJI_INPUT_TABLE_URI) == null) {
+    val modifiedFlow = if (flow.getStringProperty(FijiConfKeys.FIJI_INPUT_TABLE_URI) == null) {
       // TODO CHOP-71 Remove this hack which is introduced by a scalding bug:
       // https://github.com/twitter/scalding/issues/369
       // This hack is only required for testing (HadoopTest Mode)

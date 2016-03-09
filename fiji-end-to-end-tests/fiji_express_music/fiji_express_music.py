@@ -152,8 +152,8 @@ class Tutorial(object):
         'MUSIC_EXPRESS_HOME': self._express_music_dir,
         'LIBS_DIR': express_music_lib_dir,
         'EXPRESS_MUSIC_JAR': express_music_jar,
-        'KIJI': self._fiji_instance_uri,
-        'KIJI_CLASSPATH':
+        'FIJI': self._fiji_instance_uri,
+        'FIJI_CLASSPATH':
             ':'.join(glob.glob(os.path.join(express_music_lib_dir, '*'))),
         'HDFS_BASE': self._hdfs_base,
     })
@@ -201,7 +201,7 @@ class Tutorial(object):
 
     # --------------------------------------------------------------------------
 
-    install = self.Command('fiji install --fiji=${KIJI}')
+    install = self.Command('fiji install --fiji=${FIJI}')
     assert (install.exit_code == 0)
     assert ('Successfully created fiji instance: ' in install.output_text)
 
@@ -209,7 +209,7 @@ class Tutorial(object):
 
     create_table = self.Command(base.StripMargin("""
         |fiji-schema-shell \\
-        |    --fiji=${KIJI} \\
+        |    --fiji=${FIJI} \\
         |    --file=${MUSIC_EXPRESS_HOME}/music-schema.ddl \\
         """))
     print(create_table.error_text)
@@ -217,7 +217,7 @@ class Tutorial(object):
 
     # --------------------------------------------------------------------------
 
-    list_tables = self.Command('fiji ls ${KIJI}')
+    list_tables = self.Command('fiji ls ${FIJI}')
     assert (list_tables.exit_code == 0)
     assert ('songs' in list_tables.output_text), (
         'Missing table "songs": %s' % list_tables.output_lines)
@@ -255,7 +255,7 @@ class Tutorial(object):
           |    com.moz.fiji.express.music.SongMetadataImporter \\
           |    --libjars "${MUSIC_EXPRESS_HOME}/lib/*" \\
           |    --input ${HDFS_BASE}/express-tutorial/song-metadata.json \\
-          |    --table-uri ${KIJI}/songs --hdfs
+          |    --table-uri ${FIJI}/songs --hdfs
           """)
 
     else:
@@ -267,7 +267,7 @@ class Tutorial(object):
           |    --job_name=com.moz.fiji.express.music.SongMetadataImporter \\
           |    --mode=hdfs \\
           |    --input ${HDFS_BASE}/express-tutorial/song-metadata.json \\
-          |    --table-uri ${KIJI}/songs
+          |    --table-uri ${FIJI}/songs
           """)
 
     songMetadataImport = self.Command(cmd)
@@ -275,7 +275,7 @@ class Tutorial(object):
 
     # --------------------------------------------------------------------------
 
-    list_rows = self.Command('fiji scan ${KIJI}/songs --max-rows=5')
+    list_rows = self.Command('fiji scan ${FIJI}/songs --max-rows=5')
     assert (list_rows.exit_code == 0)
     # Strip the first line from the output, if it is about $JAVA_HOME not set.
     stripped_output = self.StripJavaHomeLine(list_rows.output_lines)
@@ -302,7 +302,7 @@ class Tutorial(object):
           |    com.moz.fiji.express.music.SongPlaysImporter \\
           |    --libjars "${MUSIC_EXPRESS_HOME}/lib/*" \\
           |    --input ${HDFS_BASE}/express-tutorial/song-plays.json \\
-          |    --table-uri ${KIJI}/users --hdfs
+          |    --table-uri ${FIJI}/users --hdfs
           """)
     else:
       cmd = base.StripMargin("""
@@ -313,14 +313,14 @@ class Tutorial(object):
         |    -job_name=com.moz.fiji.express.music.SongPlaysImporter \\
         |    -mode=hdfs \\
         |    --input ${HDFS_BASE}/express-tutorial/song-plays.json \\
-        |    --table-uri ${KIJI}/users
+        |    --table-uri ${FIJI}/users
         """)
     userDataImport = self.Command(cmd)
     assert (userDataImport.exit_code == 0)
 
     # --------------------------------------------------------------------------
 
-    list_rows = self.Command('fiji scan ${KIJI}/users --max-rows=5')
+    list_rows = self.Command('fiji scan ${FIJI}/users --max-rows=5')
     assert (list_rows.exit_code == 0)
     stripped_output = self.StripJavaHomeLine(list_rows.output_lines)
     assert (stripped_output[0].startswith('Scanning fiji table: fiji://'))
@@ -347,7 +347,7 @@ class Tutorial(object):
         |  ${EXPRESS_MUSIC_JAR} \\
         |  com.moz.fiji.express.music.SongPlayCounter \\
         |  --libjars "${MUSIC_EXPRESS_HOME}/lib/*" \\
-        |  --table-uri ${KIJI}/users \\
+        |  --table-uri ${FIJI}/users \\
         |  --output ${HDFS_BASE}/express-tutorial/songcount-output \\
         |  --hdfs
         """)
@@ -359,7 +359,7 @@ class Tutorial(object):
         |    -user_jar=${EXPRESS_MUSIC_JAR} \\
         |    -job_name=com.moz.fiji.express.music.SongPlayCounter \\
         |    -mode=hdfs \\
-        |    --table-uri ${KIJI}/users \\
+        |    --table-uri ${FIJI}/users \\
         |    --output ${HDFS_BASE}/express-tutorial/songcount-output \\
         """)
     play_count = self.Command(cmd)
@@ -383,8 +383,8 @@ class Tutorial(object):
         |    ${EXPRESS_MUSIC_JAR} \\
         |    com.moz.fiji.express.music.TopNextSongs \\
         |    --libjars "${MUSIC_EXPRESS_HOME}/lib/*" \\
-        |    --users-table ${KIJI}/users \\
-        |    --songs-table ${KIJI}/songs --hdfs
+        |    --users-table ${FIJI}/users \\
+        |    --songs-table ${FIJI}/songs --hdfs
         """)
     else:
       cmd = base.StripMargin("""
@@ -394,12 +394,12 @@ class Tutorial(object):
         |    -user_jar=${EXPRESS_MUSIC_JAR} \\
         |    -job_name=com.moz.fiji.express.music.TopNextSongs \\
         |    -mode=hdfs \\
-        |    --users-table ${KIJI}/users \\
-        |    --songs-table ${KIJI}/songs --hdfs
+        |    --users-table ${FIJI}/users \\
+        |    --songs-table ${FIJI}/songs --hdfs
         """)
     top_songs = self.Command(cmd)
     assert (top_songs.exit_code == 0)
-    list_rows = self.Command('fiji scan ${KIJI}/songs --max-rows=2')
+    list_rows = self.Command('fiji scan ${FIJI}/songs --max-rows=2')
     assert (list_rows.exit_code == 0)
     stripped_output = self.StripJavaHomeLine(list_rows.output_lines)
     assert (stripped_output[0].startswith('Scanning fiji table: fiji://'))
@@ -429,8 +429,8 @@ class Tutorial(object):
       cmd = base.StripMargin("""
         |express job ${EXPRESS_MUSIC_JAR} \\
         |    com.moz.fiji.express.music.SongRecommender \\
-        |    --songs-table ${KIJI}/songs \\
-        |    --users-table ${KIJI}/users
+        |    --songs-table ${FIJI}/songs \\
+        |    --users-table ${FIJI}/users
         """)
     else:
       cmd = base.StripMargin("""
@@ -439,13 +439,13 @@ class Tutorial(object):
         |    -user_jar=${EXPRESS_MUSIC_JAR} \\
         |    -job_name=com.moz.fiji.express.music.SongRecommender \\
         |    -mode=hdfs \\
-        |    --songs-table ${KIJI}/songs \\
-        |    --users-table ${KIJI}/users
+        |    --songs-table ${FIJI}/songs \\
+        |    --users-table ${FIJI}/users
         """)
     song_recommend = self.Command(cmd)
     assert (song_recommend.exit_code == 0)
 
-    list_rows = self.Command("fiji scan ${KIJI}/users --max-rows=2")
+    list_rows = self.Command("fiji scan ${FIJI}/users --max-rows=2")
     assert (list_rows.exit_code == 0)
     stripped_output = self.StripJavaHomeLine(list_rows.output_lines)
     assert (stripped_output[0].startswith('Scanning fiji table: fiji://'))

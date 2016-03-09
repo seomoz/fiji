@@ -31,8 +31,8 @@ public class TestJobOutputSpec {
   @Test
   public void testNullPathConstructor() {
     final String location = "the-location";
-    JobOutputSpec spec = JobOutputSpec.create(JobOutputSpec.Format.KIJI, location, 1);
-    assertEquals(JobOutputSpec.Format.KIJI, spec.getFormat());
+    JobOutputSpec spec = JobOutputSpec.create(JobOutputSpec.Format.FIJI, location, 1);
+    assertEquals(JobOutputSpec.Format.FIJI, spec.getFormat());
     assertEquals(location, spec.getLocation());
     assertEquals(1, spec.getSplits());
   }
@@ -48,7 +48,7 @@ public class TestJobOutputSpec {
   @Test
   public void testParseFiji() {
     JobOutputSpec spec = JobOutputSpec.parse("fiji:fiji://hbase/instance/table@123");
-    assertEquals(JobOutputSpec.Format.KIJI, spec.getFormat());
+    assertEquals(JobOutputSpec.Format.FIJI, spec.getFormat());
     assertEquals("fiji://hbase/instance/table", spec.getLocation());
     assertEquals(123, spec.getSplits());
   }

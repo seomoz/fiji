@@ -223,7 +223,7 @@ public class IntegrationTestJobHistoryFijiTable extends AbstractFijiIntegrationT
         final Configuration config = new Configuration();
         config.addResource(new ByteArrayInputStream(configString.getBytes()));
         assertTrue(EmailDomainProducer.class
-            == config.getClass(FijiConfKeys.KIJI_PRODUCER_CLASS, null));
+            == config.getClass(FijiConfKeys.FIJI_PRODUCER_CLASS, null));
         assertEquals("Couldn't retrieve configuration field from deserialized configuration.",
             "squirrel", config.get("conf.test.animal.string"));
       } finally {

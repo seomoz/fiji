@@ -229,7 +229,7 @@ public final class HiveTableDescription {
     } else {
       mEntityIdShellStringIndex = null;
     }
-    // TODO(KIJIHIVE-30) Process EntityId component columns here.
+    // TODO(FIJIHIVE-30) Process EntityId component columns here.
 
     FijiDataRequest dataRequest = DataRequestOptimizer.getDataRequest(mExpressions);
     if (builder.mCellPagingMap != null) {
@@ -321,7 +321,7 @@ public final class HiveTableDescription {
     Text entityIdShellString = new Text((String) entityIdShellStringObject);
     EntityIdWritable entityIdWritable = new EntityIdWritable(entityIdShellString.toString());
 
-    // TODO(KIJIHIVE-30) Process EntityId component columns here.
+    // TODO(FIJIHIVE-30) Process EntityId component columns here.
 
     Map<FijiColumnName, NavigableMap<Long, FijiCellWritable>> writableData = Maps.newHashMap();
     for (int c=0; c < mExpressions.size(); c++) {

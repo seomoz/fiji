@@ -166,7 +166,7 @@ public final class LsTool extends BaseTool {
    */
   protected static String parseInstanceName(String fijiTableName) {
     final String[] parts = StringUtils.split(fijiTableName, '\u0000', '.');
-    if (parts.length < 3 || !FijiURI.KIJI_SCHEME.equals(parts[0])) {
+    if (parts.length < 3 || !FijiURI.FIJI_SCHEME.equals(parts[0])) {
       return null;
     }
     return parts[1];

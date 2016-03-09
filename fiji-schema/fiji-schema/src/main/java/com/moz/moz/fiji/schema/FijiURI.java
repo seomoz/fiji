@@ -76,7 +76,7 @@ import com.moz.fiji.schema.zookeeper.ZooKeeperFactory;
  * The scheme is specific to the type of cluster identified, and determines how the remaining
  * components will be parsed.
  * <p>
- * The default {@code FijiURI} scheme is "{@value #KIJI_SCHEME}". When this scheme is parsed an
+ * The default {@code FijiURI} scheme is "{@value #FIJI_SCHEME}". When this scheme is parsed an
  * {@link com.moz.fiji.schema.hbase.HBaseFijiURI} will be created.
  *
  * <H3>Cluster Identifier</H3>
@@ -150,7 +150,7 @@ public class FijiURI {
    * Default {@code FijiURI} scheme. When a {@code FijiURI} with this scheme is parsed, the default
    * {@code FijiURI} type ({@link com.moz.fiji.schema.hbase.HBaseFijiURI}) is used.
    */
-  public static final String KIJI_SCHEME = "fiji";
+  public static final String FIJI_SCHEME = "fiji";
 
   /** String to specify an unset FijiURI field. */
   public static final String UNSET_URI_STRING = ".unset";
@@ -287,7 +287,7 @@ public class FijiURI {
      * See {@link FijiURI#newBuilder()} for specific values.
      */
     protected FijiURIBuilder() {
-      this(KIJI_SCHEME);
+      this(FIJI_SCHEME);
     }
 
     /**
@@ -755,7 +755,7 @@ public class FijiURI {
 
     try {
       // SCHEMA-6. URI Encode column names using RFC-2396.
-      final URI columnsEncoded = new URI(KIJI_SCHEME, columnField, null);
+      final URI columnsEncoded = new URI(FIJI_SCHEME, columnField, null);
       return String.format("%s%s/",
           toStringTable(preserveOrdering),
           columnsEncoded.getRawSchemeSpecificPart());

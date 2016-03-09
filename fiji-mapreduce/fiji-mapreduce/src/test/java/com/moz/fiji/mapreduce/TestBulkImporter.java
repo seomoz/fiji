@@ -226,7 +226,7 @@ public class TestBulkImporter extends FijiClientTest {
         counters.findCounter(JobHistoryCounters.BULKIMPORTER_RECORDS_PROCESSED).getValue());
   }
 
-  // TODO(KIJI-359): Implement missing tests
+  // TODO(FIJI-359): Implement missing tests
   //  - bulk-importing to HFiles
   //  - bulk-importing multiple files
 }

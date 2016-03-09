@@ -117,7 +117,7 @@ public class CassandraFijiClientTest {
   private static final AtomicLong FAKE_CASSANDRA_INSTANCE_COUNTER = new AtomicLong();
 
   /** Counter for test Fiji instances. */
-  private static final AtomicLong KIJI_INSTANCE_COUNTER = new AtomicLong();
+  private static final AtomicLong FIJI_INSTANCE_COUNTER = new AtomicLong();
 
   /** Test identifier, eg. "org_package_ClassName_testMethodName". */
   private String mTestId;
@@ -198,7 +198,7 @@ public class CassandraFijiClientTest {
     // Hopefully dropping off the class name is good enough to make this short enough.
 
     final String instanceName =
-        String.format("%s_%d", mTestName.getMethodName(), KIJI_INSTANCE_COUNTER.getAndIncrement());
+        String.format("%s_%d", mTestName.getMethodName(), FIJI_INSTANCE_COUNTER.getAndIncrement());
 
     LOG.info("Creating a test Fiji instance.  Calling Fiji instance " + instanceName);
 

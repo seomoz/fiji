@@ -31,7 +31,7 @@ important piece of data.
 
 ## Running
 
-* Export `$KIJI_HOME` to point to your FijiSchema installation.
+* Export `$FIJI_HOME` to point to your FijiSchema installation.
 * Run `bin/fiji-schema-shell`
 
 This command takes a few options (e.g., to load a script out of a file).
@@ -661,7 +661,7 @@ The schema may be specified as follows:
     SCHEMA ID <id>
 
 To refer to a schema by by its SpecificRecord class, you must make it available to the
-Fiji shell. All jar files in the `$KIJI_CLASSPATH` environment variable will be present.
+Fiji shell. All jar files in the `$FIJI_CLASSPATH` environment variable will be present.
 You can also load jars at runtime by using the command:
 
     USE JAR INFILE '/path/to/my-local-jar-file.jar';

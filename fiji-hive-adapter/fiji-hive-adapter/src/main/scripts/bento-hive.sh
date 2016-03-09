@@ -18,7 +18,7 @@
 #   limitations under the License.
 
 # Configuration parameters for this script
-KIJI_HIVE_ADAPTER_VERSION="${project.version}"
+FIJI_HIVE_ADAPTER_VERSION="${project.version}"
 HIVE_VERSION="${hive.version}"
 HIVE_DIRECTORY="hive-${HIVE_VERSION}"
 
@@ -75,7 +75,7 @@ function generate_import_table_sql() {
   IMPORT_TABLE_URI=$1
   TABLE_NAME="${IMPORT_TABLE_URI##*/}"
   echo Generating import table SQL for ${TABLE_NAME}
-  IMPORT_TABLE_SQL="${KIJI_HIVE_ADAPTER_HOME}${TABLE_NAME}-import.sql"
+  IMPORT_TABLE_SQL="${FIJI_HIVE_ADAPTER_HOME}${TABLE_NAME}-import.sql"
   if [ ! -z ${IMPORT_TABLE_URI} ]; then
     echo "-- GENERATED FILE DO NOT EDIT" > ${IMPORT_TABLE_SQL}
     fiji generate-hive-table --fiji=${IMPORT_TABLE_URI} >> ${IMPORT_TABLE_SQL}
@@ -111,12 +111,12 @@ bin=`dirname "$prgm"`
 bin=`cd "${bin}" && pwd`
 command="$1"
 
-KIJI_HIVE_ADAPTER_HOME="${bin}/../"
-KIJI_HIVE_ADAPTER_LIB="${KIJI_HIVE_ADAPTER_HOME}lib/"
+FIJI_HIVE_ADAPTER_HOME="${bin}/../"
+FIJI_HIVE_ADAPTER_LIB="${FIJI_HIVE_ADAPTER_HOME}lib/"
 
 # First make sure we have everything we need in the environment.
-if [ -z "${KIJI_HOME}" -o ! -d "${KIJI_HOME}" ]; then
-    echo "Please set your KIJI_HOME environment variable."
+if [ -z "${FIJI_HOME}" -o ! -d "${FIJI_HOME}" ]; then
+    echo "Please set your FIJI_HOME environment variable."
     exit 1
 fi
 if [ -z "${HBASE_HOME}" -o ! -d "${HBASE_HOME}" ]; then
@@ -139,11 +139,11 @@ else
 
     # Set metastore_db to the Fiji Hive Adapter root so that invocations from different directions
     # use the same metastore
-    HIVE_OPTIONS="--hiveconf javax.jdo.option.ConnectionURL=jdbc:derby:;databaseName=$KIJI_HIVE_ADAPTER_HOME/metastore_db;create=true"
+    HIVE_OPTIONS="--hiveconf javax.jdo.option.ConnectionURL=jdbc:derby:;databaseName=$FIJI_HIVE_ADAPTER_HOME/metastore_db;create=true"
 
     # If HIVE_HOME isn't set and we find it in our lib directory, use that
-    if [ -z "${HIVE_HOME}" -a -d "${KIJI_HIVE_ADAPTER_LIB}${HIVE_DIRECTORY}" ]; then
-        HIVE_HOME="${KIJI_HIVE_ADAPTER_LIB}${HIVE_DIRECTORY}"
+    if [ -z "${HIVE_HOME}" -a -d "${FIJI_HIVE_ADAPTER_LIB}${HIVE_DIRECTORY}" ]; then
+        HIVE_HOME="${FIJI_HIVE_ADAPTER_LIB}${HIVE_DIRECTORY}"
     fi
 
     # If we can't find Hive, offer to download it into our lib directory
@@ -152,9 +152,9 @@ else
         read -p "Would you like to download Hive from Cloudera(y/n)?" INSTALL_HIVE
 
         if [[ $INSTALL_HIVE =~ ^[Yy]$ ]]; then
-          wget ${HIVE_URL} -O ${KIJI_HIVE_ADAPTER_LIB}/${HIVE_ARCHIVE}
-          tar -xzf ${KIJI_HIVE_ADAPTER_LIB}/${HIVE_ARCHIVE} -C ${KIJI_HIVE_ADAPTER_LIB}
-          HIVE_HOME="${KIJI_HIVE_ADAPTER_LIB}/${HIVE_DIRECTORY}"
+          wget ${HIVE_URL} -O ${FIJI_HIVE_ADAPTER_LIB}/${HIVE_ARCHIVE}
+          tar -xzf ${FIJI_HIVE_ADAPTER_LIB}/${HIVE_ARCHIVE} -C ${FIJI_HIVE_ADAPTER_LIB}
+          HIVE_HOME="${FIJI_HIVE_ADAPTER_LIB}/${HIVE_DIRECTORY}"
         else
           echo "No Hive installation present."
           exit 1
@@ -163,17 +163,17 @@ else
     HIVE_BINARY="${HIVE_HOME}/bin/hive"
 
     # Use user classpath precedence for jobs created in MapReduce mode.
-    export HADOOP_CONF_DIR="${KIJI_HIVE_ADAPTER_HOME}/conf"
+    export HADOOP_CONF_DIR="${FIJI_HIVE_ADAPTER_HOME}/conf"
 
 fi
 
-KIJI_HIVE_LIB="${KIJI_HIVE_ADAPTER_LIB}/fiji-hive-adapter-${KIJI_HIVE_ADAPTER_VERSION}.jar"
-export HADOOP_CLASSPATH="${KIJI_HIVE_LIB}:${HADOOP_CLASSPATH}"
+FIJI_HIVE_LIB="${FIJI_HIVE_ADAPTER_LIB}/fiji-hive-adapter-${FIJI_HIVE_ADAPTER_VERSION}.jar"
+export HADOOP_CLASSPATH="${FIJI_HIVE_LIB}:${HADOOP_CLASSPATH}"
 
 # Force user classpath precedence for jobs created in local mode.
 export HADOOP_USER_CLASSPATH_FIRST=true
 
-HIVERC="${KIJI_HIVE_ADAPTER_HOME}.hiverc"
+HIVERC="${FIJI_HIVE_ADAPTER_HOME}.hiverc"
 
 case $command in
     shell)
@@ -202,7 +202,7 @@ case $command in
         generate_import_table_sql ${IMPORT_TABLE_URI}
 
         TABLE_NAME="${IMPORT_TABLE_URI##*/}"
-        SQL_FILENAME="${KIJI_HIVE_ADAPTER_HOME}${TABLE_NAME}-import.sql"
+        SQL_FILENAME="${FIJI_HIVE_ADAPTER_HOME}${TABLE_NAME}-import.sql"
         exit 0
         ;;
     import)
@@ -211,7 +211,7 @@ case $command in
         generate_import_table_sql ${IMPORT_TABLE_URI}
 
         TABLE_NAME="${IMPORT_TABLE_URI##*/}"
-        SQL_FILENAME="${KIJI_HIVE_ADAPTER_HOME}${TABLE_NAME}-import.sql"
+        SQL_FILENAME="${FIJI_HIVE_ADAPTER_HOME}${TABLE_NAME}-import.sql"
         ${HIVE_BINARY} ${HIVE_OPTIONS} -i ${HIVERC} -f ${SQL_FILENAME}
         if [ $? -ne 0 ]; then
           echo "Failed to import table '${TABLE_NAME}'."
@@ -223,7 +223,7 @@ case $command in
         fi
         ;;
     server)
-        HIVE_OPTIONS="${HIVE_OPTIONS} --hiveconf hive.aux.jars.path=file://${KIJI_HIVE_LIB}"
+        HIVE_OPTIONS="${HIVE_OPTIONS} --hiveconf hive.aux.jars.path=file://${FIJI_HIVE_LIB}"
         exec ${HIVE_BINARY} --service hiveserver ${HIVE_OPTIONS}
         exit 0
         ;;

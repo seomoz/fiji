@@ -29,7 +29,7 @@ For more information about FijiSchema and the Fiji system, see
 Running
 =======
 
-* Export `$KIJI_HOME` to point to your FijiSchema installation.
+* Export `$FIJI_HOME` to point to your FijiSchema installation.
   If you source `fiji-env.sh` in the BentoBox, this is taken care of.
 * Run `bin/fiji-schema-shell`
 

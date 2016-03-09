@@ -24,9 +24,9 @@
 #
 # The sequence of commands is as follows:
 #
-# $KIJI_HOME/bin/profiling/enable-profiling.sh
+# $FIJI_HOME/bin/profiling/enable-profiling.sh
 # fiji <command> etc...
-# $KIJI_HOME/bin/profiling/disable-profiling.sh
+# $FIJI_HOME/bin/profiling/disable-profiling.sh
 
 # ------------------------------------------------------------------------------
 
@@ -41,24 +41,24 @@ fi
 
 # ------------------------------------------------------------------------------
 
-if [[ -z "${KIJI_HOME}" ]]; then
-  echo "Please set the KIJI_HOME enviroment variable before you enable profiling."
+if [[ -z "${FIJI_HOME}" ]]; then
+  echo "Please set the FIJI_HOME enviroment variable before you enable profiling."
   exit 1
 fi
 
-if [[ ! -f "${KIJI_HOME}/conf/fiji-schema.version" ]]; then
-  error "Invalid KIJI_HOME=${KIJI_HOME}"
-  error "Cannot find \${KIJI_HOME}/conf/fiji-schema.version"
+if [[ ! -f "${FIJI_HOME}/conf/fiji-schema.version" ]]; then
+  error "Invalid FIJI_HOME=${FIJI_HOME}"
+  error "Cannot find \${FIJI_HOME}/conf/fiji-schema.version"
   exit 1
 fi
-fiji_schema_version=$(cat "${KIJI_HOME}/conf/fiji-schema.version")
+fiji_schema_version=$(cat "${FIJI_HOME}/conf/fiji-schema.version")
 
-if [[ ! -f "${KIJI_HOME}/conf/fiji-mapreduce.version" ]]; then
-  error "Invalid KIJI_HOME=${KIJI_HOME}"
-  error "Cannot find \${KIJI_HOME}/conf/fiji-mapreduce.version"
+if [[ ! -f "${FIJI_HOME}/conf/fiji-mapreduce.version" ]]; then
+  error "Invalid FIJI_HOME=${FIJI_HOME}"
+  error "Cannot find \${FIJI_HOME}/conf/fiji-mapreduce.version"
   exit 1
 fi
-fiji_mr_version=$(cat "${KIJI_HOME}/conf/fiji-mapreduce.version")
+fiji_mr_version=$(cat "${FIJI_HOME}/conf/fiji-mapreduce.version")
 
 if [[ -z "${HADOOP_HOME}" ]]; then
   echo "Please set the HADOOP_HOME environment variable before you enable profiling."
@@ -79,7 +79,7 @@ fiji_mr_jar_name="fiji-mapreduce-${fiji_mr_version}.jar"
 
 # The location to store the original FijiSchema and FijiMR jars during profiling
 # so that they may be restored later.
-orig_dir="${KIJI_HOME}/lib/original_jars"
+orig_dir="${FIJI_HOME}/lib/original_jars"
 
 # Flag to indicate if something unexpected was found and disabling profiling
 # requires any manual intervention.
@@ -90,31 +90,31 @@ aspectj_jar_name="aspectjrt-1.7.2.jar"
 
 # Remove the profiling jars from lib and distrodir. We have cp'd them while
 # enabling profiling, so rm should be fine.
-if [[ -f "${KIJI_HOME}/lib/${fiji_profiling_schema_jar_name}" ]]; then
+if [[ -f "${FIJI_HOME}/lib/${fiji_profiling_schema_jar_name}" ]]; then
   echo "Removing profile enabled fiji schema jar..."
-  rm -f "${KIJI_HOME}/lib/${fiji_profiling_schema_jar_name}"
+  rm -f "${FIJI_HOME}/lib/${fiji_profiling_schema_jar_name}"
 else
-  echo "Did not find ${fiji_profiling_schema_jar_name} in ${KIJI_HOME}/lib. "
+  echo "Did not find ${fiji_profiling_schema_jar_name} in ${FIJI_HOME}/lib. "
   echo "Is profiling enabled?"
   inconsistent_state="true"
 fi
 
 # Remove the aspectj jar
-if [[ -f "${KIJI_HOME}/lib/${aspectj_jar_name}" ]]; then
+if [[ -f "${FIJI_HOME}/lib/${aspectj_jar_name}" ]]; then
   echo "Removing aspectj jar..."
-  rm -f "${KIJI_HOME}/lib/${aspectj_jar_name}"
+  rm -f "${FIJI_HOME}/lib/${aspectj_jar_name}"
 else
-  echo "Did not find ${aspectj_jar_name} in ${KIJI_HOME}/lib. "
+  echo "Did not find ${aspectj_jar_name} in ${FIJI_HOME}/lib. "
   echo "Is profiling enabled?"
   inconsistent_state="true"
 fi
 
 # Remove the FijiMR profiling-enabled jar
-if [[ -f "${KIJI_HOME}/lib/${fiji_profiling_mr_jar_name}" ]]; then
+if [[ -f "${FIJI_HOME}/lib/${fiji_profiling_mr_jar_name}" ]]; then
   echo "Removing profile enabled fiji mapreduce jar..."
-  rm -f "${KIJI_HOME}/lib/${fiji_profiling_mr_jar_name}"
+  rm -f "${FIJI_HOME}/lib/${fiji_profiling_mr_jar_name}"
 else
-  echo "Did not find ${fiji_profiling_mr_jar_name} in ${KIJI_HOME}/lib. "
+  echo "Did not find ${fiji_profiling_mr_jar_name} in ${FIJI_HOME}/lib. "
   echo "Is profiling enabled?"
   inconsistent_state="true"
 fi
@@ -124,24 +124,24 @@ fi
 if [[ -d "${orig_dir}" ]]; then
   if [[ ! -f "${orig_dir}/${fiji_schema_jar_name}" ]]; then
     echo "Cannot find original schema jar in ${orig_dir}. " \
-      "Please move the jar ${fiji_schema_jar_name} to ${KIJI_HOME}/lib"
+      "Please move the jar ${fiji_schema_jar_name} to ${FIJI_HOME}/lib"
     inconsistent_state="true"
   else
-    echo "Moving ${orig_dir}/${fiji_schema_jar_name} to ${KIJI_HOME}/lib/ ..."
-    mv "${orig_dir}/${fiji_schema_jar_name}" "${KIJI_HOME}/lib/"
+    echo "Moving ${orig_dir}/${fiji_schema_jar_name} to ${FIJI_HOME}/lib/ ..."
+    mv "${orig_dir}/${fiji_schema_jar_name}" "${FIJI_HOME}/lib/"
   fi
 
   if [[ ! -f "${orig_dir}/${fiji_mr_jar_name}" ]]; then
     echo "Cannot find original mapreduce jar in ${orig_dir}. " \
-      "Please move the jar ${fiji_mr_jar_name} to ${KIJI_HOME}/lib"
+      "Please move the jar ${fiji_mr_jar_name} to ${FIJI_HOME}/lib"
     inconsistent_state="true"
   else
-    echo "Moving ${orig_dir}/${fiji_mr_jar_name} to ${KIJI_HOME}/lib/ ..."
-    mv "${orig_dir}/${fiji_mr_jar_name}" "${KIJI_HOME}/lib/"
+    echo "Moving ${orig_dir}/${fiji_mr_jar_name} to ${FIJI_HOME}/lib/ ..."
+    mv "${orig_dir}/${fiji_mr_jar_name}" "${FIJI_HOME}/lib/"
   fi
 else
   echo "Did not find ${orig_dir}. This may be because profiling was not enabled."
-  echo "Ensure that ${KIJI_HOME}/lib/ has the " \
+  echo "Ensure that ${FIJI_HOME}/lib/ has the " \
     "${fiji_schema_jar_name} and ${fiji_mr_jar_name} files."
   inconsistent_state="true"
 fi

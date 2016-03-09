@@ -350,10 +350,10 @@
 </div>
 <h3 id='compiling'>Compiling</h3>
 
-<p>If you have downloaded the standalone Fiji BentoBox, the code for this tutorial is already compiled and located in the <code>$KIJI_HOME/examples/music/</code> directory. Commands in this tutorial will depend on this location:</p>
+<p>If you have downloaded the standalone Fiji BentoBox, the code for this tutorial is already compiled and located in the <code>$FIJI_HOME/examples/music/</code> directory. Commands in this tutorial will depend on this location:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>MUSIC_HOME</span><span class='o'>=</span><span class='k'>${</span><span class='nv'>KIJI_HOME</span><span class='k'>}</span>/examples/music
+<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>MUSIC_HOME</span><span class='o'>=</span><span class='k'>${</span><span class='nv'>FIJI_HOME</span><span class='k'>}</span>/examples/music
 </code></pre></div>
 
 </div>
@@ -377,10 +377,10 @@
 
 <p>After Bento starts, it will display ports you will need to complete this tutorial. It will be useful to know the address of the MapReduce JobTracker webapp (<a href='http://localhost:50030'>http://localhost:50030</a> by default) while working through this tutorial.</p>
 
-<p>It will be useful to define an environment variable named <code>KIJI</code> that holds a Fiji URI to the Fiji instance we&#8217;ll use during this tutorial.</p>
+<p>It will be useful to define an environment variable named <code>FIJI</code> that holds a Fiji URI to the Fiji instance we&#8217;ll use during this tutorial.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>KIJI</span><span class='o'>=</span>fiji://.env/fiji_music
+<div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>FIJI</span><span class='o'>=</span>fiji://.env/fiji_music
 </code></pre></div>
 
 </div>
@@ -388,7 +388,7 @@
 <div class='userinput'>
 
 <div class='highlight'><pre><code class='bash'><span class='nb'>export </span><span class='nv'>LIBS_DIR</span><span class='o'>=</span><span class='nv'>$MUSIC_HOME</span>/lib
-<span class='nb'>export </span><span class='nv'>KIJI_CLASSPATH</span><span class='o'>=</span><span class='s2'>&quot;${LIBS_DIR}/*&quot;</span>
+<span class='nb'>export </span><span class='nv'>FIJI_CLASSPATH</span><span class='o'>=</span><span class='s2'>&quot;${LIBS_DIR}/*&quot;</span>
 </code></pre></div>
 
 </div>
@@ -397,7 +397,7 @@
 <p>Install your Fiji instance:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji install --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>
+<div class='highlight'><pre><code class='bash'>fiji install --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>
 </code></pre></div>
 
 </div>
@@ -409,7 +409,7 @@
   </div>
 </div><div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji-schema-shell --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span> --file<span class='o'>=</span><span class='nv'>$MUSIC_HOME</span>/music_schema.ddl
+<div class='highlight'><pre><code class='bash'>fiji-schema-shell --fiji<span class='o'>=</span><span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span> --file<span class='o'>=</span><span class='nv'>$MUSIC_HOME</span>/music_schema.ddl
 </code></pre></div>
 
 </div>

@@ -94,7 +94,7 @@
       <fileMode>0755</fileMode>
     </fileSet>
     <fileSet>
-      <!-- fiji-schema profiling binaries go in $KIJI_HOME/bin/profiling/ -->
+      <!-- fiji-schema profiling binaries go in $FIJI_HOME/bin/profiling/ -->
       <useDefaultExcludes>false</useDefaultExcludes>
       <outputDirectory>bin/profiling</outputDirectory>
       <directory>target/prereqs-dir/fiji-schema-${fiji-schema.version}/bin</directory>

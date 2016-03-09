@@ -126,8 +126,8 @@ Finally we create a flow that does the following:
 express.py job \
     --user-jar=${MUSIC_EXPRESS_HOME}/lib/fiji-express-music-2.0.1.jar \
     --job-name=org.fiji.express.music.SongRecommender --mode=hdfs \
-    --songs-table ${KIJI}/songs \
-    --users-table ${KIJI}/users
+    --songs-table ${FIJI}/songs \
+    --users-table ${FIJI}/users
 {% endhighlight %}
 </div>
 
@@ -137,7 +137,7 @@ You can verify the output by scanning the `users-table`.
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/users --max-rows=2
+fiji scan ${FIJI}/users --max-rows=2
 {% endhighlight %}
 </div>
 

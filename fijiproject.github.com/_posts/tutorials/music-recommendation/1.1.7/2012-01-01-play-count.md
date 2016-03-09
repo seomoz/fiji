@@ -212,7 +212,7 @@ local job runner. The resulting output sequence file is then validated.
 fiji gather \
     --gatherer=org.fiji.examples.music.gather.SongPlayCounter \
     --reducer=org.fiji.mapreduce.lib.reduce.LongSumReducer \
-    --input="format=fiji table=${KIJI}/users" \
+    --input="format=fiji table=${FIJI}/users" \
     --output="format=text file=output.txt_file nsplits=2" \
     --lib=${LIBS_DIR}
 {% endhighlight %}

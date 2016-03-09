@@ -141,7 +141,7 @@ public final class XmlKeyValueStoreParser {
 
           // If the store class string does not contain any package specification,
           // auto-append com.moz.fiji.mapreduce.kvstore.
-          // TODO(KIJI-364): Make this compatible with user-written kvstores that live
+          // TODO(FIJI-364): Make this compatible with user-written kvstores that live
           // in the default package. (Maybe try instantiating them first?)
           if (!storeClassStr.contains(".")) {
             // TODO: Make this a sane integration when these classes move to fiji-mr-lib

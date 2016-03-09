@@ -76,7 +76,7 @@ public class FijiTableStorageHandler extends DefaultStorageHandler {
    */
   private void configureFijiJobProperties(TableDesc tableDesc, Map<String, String> jobProperties) {
     final FijiURI fijiURI = FijiTableInfo.getURIFromProperties(tableDesc.getProperties());
-    jobProperties.put(FijiTableOutputFormat.CONF_KIJI_TABLE_URI, fijiURI.toString());
+    jobProperties.put(FijiTableOutputFormat.CONF_FIJI_TABLE_URI, fijiURI.toString());
 
     // We need to propagate the table name for the jobs to know which data request to use.
     final String tableName = tableDesc.getTableName();

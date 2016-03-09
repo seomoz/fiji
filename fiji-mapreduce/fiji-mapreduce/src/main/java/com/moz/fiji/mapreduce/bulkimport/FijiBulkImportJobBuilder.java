@@ -156,7 +156,7 @@ public final class FijiBulkImportJobBuilder
       throw new JobConfigurationException("Must specify a bulk importer.");
     }
     conf.setClass(
-        FijiConfKeys.KIJI_BULK_IMPORTER_CLASS, mBulkImporterClass, FijiBulkImporter.class);
+        FijiConfKeys.FIJI_BULK_IMPORTER_CLASS, mBulkImporterClass, FijiBulkImporter.class);
 
     mJobOutput.configure(job);
 

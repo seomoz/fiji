@@ -32,7 +32,7 @@ public final class FijiConfKeys {
   public static final String INPUT_TABLE_URI = "fiji.input.table.uri";
 
   /** URI of the output Fiji table to write to. */
-  public static final String OUTPUT_KIJI_TABLE_URI = "fiji.output.table.uri";
+  public static final String OUTPUT_FIJI_TABLE_URI = "fiji.output.table.uri";
 
   /** Serialized input data request. */
   public static final String INPUT_DATA_REQUEST = "fiji.input.request";

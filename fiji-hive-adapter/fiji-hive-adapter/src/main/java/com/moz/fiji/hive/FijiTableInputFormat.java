@@ -65,7 +65,7 @@ public class FijiTableInputFormat
     implements InputFormat<ImmutableBytesWritable, FijiRowDataWritable> {
   private static final Logger LOG = LoggerFactory.getLogger(FijiTableInputFormat.class);
 
-  public static final String CONF_KIJI_DATA_REQUEST_PREFIX = "fiji.data.request.";
+  public static final String CONF_FIJI_DATA_REQUEST_PREFIX = "fiji.data.request.";
 
   /**
    * Returns an object responsible for generating records contained in a
@@ -144,10 +144,10 @@ public class FijiTableInputFormat
    * @return The name of the fiji table this input format will read from.
    */
   private static FijiURI getFijiURI(Configuration conf) {
-    final String fijiURIString = conf.get(FijiTableInfo.KIJI_TABLE_URI);
+    final String fijiURIString = conf.get(FijiTableInfo.FIJI_TABLE_URI);
     if (null == fijiURIString) {
       throw new RuntimeException("FijiTableInputFormat needs to be configured. "
-          + "Please specify " + FijiTableInfo.KIJI_TABLE_URI + " in the configuration.");
+          + "Please specify " + FijiTableInfo.FIJI_TABLE_URI + " in the configuration.");
     }
     FijiURI fijiURI = FijiURI.newBuilder(fijiURIString).build();
     return fijiURI;

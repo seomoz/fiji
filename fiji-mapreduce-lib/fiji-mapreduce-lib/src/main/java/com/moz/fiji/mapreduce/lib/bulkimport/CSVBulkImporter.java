@@ -170,7 +170,7 @@ public final class CSVBulkImporter extends DescribedInputTextBulkImporter {
    * @return The EntityId for the data that gets imported by this line.
    */
   protected EntityId getEntityId(List<String> fields, FijiTableContext context) {
-    //TODO(KIJIMRLIB-3) Extend this to support composite row key ids
+    //TODO(FIJIMRLIB-3) Extend this to support composite row key ids
     String rowkey = fields.get(mFieldMap.get(getEntityIdSource()));
     return context.getEntityId(rowkey);
   }

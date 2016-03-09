@@ -326,7 +326,7 @@ one of `INT`, `BIGINT`, or `STRING`.
 In order for the Fiji Hive Adapter to write back to a Fiji table, we need to
 determine the row key to write back to.  Currently we use the notion of the
 EntityId's shell string(found in the Fiji CLI) to form the row key.  There is 
-a ticket(KIJIHIVE-30) to support building the EntityId from columns
+a ticket(FIJIHIVE-30) to support building the EntityId from columns
 representing each of the row key components.
 
 For writing to a writable Hive view of a table, it is required that all columns
@@ -335,7 +335,7 @@ only are writing a subset of columns, you will need to create another view
 that only contains the relevant columns(and the EntityId).
 
 Fiji Hive Adapter currently only supports write access with primitive types.
-Complex Avro records would involve work done on KIJIHIVE-31.  In addition, to
+Complex Avro records would involve work done on FIJIHIVE-31.  In addition, to
 determine the row key to write to(the Fiji EntityId), we require the use of the
 EntityId's shell string(which is the view presented within the Fiji CLI.
 

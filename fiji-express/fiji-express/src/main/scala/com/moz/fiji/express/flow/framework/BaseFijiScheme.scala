@@ -249,7 +249,7 @@ object BaseFijiScheme {
     rowRangeSpec.startEntityId match {
       case Some(entityId) =>
         conf.set(
-          FijiConfKeys.KIJI_START_ROW_KEY,
+          FijiConfKeys.FIJI_START_ROW_KEY,
           Base64.encodeBase64String(
             entityId.toJavaEntityId(eidFactory).getHBaseRowKey))
       case None => //Do Nothing
@@ -258,7 +258,7 @@ object BaseFijiScheme {
     rowRangeSpec.limitEntityId match {
       case Some(entityId) =>
         conf.set(
-          FijiConfKeys.KIJI_LIMIT_ROW_KEY,
+          FijiConfKeys.FIJI_LIMIT_ROW_KEY,
           Base64.encodeBase64String(
             entityId.toJavaEntityId(eidFactory).getHBaseRowKey))
       case None => //Do Nothing
@@ -266,7 +266,7 @@ object BaseFijiScheme {
     // Set row filter.
     rowFilterSpec.toFijiRowFilter match {
       case Some(fijiRowFilter) =>
-        conf.set(FijiConfKeys.KIJI_ROW_FILTER, fijiRowFilter.toJson.toString)
+        conf.set(FijiConfKeys.FIJI_ROW_FILTER, fijiRowFilter.toJson.toString)
       case None => //Do Nothing
     }
   }

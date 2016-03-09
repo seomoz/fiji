@@ -714,7 +714,7 @@ in a limited way using a KeyValueStoreReader.</p>
 <div class="highlight"><pre><code class="bash">fiji gather <span class="se">\</span>
     --gatherer<span class="o">=</span>org.fiji.examples.music.gather.SequentialPlayCounter <span class="se">\</span>
     --reducer<span class="o">=</span>org.fiji.examples.music.reduce.SequentialPlayCountReducer <span class="se">\</span>
-    --input<span class="o">=</span><span class="s2">&quot;format=fiji table=${KIJI}/users&quot;</span> <span class="se">\</span>
+    --input<span class="o">=</span><span class="s2">&quot;format=fiji table=${FIJI}/users&quot;</span> <span class="se">\</span>
     --output<span class="o">=</span><span class="s2">&quot;format=avrokv file=output.sequentialPlayCount nsplits=2&quot;</span> <span class="se">\</span>
     --lib<span class="o">=</span><span class="k">${</span><span class="nv">LIBS_DIR</span><span class="k">}</span>
 </code></pre></div>

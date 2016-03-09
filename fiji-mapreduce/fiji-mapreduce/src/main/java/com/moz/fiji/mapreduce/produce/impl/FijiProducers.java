@@ -52,7 +52,7 @@ public final class FijiProducers {
    */
   public static FijiProducer create(Configuration conf) throws IOException {
     final Class<? extends FijiProducer> producerClass =
-        conf.getClass(FijiConfKeys.KIJI_PRODUCER_CLASS, null, FijiProducer.class);
+        conf.getClass(FijiConfKeys.FIJI_PRODUCER_CLASS, null, FijiProducer.class);
     if (null == producerClass) {
       throw new IOException("Producer class could not be found in configuration.");
     }

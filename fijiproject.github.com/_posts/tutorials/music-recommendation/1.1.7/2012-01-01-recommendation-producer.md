@@ -57,7 +57,7 @@ implement KeyValueStoreClient. This interface requires that you implement getReq
 The value that you must return from getRequiredStores is a map from the name of a KeyValueStore to
 the default implementation.
 
-For reasons pertaining to [FijiMR-91](https://jira.fiji.org/browse/KIJIMR-91) we leave our default
+For reasons pertaining to [FijiMR-91](https://jira.fiji.org/browse/FIJIMR-91) we leave our default
 implementation unconfigured.
 
 {% highlight java %}
@@ -124,7 +124,7 @@ withStore() method of JobBuilders.
 When we run this example, we again need to specify which
 [`FijiTable`]({{site.api_schema_1_5_0}}/FijiTable.html) we want to use to back our
 KeyValueStore. This time, we will override the KeyValueStore binding from
-the command line using an XML configuration file (located at ${KIJI_HOME}/examples/music/KVStoreConfig.xml).
+the command line using an XML configuration file (located at ${FIJI_HOME}/examples/music/KVStoreConfig.xml).
 The contents of the file are displayed below. If you are not using BentoBox, you may need to modify this
 XML file so that the URI points to the songs table you would like to use.
 
@@ -154,8 +154,8 @@ Now, run the command:
 {% highlight bash %}
 fiji produce \
     --producer=org.fiji.examples.music.produce.NextSongRecommender \
-    --input="format=fiji table=${KIJI}/users" \
-    --output="format=fiji table=${KIJI}/users nsplits=2" \
+    --input="format=fiji table=${FIJI}/users" \
+    --output="format=fiji table=${FIJI}/users nsplits=2" \
     --lib=${LIBS_DIR} \
     --kvstores=${MUSIC_HOME}/KVStoreConfig.xml
 {% endhighlight %}
@@ -168,7 +168,7 @@ and the KeyValueStores are specified by the KVStoreConfig.xml file.
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/users/info:next_song_rec --max-rows=3
+fiji scan ${FIJI}/users/info:next_song_rec --max-rows=3
 {% endhighlight %}
 
 These are our recommendations for the next song to play for each user!

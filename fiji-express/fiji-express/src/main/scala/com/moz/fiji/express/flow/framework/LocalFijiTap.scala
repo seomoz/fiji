@@ -84,7 +84,7 @@ final private[express] class LocalFijiTap(
       flow: FlowProcess[Properties],
       conf: Properties) {
     // Store the input table.
-    conf.setProperty(FijiConfKeys.KIJI_INPUT_TABLE_URI, tableUri)
+    conf.setProperty(FijiConfKeys.FIJI_INPUT_TABLE_URI, tableUri)
 
     super.sourceConfInit(flow, conf)
   }
@@ -101,7 +101,7 @@ final private[express] class LocalFijiTap(
       flow: FlowProcess[Properties],
       conf: Properties) {
     // Store the output table.
-    conf.setProperty(FijiConfKeys.KIJI_OUTPUT_TABLE_URI, tableUri)
+    conf.setProperty(FijiConfKeys.FIJI_OUTPUT_TABLE_URI, tableUri)
 
     super.sinkConfInit(flow, conf)
   }

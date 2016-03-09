@@ -163,7 +163,7 @@ public final class FijiProduceJobBuilder extends FijiTableInputJobBuilder<FijiPr
     }
 
     // Serialize the producer class name into the job configuration.
-    conf.setClass(FijiConfKeys.KIJI_PRODUCER_CLASS, mProducerClass, FijiProducer.class);
+    conf.setClass(FijiConfKeys.FIJI_PRODUCER_CLASS, mProducerClass, FijiProducer.class);
 
     // Write to the table, but make sure the output table is the same as the input table.
     if (!getInputTableURI().equals(mJobOutput.getOutputTableURI())) {

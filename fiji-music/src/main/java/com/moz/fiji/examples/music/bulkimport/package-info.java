@@ -24,10 +24,10 @@
  * Bulk imports are run from the shell:
  * <pre>
  *   fiji bulk-import \
- *       --fiji=${KIJI} \
+ *       --fiji=${FIJI} \
  *       --importer=com.moz.fiji.examples.music.bulkimport.SongMetadataBulkImporter \
  *       --lib=lib/ \
- *       --output="format=fiji table=${KIJI}/songs nsplits=1" \
+ *       --output="format=fiji table=${FIJI}/songs nsplits=1" \
  *       --input="format=text file=${HDFS_ROOT}/fiji-mr-tutorial/song-metadata.json"
  * </pre>
  * </p>

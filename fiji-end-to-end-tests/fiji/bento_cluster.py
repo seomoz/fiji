@@ -121,8 +121,8 @@ class BentoCluster(object):
     """Fetches and installs the specified version of BentoCluster."""
     repo = maven_repo.MavenRepository(
         remotes=[
-            maven_repo.KIJI_PUBLIC_REPO,
-            maven_repo.KIJI_SNAPSHOT_REPO,
+            maven_repo.FIJI_PUBLIC_REPO,
+            maven_repo.FIJI_SNAPSHOT_REPO,
         ],
     )
     local_path = repo.Get(

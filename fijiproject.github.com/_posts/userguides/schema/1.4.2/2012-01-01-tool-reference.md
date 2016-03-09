@@ -505,7 +505,7 @@ plausible email addresses with gmail, hotmail, etc. accounts based on the
 generated names. These columns can be used with mappers and reducers.
 
 To use this tool, first create a table with the layout in
-`${KIJI_HOME}/examples/synthdata-layout.xml`.
+`${FIJI_HOME}/examples/synthdata-layout.xml`.
 Then invoke `bin/fiji synthesize-user-data --table=<table-uri>`.
 This will generate 100 rows of data.
 You can create a different number of records by specifying

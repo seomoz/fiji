@@ -32,7 +32,7 @@ express.py job -libjars=${MUSIC_EXPRESS_HOME}/lib/* \
     --user_jar=${MUSIC_EXPRESS_HOME}/lib/fiji-express-music-2.0.2.jar \
     --job-name=org.fiji.express.music.SongMetadataImporter --mode=hdfs \
     --input express-tutorial/song-metadata.json \
-    --table-uri ${KIJI}/songs
+    --table-uri ${FIJI}/songs
 {% endhighlight %}
 </div>
 
@@ -44,7 +44,7 @@ express.py job -libjars=${MUSIC_EXPRESS_HOME}/lib/* \
     --user-jar=${MUSIC_EXPRESS_HOME}/lib/fiji-express-music-2.0.2.jar \
     --job-name=org.fiji.express.music.SongPlaysImporter --mode=hdfs \
     --input express-tutorial/song-plays.json \
-    --table-uri ${KIJI}/users
+    --table-uri ${FIJI}/users
 {% endhighlight %}
 </div>
 
@@ -56,7 +56,7 @@ using the `fiji scan` command:
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/songs --max-rows=5
+fiji scan ${FIJI}/songs --max-rows=5
 {% endhighlight %}
 </div>
 
@@ -82,7 +82,7 @@ You should see something like:
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/users --max-rows=2 --max-versions=5
+fiji scan ${FIJI}/users --max-rows=2 --max-versions=5
 {% endhighlight %}
 </div>
 

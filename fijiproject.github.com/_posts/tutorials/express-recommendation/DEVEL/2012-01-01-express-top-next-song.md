@@ -186,8 +186,8 @@ To run the TopNextSongs job:
 express.py job --jars="${MUSIC_EXPRESS_HOME}/lib/*" \
     --class=org.fiji.express.music.TopNextSongs \
     --mode=hdfs \
-    --users-table ${KIJI}/users \
-    --songs-table ${KIJI}/songs
+    --users-table ${FIJI}/users \
+    --songs-table ${FIJI}/songs
 {% endhighlight %}
 </div>
 
@@ -197,7 +197,7 @@ To see the output from the job, run the following command if using an HBase-back
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/songs --max-rows=2
+fiji scan ${FIJI}/songs --max-rows=2
 {% endhighlight %}
 </div>
 
@@ -217,7 +217,7 @@ And if using a Cassandra-backed Fiji instance, run:
 
 <div class="userinput">
 {% highlight bash %}
-fiji get ${KIJI}/songs --entity-id="['song-32']"
+fiji get ${FIJI}/songs --entity-id="['song-32']"
 {% endhighlight %}
 </div>
 

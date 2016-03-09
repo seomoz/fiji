@@ -88,7 +88,7 @@ public final class MapReduceJobInputFactory {
       return MapReduceJobInputs.newWholeTextFileMapReduceJobInput();
     case SEQUENCE:
       return MapReduceJobInputs.newSequenceFileMapReduceJobInput();
-    // TODO(KIJIMR-61) Map file job input
+    // TODO(FIJIMR-61) Map file job input
     // case MAP_FILE:
     //   throw new IOException(String.format(
     //       "Map files are not supported as job input in spec '%s'.", ssm));
@@ -96,7 +96,7 @@ public final class MapReduceJobInputFactory {
       return MapReduceJobInputs.newAvroKeyMapReduceJobInput();
     case AVRO_KV:
       return MapReduceJobInputs.newAvroKeyValueMapReduceJobInput();
-    case KIJI:
+    case FIJI:
       return MapReduceJobInputs.newFijiTableMapReduceJobInput();
     case XML:
       return MapReduceJobInputs.newXMLMapReduceJobInput();

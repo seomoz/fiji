@@ -62,7 +62,7 @@ public class FijiTableRecordWriter
    */
   public FijiTableRecordWriter(Configuration conf)
       throws IOException {
-    String fijiURIString = conf.get(FijiTableOutputFormat.CONF_KIJI_TABLE_URI);
+    String fijiURIString = conf.get(FijiTableOutputFormat.CONF_FIJI_TABLE_URI);
     FijiURI fijiURI = FijiURI.newBuilder(fijiURIString).build();
     mFiji = Fiji.Factory.open(fijiURI);
     mFijiTable = mFiji.openTable(fijiURI.getTable());
@@ -84,7 +84,7 @@ public class FijiTableRecordWriter
     FijiRowDataWritable fijiRowDataWritable = (FijiRowDataWritable) writable;
     FijiTableLayout fijiTableLayout = mFijiTable.getLayout();
 
-    // TODO(KIJIHIVE-30) Process EntityId components here as well.
+    // TODO(FIJIHIVE-30) Process EntityId components here as well.
     EntityId entityId = ToolUtils.createEntityIdFromUserInputs(
         fijiRowDataWritable.getEntityId().toShellString(),
         fijiTableLayout);
@@ -122,7 +122,7 @@ public class FijiTableRecordWriter
           case MAP:
           case UNION:
           default:
-            // TODO(KIJIHIVE-31): Support the writing of some of these complex types.
+            // TODO(FIJIHIVE-31): Support the writing of some of these complex types.
             throw new UnsupportedOperationException("Unsupported type: " + schema.getType());
         }
       }

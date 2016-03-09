@@ -96,26 +96,26 @@ public final class FijiManagedHBaseTableName {
   private static final Joiner DELIMITER_JOINER = Joiner.on(DELIMITER);
 
   /** The first component of all HBase table names managed by Fiji. */
-  public static final String KIJI_COMPONENT = "fiji";
+  public static final String FIJI_COMPONENT = "fiji";
 
   /** Regexp matching Fiji system tables. */
-  public static final Pattern KIJI_SYSTEM_TABLES_REGEX =
+  public static final Pattern FIJI_SYSTEM_TABLES_REGEX =
       Pattern.compile("fiji[.](.*)[.](meta|system|schema_hash|schema_id)");
 
   /** The name component used for the Fiji meta table. */
-  private static final String KIJI_META_COMPONENT = "meta";
+  private static final String FIJI_META_COMPONENT = "meta";
 
   /** The name component used for the Fiji schema hash table. */
-  private static final String KIJI_SCHEMA_HASH_COMPONENT = "schema_hash";
+  private static final String FIJI_SCHEMA_HASH_COMPONENT = "schema_hash";
 
   /** The name component used for the Fiji schema IDs table. */
-  private static final String KIJI_SCHEMA_ID_COMPONENT = "schema_id";
+  private static final String FIJI_SCHEMA_ID_COMPONENT = "schema_id";
 
   /** The name component used for the Fiji system table. */
-  private static final String KIJI_SYSTEM_COMPONENT = "system";
+  private static final String FIJI_SYSTEM_COMPONENT = "system";
 
   /** The name component used for all user-space Fiji tables. */
-  private static final String KIJI_TABLE_COMPONENT = "table";
+  private static final String FIJI_TABLE_COMPONENT = "table";
 
   /** The HBase table name. */
   private final String mHBaseTableName;
@@ -133,7 +133,7 @@ public final class FijiManagedHBaseTableName {
    * @param type The type component of the HBase table name (meta, schema, system, table).
    */
   private FijiManagedHBaseTableName(String fijiInstanceName, String type) {
-    mHBaseTableName = DELIMITER_JOINER.join(KIJI_COMPONENT, fijiInstanceName, type);
+    mHBaseTableName = DELIMITER_JOINER.join(FIJI_COMPONENT, fijiInstanceName, type);
     mFijiInstanceName = fijiInstanceName;
     mFijiTableName = null;
   }
@@ -146,7 +146,7 @@ public final class FijiManagedHBaseTableName {
    * @param fijiTableName The name of the user-space Fiji table.
    */
   private FijiManagedHBaseTableName(String fijiInstanceName, String type, String fijiTableName) {
-    mHBaseTableName = DELIMITER_JOINER.join(KIJI_COMPONENT, fijiInstanceName, type, fijiTableName);
+    mHBaseTableName = DELIMITER_JOINER.join(FIJI_COMPONENT, fijiInstanceName, type, fijiTableName);
     mFijiInstanceName = fijiInstanceName;
     mFijiTableName = fijiTableName;
   }
@@ -165,7 +165,7 @@ public final class FijiManagedHBaseTableName {
         hbaseTableName, Character.toString(DELIMITER), 4);
 
     // Make sure the first component is 'fiji'.
-    if (!components[0].equals(KIJI_COMPONENT)) {
+    if (!components[0].equals(FIJI_COMPONENT)) {
       throw new NotAFijiManagedTableException(
           hbaseTableName, "Doesn't start with fiji name component.");
     }
@@ -190,7 +190,7 @@ public final class FijiManagedHBaseTableName {
    * @return The name of the HBase table used to store the Fiji meta table.
    */
   public static FijiManagedHBaseTableName getMetaTableName(String fijiInstanceName) {
-    return new FijiManagedHBaseTableName(fijiInstanceName, KIJI_META_COMPONENT);
+    return new FijiManagedHBaseTableName(fijiInstanceName, FIJI_META_COMPONENT);
   }
 
   /**
@@ -200,7 +200,7 @@ public final class FijiManagedHBaseTableName {
    * @return The name of the HBase table used to store the Fiji schema hash table.
    */
   public static FijiManagedHBaseTableName getSchemaHashTableName(String fijiInstanceName) {
-    return new FijiManagedHBaseTableName(fijiInstanceName, KIJI_SCHEMA_HASH_COMPONENT);
+    return new FijiManagedHBaseTableName(fijiInstanceName, FIJI_SCHEMA_HASH_COMPONENT);
   }
 
   /**
@@ -210,7 +210,7 @@ public final class FijiManagedHBaseTableName {
    * @return The name of the HBase table used to store the Fiji schema IDs table.
    */
   public static FijiManagedHBaseTableName getSchemaIdTableName(String fijiInstanceName) {
-    return new FijiManagedHBaseTableName(fijiInstanceName, KIJI_SCHEMA_ID_COMPONENT);
+    return new FijiManagedHBaseTableName(fijiInstanceName, FIJI_SCHEMA_ID_COMPONENT);
   }
 
   /**
@@ -220,7 +220,7 @@ public final class FijiManagedHBaseTableName {
    * @return The name of the HBase table used to store the Fiji system table.
    */
   public static FijiManagedHBaseTableName getSystemTableName(String fijiInstanceName) {
-    return new FijiManagedHBaseTableName(fijiInstanceName, KIJI_SYSTEM_COMPONENT);
+    return new FijiManagedHBaseTableName(fijiInstanceName, FIJI_SYSTEM_COMPONENT);
   }
 
   /**
@@ -232,7 +232,7 @@ public final class FijiManagedHBaseTableName {
    */
   public static FijiManagedHBaseTableName getFijiTableName(
       String fijiInstanceName, String fijiTableName) {
-    return new FijiManagedHBaseTableName(fijiInstanceName, KIJI_TABLE_COMPONENT, fijiTableName);
+    return new FijiManagedHBaseTableName(fijiInstanceName, FIJI_TABLE_COMPONENT, fijiTableName);
   }
 
   /**

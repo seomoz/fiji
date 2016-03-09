@@ -94,7 +94,7 @@ public class TestFijiRestEntityId {
     final String recoveredComponent = Bytes.toString(
         Bytes.toBytesBinary(
             resolvedEid.toShellString().substring(
-                ToolUtils.KIJI_ROW_KEY_SPEC_PREFIX.length())));
+                ToolUtils.FIJI_ROW_KEY_SPEC_PREFIX.length())));
     assertEquals(UNUSUAL_STRING_EID, recoveredComponent);
     assertEquals(resolvedEid, restEid4.resolve(layout));
   }
@@ -131,7 +131,7 @@ public class TestFijiRestEntityId {
     final String recoveredComponent = Bytes.toString(
         Bytes.toBytesBinary(
             resolvedEid.toShellString().substring(
-                ToolUtils.KIJI_ROW_KEY_SPEC_PREFIX.length())));
+                ToolUtils.FIJI_ROW_KEY_SPEC_PREFIX.length())));
     assertEquals(UNUSUAL_STRING_EID, recoveredComponent);
     assertEquals(resolvedEid, restEid4.resolve(layout));
   }

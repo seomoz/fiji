@@ -25,7 +25,7 @@ To use this tool to see freshening in action, run the following command:
 
 <div class="userinput">
 {% highlight bash %}
-fiji scoring-music --fiji=${KIJI}/users \
+fiji scoring-music --fiji=${FIJI}/users \
 --write-user=user-35 \
 --freshen-user=user-35
 {% endhighlight %}

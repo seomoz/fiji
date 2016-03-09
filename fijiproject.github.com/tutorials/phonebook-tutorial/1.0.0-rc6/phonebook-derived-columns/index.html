@@ -347,24 +347,24 @@
 <p>The run function begins by creating an HBase configuration, and configuring the MapReduce task. Note that we need to ship certain jars that we depend on during the <em>map</em> task. Here&#39;s how we do this:</p>
 <div class='highlight'><pre><code class='java'><span class='n'>GenericTableMapReduceUtil</span><span class='o'>.</span><span class='na'>addAllDependencyJars</span><span class='o'>(</span><span class='n'>job</span><span class='o'>);</span>
 <span class='n'>DistributedCacheJars</span><span class='o'>.</span><span class='na'>addJarsToDistributedCache</span><span class='o'>(</span><span class='n'>job</span><span class='o'>,</span>
-    <span class='k'>new</span> <span class='nf'>File</span><span class='o'>(</span><span class='n'>System</span><span class='o'>.</span><span class='na'>getenv</span><span class='o'>(</span><span class='s'>&quot;KIJI_HOME&quot;</span><span class='o'>),</span> <span class='s'>&quot;lib&quot;</span><span class='o'>));</span>
+    <span class='k'>new</span> <span class='nf'>File</span><span class='o'>(</span><span class='n'>System</span><span class='o'>.</span><span class='na'>getenv</span><span class='o'>(</span><span class='s'>&quot;FIJI_HOME&quot;</span><span class='o'>),</span> <span class='s'>&quot;lib&quot;</span><span class='o'>));</span>
 <span class='n'>job</span><span class='o'>.</span><span class='na'>setUserClassesTakesPrecedence</span><span class='o'>(</span><span class='kc'>true</span><span class='o'>);</span>
 </code></pre></div>
 <p>The AddressMapper extends Hadoop&#8217;s Mapper class. The map function is run per row of the Fiji table. It extracts the address field from each row as follows:</p>
 <div class='highlight'><pre><code class='java'><span class='kd'>final</span> <span class='n'>Address</span> <span class='n'>address</span> <span class='o'>=</span> <span class='n'>row</span><span class='o'>.</span><span class='na'>getMostRecentValue</span><span class='o'>(</span><span class='n'>Fields</span><span class='o'>.</span><span class='na'>INFO_FAMILY</span><span class='o'>,</span> <span class='n'>Fields</span><span class='o'>.</span><span class='na'>ADDRESS</span><span class='o'>);</span>
 </code></pre></div>
-<p>Address is the same Avro type you read about on the <a href='../phonebook-import/'>Phonebook Importer</a> page. The JSON description for it can be found at <code>$KIJI_HOME/examples/phonebook/src/main/avro/Address.avsc</code>. More information about Avro types can be found <a href='http://avro.apache.org/docs/current/spec.html'>here</a>.</p>
+<p>Address is the same Avro type you read about on the <a href='../phonebook-import/'>Phonebook Importer</a> page. The JSON description for it can be found at <code>$FIJI_HOME/examples/phonebook/src/main/avro/Address.avsc</code>. More information about Avro types can be found <a href='http://avro.apache.org/docs/current/spec.html'>here</a>.</p>
 
 <p>We decompose and write the individual fields into a derived column using <code>mWriter.put(...)</code>. For example, the zip code can be extracted from the Address object and written as follows:</p>
 <div class='highlight'><pre><code class='java'><span class='n'>mWriter</span><span class='o'>.</span><span class='na'>put</span><span class='o'>(</span><span class='n'>entityId</span><span class='o'>,</span> <span class='n'>Fields</span><span class='o'>.</span><span class='na'>DERIVED_FAMILY</span><span class='o'>,</span> <span class='n'>Fields</span><span class='o'>.</span><span class='na'>ZIP</span><span class='o'>,</span> <span class='n'>address</span><span class='o'>.</span><span class='na'>getZip</span><span class='o'>());</span>
 </code></pre></div>
 <h3 id='running_the_example'>Running the Example</h3>
 
-<p>We assume that you have already imported the contacts from <code>$KIJI_HOME/examples/phonebook/input-data.txt</code> into the phonebook Fiji table by this point. You can execute this example using the <code>fiji jar</code> command with the class name:</p>
+<p>We assume that you have already imported the contacts from <code>$FIJI_HOME/examples/phonebook/input-data.txt</code> into the phonebook Fiji table by this point. You can execute this example using the <code>fiji jar</code> command with the class name:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
-    <span class='nv'>$KIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc6.jar <span class='se'>\</span>
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji jar <span class='se'>\</span>
+    <span class='nv'>$FIJI_HOME</span>/examples/phonebook/lib/fiji-phonebook-1.0.0-rc6.jar <span class='se'>\</span>
     org.fiji.examples.phonebook.AddressFieldExtractor
 </code></pre></div>
 
@@ -374,7 +374,7 @@
 <p>You can use the following command to see if your contacts&#8217; address data was successfully extracted:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook/derived
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji scan fiji://.env/default/phonebook/derived
 </code></pre></div>
 
 </div>

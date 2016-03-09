@@ -227,7 +227,7 @@ public class TestFijiGatherJobBuilder extends FijiClientTest {
     // TODO: Verify that the MR Job was configured correctly.
     final Job job = gatherJob.getHadoopJob();
     final Configuration conf = job.getConfiguration();
-    assertEquals(SimpleGatherer.class.getName(), conf.get(FijiConfKeys.KIJI_GATHERER_CLASS));
+    assertEquals(SimpleGatherer.class.getName(), conf.get(FijiConfKeys.FIJI_GATHERER_CLASS));
     assertEquals(MyCombiner.class, job.getCombinerClass());
     assertEquals(MyReducer.class, job.getReducerClass());
   }
@@ -244,7 +244,7 @@ public class TestFijiGatherJobBuilder extends FijiClientTest {
 
     final Job job = gatherJob.getHadoopJob();
     final Configuration conf = job.getConfiguration();
-    assertEquals(GatherToHFile.class.getName(), conf.get(FijiConfKeys.KIJI_GATHERER_CLASS));
+    assertEquals(GatherToHFile.class.getName(), conf.get(FijiConfKeys.FIJI_GATHERER_CLASS));
     assertEquals(null, job.getCombinerClass());
     assertEquals(IdentityReducer.class, job.getReducerClass());
     assertEquals(10, job.getNumReduceTasks());
@@ -266,7 +266,7 @@ public class TestFijiGatherJobBuilder extends FijiClientTest {
 
     final Job job = gatherJob.getHadoopJob();
     final Configuration conf = job.getConfiguration();
-    assertEquals(SimpleGatherer.class.getName(), conf.get(FijiConfKeys.KIJI_GATHERER_CLASS));
+    assertEquals(SimpleGatherer.class.getName(), conf.get(FijiConfKeys.FIJI_GATHERER_CLASS));
     assertEquals(null, job.getCombinerClass());
     assertEquals(ReducerToHFile.class, job.getReducerClass());
     assertEquals(10, job.getNumReduceTasks());

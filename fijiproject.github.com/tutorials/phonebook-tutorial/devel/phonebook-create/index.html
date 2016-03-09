@@ -205,14 +205,14 @@ and most well-supported mechanism to use; we will introduce it first.</p>
 <p>We assume that you have <code>fiji-schema-shell</code> installed. If not, you should
 consult the <a href="http://www.fiji.org/getstarted">Get Started</a> section of the Fiji website.</p>
 
-<p>We have provided the phonebook layout in the <code>$KIJI_HOME/examples/phonebook/layout.ddl</code> file.
+<p>We have provided the phonebook layout in the <code>$FIJI_HOME/examples/phonebook/layout.ddl</code> file.
 For more information about how to create this file, see the
 <a href="/userguides/schema/devel/schema-shell-ddl-ref/">DDL Shell Reference</a>.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/schema-shell/bin/fiji-schema-shell <span class="se">\</span>
-    --file<span class="o">=</span><span class="nv">$KIJI_HOME</span>/examples/phonebook/layout.ddl
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/schema-shell/bin/fiji-schema-shell <span class="se">\</span>
+    --file<span class="o">=</span><span class="nv">$FIJI_HOME</span>/examples/phonebook/layout.ddl
 </code></pre></div>
 
 </div>
@@ -227,7 +227,7 @@ For more information about how to create this file, see the
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/schema-shell/bin/fiji-schema-shell
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/schema-shell/bin/fiji-schema-shell
 </code></pre></div>
 
 </div>
@@ -351,7 +351,7 @@ another time using JSON. Use the following command to delete the table:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji delete --target<span class="o">=</span><span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/phonebook
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji delete --target<span class="o">=</span><span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/phonebook
 </code></pre></div>
 
 </div>
@@ -367,12 +367,12 @@ Fiji table 'fiji://localhost:2181/phonebook/phonebook/' deleted.
 </code></pre>
 
 <p>The command below creates the same phonebook table with the layout specified in the <code>layout.json</code> file in your
-<code>$KIJI_HOME/examples/phonebook</code> directory.</p>
+<code>$FIJI_HOME/examples/phonebook</code> directory.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji create-table --table<span class="o">=</span><span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/phonebook <span class="se">\</span>
-    --layout<span class="o">=</span><span class="nv">$KIJI_HOME</span>/examples/phonebook/layout.json
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji create-table --table<span class="o">=</span><span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/phonebook <span class="se">\</span>
+    --layout<span class="o">=</span><span class="nv">$FIJI_HOME</span>/examples/phonebook/layout.json
 </code></pre></div>
 
 </div>
@@ -380,7 +380,7 @@ Fiji table 'fiji://localhost:2181/phonebook/phonebook/' deleted.
 
 
 
-<div class="highlight"><pre><code class="bash">Parsing table layout: <span class="nv">$KIJI_HOME</span>/examples/phonebook/layout.json
+<div class="highlight"><pre><code class="bash">Parsing table layout: <span class="nv">$FIJI_HOME</span>/examples/phonebook/layout.json
 Creating Fiji table: fiji://localhost:2181/phonebook/phonebook/
 </code></pre></div>
 
@@ -392,7 +392,7 @@ tables in your Fiji instance.</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash"><span class="nv">$KIJI_HOME</span>/bin/fiji ls <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>
+<div class="highlight"><pre><code class="bash"><span class="nv">$FIJI_HOME</span>/bin/fiji ls <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>
 </code></pre></div>
 
 </div>

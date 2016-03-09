@@ -52,7 +52,7 @@ RUNNING:
 
   To run this example, you will need to configure Fiji ${project.version},
 HBase, and Hadoop from CDH4. The commands in this section refer to the
-'fiji' executable; you will need $KIJI_HOME/bin in your path for this to
+'fiji' executable; you will need $FIJI_HOME/bin in your path for this to
 work as-is.
 
   If you haven't already done so, run 'fiji install' to create the Fiji

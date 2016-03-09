@@ -32,8 +32,8 @@ If you are using a bento box, you may have to first set your classpath to whatev
 these commands:
 
 ```bash
-KIJI_CP=$(fiji classpath)
-$ java -cp ${KIJI_CP}:'lib/*' org.fiji.rest.load_test.RandomDataGenerator fiji://.env/loadtesting
+FIJI_CP=$(fiji classpath)
+$ java -cp ${FIJI_CP}:'lib/*' org.fiji.rest.load_test.RandomDataGenerator fiji://.env/loadtesting
 ```
 
 You may also want to turn off request logging in FijiREST.  To do so, edit your FijiREST

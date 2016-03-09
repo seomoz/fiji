@@ -98,9 +98,9 @@ public final class GatherMapper<K, V>
     @SuppressWarnings("unchecked")
     Class<? extends FijiGatherer<K, V>> gatherClass =
         (Class<? extends FijiGatherer<K, V>>)
-        conf.getClass(FijiConfKeys.KIJI_GATHERER_CLASS, null, FijiGatherer.class);
+        conf.getClass(FijiConfKeys.FIJI_GATHERER_CLASS, null, FijiGatherer.class);
     if (null == gatherClass) {
-      LOG.error("Null " + FijiConfKeys.KIJI_GATHERER_CLASS + " in createGatherer()?");
+      LOG.error("Null " + FijiConfKeys.FIJI_GATHERER_CLASS + " in createGatherer()?");
       return null;
     }
     return ReflectionUtils.newInstance(gatherClass, conf);

@@ -357,7 +357,7 @@
 <div class='highlight'><pre><code class='bash'>fiji bulk-import
 -Dfiji.import.text.input.descriptor.path<span class='o'>=</span>express-tutorial/song-plays-import-descriptor.json
 --importer<span class='o'>=</span>org.fiji.mapreduce.lib.bulkimport.JSONBulkImporter
---output<span class='o'>=</span><span class='s2'>&quot;format=fiji table=${KIJI}/users nsplits=1&quot;</span>     --input<span class='o'>=</span><span class='s2'>&quot;format=text</span>
+--output<span class='o'>=</span><span class='s2'>&quot;format=fiji table=${FIJI}/users nsplits=1&quot;</span>     --input<span class='o'>=</span><span class='s2'>&quot;format=text</span>
 <span class='s2'>file=express-tutorial/song-plays.json&quot;</span>     --lib<span class='o'>=</span><span class='k'>${</span><span class='nv'>LIBS_DIR</span><span class='k'>}</span>
 </code></pre></div>
 
@@ -375,7 +375,7 @@
     <span class='k'>${</span><span class='nv'>MUSIC_EXPRESS_HOME</span><span class='k'>}</span>/lib/fiji-express-music-0.4.0.jar <span class='se'>\</span>
     org.fiji.express.music.SongMetadataImporter <span class='se'>\</span>
     --input express-tutorial/song-metadata.json <span class='se'>\</span>
-    --table-uri <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/songs --hdfs
+    --table-uri <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/songs --hdfs
 </code></pre></div>
 
 </div>
@@ -384,7 +384,7 @@
 <p>After running the importer, you can verify that the Fiji table <code>songs</code> contains the imported data using the <code>fiji scan</code> command.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/songs --max-rows<span class='o'>=</span>5
+<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/songs --max-rows<span class='o'>=</span>5
 </code></pre></div>
 
 </div>
@@ -409,7 +409,7 @@ entity-id=[&#39;song-8&#39;] [1365548282382] info:metadata
 <p>We can also use the <code>fiji scan</code> command to verify the users table import was successful.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>KIJI</span><span class='k'>}</span>/users --max-rows<span class='o'>=</span>2 --max-versions<span class='o'>=</span>5
+<div class='highlight'><pre><code class='bash'>fiji scan <span class='k'>${</span><span class='nv'>FIJI</span><span class='k'>}</span>/users --max-rows<span class='o'>=</span>2 --max-versions<span class='o'>=</span>5
 </code></pre></div>
 
 </div>

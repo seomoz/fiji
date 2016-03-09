@@ -18,15 +18,15 @@ and most well-supported mechanism to use; we will introduce it first.
 We assume that you have `fiji-schema-shell` installed. If not, you should
 consult the [Get Started](http://www.fiji.org/getstarted) section of the Fiji website.
 
-We have provided the phonebook layout in the `$KIJI_HOME/examples/phonebook/layout.ddl` file.
+We have provided the phonebook layout in the `$FIJI_HOME/examples/phonebook/layout.ddl` file.
 For more information about how to create this file, see the
 [DDL Shell Reference]({{site.userguide_schema_devel}}/schema-shell-ddl-ref/).
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/schema-shell/bin/fiji-schema-shell \
-    --fiji=${KIJI} \
-    --file=${KIJI_HOME}/examples/phonebook/layout.ddl
+$FIJI_HOME/schema-shell/bin/fiji-schema-shell \
+    --fiji=${FIJI} \
+    --file=${FIJI_HOME}/examples/phonebook/layout.ddl
 {% endhighlight %}
 </div>
 
@@ -37,7 +37,7 @@ Enter the FijiSchema shell using the following command:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/schema-shell/bin/fiji-schema-shell
+$FIJI_HOME/schema-shell/bin/fiji-schema-shell
 {% endhighlight %}
 </div>
 
@@ -152,7 +152,7 @@ another time using JSON. Use the following command to delete the table:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji delete --target=${KIJI}/phonebook
+$FIJI_HOME/bin/fiji delete --target=${FIJI}/phonebook
 {% endhighlight %}
 </div>
 
@@ -165,17 +165,17 @@ $KIJI_HOME/bin/fiji delete --target=${KIJI}/phonebook
     Fiji table 'fiji://localhost:2181/phonebook/phonebook/' deleted.
 
 The command below creates the same phonebook table with the layout specified in the `layout.json` file in your
-`$KIJI_HOME/examples/phonebook` directory.
+`$FIJI_HOME/examples/phonebook` directory.
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji create-table --table=${KIJI}/phonebook \
-    --layout=$KIJI_HOME/examples/phonebook/layout.json
+$FIJI_HOME/bin/fiji create-table --table=${FIJI}/phonebook \
+    --layout=$FIJI_HOME/examples/phonebook/layout.json
 {% endhighlight %}
 </div>
 
 {% highlight bash %}
-Parsing table layout: $KIJI_HOME/examples/phonebook/layout.json
+Parsing table layout: $FIJI_HOME/examples/phonebook/layout.json
 Creating Fiji table: fiji://localhost:2181/phonebook/phonebook/
 {% endhighlight %}
 
@@ -187,7 +187,7 @@ tables in your Fiji instance.
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji ls ${KIJI}
+$FIJI_HOME/bin/fiji ls ${FIJI}
 {% endhighlight %}
 </div>
 

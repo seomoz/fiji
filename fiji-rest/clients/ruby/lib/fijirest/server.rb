@@ -24,11 +24,11 @@ module FijiRest
 
   # Class that wraps the starting/stopping of a FijiREST server.
   # assumes that this is running as a non-privileged user that
-  # has permissions to read/write to the location where KIJI_REST is
+  # has permissions to read/write to the location where FIJI_REST is
   # installed
   class Server
-    KIJI_REST_HOME = "/opt/wibi/fiji-rest"
-    def initialize(fiji_rest_home = KIJI_REST_HOME)
+    FIJI_REST_HOME = "/opt/wibi/fiji-rest"
+    def initialize(fiji_rest_home = FIJI_REST_HOME)
       @fiji_server_location = fiji_rest_home
       unless authorized_to_run?
         raise "#{ENV['USER']} not authorized to run FijiREST server!"

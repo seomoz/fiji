@@ -33,7 +33,7 @@ express.py job --jars="${MUSIC_EXPRESS_HOME}/lib/*" \
     --class=org.fiji.express.music.SongMetadataImporter \
     --mode=hdfs \
     --input express-tutorial/song-metadata.json \
-    --table-uri ${KIJI}/songs
+    --table-uri ${FIJI}/songs
 {% endhighlight %}
 </div>
 
@@ -47,7 +47,7 @@ express.py job --jars="${MUSIC_EXPRESS_HOME}/lib/*" \
     --class=org.fiji.express.music.SongPlaysImporter \
     --mode=hdfs \
     --input express-tutorial/song-plays.json \
-    --table-uri ${KIJI}/users
+    --table-uri ${FIJI}/users
 {% endhighlight %}
 </div>
 
@@ -59,7 +59,7 @@ are using an HBase-backed Fiji instance, run the `fiji scan` command:
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/songs --max-rows=5
+fiji scan ${FIJI}/songs --max-rows=5
 {% endhighlight %}
 </div>
 
@@ -83,7 +83,7 @@ You should see something like:
 
 <div class="userinput">
 {% highlight bash %}
-fiji scan ${KIJI}/users --max-rows=2 --max-versions=5
+fiji scan ${FIJI}/users --max-rows=2 --max-versions=5
 {% endhighlight %}
 </div>
 
@@ -115,7 +115,7 @@ individual records are present:
 
 <div class="userinput">
 {% highlight bash %}
-fiji get ${KIJI}/songs --entity-id="['song-49']"
+fiji get ${FIJI}/songs --entity-id="['song-49']"
 {% endhighlight %}
 </div>
 
@@ -125,7 +125,7 @@ fiji get ${KIJI}/songs --entity-id="['song-49']"
 
 <div class="userinput">
 {% highlight bash %}
-fiji get ${KIJI}/users --entity-id="['user-2']"
+fiji get ${FIJI}/users --entity-id="['user-2']"
 {% endhighlight %}
 </div>
 

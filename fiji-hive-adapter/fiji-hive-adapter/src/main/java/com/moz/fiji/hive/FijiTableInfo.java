@@ -38,7 +38,7 @@ import com.moz.fiji.schema.util.ResourceUtils;
  * Contains all the information about a fiji table relevant to using hive.
  */
 public class FijiTableInfo implements Closeable {
-  public static final String KIJI_TABLE_URI = "fiji.table.uri";
+  public static final String FIJI_TABLE_URI = "fiji.table.uri";
 
   private final FijiURI mFijiURI;
 
@@ -60,7 +60,7 @@ public class FijiTableInfo implements Closeable {
    * @return FijiURI extracted from the passed in properties.
    */
   public static FijiURI getURIFromProperties(Properties properties) {
-    String fijiURIString = properties.getProperty(KIJI_TABLE_URI);
+    String fijiURIString = properties.getProperty(FIJI_TABLE_URI);
     //TODO Pretty exceptions for URI parser issues.
     FijiURI fijiURI = FijiURI.newBuilder(fijiURIString).build();
 

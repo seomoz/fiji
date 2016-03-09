@@ -42,33 +42,33 @@ Unpack the Bento Box:
 
     tar -zxvf cassandra-bento.tar.gz
 
-Set your `KIJI_HOME` environment variable to the root of your Bento Box:
+Set your `FIJI_HOME` environment variable to the root of your Bento Box:
 
-    export KIJI_HOME=/path/to/fiji-bento-ebi
+    export FIJI_HOME=/path/to/fiji-bento-ebi
 
 Create an environment variable to use for our Fiji URI:
 
-    export KIJI=fiji-cassandra://localhost:2181/localhost/9042/tutorial
+    export FIJI=fiji-cassandra://localhost:2181/localhost/9042/tutorial
 
 Because this URI starts with `fiji-cassandra://` instead of just `fiji://`, it indicates to Fiji
 that it references a Cassandra-backed Fiji instance.
 
-The source code for this example is located in `$KIJI_HOME/examples/cassandra-phonebook.`  This
+The source code for this example is located in `$FIJI_HOME/examples/cassandra-phonebook.`  This
 tutorial assumes that you will use the prebuilt JARs located in
-`$KIJI_HOME/examples/cassandra-phonebook/lib`, however you can build your own in
-`$KIJI_HOME/examples/cassandra-phonebook/target` by running `mvn package` from
-`$KIJI_HOME/examples/cassandra-phonebook`
+`$FIJI_HOME/examples/cassandra-phonebook/lib`, however you can build your own in
+`$FIJI_HOME/examples/cassandra-phonebook/target` by running `mvn package` from
+`$FIJI_HOME/examples/cassandra-phonebook`
 
 To work through this tutorial, various Fiji tools will require that Avro data type definitions
 particular to the working phonebook example be on the classpath. You can add your artifacts to the
 Fiji classpath by running:
 
-    export KIJI_CLASSPATH="$KIJI_HOME/examples/cassandra-phonebook/lib/*"
+    export FIJI_CLASSPATH="$FIJI_HOME/examples/cassandra-phonebook/lib/*"
 
 Now we are ready to start up our Bento Box.  The following command will create a cluster running
 Hadoop, ZooKeeper, HBase, and Cassandra:
 
-    source ${KIJI_HOME}/bin/fiji-env.sh
+    source ${FIJI_HOME}/bin/fiji-env.sh
     bento start
 
 
@@ -77,7 +77,7 @@ Create a Fiji instance
 
 Now that our Bento Box is up and running, let's create a Fiji instance:
 
-    fiji install --fiji=${KIJI}
+    fiji install --fiji=${FIJI}
 
 Executing the command should produce the following output:
 
@@ -91,15 +91,15 @@ We need to create a table to store your numerous phonebook contacts. To create a
 specify a layout and register it with Fiji.  We can specify layouts using JSON or the Fiji Data
 Definition Language, DDL.  For this tutorial, we create a table with JSON:
 
-    $KIJI_HOME/bin/fiji create-table --table=${KIJI}/phonebook --layout=$KIJI_HOME/examples/phonebook/layout.json
+    $FIJI_HOME/bin/fiji create-table --table=${FIJI}/phonebook --layout=$FIJI_HOME/examples/phonebook/layout.json
 
 Most users should instead use the Fiji schema shell and DDL for creating tables, but the
 Cassandra version of the schema shell is not yet complete.
 
 After creating the table, we can verify that it exists.  Run the `fiji ls` command to see all of the
-tables in our `$KIJI` Fiji instance:
+tables in our `$FIJI` Fiji instance:
 
-    fiji ls ${KIJI}
+    fiji ls ${FIJI}
 
 You should see the following:
 
@@ -172,7 +172,7 @@ performs reference counting to determine when to actually close resources.
 
 You can run the `AddEntry` class on the command line as follows:
 
-    fiji jar $KIJI_HOME/examples/cassandra-phonebook/lib/fiji-phonebook-1.1.5-SNAPSHOT.jar \
+    fiji jar $FIJI_HOME/examples/cassandra-phonebook/lib/fiji-phonebook-1.1.5-SNAPSHOT.jar \
         org.fiji.examples.phonebook.AddEntry
 
 This syntax is the preferred mechanism for running your own `main(...)` methods with Fiji and its
@@ -195,7 +195,7 @@ The interactive prompts and reponses should look like the following:
 
 Now let's verify that our entry is present in the phonebook with Fiji scan:
 
-    fiji scan $KIJI/phonebook
+    fiji scan $FIJI/phonebook
 
 You should see a result like the following:
 
@@ -258,12 +258,12 @@ We now retrieve our result by passing the EntityId and data request to our table
 
 You can run the following command to perform a lookup using the Lookup.java example:
 
-    fiji jar $KIJI_HOME/examples/cassandra-phonebook/lib/fiji-phonebook-1.1.5-SNAPSHOT.jar \
+    fiji jar $FIJI_HOME/examples/cassandra-phonebook/lib/fiji-phonebook-1.1.5-SNAPSHOT.jar \
         org.fiji.examples.phonebook.Lookup --first=John --last=Doe
 
 Or use a Fiji command-line get:
 
-    fiji get $KIJI/phonebook --entity-id="['John,Doe']"
+    fiji get $FIJI/phonebook --entity-id="['John,Doe']"
 
 ### Deleting an Entry
 A `FijiTableWriter` is used to perform point deletions on a Fiji table:
@@ -276,7 +276,7 @@ A `FijiTableWriter` is used to perform point deletions on a Fiji table:
 Run the `DeleteEntry` class from the command line:
 
 
-    fiji jar $KIJI_HOME/examples/cassandra-phonebook/lib/fiji-phonebook-1.1.5-SNAPSHOT.jar \
+    fiji jar $FIJI_HOME/examples/cassandra-phonebook/lib/fiji-phonebook-1.1.5-SNAPSHOT.jar \
       org.fiji.examples.phonebook.DeleteEntry
 
 and enter the user you wish to remove:
@@ -287,7 +287,7 @@ and enter the user you wish to remove:
 
 Now check the user has been removed:
 
-    fiji get $KIJI/phonebook --entity-id="['John,Doe']"
+    fiji get $FIJI/phonebook --entity-id="['John,Doe']"
 
 Wrapping up
 -----------

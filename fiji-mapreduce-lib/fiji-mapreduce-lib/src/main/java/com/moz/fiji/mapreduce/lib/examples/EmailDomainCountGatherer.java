@@ -38,7 +38,7 @@ import com.moz.fiji.schema.FijiRowData;
  * <p>To run this from the command line:<p>
  *
  * <pre>
- * $ $KIJI_HOME/bin/fiji gather \
+ * $ $FIJI_HOME/bin/fiji gather \
  * &gt;   --input=fiji:tablename \
  * &gt;   --gatherer=com.moz.fiji.mapreduce.lib.examples.EmailDomainCountGatherer \
  * &gt;   --reducer=com.moz.fiji.mapreduce.lib.reduce.IntSumReducer \

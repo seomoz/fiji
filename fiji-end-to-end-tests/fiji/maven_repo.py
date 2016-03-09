@@ -27,9 +27,9 @@ class Error(Exception):
 # ------------------------------------------------------------------------------
 
 
-KIJI_PUBLIC_REPO = 'https://repo.wibidata.com/artifactory/fiji-packages'
-KIJI_SNAPSHOT_REPO = 'https://repo.wibidata.com/artifactory/fiji-nightly'
-KIJI_ALL_REPO = 'https://repo.wibidata.com/artifactory/all'
+FIJI_PUBLIC_REPO = 'https://repo.wibidata.com/artifactory/fiji-packages'
+FIJI_SNAPSHOT_REPO = 'https://repo.wibidata.com/artifactory/fiji-nightly'
+FIJI_ALL_REPO = 'https://repo.wibidata.com/artifactory/all'
 CLOUDERA_REPO = 'https://repository.cloudera.com/artifactory/cloudera-repos'
 MAVEN_CENTRAL_REPO = 'http://repo.maven.apache.org/maven2'
 

@@ -152,7 +152,7 @@ public final class HFileMapReduceJobOutput extends FijiTableMapReduceJobOutput {
 
     // Fiji table context:
     conf.setClass(
-        FijiConfKeys.KIJI_TABLE_CONTEXT_CLASS,
+        FijiConfKeys.FIJI_TABLE_CONTEXT_CLASS,
         HFileWriterContext.class,
         FijiTableContext.class);
 

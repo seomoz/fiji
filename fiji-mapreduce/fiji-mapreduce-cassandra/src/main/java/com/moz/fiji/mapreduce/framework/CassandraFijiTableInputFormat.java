@@ -99,7 +99,7 @@ public final class CassandraFijiTableInputFormat
   public List<InputSplit> getSplits(JobContext context) throws IOException {
     final Configuration conf = context.getConfiguration();
     final CassandraFijiURI inputTableURI =
-        CassandraFijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_INPUT_TABLE_URI)).build();
+        CassandraFijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_INPUT_TABLE_URI)).build();
     final Fiji fiji = Fiji.Factory.open(inputTableURI);
     try {
       final FijiTable table = fiji.openTable(inputTableURI.getTable());
@@ -198,7 +198,7 @@ public final class CassandraFijiTableInputFormat
      */
     CassandraFijiTableRecordReader(Configuration conf) {
       // Get data request from the job configuration.
-      final String dataRequestB64 = conf.get(FijiConfKeys.KIJI_INPUT_DATA_REQUEST);
+      final String dataRequestB64 = conf.get(FijiConfKeys.FIJI_INPUT_DATA_REQUEST);
       Preconditions.checkNotNull(dataRequestB64, "Missing data request in job configuration.");
       final byte[] dataRequestBytes = Base64.decodeBase64(Bytes.toBytes(dataRequestB64));
       mDataRequest = (FijiDataRequest) SerializationUtils.deserialize(dataRequestBytes);
@@ -226,7 +226,7 @@ public final class CassandraFijiTableInputFormat
       assert(mTokenRangeIterator.hasNext());
 
       final FijiURI inputURI =
-          FijiURI.newBuilder(conf.get(FijiConfKeys.KIJI_INPUT_TABLE_URI)).build();
+          FijiURI.newBuilder(conf.get(FijiConfKeys.FIJI_INPUT_TABLE_URI)).build();
 
       // TODO: Not sure if we need this...
       // Extract the ColumnReaderSpecs and build a mapping from column to the appropriate overrides.

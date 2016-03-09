@@ -361,11 +361,11 @@
 
 <p>We assume that you have <code>fiji-schema-shell</code> installed. If not, you should consult the <a href='http://www.fiji.org/getstarted'>Get Started</a> section of the Fiji website.</p>
 
-<p>We have provided the phonebook layout in the <code>$KIJI_HOME/examples/phonebook/layout.ddl</code> file. For more information about how to create this file, see the <a href='/userguides/schema/1.0.0-rc4/schema-shell-ddl-ref/'>DDL Shell Reference</a>.</p>
+<p>We have provided the phonebook layout in the <code>$FIJI_HOME/examples/phonebook/layout.ddl</code> file. For more information about how to create this file, see the <a href='/userguides/schema/1.0.0-rc4/schema-shell-ddl-ref/'>DDL Shell Reference</a>.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/schema-shell/bin/fiji-schema-shell <span class='se'>\</span>
-    --file<span class='o'>=</span><span class='nv'>$KIJI_HOME</span>/examples/phonebook/layout.ddl
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/schema-shell/bin/fiji-schema-shell <span class='se'>\</span>
+    --file<span class='o'>=</span><span class='nv'>$FIJI_HOME</span>/examples/phonebook/layout.ddl
 </code></pre></div>
 
 </div>
@@ -376,7 +376,7 @@
 <p>Enter the FijiSchema shell using the following command:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/schema-shell/bin/fiji-schema-shell
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/schema-shell/bin/fiji-schema-shell
 </code></pre></div>
 
 </div>
@@ -454,7 +454,7 @@ Column family: stats
 <p>But first, we need to delete the table we just created, just so that we can create it another time using JSON! Use the following command to delete the table:</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji delete --target<span class='o'>=</span>fiji://.env/default/phonebook
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji delete --target<span class='o'>=</span>fiji://.env/default/phonebook
 </code></pre></div>
 
 </div>
@@ -467,14 +467,14 @@ yes
 00/11/00 20:33:19 INFO org.apache.hadoop.hbase.client.HBaseAdmin: Deleted fiji.default.table.phonebook
 Deleted fiji table: fiji://localhost:2181/default/phonebook/</code></pre>
 
-<p>The command below creates the same phonebook table with the layout specified in the <code>layout.json</code> file in your <code>$KIJI_HOME/examples/phonebook</code> directory.</p>
+<p>The command below creates the same phonebook table with the layout specified in the <code>layout.json</code> file in your <code>$FIJI_HOME/examples/phonebook</code> directory.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji create-table --table<span class='o'>=</span>fiji://.env/default/phonebook <span class='se'>\</span>
-    --layout<span class='o'>=</span><span class='nv'>$KIJI_HOME</span>/examples/phonebook/layout.json
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji create-table --table<span class='o'>=</span>fiji://.env/default/phonebook <span class='se'>\</span>
+    --layout<span class='o'>=</span><span class='nv'>$FIJI_HOME</span>/examples/phonebook/layout.json
 </code></pre></div>
 
-</div><div class='highlight'><pre><code class='bash'>Parsing table layout: <span class='nv'>$KIJI_HOME</span>/examples/phonebook/layout.json
+</div><div class='highlight'><pre><code class='bash'>Parsing table layout: <span class='nv'>$FIJI_HOME</span>/examples/phonebook/layout.json
 Creating fiji table: fiji://localhost:2181/default/phonebook/...
 </code></pre></div>
 <h4 id='verify'>Verify</h4>
@@ -482,7 +482,7 @@ Creating fiji table: fiji://localhost:2181/default/phonebook/...
 <p>To ensure that your table exists, use the <code>fiji ls</code> command to show the available tables in your Fiji instance.</p>
 <div class='userinput'>
 
-<div class='highlight'><pre><code class='bash'><span class='nv'>$KIJI_HOME</span>/bin/fiji ls
+<div class='highlight'><pre><code class='bash'><span class='nv'>$FIJI_HOME</span>/bin/fiji ls
 </code></pre></div>
 
 </div>

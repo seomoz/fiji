@@ -182,7 +182,7 @@ Version 1.1.0
   * SCHEMA-187. Allows decoding records with the writer schema when no
       specific record is available (ie. when there is no reader schema).
   * SCHEMA-324. bin/fiji supports loading Hadoop distro-specific dependencies
-      by inferring from "bin/hadoop version" or $KIJI_HADOOP_DISTRO_VER.
+      by inferring from "bin/hadoop version" or $FIJI_HADOOP_DISTRO_VER.
 
 Version 1.0.2
   * SCHEMA-317. Silence spurious warning about not using GenericOptionsParser.
@@ -304,7 +304,7 @@ Version 1.0.0-rc4
       components.
   * SCHEMA-175. fiji script can now use tools provided by fiji-mapreduce. To make
       fiji-mapreduce tools available for use through the fiji script, make sure
-      the environment variable KIJI_MR_HOME is set to the path to a fiji-mapreduce
+      the environment variable FIJI_MR_HOME is set to the path to a fiji-mapreduce
       distribution.
   * SCHEMA-153. Adds a getRegions() method to FijiTable. Returns logical
       region divisions in a fiji table.

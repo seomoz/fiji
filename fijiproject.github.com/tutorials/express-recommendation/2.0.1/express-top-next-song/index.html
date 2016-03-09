@@ -459,8 +459,8 @@ The Avro definition for <code>TopSongs</code> follows:</p>
 <div class="highlight"><pre><code class="bash">express.py job --libjars<span class="o">=</span><span class="s2">&quot;${MUSIC_EXPRESS_HOME}/lib/*&quot;</span> <span class="se">\</span>
     --user-jar<span class="o">=</span><span class="k">${</span><span class="nv">MUSIC_EXPRESS_HOME</span><span class="k">}</span>/lib/fiji-express-music-2.0.1.jar <span class="se">\</span>
     --job-name<span class="o">=</span>org.fiji.express.music.TopNextSongs --mode<span class="o">=</span>hdfs <span class="se">\</span>
-    --users-table <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/users <span class="se">\</span>
-    --songs-table <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/songs
+    --users-table <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/users <span class="se">\</span>
+    --songs-table <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/songs
 </code></pre></div>
 
 </div>
@@ -475,7 +475,7 @@ The Avro definition for <code>TopSongs</code> follows:</p>
 
 <div class="userinput">
 
-<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">KIJI</span><span class="k">}</span>/songs --max-rows<span class="o">=</span>2
+<div class="highlight"><pre><code class="bash">fiji scan <span class="k">${</span><span class="nv">FIJI</span><span class="k">}</span>/songs --max-rows<span class="o">=</span>2
 </code></pre></div>
 
 </div>

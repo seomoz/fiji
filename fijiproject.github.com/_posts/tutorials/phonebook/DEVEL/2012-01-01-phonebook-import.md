@@ -19,7 +19,7 @@ for every user, but is still suboptimal because you are using one machine to per
 
 #### Parsing the Delimited Phonebook Entries
 First, let's take a closer look at the data we want to import.  In
-`$KIJI_HOME/examples/phonebook/input-data.txt` you will see records like:
+`$FIJI_HOME/examples/phonebook/input-data.txt` you will see records like:
 
     John|Doe|johndoe@gmail.com|202-555-9876|{"addr1":"1600 Pennsylvania Ave","apt":null,"addr2":null,"city":"Washington","state":"DC","zip":99999}
 
@@ -77,11 +77,11 @@ example - using the `fiji jar` command.
 
 <div class="userinput">
 {% highlight bash %}
-${KIJI_HOME}/bin/fiji jar \
-    ${KIJI_HOME}/examples/phonebook/lib/fiji-phonebook-*.jar \
+${FIJI_HOME}/bin/fiji jar \
+    ${FIJI_HOME}/examples/phonebook/lib/fiji-phonebook-*.jar \
     org.fiji.examples.phonebook.StandalonePhonebookImporter \
-    --fiji=${KIJI} \
-    --input-data=${KIJI_HOME}/examples/phonebook/input-data.txt
+    --fiji=${FIJI} \
+    --input-data=${FIJI_HOME}/examples/phonebook/input-data.txt
 {% endhighlight %}
 </div>
 
@@ -93,7 +93,7 @@ properly by running `fiji scan`:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji scan ${KIJI}/phonebook
+$FIJI_HOME/bin/fiji scan ${FIJI}/phonebook
 {% endhighlight %}
 </div>
 
@@ -101,7 +101,7 @@ Or, for a Cassandra-backed Fiji instance, use `fiji get`:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji get ${KIJI}/phonebook --entity-id="['John,Doe']"
+$FIJI_HOME/bin/fiji get ${FIJI}/phonebook --entity-id="['John,Doe']"
 {% endhighlight %}
 </div>
 
@@ -201,7 +201,7 @@ You can do this by using the HDFS `-copyFromLocal` command:
 <div class="userinput">
 {% highlight bash %}
 $HADOOP_HOME/bin/hadoop fs -copyFromLocal \
-    $KIJI_HOME/examples/phonebook/input-data.txt /tmp
+    $FIJI_HOME/examples/phonebook/input-data.txt /tmp
 {% endhighlight %}
 </div>
 
@@ -211,10 +211,10 @@ path to the `input-data.txt` file in HDFS.
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji jar \
-    $KIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar \
+$FIJI_HOME/bin/fiji jar \
+    $FIJI_HOME/examples/phonebook/lib/fiji-phonebook-*.jar \
     org.fiji.examples.phonebook.PhonebookImporter \
-    --fiji=${KIJI} \
+    --fiji=${FIJI} \
     --input-data=/tmp/input-data.txt
 {% endhighlight %}
 </div>
@@ -231,11 +231,11 @@ run the same bulk import job without requiring that you write a "`main()`" metho
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji bulk-import \
+$FIJI_HOME/bin/fiji bulk-import \
     --importer='org.fiji.examples.phonebook.PhonebookImporter$PhonebookBulkImporter' \
     --input="format=text file=/tmp/input-data.txt" \
-    --output="format=fiji nsplits=1 table=${KIJI}/phonebook" \
-    --lib=$KIJI_HOME/examples/phonebook/lib
+    --output="format=fiji nsplits=1 table=${FIJI}/phonebook" \
+    --lib=$FIJI_HOME/examples/phonebook/lib
 {% endhighlight %}
 </div>
 
@@ -249,7 +249,7 @@ Verify that the user records were added properly by running `fiji get`:
 
 <div class="userinput">
 {% highlight bash %}
-$KIJI_HOME/bin/fiji get ${KIJI}/phonebook --entity-id="['John,Doe']"
+$FIJI_HOME/bin/fiji get ${FIJI}/phonebook --entity-id="['John,Doe']"
 {% endhighlight %}
 </div>
 
