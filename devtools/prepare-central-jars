@@ -39,7 +39,7 @@ for f in $(find . -name \*.pom) ; do
   done
 
   echo "Creating upload jar for: $d"
-  j=$(basename $stubname.jar
+  j=$(basename $stubname).jar
   (
     cd $d
     jar -cf $upload/$j *
