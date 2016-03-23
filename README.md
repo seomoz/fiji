@@ -43,6 +43,12 @@ Make sure you have the following installed:
     The build process fetches and produces Maven artifacts into the local repository: `$wkspc/output/maven_repository/`.
     Executables are generated into `$wkspc/output/bin/`.
 
+ 4. To build jars suitable for uploads to Maven Central, see `$wkspc/devtools/prepare-central-jars`.
+
+ 5. To build assemblies, which are tar balls that package transitive dependencies for runtime use, in each
+    directory with `pom.xml` run:
+    ```mvn assembly:single```
+
 
 ## Fiji CLI
 
