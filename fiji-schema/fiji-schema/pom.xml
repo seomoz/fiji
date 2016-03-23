@@ -160,7 +160,9 @@
     <dependency> <groupId>org.javassist</groupId>                             <artifactId>javassist</artifactId>                           <type>jar</type>               <version>3.15.0-GA</version>             <scope>test</scope> <exclusions> <exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion> </exclusions></dependency>
     <dependency> <groupId>org.objenesis</groupId>                             <artifactId>objenesis</artifactId>                           <type>jar</type>               <version>1.2</version>                   <scope>test</scope> <exclusions> <exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion> </exclusions></dependency>
     <dependency> <groupId>org.scala-lang</groupId>                            <artifactId>scala-library</artifactId>                       <type>jar</type>               <version>2.10.4</version>                <scope>test</scope> <exclusions> <exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion> </exclusions></dependency>
+<!--
     <dependency> <groupId>testing</groupId>                                   <artifactId>test-annotation-collector</artifactId>           <type>jar</type>               <version>0.1.0</version>                 <scope>test</scope> <exclusions> <exclusion><groupId>*</groupId><artifactId>*</artifactId></exclusion> </exclusions></dependency>
+-->
   </dependencies>
 
 </project>
