@@ -45,9 +45,10 @@ Make sure you have the following installed:
 
  4. To build jars suitable for uploads to Maven Central, see `$wkspc/devtools/prepare-central-jars`.
 
- 5. To build assemblies, which are tar balls that package transitive dependencies for runtime use, in each
+ 5. To build assemblies, which are tar balls that package transitive dependencies for runtime use, you will
+    need to put all of your repositories in the `profiles` section of your `settings.xml`. Then, in each
     directory with `pom.xml` run:
-    ```mvn assembly:single```
+    ```mvn assembly:single -Ddescriptor=src/main/assembly/release.xml```
 
 
 ## Fiji CLI
