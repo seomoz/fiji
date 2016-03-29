@@ -50,6 +50,9 @@ Make sure you have the following installed:
     directory with `pom.xml` run:
     ```mvn assembly:single -Ddescriptor=src/main/assembly/release.xml```
 
+ 6. For Mozlinks use, it was necessary to manually insert the fiji-schema-shell-lib jar into the tar ball
+    of the same name.
+
 
 ## Fiji CLI
 
