@@ -1,11 +1,14 @@
 /output/
 __pycache__/
+target/
+upload/
 
 # Temporary files used by editors.
 *~
 *.swp
 .#*
 \#*
+*.sublime-workspace
 
 # Idea things
 *.iml
@@ -14,3 +17,13 @@ atlassian-ide-plugin.xml
 
 # Vagrant stuff
 .vagrant
+
+# Berks
+Berksfile.lock
+
+# Bundler
+Gemfile.lock
+
+# Travis
+secrets.tar.gz
+*.gpg

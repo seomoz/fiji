@@ -11,6 +11,7 @@ import tempfile
 import urllib.error
 import urllib.request
 import xml.etree.ElementTree as etree
+import ssl
 
 from base import base
 
@@ -436,8 +437,14 @@ class RemoteRepository(object):
 
         logging.log(LOG_LEVEL.DEBUG_VERBOSE, "Opening %r", file_url)
         http_req = urllib.request.Request(url=file_url)
+
+        # We need to disable hostname checking for some naughty maven repos.
+        # Requires python 3.4.3 or greater.
+        context = ssl.SSLContext(ssl.PROTOCOL_TLSv1)
+        context.check_hostname = False
+
         try:
-            http_reply = urllib.request.urlopen(http_req)
+            http_reply = urllib.request.urlopen(http_req, context=context)
             return (http_reply, md5, sha1)
         except urllib.error.HTTPError as err:
             if err.code == 404:

@@ -29,10 +29,10 @@ Python3 itself has dependencies on the following development libraries:
     $ sudo aptitude install libreadline-dev libsqlite3-dev libbz2-dev libssl-dev
 
 To install Python 3.4:
-    $ pyenv install 3.4.2
+    $ pyenv install 3.4.3
 
 Configure the Python version to use by default:
-    $ pyenv global 3.4.2
+    $ pyenv global 3.4.3
 
 
 Finally, devtools requires the python-base module:
