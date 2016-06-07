@@ -1,0 +1,42 @@
+language: python
+dist: trusty
+sudo: required
+
+jdk:
+  - oraclejdk8
+
+python:
+  - "3.4"
+
+addons:
+  apt:
+    sources:
+    - chef-current-precise
+    packages:
+    - chefdk
+
+before_script: ./travis-ci/before-script
+script: >
+  ./bin/fiji-build test
+
+env:
+  global:
+    # travis encrypt SONATYPE_USERNAME=...
+    - secure: "cVj0CfQ8kfM2nFQTPelpvLDKeZ1cU0VkljDK+V9GBHdKrFqKT9RkbNADqmJ1gljcnk535LMd8P8RxWDEUxUlnCNIzNiSg9m/EIM7mccCnLOIwt1ses9etfhnWc63FCGc0bPV9S+AcAQvbNcDIm1d71o79cZ4rRpFq1wBITiNBHiKPzxRw6nnTNzYXlMw2E0x/NRGytMKqB1UaToJRf144j2VC4tRBkHyqWF+2Dyttk3Jr4K/mJPvFgFTsiFvWV+edUzgaSi6C6l0aBv7RWmKiXtaj1lV1jnO6tSsBQgrfqWtulGizPwmvuCeTxIyn98szuALsIAri5Z7e4QsnDWnPg3mEVd2J7apzh7qj5h1DVU1vFB9eCIUuiFVRLCu/zo6Dr7GPFDuEFHiu49ctNB7vm0QhAS9YVmqiI35o51Laraj+vo+vePlQ9nsce6Xd3kSaQzJf6bEGGJ6XGXDn3q4lOG6TwFlbTYn2eh/eLa3eiMfNUGRKm9WaUKHJPZJXcGY16Fx5SihheFJy9Yf0Jq6GevEyeAW9nvrXgwLF4WB3+HMMpUXbquU1rX/nnFTiLY6jdcLKrpKUIHgro2O5oZl/tepoRxlVDUTS6SY9lSCx7f6Nlc1tTHmkTwxE2wJ6lUd24PqZw408qV9c6r3W9dVY4QQ6ervZiYbEGtRqUZXDAg="
+    # travis encrypt 'SONATYPE_PASSWORD=...'
+    - secure: "UKGeW+zmAYqQfyt+iug827+V5y2bok7nqJgeFL3d2jg6bLhOnMBd/Bag337l9GOeTe/RF7YhhAHhZ+t2SLdd5NbSEfmvxYETku9kd014bPIHVnKl5iycZHojUjmC9ugWsiw/M8IftjHTZKwH4k4CYnlMSaIva1aS7AuvMUcrCbNG6qH4xFd0wQUuq5ykGPyyKeiX/kdTtahwvU0gW3hpQMHNcHZczqNFZJ2tEhwlnzr3mdR6FeXhOovw73u36RUlzBf7xtDH2U/KaFlz7qADRy+OkTqX5dP0XL/oc8NqcF3nSS3uIuRCj+H2Jn5rtri5RU3jHJq0s6rlvskdk8Zg8b1x+FHPB4P71fUkkWym/b0PhVqjydKJFFNjeyHzYRyUVHIJ3rjctmxtlUC09SzKEbI8u1UbaXoH6vfPNqHOe+p1ivobVvK+eJ/uwdI46giFXAhqSzOuBa/VOJ8XZh7+pixMsTAspS+rWneREHHCJq/EvoQ5hnLlam/Bj/PhBi0MJBPJSr6Yr6Uw3UNwa/gkIJQJof2vh9H9QaCJI2DVY/NUcPdZS1uAO47cXnUZwSprb21CL483Xm7veNV5wnv6MM/5QRA/V6Qow8AS9hVUeznP1XPWa3Xj0n8dyAM3viQOTk4xOUPptrxxu7Z8B77hSoWQsc7sTgbNLZzmf5VYX1A="
+    # travis encrypt GPG_KEYNAME=...
+    - secure: "FTb5AQCucHXR866mtqiNcHDwVelXqF0d0yIX46FeFhNZs7AaFqORUyzLoL5tgOEjRp0FPSBCTdDDQDNJvQnsjEZpGrMRxPNTedZ3POuY3ZGFCa6jL+WrLMEy4b318jQxjkGkwVMFaRmgHsL5NP91IiRbuXvbztiW+/7Pz1Q2Dc3cADaWmfQt5rZ1JjfHEpUW/NbbyDLZSiCwJ2V7Z6d73h1d6cv8uhNr2gtazqJPgUp/R9iNQ8bGsFHlVPZh4IeN6d+2T+f1VA+Tru1JuITAeojBSjL+ueSKPUSPyO+w64d622iCwp5nACGRoMVxWX16ZUUSlQoftDjj226Zo+Y5Ag35YUT1U3/Ci+6tvlSXvM2+4TiFuuyOJuhQDg6jtZHyL+i8qdnbrfF/K1WU8/A19iybAw14NrY0p9Yx+dUDV+EMW1A4GcXag2N33sW3PtwvN3W092SwWjB+cHKF6RnwC5kljqhhhISsZpGAkXF3zRQOCKwd36bD0FadTrNUInx8QOMkmU27XcxSIHkhCP0X84N6IXmlXNQnjaAdu/H1PQOvJeWppVs/HRBNPi/yKWRLsBZ6Kig8zWrsh61hsdq8Hzgk7wuJSDJgzcp3xdpz0dxMyqEEFRhLKB1vsN3/5I9++6JZ6Y8yNqwODwvpaeDWVZzyA3ktl1t8/UtmEzWGwEU="
+    # travis encrypt 'GPG_PASSPHRASE=...'
+    - secure: "VBQ4i+G0uYE07Vl/EeupfyC/UcMsyE2f4Lkrf8eGeHiypb9bPxCBveqL61RWqymR8wlxnIngBLggefx0C1VFkMFJoJ+aXlX3wlCWt0MaVKTf2Ii79wAZJImebaDA4Q0HudF7r1DJB3BpNOMR1gJ8khdECddsLYHs2cSWvL1NGA317LhA3YUr9LfPA0GYCqp6/lo/Gp4CaQOA41DKLjoBlke5FIL9JuLWGaCMf6ztZoIwmsIGIbZbCY09cxlOljEpwCJhvhkJCESw+qzlxmzuKKcM0Q2DdLTdzwU8FRltg8juBxUyRi5zdxUeeRRO/TTcCmtDB7ufqA9e4sFVnM8mfqK5wavwVBcw90eL7wy5mNoSS70hiW2EbOs/bUMkgIqbCVg+rx4QTmCBrjWnasTq6zHAN5UlMvS1nuftuZuYWeA95YMjL7zyxARErI97q0uc5AgqXt6UUtIg7xrDLH3/fo1IFF12cKGE8s8fv2jFRLSSv62rYygq1/XVC6MPJUkDefAKxwrGFSXVlohaLQSyNkTzS2N4MFskz2OCX2py9a2nsi7/zQPpBWp7BB1JuRozujn82/jz08JTSHyu6qFhtQRhngw4j5oFgu3/ECtnDHMkFDrCt+GSgt/XEn88fBiQMNjwXb5NdxUZ5l4TaenrhOVdVFAAkkRRpD5FoDQC63Y="
+  matrix:
+    - FIJI_HADOOP_DISTRIBUTION=cdh
+      FIJI_HADOOP_DISTRIBUTION_VERSION=5.3.5
+
+deploy:
+  provider: script
+  script: ./devtools/prepare-central-jars
+  skip_cleanup: true
+  on:
+    condition:
+    tags: true

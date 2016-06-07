@@ -1,5 +1,6 @@
 <!-- https://github.com/seomoz/docs/blob/improved-readme/Readme%20header.md -->
 
+[![Build Status][build-status-badge]][build-status-link]
 [![Ready Stories][tickets-badge]][tickets-link]
 ![Status Incubating][status-badge]
 ![Team Big Data][team-badge]
@@ -9,6 +10,8 @@
 [![Slack][slack-badge]][slack-link]
 ![Internal][scope-badge]
 
+[build-status-badge]: https://travis-ci.org/seomoz/fiji.svg?branch=master
+[build-status-link]: https://travis-ci.org/seomoz/fiji
 [tickets-badge]: https://badge.waffle.io/seomoz/fiji.png?label=ready&title=Ready
 [tickets-link]: https://waffle.io/seomoz/fiji
 [status-badge]: https://img.shields.io/badge/status-incubating-blue.svg?style=flat
@@ -29,7 +32,7 @@ This workspace contains the collection of Fiji projects.
 
 Make sure you have the following installed:
 
- - Python 3.4.2 or greater.
+ - Python 3.4.3 or greater.
  - Oracle JDK 7 or greater.
 
 ## Build instructions

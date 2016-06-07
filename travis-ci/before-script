@@ -1,0 +1,65 @@
+#! /bin/bash
+
+# Die on error
+set -e
+
+date
+
+# Reading the docs is fun!
+# https://docs.travis-ci.com/user/encrypting-files/#Encrypting-multiple-files
+# $ tar czf secrets.tar.gz devtools/*.gpg
+# $ travis encrypt-file secrets.tar.gz
+openssl aes-256-cbc \
+  -K $encrypted_16818c106fea_key \
+  -iv $encrypted_16818c106fea_iv \
+  -in secrets.tar.gz.enc \
+  -out secrets.tar.gz -d
+
+tar xzf secrets.tar.gz
+
+chef_solo_dir="/tmp/chef-solo"
+mkdir -p ${chef_solo_dir}/{backup,cache,cookbooks,environments}
+
+# Vendor in berks dependencies
+berks vendor -b Berksfile ${chef_solo_dir}/cookbooks
+
+# Configure the chef client
+cat > ${chef_solo_dir}/config.rb <<EOF
+node_name 'travis'
+file_cache_path "${chef_solo_dir}/cache"
+file_backup_path "${chef_solo_dir}/backup"
+cookbook_path ["${chef_solo_dir}/cookbooks"]
+environment_path "${chef_solo_dir}/environments"
+EOF
+
+cat > ${chef_solo_dir}/attributes.json <<EOF
+{
+  "run_list": [
+    "recipe[fiji::test]"
+  ]
+}
+EOF
+
+cat > ${chef_solo_dir}/environments/test.json <<EOF
+{
+  "json_class": "Chef::Environment",
+  "name": "test",
+  "description": "The travis-based test environment",
+  "cookbook_versions": {},
+  "chef_type": "environment",
+  "default_attributes": {},
+  "override_attributes": {
+    "hadoop": {
+      "distribution": "${FIJI_HADOOP_DISTRIBUTION}",
+      "distribution_version": "${FIJI_HADOOP_DISTRIBUTION_VERSION}"
+    }
+  }
+}
+EOF
+
+# Fire the chef client locally
+sudo chef-solo \
+  --force-logger --logfile /dev/null \
+  --config "${chef_solo_dir}/config.rb" \
+  --json-attributes "${chef_solo_dir}/attributes.json" \
+  --environment test

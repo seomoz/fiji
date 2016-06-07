@@ -1,47 +1,32 @@
 #!/bin/bash
 
-# Create jars suitable for uploading Fiji to the Maven central repository at https://oss.sonatype.org/
+# Create jars suitable for uploading Fiji to the Maven central repository at
+# https://oss.sonatype.org/
 
 # ASSUMPTIONS:
 # 1. You have built Fiji.
 # 2. You are running this script from the project root directory.
 # 3. You have gpg installed and configured
-# 4. You have copied devtools/pomstuff.xml.template to devtools/pomstuff.xml and have put your
-#    contact information in the <developers> tag.
+# 4. You have put your contact info in the <developers> tag in devtools/pomstuff.xml.
 #
 # This script is NOT idempotent.
 
 root=$(pwd)
 newpom=/tmp/new.pom
-upload=$root/upload
-
-mkdir -p $upload
 
 cd output/maven_repository/com/moz/fiji/
 
 for f in $(find . -name \*.pom) ; do
   echo "Inserting required fields into: $f"
   head -2 $f | cat - $root/devtools/pomstuff.xml > $newpom
-  tail -n +3 $f >> $newpom 
+  tail -n +3 $f >> $newpom
   mv $newpom $f
 
-  echo "Creating sources and javadoc jars for: $f"
-  stubname=$(echo $f | sed 's/.pom//')
-  sources="${stubname}-sources.jar"
-  javadoc="${stubname}-javadoc.jar"
-  jar -cf $sources $root/README.md
-  jar -cf $javadoc $root/README.md
-
   d=$(dirname $f)
-  echo "Signing jars in: $d"
-  for a in $d/* ; do
-    gpg -ab $a
-  done
-
-  echo "Creating upload jar for: $d"
-  j=$(basename $stubname).jar
+  echo "Deploying: $d"
   (
     cd $d
-    jar -cf $upload/$j *
+    mvn deploy --settings $root/devtools/settings.xml \
+      -DperformRelease=true -DskipTests=true
   )
 done

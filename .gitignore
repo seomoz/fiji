@@ -1,5 +1,7 @@
 /output/
 __pycache__/
+target/
+upload/
 
 # Temporary files used by editors.
 *~
@@ -15,3 +17,13 @@ atlassian-ide-plugin.xml
 
 # Vagrant stuff
 .vagrant
+
+# Berks
+Berksfile.lock
+
+# Bundler
+Gemfile.lock
+
+# Travis
+secrets.tar.gz
+*.gpg
