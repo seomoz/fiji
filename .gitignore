@@ -6,6 +6,7 @@ __pycache__/
 *.swp
 .#*
 \#*
+*.sublime-workspace
 
 # Idea things
 *.iml
