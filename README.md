@@ -1,5 +1,6 @@
 <!-- https://github.com/seomoz/docs/blob/improved-readme/Readme%20header.md -->
 
+[![Ready Stories][tickets-badge]][tickets-link]
 ![Status Incubating][status-badge]
 ![Team Big Data][team-badge]
 ![Closed Source][open-badge]
@@ -8,6 +9,8 @@
 [![Slack][slack-badge]][slack-link]
 ![Internal][scope-badge]
 
+[tickets-badge]: https://badge.waffle.io/seomoz/fiji.png?label=ready&title=Ready
+[tickets-link]: https://waffle.io/seomoz/fiji
 [status-badge]: https://img.shields.io/badge/status-incubating-blue.svg?style=flat
 [team-badge]: https://img.shields.io/badge/team-big_data-green.svg?style=flat
 [open-badge]: https://img.shields.io/badge/open_source-nope-orange.svg?style=flat
@@ -31,7 +34,7 @@ Make sure you have the following installed:
 
 ## Build instructions
 
- 1. Download and extract the workspace into a directory `$wkspc`:  
+ 1. Download and extract the workspace into a directory `$wkspc`:
     ```git clone https://github.com/seomoz/fiji $wkspc```
 
  2. Make sure the workspace settings are correct in:
