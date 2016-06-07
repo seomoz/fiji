@@ -17,7 +17,7 @@ addons:
 
 before_script: ./travis-ci/before-script
 script: >
-  ./bin/fiji-build test
+  ./bin/fiji-build build # TODO(phs): test
 
 env:
   global:
