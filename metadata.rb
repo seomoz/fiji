@@ -8,6 +8,7 @@ source_url 'https://github.com/seomoz/fiji'
 issues_url 'https://github.com/seomoz/fiji/issues'
 version '0.0.1'
 
+depends 'git'
 depends 'hadoop'
 depends 'java'
 
