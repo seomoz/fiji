@@ -5,8 +5,8 @@
 
 # Default version ID to use when emitting Maven artifacts:
 # All artifacts are currently pegged on a single version ID.
-#maven_artifact_version = "3.0.0-SNAPSHOT"
-maven_artifact_version = "0.1.0"
+with open('FIJI_VERSION', 'r') as fiji_version_file:
+    maven_artifact_version = fiji_version_file.read().strip()
 
 # --------------------------------------------------------------------------------------------------
 # Python base libraries

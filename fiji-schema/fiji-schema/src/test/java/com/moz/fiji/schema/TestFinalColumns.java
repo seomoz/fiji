@@ -71,10 +71,10 @@ public class TestFinalColumns extends FijiClientTest {
         final FijiTableReader reader = table.openTableReader();
         try {
           final FijiRowData row = reader.get(eid, FijiDataRequest.create("family"));
-          assertEquals(314159, row.getMostRecentValue("family", "int"));
+          assertEquals(314159, (int) row.getMostRecentValue("family", "int"));
 
           // Ensures the long value has not been overwritten:
-          assertEquals(314159L, row.getMostRecentValue("family", "long"));
+          assertEquals(314159L, (long) row.getMostRecentValue("family", "long"));
         } finally {
           reader.close();
         }
