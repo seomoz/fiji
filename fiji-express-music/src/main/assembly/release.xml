@@ -119,6 +119,10 @@
       <scope>runtime</scope>
       <useTransitiveFiltering>true</useTransitiveFiltering>
       <fileMode>0644</fileMode>
+      <excludes>
+        <exclude>org.apache.hadoop</exclude>
+        <exclude>org.apache.hbase</exclude>
+      </excludes>
     </dependencySet>
   </dependencySets>
 
