@@ -30,6 +30,18 @@ http://maven.apache.org/xsd/assembly-1.1.2.xsd">
   <includeBaseDirectory>true</includeBaseDirectory>
   <fileSets>
     <fileSet>
+      <!-- artifacts -->
+      <useDefaultExcludes>false</useDefaultExcludes>
+      <directory>${maven.artifact.path.in.repo}</directory>
+      <outputDirectory>lib</outputDirectory>
+      <fileMode>0644</fileMode>
+      <includes>
+        <include>*.jar</include>
+      </includes>
+      <filtered>false</filtered>
+    </fileSet>
+
+    <fileSet>
       <useDefaultExcludes>true</useDefaultExcludes>
       <outputDirectory></outputDirectory>
       <directory>${project.basedir}/</directory>
@@ -60,6 +72,10 @@ http://maven.apache.org/xsd/assembly-1.1.2.xsd">
       <scope>runtime</scope>
       <useTransitiveFiltering>true</useTransitiveFiltering>
       <fileMode>0644</fileMode>
+      <excludes>
+        <exclude>org.apache.hadoop</exclude>
+        <exclude>org.apache.hbase</exclude>
+      </excludes>
     </dependencySet>
   </dependencySets>
 </assembly>

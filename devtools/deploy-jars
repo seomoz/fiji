@@ -1,4 +1,6 @@
-#!/bin/bash
+#! /bin/bash
+
+set -e
 
 # Create jars suitable for uploading Fiji to the Maven central repository at
 # https://oss.sonatype.org/
@@ -7,21 +9,12 @@
 # 1. You have built Fiji.
 # 2. You are running this script from the project root directory.
 # 3. You have gpg installed and configured
-# 4. You have put your contact info in the <developers> tag in devtools/pomstuff.xml.
-#
-# This script is NOT idempotent.
 
 root=$(pwd)
-newpom=/tmp/new.pom
 
-cd output/maven_repository/com/moz/fiji/
-
-for f in $(find . -name \*.pom) ; do
-  echo "Inserting required fields into: $f"
-  head -2 $f | cat - $root/devtools/pomstuff.xml > $newpom
-  tail -n +3 $f >> $newpom
-  mv $newpom $f
-
+# Then upload jars to maven central
+find output/maven_repository/com/moz/fiji -name "*.pom" | while read f
+do
   d=$(dirname $f)
   echo "Deploying: $d"
   (

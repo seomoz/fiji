@@ -388,7 +388,8 @@ class Build(Action):
                 isinstance(task, workflow_task.ScalaLibraryTask) or \
                 isinstance(task, workflow_task.NpmInstallTask) or \
                 isinstance(task, workflow_task.BowerInstallTask) or \
-                isinstance(task, workflow_task.JSAppTask)
+                isinstance(task, workflow_task.JSAppTask) or \
+                isinstance(task, workflow_task.GeneratePomTask)
         self.select_tasks(select_build_tasks)
 
 

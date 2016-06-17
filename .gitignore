@@ -27,3 +27,6 @@ Gemfile.lock
 # Travis
 secrets.tar.gz
 *.gpg
+
+# These are generated! See ./bin/fiji-build generate-pom
+pom.xml

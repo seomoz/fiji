@@ -16,8 +16,7 @@ addons:
     - chefdk
 
 before_script: ./travis-ci/before-script
-script: >
-  ./bin/fiji-build build # TODO(phs): test
+script: ./bin/fiji-build build # TODO(phs): test
 
 env:
   global:
@@ -34,9 +33,35 @@ env:
       FIJI_HADOOP_DISTRIBUTION_VERSION=5.3.5
 
 deploy:
-  provider: script
-  script: ./devtools/prepare-central-jars
-  skip_cleanup: true
-  on:
-    condition:
-    tags: true
+  - provider: script
+    script: ./devtools/create-assemblies-and-deploy-jars
+    skip_cleanup: true
+    on:
+      condition:
+      tags: true
+  - provider: releases
+    api_key:
+      # travis encrypt $API_KEY
+      secure: MNeUOKbEuT0JPOrtu345JpkakxKVy7FkVp1aU+mKhJMRriHB7YyUHw7nIx1r+tZtMhtaA4x1YoSYcPnj8W6hBmNzSkeMzZGhUcQAAjd/7k7WimB7Ui+gPaoQmWlE9SPj408HsoHe0Zcz/qp/6dMMYYSCNCuk7aCo6PLwOagzzo3DtbU708iTtywcpN4nQ7gf3EP1tyafzO/vqLI2j0dqPzxemY17Brg63XwMBINGODk09sEOt1a3Tak+c+e/h7SVdsaVfkujEi/7j0B7tYV80OsJ2ESmLLpgjnCSSBcXnSunkEt/XxifJ60zZwnNcLCHqhF8RPb2CRoN/OwNu+U89EuaCTjmlxRGo+X9q6PDkDEZx6e3YmPa3QhXqudbY3BD5O5gXejROwKdr9QRRBz8xazXWe53GJlCC1i/5cWNQxqNGcBFTCCIeNMPkeN7IH0ym+Ar9xpImk6RV2egthLgaPFxPxDE5s4gBF1eNLYANVqFmJKCO+0JkGF8vGIb1yFFIGm7t37ojZj+h8AeXUYTjFc2yDDlmkxq7g+DBlb8vjeduzkpxwfATkhYwmmploFcNo2HobD0gxwN80ECobAJ5ToBU+InYAJGwxR2gXUIt5VLetH/LSZwPUHDJOpnB6ukhmRohk+yv0rCyfxHLdqPMTFh7un1AFnpKDPbuBqpgoE=
+    file:
+      - fiji-express/fiji-express/target/fiji-express-lib-*-release.tar.gz
+      - fiji-express/fiji-express-examples/target/fiji-express-examples-*-release.tar.gz
+      - fiji-express/fiji-express-tools/target/fiji-express-tools-*-release.tar.gz
+      - fiji-express-music/target/fiji-express-music-*-release.tar.gz
+      - fiji-hive-adapter/fiji-hive-adapter/target/fiji-hive-lib-*-release.tar.gz
+      - fiji-hive-adapter/fiji-hive-tools/target/fiji-hive-tools-*-release.tar.gz
+      - fiji-mapreduce/fiji-mapreduce/target/fiji-mapreduce-*-release.tar.gz
+      - fiji-mapreduce/fiji-mapreduce-cassandra/target/fiji-mapreduce-cassandra-*-release.tar.gz
+      - fiji-modeling/fiji-modeling/target/fiji-modeling-*-release.tar.gz
+      - fiji-modeling/fiji-modeling-examples/target/fiji-modeling-examples-*-release.tar.gz
+      - fiji-music/target/fiji-music-*-release.tar.gz
+      - fiji-phonebook/target/fiji-phonebook-*-release.tar.gz
+      - fiji-rest/fiji-rest/target/fiji-rest-lib-*-release.tar.gz
+      - fiji-schema/fiji-schema/target/fiji-schema-*-release.tar.gz
+      - fiji-schema/fiji-schema-cassandra/target/fiji-schema-cassandra-*-release.tar.gz
+      - fiji-schema-shell/target/fiji-schema-shell-lib-*-release.tar.gz
+    skip_cleanup: true
+    skip_cleanup: true
+    on:
+      condition:
+      tags: true

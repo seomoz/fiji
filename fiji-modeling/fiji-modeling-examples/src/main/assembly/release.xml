@@ -31,6 +31,18 @@
   <includeBaseDirectory>true</includeBaseDirectory>
 
   <fileSets>
+    <fileSet>
+      <!-- artifacts -->
+      <useDefaultExcludes>false</useDefaultExcludes>
+      <directory>${maven.artifact.path.in.repo}</directory>
+      <outputDirectory>lib</outputDirectory>
+      <fileMode>0644</fileMode>
+      <includes>
+        <include>*.jar</include>
+      </includes>
+      <filtered>false</filtered>
+    </fileSet>
+
     <!-- source directories -->
     <fileSet>
       <useDefaultExcludes>true</useDefaultExcludes>

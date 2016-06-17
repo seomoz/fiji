@@ -333,9 +333,128 @@ POM_XML_TEMPLATE = """\
   <version>{version}</version>
   <packaging>{packaging}</packaging>
 
+  <name>Fiji</name>
+  <description>Fiji allows the imposition of schema and much else upon HBase.</description>
+  <url>https://github.com/seomoz/fiji</url>
+
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>sistawendy</id>
+      <name>Maura Hubbell</name>
+      <email>maura@moz.com</email>
+    </developer>
+    <developer>
+      <id>phs</id>
+      <name>Phil Smith</name>
+      <email>phil.h.smith@gmail.com</email>
+    </developer>
+    <developer>
+      <id>b4hand</id>
+      <name>Brandon Forehand</name>
+      <email>brandon@moz.com</email>
+    </developer>
+    <developer>
+      <id>Pyrinoc</id>
+      <name>Don Conley</name>
+      <email>don@moz.com</email>
+    </developer>
+    <developer>
+      <id>dlecocq</id>
+      <name>Dan Lecocq</name>
+      <email>dan@moz.com</email>
+    </developer>
+  </developers>
+
   <properties>
 {properties}
   </properties>
+
+  <scm>
+    <connection>scm:git:git@github.com:seomoz/fiji.git</connection>
+    <developerConnection>scm:git:git@github.com:seomoz/fiji.git</developerConnection>
+    <url>git@github.com:seomoz/fiji.git</url>
+  </scm>
+
+  <!-- https://github.com/making/travis-ci-maven-deploy-skelton -->
+  <profiles>
+    <profile>
+      <id>ossrh</id>
+      <properties>
+        <gpg.executable>gpg</gpg.executable>
+        <gpg.keyname>${{env.GPG_KEYNAME}}</gpg.keyname>
+        <gpg.passphrase>${{env.GPG_PASSPHRASE}}</gpg.passphrase>
+        <gpg.defaultKeyring>false</gpg.defaultKeyring>
+        <gpg.publicKeyring>${{env.TRAVIS_BUILD_DIR}}/devtools/pubring.gpg</gpg.publicKeyring>
+        <gpg.secretKeyring>${{env.TRAVIS_BUILD_DIR}}/devtools/secring.gpg</gpg.secretKeyring>
+      </properties>
+      <activation>
+        <property>
+          <name>performRelease</name>
+          <value>true</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.sonatype.plugins</groupId>
+            <artifactId>nexus-staging-maven-plugin</artifactId>
+            <version>1.6.2</version>
+            <extensions>true</extensions>
+            <configuration>
+              <serverId>ossrh</serverId>
+              <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+              <autoReleaseAfterClose>true</autoReleaseAfterClose>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <repositories>
+    <repository>
+      <id>central</id>
+      <name>Maven Central</name>
+      <url>http://repo1.maven.org/maven2/</url>
+    </repository>
+    <repository>
+      <id>cloudera-repo</id>
+      <name>Cloudera CDH</name>
+      <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+    </repository>
+  </repositories>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <!-- Unresolved dependency list: -->
 {unresolved_deps}
@@ -440,11 +559,19 @@ def format_pom_file(
         """Formats a Maven property."""
         return "    <{name}>{value}</{name}>".format(name=name, value=value)
 
+    maven_artifact_path_in_repo = \
+      "${{maven.repo.local}}/{group_id_path}/{artifact_id}/{version}".format(
+        group_id_path=artf.group_id.replace(".", "/"),
+        artifact_id=artf.artifact_id,
+        version=artf.version
+      )
+
     properties = [
         ("maven.compiler.source", java_source_version),
         ("maven.compiler.target", java_target_version),
         ("maven.compiler.testSource", java_source_version),
         ("maven.compiler.testTarget", java_target_version),
+        ("maven.artifact.path.in.repo", maven_artifact_path_in_repo)
     ]
 
     properties = map(lambda prop: format_property(name=prop[0], value=prop[1]), properties)
