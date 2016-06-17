@@ -20,7 +20,7 @@ do
   echo "Deploying: $d"
   (
     cd $d
-    mvn deploy --settings $root/devtools/settings.xml \
+    $root/bin/fiji-maven deploy --settings $root/devtools/settings.xml \
       -DperformRelease=true -DskipTests=true
   )
 done
