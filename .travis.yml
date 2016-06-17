@@ -37,7 +37,6 @@ deploy:
     script: ./devtools/create-assemblies-and-deploy-jars
     skip_cleanup: true
     on:
-      condition:
       tags: true
   - provider: releases
     api_key:
@@ -61,7 +60,5 @@ deploy:
       - fiji-schema/fiji-schema-cassandra/target/fiji-schema-cassandra-*-release.tar.gz
       - fiji-schema-shell/target/fiji-schema-shell-lib-*-release.tar.gz
     skip_cleanup: true
-    skip_cleanup: true
     on:
-      condition:
       tags: true
