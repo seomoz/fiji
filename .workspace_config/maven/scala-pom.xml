@@ -11,6 +11,8 @@
 {properties}
   </properties>
 
+{common_configuration}
+
   <!-- Unresolved dependency list: -->
 {unresolved_deps}
 {fiji_build_exclusions}
