@@ -322,17 +322,7 @@ def artifact_from_name(name):
 
 # --------------------------------------------------------------------------------------------------
 
-
-POM_XML_TEMPLATE = """\
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>{group_id}</groupId>
-  <artifactId>{artifact_id}</artifactId>
-  <version>{version}</version>
-  <packaging>{packaging}</packaging>
-
+POM_XML_COMMON_CONFIGURATION = """\
   <name>Fiji</name>
   <description>Fiji allows the imposition of schema and much else upon HBase.</description>
   <url>https://github.com/seomoz/fiji</url>
@@ -371,10 +361,6 @@ POM_XML_TEMPLATE = """\
       <email>dan@moz.com</email>
     </developer>
   </developers>
-
-  <properties>
-{properties}
-  </properties>
 
   <scm>
     <connection>scm:git:git@github.com:seomoz/fiji.git</connection>
@@ -455,6 +441,23 @@ POM_XML_TEMPLATE = """\
       <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
     </repository>
   </distributionManagement>
+"""
+
+POM_XML_TEMPLATE = """\
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>{group_id}</groupId>
+  <artifactId>{artifact_id}</artifactId>
+  <version>{version}</version>
+  <packaging>{packaging}</packaging>
+
+  <properties>
+{properties}
+  </properties>
+
+{common_configuration}
 
   <!-- Unresolved dependency list: -->
 {unresolved_deps}
@@ -532,6 +535,7 @@ def format_pom_file(
             classifier = "{:30s}".format(classifier)
 
         return "    " + MAVEN_DEP.format(
+            common_configuration=POM_XML_COMMON_CONFIGURATION,
             group_id=element("groupId", artf.group_id),
             artifact_id=element("artifactId", artf.artifact_id),
             version=element("version", artf.version),
@@ -577,6 +581,7 @@ def format_pom_file(
     properties = map(lambda prop: format_property(name=prop[0], value=prop[1]), properties)
 
     return pom_template.format(
+        common_configuration=POM_XML_COMMON_CONFIGURATION,
         group_id=artf.group_id,
         artifact_id=artf.artifact_id,
         version=artf.version,
