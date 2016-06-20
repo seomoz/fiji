@@ -374,11 +374,11 @@ POM_XML_COMMON_CONFIGURATION = """\
       <id>ossrh</id>
       <properties>
         <gpg.executable>gpg</gpg.executable>
-        <gpg.keyname>${{env.GPG_KEYNAME}}</gpg.keyname>
-        <gpg.passphrase>${{env.GPG_PASSPHRASE}}</gpg.passphrase>
+        <gpg.keyname>${env.GPG_KEYNAME}</gpg.keyname>
+        <gpg.passphrase>${env.GPG_PASSPHRASE}</gpg.passphrase>
         <gpg.defaultKeyring>false</gpg.defaultKeyring>
-        <gpg.publicKeyring>${{env.TRAVIS_BUILD_DIR}}/devtools/pubring.gpg</gpg.publicKeyring>
-        <gpg.secretKeyring>${{env.TRAVIS_BUILD_DIR}}/devtools/secring.gpg</gpg.secretKeyring>
+        <gpg.publicKeyring>${env.TRAVIS_BUILD_DIR}/devtools/pubring.gpg</gpg.publicKeyring>
+        <gpg.secretKeyring>${env.TRAVIS_BUILD_DIR}/devtools/secring.gpg</gpg.secretKeyring>
       </properties>
       <activation>
         <property>
