@@ -56,16 +56,17 @@ import com.moz.fiji.schema.FijiRowData;
  *
  * <p>
  *   Use the {@link FijiPivotJobBuilder} to configure a {@link FijiPivoter} job, by specifying:
- *   <ul>
- *     <li> the {@link FijiPivoter} class to run over the input FijiTable; </li>
- *     <li> the input {@link com.moz.fiji.schema.FijiTable} to be processed by the {@link FijiPivoter};
- *     </li>
- *     <li> the output {@link com.moz.fiji.schema.FijiTable} the {@link FijiPivoter} writes to. </li>
- *   </ul>
  * </p>
  *
- * <p> Example:
- * <pre><blockquote>
+ * <ul>
+ *   <li> the {@link FijiPivoter} class to run over the input FijiTable; </li>
+ *   <li> the input {@link com.moz.fiji.schema.FijiTable} to be processed by the {@link FijiPivoter};
+ *   </li>
+ *   <li> the output {@link com.moz.fiji.schema.FijiTable} the {@link FijiPivoter} writes to. </li>
+ * </ul>
+ *
+ * <p> Example: </p>
+ * <pre>
  *   final Configuration conf = ...;
  *   final FijiURI inputTableURI = ...;
  *   final FijiURI outputTableURI = ...;
@@ -77,8 +78,7 @@ import com.moz.fiji.schema.FijiRowData;
  *           .newHFileMapReduceJobOutput(outputTableURI, hfilePath))
  *       .build();
  *   job.run();
- * </blockquote></pre>
- * </p>
+ * </pre>
  */
 @ApiAudience.Public
 @ApiStability.Experimental

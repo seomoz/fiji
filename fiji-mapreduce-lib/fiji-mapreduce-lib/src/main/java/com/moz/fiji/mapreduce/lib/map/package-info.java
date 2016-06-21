@@ -21,7 +21,9 @@
  * Mappers for FijiMR.
  *
  * <h2>Usable mappers:</h2>
+ * <ul>
  * <li>{@link com.moz.fiji.mapreduce.lib.map.TextFlatteningMapper} - Takes name/text records and
  *     outputs name/flattened-text pairs. Flattened text has new lines replaced with spaces.</li>
+ * </ul>
  */
 package com.moz.fiji.mapreduce.lib.map;

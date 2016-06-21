@@ -24,9 +24,10 @@
  *   {@link com.moz.fiji.mapreduce.MapReduceJobOutput} is the base type for classes that can act
  *   as outputs to a MapReduce job for jobs that are created using a
  *   {@link com.moz.fiji.mapreduce.framework.MapReduceJobBuilder}.
- * <p>
+ * </p>
  *
  * <h2>Usable FijiMR output types</h2>
+ * <ul>
  * <li>{@link com.moz.fiji.mapreduce.output.AvroKeyMapReduceJobOutput} - Avro container files containing
  *     keys as output.</li>
  * <li>{@link com.moz.fiji.mapreduce.output.AvroKeyValueMapReduceJobOutput} - Avro container files
@@ -39,6 +40,7 @@
  * <li>{@link com.moz.fiji.mapreduce.output.SequenceFileMapReduceJobOutput} - Hadoop sequence files as
  *     output</li>
  * <li>{@link com.moz.fiji.mapreduce.output.TextMapReduceJobOutput} - text files as output</li>
+ * </ul>
  *
  * @see com.moz.fiji.mapreduce.framework.MapReduceJobBuilder
  */

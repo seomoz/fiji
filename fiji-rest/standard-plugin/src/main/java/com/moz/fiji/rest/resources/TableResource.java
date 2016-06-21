@@ -45,7 +45,9 @@ import com.moz.fiji.schema.avro.TableLayoutDesc;
  * This REST resource interacts with Fiji tables.
  *
  * This resource is served for requests using the resource identifier:
- * <li>/v1/instances/&lt;instance&gt;/tables/&lt;table&gt;
+ * <ul>
+ * <li>/v1/instances/&lt;instance&gt;/tables/&lt;table&gt;</li>
+ * </ul>
  */
 @Path(TABLE_PATH)
 @Produces(MediaType.APPLICATION_JSON)

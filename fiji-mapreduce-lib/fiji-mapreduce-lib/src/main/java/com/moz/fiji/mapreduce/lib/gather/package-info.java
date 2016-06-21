@@ -28,7 +28,9 @@
  * </p>
  *
  * <h2>Usable gatherers:</h2>
+ * <ul>
  * <li>{@link com.moz.fiji.mapreduce.lib.gather.MapTypeDelimitedFileGatherer} - Gatherer that flattens
  *     map-type Fiji data into delimited files in HDFS.</li>
+ * </ul>
  */
 package com.moz.fiji.mapreduce.lib.gather;

@@ -39,13 +39,13 @@ import com.moz.fiji.mapreduce.platform.FijiMRPlatformBridge;
  * A KeyValue-like object that implements WritableComparable.
  *
  * <p>This class works around two shortcomings in the existing KeyValue implementation
- * within HBase:
- *   <ol>
- *     <li><code>KeyValue</code> is Writable, but not WritableComparable.</li>
- *     <li><code>KeyValue</code> maintains state in private caches, which is not cleared
- *     during Writable deserialization.</li>
- *   </ol>
- * </p>
+ * within HBase: </p>
+ *
+ * <ol>
+ *   <li><code>KeyValue</code> is Writable, but not WritableComparable.</li>
+ *   <li><code>KeyValue</code> maintains state in private caches, which is not cleared
+ *   during Writable deserialization.</li>
+ * </ol>
  *
  * <p>HFileKeyValue wraps a <code>KeyValue</code> object, and resets it during
  * Writable deserialization to clear any cached state.</p>

@@ -46,9 +46,9 @@ import com.moz.fiji.annotations.ApiAudience;
  * that can be parsed by {@link java.util.Properties}. It specifies a number
  * of lines of the form:</p>
  *
- * <div><tt><pre>com.example.FooInterface=com.example.impl.FooImpl
+ * <pre>com.example.FooInterface=com.example.impl.FooImpl
  * com.example.BarInterface=com.example.impl.BarImpl
- * ...</pre></tt></div>
+ * ...</pre>
  *
  * <p>A <tt>ConfiguredLookup</tt> intended to produce instances of <tt>FooInterface</tt>
  * will search through all <tt>fiji-delegation.properties</tt> resources available
@@ -68,7 +68,7 @@ import com.moz.fiji.annotations.ApiAudience;
  * <p>This implementation caches maps constructed by parsing
  * <tt>fiji-delegation.properties</tt> files. If multiple <tt>fiji-delegation.properties</tt>
  * files exist on the classpath, mappings in files that appear earlier have precedence. Cached
- * maps are maintained on a per-ClassLoader basis.  You can call {@link #clearCache} to clear
+ * maps are maintained on a per-ClassLoader basis.  You can call {@code #clearCache} to clear
  * the resolution cache; for example, if you have modified the set of jars available on the
  * classpath to a given ClassLoader.</p>
  *

@@ -35,59 +35,73 @@ public final class RoutesConstants {
 
   /**
    * GETs a message containing a list of the available sub-resources.
-   * <li>Path: /v1/
-   * <li>Handled by:
-   * {@link com.moz.fiji.rest.resources.FijiRESTResource#getRoot}
+   * <ul>
+   * <li>Path: /v1/</li>
+   * <li>Handled by:</li>
+   * </ul>
+   * {@code com.moz.fiji.rest.resources.FijiRESTResource#getRoot}
    */
   public static final String API_ENTRY_PATH = API_VERSION;
 
   /**
    * GETs version information.
-   * <li>Path: /v1/version
-   * <li>Handled by:
-   * {@link com.moz.fiji.rest.resources.FijiRESTResource#getVersion}
+   * <ul>
+   * <li>Path: /v1/version</li>
+   * <li>Handled by:</li>
+   * </ul>
+   * {@code com.moz.fiji.rest.resources.FijiRESTResource#getVersion}
    */
   public static final String VERSION_ENDPOINT = "/version";
 
   /**
    * GETs a list of instances that are available.
-   * <li>Path: /v1/instances/
-   * <li>Handled by:
-   * {@link com.moz.fiji.rest.resources.InstancesResource#getInstanceList}
+   * <ul>
+   * <li>Path: /v1/instances/</li>
+   * <li>Handled by:</li>
+   * </ul>
+   * {@code com.moz.fiji.rest.resources.InstancesResource#getInstanceList}
    */
   public static final String INSTANCES_PATH = API_VERSION + "/instances";
 
   /**
    * GETs instance level metadata.
-   * <li>Path: /v1/instances/{instance}
-   * <li>Handled by:
-   * {@link com.moz.fiji.rest.resources.InstanceResource#getInstanceMetadata}
+   * <ul>
+   * <li>Path: /v1/instances/{instance}</li>
+   * <li>Handled by:</li>
+   * </ul>
+   * {@code com.moz.fiji.rest.resources.InstanceResource#getInstanceMetadata}
    */
   public static final String INSTANCE_PARAMETER = "instance";
   public static final String INSTANCE_PATH = INSTANCES_PATH + "/{" + INSTANCE_PARAMETER + "}";
 
   /**
    * GETs a list of tables in the specified instance.
-   * <li>Path: /v1/instances/{instance}/tables
-   * <li>Handled by:
-   * {@link com.moz.fiji.rest.resources.TablesResource#getTables}
+   * <ul>
+   * <li>Path: /v1/instances/{instance}/tables</li>
+   * <li>Handled by:</li>
+   * </ul>
+   * {@code com.moz.fiji.rest.resources.TablesResource#getTables}
    */
   public static final String TABLES_PATH = INSTANCE_PATH + "/tables";
 
   /**
    * GETs the layout of the specified table.
-   * <li>Path: /v1/instances/{instance}/tables/{table}
-   * <li>Handled by:
-   * {@link com.moz.fiji.rest.resources.TableResource#getTable}
+   * <ul>
+   * <li>Path: /v1/instances/{instance}/tables/{table}</li>
+   * <li>Handled by:</li>
+   * </ul>
+   * {@code com.moz.fiji.rest.resources.TableResource#getTable}
    */
   public static final String TABLE_PARAMETER = "table";
   public static final String TABLE_PATH = TABLES_PATH + "/{" + TABLE_PARAMETER + "}";
 
   /**
    * GETs rows resources.
-   * <li>Path: /v1/instances/{instance}/tables/{table}/rows/
-   * <li>Handled by:
-   * {@link com.moz.fiji.rest.resources.RowsResource#getRows}
+   * <ul>
+   * <li>Path: /v1/instances/{instance}/tables/{table}/rows/</li>
+   * <li>Handled by:</li>
+   * </ul>
+   * {@code com.moz.fiji.rest.resources.RowsResource#getRows}
    */
   public static final String ROWS_PATH = TABLE_PATH + "/rows";
 }

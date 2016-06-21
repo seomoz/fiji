@@ -33,7 +33,7 @@ import com.moz.fiji.mapreduce.bulkimport.FijiBulkImporter;
  * <p>You can extend this bulk importer to import text data into a Fiji
  * table.  Each line in the file will be treated as one row of input data.
  * For each line, you should generate a single EntityId to write to, and any number
- * of writes to add to that entity.  Override the {@link #produce(Text, Context)}
+ * of writes to add to that entity.  Override the {@link #produce(Text, FijiTableContext)}
  * method with this behavior.</p>
  *
  * @deprecated This class adds few capabilities; see {@link DescribedInputTextBulkImporter}

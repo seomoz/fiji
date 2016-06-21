@@ -43,7 +43,7 @@ import com.moz.fiji.schema.FijiURI;
  *
  * <p>
  *   This output format exists in addition to the
- *   {@link com.moz.fiji.mapreduce.framework.FijiTableOutputFormat} because we need one that is
+ *   {@code com.moz.fiji.mapreduce.framework.FijiTableOutputFormat} because we need one that is
  *   an instance of mapred.InputFormat (not mapreduce.FijiTableOutputFormat) for integration with
  *   Hive.
  * </p>

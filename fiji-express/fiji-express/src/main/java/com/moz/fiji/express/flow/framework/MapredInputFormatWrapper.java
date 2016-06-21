@@ -44,18 +44,18 @@ import org.apache.hadoop.util.ReflectionUtils;
  * This file was adapted from: https://github.com/kevinweil/elephant-bird/blob/master/core/src/main/
  * java/com/twitter/elephantbird/mapred/input/DeprecatedInputFormatWrapper.java
  *
- * The wrapper enables an {@link InputFormat} written for new
+ * <p>The wrapper enables an {@link InputFormat} written for new
  * <code>mapreduce</code> interface to be used unmodified in contexts where
  * a {@link org.apache.hadoop.mapred.InputFormat} with old <code>mapred</code>
  * interface is required. </p>
  *
  * Current restrictions on InputFormat: <ul>
- *    <li> the record reader should reuse key and value objects
+ *    <li> the record reader should reuse key and value objects</li>
  * </ul>
  *
- * While this restriction is satisfied by most input formats,
+ * <p>While this restriction is satisfied by most input formats,
  * it could be removed with a configuration option.
- * <p>
+ * </p>
  *
  * Usage: <pre>
  *    // set InputFormat class using a mapreduce InputFormat

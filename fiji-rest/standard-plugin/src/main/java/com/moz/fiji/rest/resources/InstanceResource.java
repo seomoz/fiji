@@ -42,7 +42,9 @@ import com.moz.fiji.schema.avro.MetadataBackup;
  * This REST resource interacts with Fiji instances.
  *
  * This resource is served for requests using the resource identifier:
- * <li>/v1/instances/&lt;instance&gt;
+ * <ul>
+ * <li>/v1/instances/&lt;instance&gt;</li>
+ * </ul>
  */
 @Path(INSTANCE_PATH)
 @Produces(MediaType.APPLICATION_JSON)

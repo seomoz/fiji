@@ -22,6 +22,7 @@
  *
  * <p>
  * Bulk imports are run from the shell:
+ * </p>
  * <pre>
  *   fiji bulk-import \
  *       --fiji=${FIJI} \
@@ -30,7 +31,6 @@
  *       --output="format=fiji table=${FIJI}/songs nsplits=1" \
  *       --input="format=text file=${HDFS_ROOT}/fiji-mr-tutorial/song-metadata.json"
  * </pre>
- * </p>
  *
  * <p>
  * The two classes in this package are very similar.  Both import data from a text file

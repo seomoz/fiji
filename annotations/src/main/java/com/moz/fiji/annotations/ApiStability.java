@@ -38,7 +38,7 @@ import java.lang.annotation.Documented;
  *     use Experimental instead.</li>
  * </ul>
  *
- * <p>{@link Private} APIs should all be considered {@link Unstable}.</p>
+ * <p>Private APIs should all be considered {@link Unstable}.</p>
  */
 @ApiAudience.Framework
 @ApiStability.Evolving

@@ -34,15 +34,15 @@ import com.moz.fiji.annotations.ApiAudience;
  * <p>This allows you to use runtime-configured dependency injection to specify
  * the implementation, like so:</p>
  *
- * <div><tt><pre>class Foo {
- *   @AutoLookup
+ * <pre>class Foo {
+ *   {@literal @}AutoLookup
  *   private Bar myBar;
  *
  *   public Foo() {
  *     Delegation.init(this); // Populate AutoLookup fields.
  *     // Use myBar here.
  *   }
- * }</pre></tt></div>
+ * }</pre>
  *
  * <p>The implementation of the <tt>Bar</tt> interface or abstract class will be chosen
  * by consulting the fiji-delegation.properties resource(s) on the classpath. See

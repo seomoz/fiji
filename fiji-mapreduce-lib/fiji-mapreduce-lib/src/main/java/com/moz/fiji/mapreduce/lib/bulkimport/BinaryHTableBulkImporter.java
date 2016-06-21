@@ -54,7 +54,7 @@ import com.moz.fiji.schema.FijiColumnName;
  * specify the type of encoding that was used for each input HTable column.  Any of the primitive
  * types supported by the HBase <code>Bytes</code> utility class may be used here:</p>
  *
- * <table>
+ * <table summary="">
  *   <tr><th>HBase <i>input-type</i></th><th>Avro schema</th><th>Decoding method</th></tr>
  *   <tr><td>boolean</td><td>"boolean"</td><td>Bytes.toBoolean(byte[])</td></tr>
  *   <tr><td>bytes</td><td>"bytes"</td><td><i>none</i></td></tr>

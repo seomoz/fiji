@@ -48,7 +48,7 @@ import com.moz.fiji.schema.util.ResourceUtils;
  *
  * <p>
  *   This input format exists in addition to the
- *   {@link com.moz.fiji.mapreduce.framework.FijiTableInputFormat} because we need one that is
+ *   {@code com.moz.fiji.mapreduce.framework.FijiTableInputFormat} because we need one that is
  *   an instance of mapred.InputFormat (not mapreduce.InputFormat) for integration with hive.
  * </p>
  *

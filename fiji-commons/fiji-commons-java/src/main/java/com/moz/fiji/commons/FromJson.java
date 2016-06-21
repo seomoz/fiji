@@ -56,8 +56,8 @@ public final class FromJson {
 
   /**
    * Decodes a JSON node as an Avro value.
-   * <p/>
-   * Comply with specified default values when decoding records with missing fields.
+   *
+   * <p>Comply with specified default values when decoding records with missing fields.</p>
    *
    * @param json   JSON node to decode.
    * @param schema Avro schema of the value to decode.

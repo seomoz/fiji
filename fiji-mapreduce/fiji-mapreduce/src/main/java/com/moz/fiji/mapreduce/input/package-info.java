@@ -24,9 +24,10 @@
  *   {@link com.moz.fiji.mapreduce.MapReduceJobInput} is the base type for classes that can act
  *   as inputs to a MapReduce job for jobs that are created using a
  *   {@link com.moz.fiji.mapreduce.framework.MapReduceJobBuilder}.
- * <p>
+ * </p>
  *
  * <h2>Usable FijiMR input types</h2>
+ * <ul>
  * <li>{@link com.moz.fiji.mapreduce.input.AvroKeyMapReduceJobInput} - Avro container files containing
  *     keys as input.</li>
  * <li>{@link com.moz.fiji.mapreduce.input.AvroKeyValueMapReduceJobInput} - Avro container files
@@ -39,6 +40,7 @@
  *     each line as a row.</li>
  * <li>{@link com.moz.fiji.mapreduce.input.WholeTextFileMapReduceJobInput} - text files in HDFS as
  *     input with each file as a row.</li>
+ * </ul>
  *
  * @see com.moz.fiji.mapreduce.framework.MapReduceJobBuilder
  */

@@ -83,12 +83,13 @@ public final class FijiTableMapReduceJobInput extends MapReduceJobInput {
    * <p>
    *   The settings here are used conjunctively with an AND operator.  In other words, a
    *   row will be included if and only if it is:
-   *   <ul>
-   *     <li>lexicographically equal to or after the start row, <em>and</em></li>
-   *     <li>lexicographically before the limit row, <em>and</em></li>
-   *     <li>accepted by the row filter.</li>
-   *   </ul>
    * </p>
+   *
+   * <ul>
+   *   <li>lexicographically equal to or after the start row, <em>and</em></li>
+   *   <li>lexicographically before the limit row, <em>and</em></li>
+   *   <li>accepted by the row filter.</li>
+   * </ul>
    *
    * @see FijiRowFilter for more information about filtering which rows get read from
    *     the Fiji table.

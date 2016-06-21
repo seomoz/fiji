@@ -40,10 +40,14 @@ import com.moz.fiji.schema.FijiURI;
  *
  * <p>
  *   Use of this job output configuration is discouraged for many reasons:
- *   <ul>
- *     <li> It may induce a very high load on the target HBase cluster.
- *     <li> It may result in partial writes (eg. if the job fails half through).
- *   </ul>
+ * </p>
+ *
+ * <ul>
+ *   <li> It may induce a very high load on the target HBase cluster.
+ *   <li> It may result in partial writes (eg. if the job fails half through).
+ * </ul>
+ *
+ * <p>
  *   The recommended way to write to HBase tables is through the {@link HFileMapReduceJobOutput}.
  * </p>
  *

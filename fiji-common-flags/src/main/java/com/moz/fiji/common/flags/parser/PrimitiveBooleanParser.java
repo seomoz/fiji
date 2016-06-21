@@ -24,13 +24,15 @@ import com.moz.fiji.common.flags.IllegalFlagValueException;
  * Parser for command-line flag parameters of native type boolean.
  *
  * Notes:
+ * <ul>
  *   <li> flag evaluates to true if and only if the string value is "true" or "yes"
- *        (case insensitive match).
+ *        (case insensitive match).</li>
  *   <li> flag evaluates to false if and only if the string value is "false" or "no"
- *        (case insensitive match).
- *   <li> <code>"--flag"</code> is evaluated as <code>"--flag=true"</code>
- *   <li> <code>"--flag="</code> is evaluated as <code>"--flag=true"</code>
- *   <li> Other inputs are rejected.
+ *        (case insensitive match).</li>
+ *   <li> <code>"--flag"</code> is evaluated as <code>"--flag=true"</code></li>
+ *   <li> <code>"--flag="</code> is evaluated as <code>"--flag=true"</code></li>
+ *   <li> Other inputs are rejected.</li>
+ * </ul>
  */
 public class PrimitiveBooleanParser extends SimpleValueParser<Boolean> {
   /** {@inheritDoc} */

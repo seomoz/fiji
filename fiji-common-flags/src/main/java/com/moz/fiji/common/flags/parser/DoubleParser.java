@@ -23,8 +23,10 @@ import com.moz.fiji.common.flags.IllegalFlagValueException;
 /**
  * Parser for command-line arguments of type Double (object).
  *
- * <li> <code>"--flag"</code> evaluates to <code>null</code>
- * <li> <code>"--flag="</code> is invalid.
+ * <ul>
+ *   <li> <code>"--flag"</code> evaluates to <code>null</code></li>
+ *   <li> <code>"--flag="</code> is invalid.</li>
+ * </ul>
  */
 public class DoubleParser extends NullableSimpleValueParser<Double> {
   /** {@inheritDoc} */

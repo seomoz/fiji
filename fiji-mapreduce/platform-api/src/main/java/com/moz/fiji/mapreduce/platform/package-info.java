@@ -23,7 +23,7 @@
  *
  * <p>Currently supported backends include:/<p>
  * <ul>
- *   <li>{@link CDH4MR1FijiMRBridge} -
+ *   <li>{@code CDH4MR1FijiMRBridge} -
  *       CDH4 is based on Hadoop 2.0 and supports the "MapReduce 1.0" (non-YARN) model.</li>
  *   <li><tt>Hadoop1xFijiMRBridge</tt> -
  *       General support for Apache Hadoop 1.0.x-based distributions (Work

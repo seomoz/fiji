@@ -31,7 +31,9 @@ import com.moz.fiji.rest.ManagedFijiClient;
  * This REST resource interacts with Fiji instances collection resource.
  *
  * This resource is served for requests using the resource identifier:
- * <li>/v1/instances/
+ * <ul>
+ * <li>/v1/instances/</li>
+ * </ul>
  */
 @ApiAudience.Public
 public class RefreshInstancesTask extends Task {

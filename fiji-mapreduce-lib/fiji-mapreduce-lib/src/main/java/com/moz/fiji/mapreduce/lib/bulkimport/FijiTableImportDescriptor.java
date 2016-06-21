@@ -79,7 +79,7 @@ import com.moz.fiji.schema.util.ToJson;
  * </code></pre>
  *
  * <h2>Overall structure</h2>
- * <p>At the top-level, a table import descriptor contains:
+ * <p>At the top-level, a table import descriptor contains:</p>
  * <ul>
  *   <li>the table that is the destination of the import.</li>
  *   <li>the table column families.</li>
@@ -87,15 +87,12 @@ import com.moz.fiji.schema.util.ToJson;
  *   <li>(optional) timestamp to use instead of system timestamp.</li>
  *   <li>format version of the import descriptor.</li>
  * </ul>
- * </p>
  *
- * <p>Each column family has:
+ * <p>Each column family has:</p>
  * <ul>
  *   <li>the name of the destination column.</li>
  *   <li>the name of the source field to import from.</li>
  * </ul>
- * </p>
- *
  */
 @ApiAudience.Public
 public final class FijiTableImportDescriptor {

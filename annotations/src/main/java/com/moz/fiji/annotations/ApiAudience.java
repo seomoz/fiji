@@ -33,12 +33,12 @@ import java.lang.annotation.Documented;
  *     have difficulty upgrading Fiji versions.</li>
  *   <li>The {@link Framework} publicity level is reserved for APIs that allow
  *     communication between Fiji modules (e.g., between FijiSchema and fiji-schema-shell).
- *     These are not intended for direct use by clients. Authors
+ *     <p>These are not intended for direct use by clients. Authors
  *     of system-level tools may use these APIs, but should keep a close eye
- *     on dev@fiji.org and issues@fiji.org.<br/>
+ *     on dev@fiji.org and issues@fiji.org.</p>
  *
- *     Framework-public APIs <b>may change in incompatible ways</b> between
- *     minor releases (1.1.0 -&gt; 1.2.0) of a component.</li>
+ *     <p>Framework-public APIs <b>may change in incompatible ways</b> between
+ *     minor releases (1.1.0 -&gt; 1.2.0) of a component.</p></li>
  *   <li>The {@link Private} publicity level is used for code whose audience is
  *     restricted to the current module (e.g., within FijiSchema). This code may
  *     change in incompatible ways at any time.</li>

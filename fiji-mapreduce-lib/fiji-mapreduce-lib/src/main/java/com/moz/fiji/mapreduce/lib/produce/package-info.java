@@ -29,9 +29,11 @@
  * </p>
 
  * <h2>Usable producers:</h2>
+ * <ul>
  * <li>{@link com.moz.fiji.mapreduce.lib.produce.ConfiguredRegexProducer} - extracts data via
  *     regex.</li>
  * <li>{@link com.moz.fiji.mapreduce.lib.produce.IdentityProducer} - copies data from one family or
  *     column to another.</li>
+ * </ul>
  */
 package com.moz.fiji.mapreduce.lib.produce;

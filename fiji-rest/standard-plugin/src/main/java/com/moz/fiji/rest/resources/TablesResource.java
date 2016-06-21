@@ -48,7 +48,9 @@ import com.moz.fiji.schema.Fiji;
  * This REST resource interacts with Fiji tables.
  *
  * This resource is served for requests using the resource identifier:
- * <li>/v1/instances/&lt;instance&gt;/tables
+ * <ul>
+ * <li>/v1/instances/&lt;instance&gt;/tables</li>
+ * </ul>
  */
 @Path(TABLES_PATH)
 @Produces(MediaType.APPLICATION_JSON)

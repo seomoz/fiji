@@ -66,12 +66,14 @@ import com.moz.fiji.schema.FijiDataRequestBuilder;
  * fields inside records across multiple cells.</p>
  *
  * <p>Valid expressions:</p>
- * <li> family - map[string, array[struct[int, fields...]]]
- * <li> family[0] - map[string, struct[int, fields...]]
- * <li> family:qualifier - array[struct[int, fields...]]
- * <li> family:qualifier[3] - struct[int, fields...]
- * <li> family:qualifier[0].field - fieldtype
- * <li> family:qualifier[-1].timestamp - timestamp (of the oldest cell)
+ * <ul>
+ *  <li> family - map[string, array[struct[int, fields...]]]</li>
+ *  <li> family[0] - map[string, struct[int, fields...]]</li>
+ *  <li> family:qualifier - array[struct[int, fields...]]</li>
+ *  <li> family:qualifier[3] - struct[int, fields...]</li>
+ *  <li> family:qualifier[0].field - fieldtype</li>
+ *  <li> family:qualifier[-1].timestamp - timestamp (of the oldest cell)</li>
+ * </ul>
  */
 public class FijiRowExpression {
   private static final Logger LOG = LoggerFactory.getLogger(FijiRowExpression.class);

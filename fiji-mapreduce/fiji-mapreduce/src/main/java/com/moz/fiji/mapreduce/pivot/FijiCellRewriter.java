@@ -62,12 +62,16 @@ import com.moz.fiji.schema.layout.ColumnReaderSpec;
  * <p>
  *   FijiCellRewriter is an example of a Pivot M/R job to rewrite cells in a Fiji table by
  *   performing a chain of compatible Avro conversions.
- * <br/>
+ * </p>
+ *
+ * <p>
  *   This job rewrites the cells from a map-type family or a fully-qualified column at a time.
  *   The rewritten cells may be written either to the same column or family of the input Fiji table,
  *   or to the same column or family of a different Fiji table, potentially in a different Fiji
  *   instance.
- * <br/>
+ * </p>
+ *
+ * <p>
  *   An example demonstrating how to use this job is available in {@code TestFijiCellRewriter}.
  * </p>
  */

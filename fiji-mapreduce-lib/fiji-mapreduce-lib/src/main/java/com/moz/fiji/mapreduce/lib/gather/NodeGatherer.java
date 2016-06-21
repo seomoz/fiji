@@ -32,7 +32,7 @@ import com.moz.fiji.mapreduce.gather.FijiGatherer;
 import com.moz.fiji.mapreduce.lib.avro.Node;
 
 /**
- * Base class for gatherers that output <key, Node> pairs.
+ * Base class for gatherers that output {@code <key, Node>} pairs.
  *
  * @param <K> The type of the MapReduce output key.
  */

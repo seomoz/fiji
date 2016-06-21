@@ -57,11 +57,13 @@ import com.moz.fiji.schema.util.ResourceUtils;
  * Fiji context that emits puts for the configured output table to HFiles.
  *
  * This is the recommended way for writing to an HBase table.
+ * <ul>
  *  <li> This context provides some level of atomicity and isolation
- *       (no partial writes to the table while the M/R job runs, or if the M/R job fails).
- *  <li> Region servers are not hammered but a sustained stream of puts while the M/R job.
+ *       (no partial writes to the table while the M/R job runs, or if the M/R job fails).</li>
+ *  <li> Region servers are not hammered but a sustained stream of puts while the M/R job.</li>
  *  <li> After the M/R job completed successfully, the output is committed to the HBase table
- *       using the HFileLoader.
+ *       using the HFileLoader.</li>
+ * </ul>
  */
 @ApiAudience.Private
 public final class HFileWriterContext

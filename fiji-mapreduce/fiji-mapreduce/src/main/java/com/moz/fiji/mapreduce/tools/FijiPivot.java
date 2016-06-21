@@ -51,15 +51,14 @@ import com.moz.fiji.schema.util.ResourceUtils;
  * <p>
  * Here is an example of command-line to launch a FijiPivoter named {@code package.SomePivoter}
  * on the rows from an input table {@code fiji://.env/input_instance/input_table}
- * while writing cells to another output table {@code fiji://.env/output_instance/output_table}:
- * <pre><blockquote>
+ * while writing cells to another output table {@code fiji://.env/output_instance/output_table}: </p>
+ * <pre>
  *   $ fiji pivot \
  *       --pivoter='package.SomePivoter' \
  *       --input="format=fiji table=fiji://.env/default/input_table" \
  *       --output="format=fiji table=fiji://.env/default/output_table nsplits=5" \
  *       --lib=/path/to/libdir/
- * </blockquote></pre>
- * </p>
+ * </pre>
  */
 @ApiAudience.Private
 public final class FijiPivot extends FijiJobTool<FijiPivotJobBuilder> {

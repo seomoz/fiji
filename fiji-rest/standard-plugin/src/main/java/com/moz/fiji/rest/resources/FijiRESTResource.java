@@ -43,8 +43,10 @@ import com.moz.fiji.schema.util.VersionInfo;
  * This REST resource interacts with the Fiji cluster.
  *
  * This resource is served for requests using the resource identifiers:
- * <li>/v1/
- * <li>/v1/version
+ * <ul>
+ * <li>/v1/</li>
+ * <li>/v1/version</li>
+ * </ul>
  */
 @Path(API_ENTRY_PATH)
 @Produces(MediaType.APPLICATION_JSON)

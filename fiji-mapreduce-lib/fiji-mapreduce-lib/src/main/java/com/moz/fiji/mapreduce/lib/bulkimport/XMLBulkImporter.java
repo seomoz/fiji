@@ -49,7 +49,7 @@ import com.moz.fiji.schema.FijiColumnName;
  * within a record, CDATA element, or comment.  Each record will be imported to a single row.
  * Comments and CDATA containing record delimiting tags will be read as valid tags and may cause the
  * record reader to return invalid records.  Other comments and CDATA will be parsed normally. This
- * bulk importer uses {@link javax.xml.DocumentBuilder} to parse XML records and XPath to convert
+ * bulk importer uses {@code javax.xml.DocumentBuilder} to parse XML records and XPath to convert
  * records to fields.
  *
  * <p>
@@ -57,16 +57,15 @@ import com.moz.fiji.schema.FijiColumnName;
  *  understand XML structures and will fail to properly differentiate records if the specified
  *  record delimiting tag occurs within records. For example, the following code will yield a
  *  malformed record because the record reader will find a <code>&lt;/record&gt;</code> tag before
- *  the full record has been read.
+ *  the full record has been read.</p>
  * <pre><code>&lt;record&gt;
  *   &lt;user&gt;
  *     &lt;record&gt;
  *     &lt;/record&gt;
  *   &lt;/user&gt;
- * &lt;/record&gt;</code></pre></p>
+ * &lt;/record&gt;</code></pre>
  *
- * <h4>An example of valid XML and an input descriptor</h4>
- * <p>
+ * <p>An example of valid XML and an input descriptor</p>
  * <pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
  *   &lt;users&gt;
  *     &lt;user id=001&gt;
@@ -107,7 +106,6 @@ import com.moz.fiji.schema.FijiColumnName;
  *   entityIdSource : "user/email"
  *   version : "import-1.0"
  * }</code></pre>
- * </p>
  * <p>
  * To import data from the XML file above using the import descriptor, the record delimiting tag
  * should be set to <code>user</code>.  The source fields in the import descriptor are XPath
@@ -116,7 +114,7 @@ import com.moz.fiji.schema.FijiColumnName;
  * only, not the original source file.
  * </p>
  *
- * <h4>Common XPath expressions</h4>
+ * <p>Common XPath expressions</p>
  * <p>
  * <code>user/email</code> or <code>user/email[1]</code> returns the text content of the first
  * <code>email</code> tag inside the user record. <code>user/email[2]</code> returns the text
@@ -141,7 +139,7 @@ import com.moz.fiji.schema.FijiColumnName;
  *   conf.set(XMLInputFormat.RECORD_TAG_CONF_KEY, "user");
  *   // Set the XML header.  This line is unnecessary in this case, because the header matches the
  *   // default value.
- *   conf.set(XMLInputFormat.XML_HEADER_CONF_KEY, "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+ *   conf.set(XMLInputFormat.XML_HEADER_CONF_KEY, "&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;");
  *   // Configure and create the MapReduce job.
  *   final MapReduceJob job = FijiBulkImportJobBuilder.create()
         .withConf(conf)
@@ -165,7 +163,7 @@ import com.moz.fiji.schema.FijiColumnName;
  *  "fiji.input.xml.record.tag" should be set to the XML tag used to delimit records (the tag should
  *  be specified without angle brackets as they will be added by the record reader automatically).
  *  "fiji.input.xml.header" should be set to the XML header line containing version and encoding
- *  information (e.g. <tt><?xml version=\"1.0\" encoding=\"UTF-8\"?></tt> is the default header
+ *  information (e.g. <tt>&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;</tt> is the default header
  *  value) which will be used to interpret records if necessary. Configuration keys should be
  *  specified at the beginning of the argument list to <code>fiji bulk-import</code> because the
  *  keys are needed by other arguments for configuration.

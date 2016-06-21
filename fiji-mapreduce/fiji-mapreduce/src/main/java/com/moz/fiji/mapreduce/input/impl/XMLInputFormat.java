@@ -48,7 +48,7 @@ import com.moz.fiji.annotations.ApiAudience;
  * will be read as valid tags and may cause the record reader to return invalid records.
  *
  * This Input format can be used with the stock
- * {@link com.moz.fiji.mapreduce.lib.bulkimport.XMLBulkImporter}.
+ * {@code com.moz.fiji.mapreduce.lib.bulkimport.XMLBulkImporter}.
  */
 @ApiAudience.Private
 public final class XMLInputFormat extends FileInputFormat<LongWritable, Text> {

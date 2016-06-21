@@ -32,6 +32,7 @@
  * </p>
  *
  * <h2>Usable bulk importers:</h2>
+ * <ul>
  * <li>{@link com.moz.fiji.mapreduce.lib.bulkimport.CommonLogBulkImporter} - Common Log bulk
  *     importer</li>
  * <li>{@link com.moz.fiji.mapreduce.lib.bulkimport.CSVBulkImporter} - CSV (Comma Separated Value)
@@ -44,6 +45,7 @@
  *     from this including:</li>
  * <li>{@link com.moz.fiji.mapreduce.lib.bulkimport.FijiTableImportDescriptor} - The bulk import
  *     mapping import configuration.</li>
+ * </ul>
  */
 
 package com.moz.fiji.mapreduce.lib.bulkimport;

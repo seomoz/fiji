@@ -31,28 +31,11 @@ import com.moz.fiji.annotations.Inheritance;
  * through a {@link ConfiguredLookup}.
  *
  * <p>This allows you to use runtime-configured dependency injection to specify
- * the implementation, like so:</p>
+ * the implementation.  See {@link Delegation#init(Object)} for more information.</p>
  *
- * <div><tt><pre>import com.moz.fiji.delegation.AutoLookup;
- * import com.moz.fiji.delegation.Delegation;
- *
- * class Foo {
- *   @AutoLookup
- *   private Bar myBar;
- *
- *   public Foo() {
- *     Delegation.init(this); // Populate AutoLookup fields.
- *     // Use myBar here.
- *   }
- * }</pre></tt></div>
- *
- * <p>The implementation of the <tt>Bar</tt> interface or abstract class will be chosen
- * by consulting the fiji-delegation.properties resource(s) on the classpath. See
- * {@link Delegation#init(Object)} for more information.</p>
- *
- * <p>Fields with non-null values are ignored, to prevent multiple calls to {@link #init}
- * from accidentally overwriting values already in use. You must explicitly null out fields
- * before reinitializing them.</p>
+ * <p>Fields with non-null values are ignored, to prevent multiple calls to {@code #init}
+ * from accidentally overwriting values already in use. You must explicitly null out
+ * fields before reinitializing them.</p>
  */
 @ApiAudience.Public
 @Inheritance.Sealed

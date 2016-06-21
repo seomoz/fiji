@@ -96,8 +96,10 @@ import com.moz.fiji.schema.util.ResourceUtils;
 /**
  * This REST resource interacts with Fiji tables.
  *
- * This resource is served for requests using the resource identifier: <li>
- * /v1/instances/&lt;instance&gt;/tables/&lt;table&gt;/rows
+ * This resource is served for requests using the resource identifier:
+ * <ul>
+ * <li>/v1/instances/&lt;instance&gt;/tables/&lt;table&gt;/rows</li>
+ * </ul>
  */
 @Path(ROWS_PATH)
 @Produces(MediaType.APPLICATION_JSON)

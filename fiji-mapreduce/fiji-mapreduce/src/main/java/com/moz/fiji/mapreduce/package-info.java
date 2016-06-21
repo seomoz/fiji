@@ -29,19 +29,23 @@
  * <p>
  *   FijiMR contains many job builders for various types of MapReduce jobs.
  * </p>
+ * <ul>
  * <li>{@link com.moz.fiji.mapreduce.bulkimport Bulk Importers} - for the creation of bulk
- *     import jobs which allow data to be inserted into Fiji tables efficiently.
+ *     import jobs which allow data to be inserted into Fiji tables efficiently.</li>
  * <li>{@link com.moz.fiji.mapreduce.produce Producers} - for the creation of produce jobs
- *     which generate per-row derived entity data.
+ *     which generate per-row derived entity data.<!--  -->
  * <li>{@link com.moz.fiji.mapreduce.gather Gatherers} - for the creation of gather jobs
  *     which scan over the rows of a Fiji table to aggregate information which can be passed to a
- *     reducer.
+ *     reducer.<!--  -->
  * <li>{@link com.moz.fiji.mapreduce.FijiMapReduceJobBuilder General MapReduce} - for the creation of
  *     general MapReduce jobs around Fiji mappers and reducers.</li>
+ * </ul>
  *
  * <h2>Utility packages for MapReduce job construction:</h2>
+ * <ul>
  * <li>{@link com.moz.fiji.mapreduce.input} - input formats for MapReduce jobs</li>
  * <li>{@link com.moz.fiji.mapreduce.output} - output formats for MapReduce jobs</li>
  * <li>{@link com.moz.fiji.mapreduce.kvstore} - Key-Value store API used in MapReduce jobs</li>
+ * </ul>
  */
 package com.moz.fiji.mapreduce;

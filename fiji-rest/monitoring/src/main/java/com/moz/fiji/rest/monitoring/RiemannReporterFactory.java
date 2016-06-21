@@ -37,9 +37,9 @@ import com.moz.fiji.commons.SocketAddressUtils;
 
 /**
  * A factory for {@link RiemannReporter} instances.
- * <p/>
+ *
  * <b>Configuration Parameters:</b>
- * <table>
+ * <table summary="">
  *     <tr>
  *         <td>Name</td>
  *         <td>Default</td>

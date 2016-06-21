@@ -21,11 +21,13 @@
  * Reducers for FijiMR.
  *
  * <h2>Usable reducers:</h2>
+ * <ul>
  * <li>{@link com.moz.fiji.mapreduce.lib.reduce.DoubleSumReducer} - for all double values with the same
  *     key, returns a single pair with a double value equal to the sum.</li>
  * <li>{@link com.moz.fiji.mapreduce.lib.reduce.IntSumReducer} - for all int values with the same
  *     key, returns a single pair with a int value equal to the sum.</li>
  * <li>{@link com.moz.fiji.mapreduce.lib.reduce.LongSumReducer} - for all long values with the same
  *     key, returns a single pair with a long value equal to the sum.</li>
+ * </ul>
  */
 package com.moz.fiji.mapreduce.lib.reduce;

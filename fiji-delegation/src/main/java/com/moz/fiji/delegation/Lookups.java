@@ -131,7 +131,7 @@ public final class Lookups {
 
   /**
    * Creates a lookup instance that can resolve providers for the specified class
-   * or interface, by using a configuration file or resouce. See {@link ConfiguredProvider}.
+   * or interface, by using a configuration file or resouce. See {@code ConfiguredProvider}.
    *
    * @param <T> the type that this Lookup instance should provide.
    * @param clazz the abstract class or interface to lookup a provider for.
@@ -143,7 +143,7 @@ public final class Lookups {
 
   /**
    * Creates a lookup instance that can resolve providers for the specified class
-   * or interface, by using a configuration file or resouce. See {@link ConfiguredProvider}.
+   * or interface, by using a configuration file or resouce. See {@code ConfiguredProvider}.
    *
    * @param <T> the type that this Lookup instance should provide.
    * @param clazz the abstract class or interface to lookup a provider for.

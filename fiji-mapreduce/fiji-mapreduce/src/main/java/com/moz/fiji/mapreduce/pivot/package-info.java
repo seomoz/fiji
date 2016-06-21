@@ -30,7 +30,7 @@
  *
  * <h2>Constructing a pivot job:</h2>
  * <p> A pivot job that writes HFiles can be created as follows: </p>
- * <pre><blockquote>
+ * <pre>
  *   final Configuration conf = ...;
  *   final FijiURI inputTableURI = ...;
  *   final FijiURI outputTableURI = ...;
@@ -42,7 +42,7 @@
  *           .newHFileMapReduceJobOutput(outputTableURI, hfilePath))
  *       .build();
  *   job.run();
- * </blockquote></pre>
+ * </pre>
  * <p>
  *   The {@code fiji pivot} command line tool wraps this functionality and can be used
  *   to launch pivot jobs.

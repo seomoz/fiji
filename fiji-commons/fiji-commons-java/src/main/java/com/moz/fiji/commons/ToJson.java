@@ -59,8 +59,8 @@ public final class ToJson {
 
   /**
    * Serializes a Java Avro value into JSON.
-   * <p/>
-   * When serializing records, fields whose value matches the fields' default value are omitted.
+   *
+   * <p>When serializing records, fields whose value matches the fields' default value are omitted.</p>
    *
    * @param value  the Java value to serialize.
    * @param schema Avro schema of the value to serialize.
@@ -192,8 +192,8 @@ public final class ToJson {
 
   /**
    * Encodes an Avro value into a JSON string.
-   * <p/>
-   * Fields with default values are omitted.
+   *
+   * <p>Fields with default values are omitted.</p>
    *
    * @param value  Avro value to encode.
    * @param schema Avro schema of the value.

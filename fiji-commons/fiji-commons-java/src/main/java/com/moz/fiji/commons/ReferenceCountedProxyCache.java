@@ -33,28 +33,16 @@ import com.moz.fiji.annotations.ApiStability;
 /**
  * A keyed cache which keeps track of how many outstanding users of the cached value exist.
  *
- * <p>
- *   When the values returned by {@link #get} are closed, their reference count is automatically
- *   decremented in the cache. When the reference count falls to 0, the cached value (which must
- *   implement {@link Closeable}), is removed from the cache and closed.
- * </p>
+ * When the values returned by {@link #get} are closed, their reference count is automatically decremented in the cache. When the reference count falls to 0, the cached value (which must implement {@link Closeable}), is removed from the cache and closed.
  *
- * <p>
- *   In general, this class is an easier to use version of {@link ReferenceCountedCache} (since
- *   values need not be manually returned), but it has a few caveats:
- *   <ul>
- *     <li>The value type must be an interface that extends {@code Closeable}.
- *     <li>The values loaned out by this cache have a small method call performance overhead.
- *     <li>Unless equality for the underlying class is based only on the interface methods, proxies
- *       with the same underlying value will not be equal.
- *   </ul>
- * </p>
+ * In general, this class is an easier to use version of {@link ReferenceCountedCache} (since values need not be manually returned), but it has a few caveats:
+ * <ul>
+ *   <li>The value type must be an interface that extends {@code Closeable}.</li>
+ *   <li>The values loaned out by this cache have a small method call performance overhead.</li>
+ *   <li>Unless equality for the underlying class is based only on the interface methods, proxies with the same underlying value will not be equal.</li>
+ * </ul>
  *
- * <p>
- *   The {@code ReferenceCountedProxyCache} may optionally be closed, which will preemptively close
- *   all cached entries regardless of reference count. See the javadoc of {@link #close()} for
- *   caveats.
- * </p>
+ * The {@code ReferenceCountedProxyCache} may optionally be closed, which will preemptively close all cached entries regardless of reference count. See the javadoc of {@link #close()} for caveats.
  *
  * @param <K> key type of cache.
  * @param <V> value type of cache. Must be an interface.

@@ -41,7 +41,7 @@ import com.moz.fiji.mapreduce.lib.graph.NodeUtils;
  * utility knife of aggregate analysis.  The gatherer's output records are grouped by key
  * by the MapReduce framework.  The <code>MergeNodeReducer</code>'s
  * <code>reduce()</code> method is called once per group.  The nodes in the group are
- * merged into a single node (see {@link com.wibidata.core.client.lib.graph.NodeUtils} for the
+ * merged into a single node (see {@code com.wibidata.core.client.lib.graph.NodeUtils} for the
  * merging algorithm).  The aggregation method of the merged node is determined by the
  * <code>merge.node.aggregate.type</code> configuration variable.<p>
  *

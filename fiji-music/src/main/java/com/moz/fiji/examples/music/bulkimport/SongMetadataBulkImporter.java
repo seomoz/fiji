@@ -39,6 +39,7 @@ import com.moz.fiji.schema.EntityId;
  *
  * <p>
  * Input files will contain JSON data representing song metadata, with one song per line:
+ * </p>
  * <pre>
  * {
  *   "song_id" : "0",
@@ -50,13 +51,14 @@ import com.moz.fiji.schema.EntityId;
  *   "duration" : "180"
  * }
  * </pre>
- * </p>
  *
  * <p>
  * The bulk-importer expects a text input format:
+ * </p>
+ * <ul>
  *   <li> input keys are the positions (in bytes) of each line in input file;</li>
  *   <li> input values are the lines, as Text instances.</li>
- * </p>
+ * </ul>
  */
 public class SongMetadataBulkImporter extends FijiBulkImporter<LongWritable, Text> {
   private static final Logger LOG = LoggerFactory.getLogger(SongMetadataBulkImporter.class);
