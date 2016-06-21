@@ -35,9 +35,8 @@ import com.moz.fiji.annotations.ApiStability;
  *   This iterator combines a {@link MapFamilyQualifierIterator} and many
  *   {@link ColumnVersionIterator}s
  * </p>
- * <p>
  *   You may construct a version iterator on a map-type family with paging enabled as follows:
- *   <tt><pre>{@code
+ *   <pre>{@code
  *   final String family = ...;
  *   final FijiDataRequest dataRequest = FijiDataRequest.builder()
  *       .addColumns(ColumnsDef.create()
@@ -58,8 +57,7 @@ import com.moz.fiji.annotations.ApiStability;
  *   } finally {
  *     iterable.close();
  *   }
- *   }</pre></tt>
- * </p>
+ *   }</pre>
  *
  * @param <T> Type of the cells in the map-type family.
  */

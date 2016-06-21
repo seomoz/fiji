@@ -97,15 +97,14 @@ import com.moz.fiji.schema.util.ToJson;
  * </p>
  *
  * <h1>Overall structure</h1>
- * <p>At the top-level, a table contains:
+ * <p>At the top-level, a table contains:</p>
  * <ul>
  *   <li>the table name and description;</li>
  *   <li>how row keys are encoded;</li>
  *   <li>the table locality groups.</li>
  * </ul>
- * </p>
  *
- * <p>Each locality group has:
+ * <p>Each locality group has:</p>
  * <ul>
  *   <li>a primary name, unique within the table, a description and some name aliases;</li>
  *   <li>whether the data is to be stored in memory or on disk;</li>
@@ -114,23 +113,20 @@ import com.moz.fiji.schema.util.ToJson;
  *   <li>type of compression;</li>
  *   <li>column families stored in this locality group</li>
  * </ul>
- * </p>
  *
- * <p>Each column family has:
+ * <p>Each column family has:</p>
  * <ul>
  *   <li>a primary name, globally unique within the table,
  *       a description and some name aliases;</li>
  *   <li>for map-type families, the Avro schema of the cell values;</li>
  *   <li>for group-type families, the collection of columns in the group.</li>
  * </ul>
- * </p>
  *
- * <p>Each column in a group-type family has:
+ * <p>Each column in a group-type family has:</p>
  * <ul>
  *   <li>a primary name, unique within the family, a description and some name aliases;</li>
  *   <li>an Avro schema.</li>
  * </ul>
- * </p>
  *
  * <h1>Layout descriptors</h1>
  *

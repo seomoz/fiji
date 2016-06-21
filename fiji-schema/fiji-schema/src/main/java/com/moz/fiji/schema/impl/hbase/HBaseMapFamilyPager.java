@@ -60,11 +60,8 @@ import com.moz.fiji.schema.util.Debug;
  *   This pager conforms to the FijiPager interface, in order to implement
  *   {@link FijiRowData#getPager(String)}.
  *   More straightforward interfaces are available using {@link HBaseQualifierPager} and
- *   {@link HBaseQualifierIterator}.
+ *   {@code HBaseQualifierIterator}.
  * </p>
- *
- * @see HBaseQualifierPager
- * @see HBaseQualifierIterator
  */
 @ApiAudience.Private
 public final class HBaseMapFamilyPager implements FijiPager {

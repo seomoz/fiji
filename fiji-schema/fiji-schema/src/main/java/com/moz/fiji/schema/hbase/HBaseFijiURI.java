@@ -55,16 +55,18 @@ import com.moz.fiji.schema.impl.hbase.HBaseFijiInstaller;
  *
  * The following are valid example {@code HBaseFijiURI}s:
  *
- * <li> {@code fiji-hbase://zkHost}
- * <li> {@code fiji-hbase://zkHost/instance}
- * <li> {@code fiji-hbase://zkHost/instance/table}
- * <li> {@code fiji-hbase://zkHost:zkPort/instance/table}
- * <li> {@code fiji-hbase://zkHost1,zkHost2/instance/table}
- * <li> {@code fiji-hbase://(zkHost1,zkHost2):zkPort/instance/table}
- * <li> {@code fiji-hbase://zkHost/instance/table/col}
- * <li> {@code fiji-hbase://zkHost/instance/table/col1,col2}
- * <li> {@code fiji-hbase://.env/instance/table}
- * <li> {@code fiji-hbase://.unset/instance/table}
+ * <ul>
+ * <li> {@code fiji-hbase://zkHost}</li>
+ * <li> {@code fiji-hbase://zkHost/instance}</li>
+ * <li> {@code fiji-hbase://zkHost/instance/table}</li>
+ * <li> {@code fiji-hbase://zkHost:zkPort/instance/table}</li>
+ * <li> {@code fiji-hbase://zkHost1,zkHost2/instance/table}</li>
+ * <li> {@code fiji-hbase://(zkHost1,zkHost2):zkPort/instance/table}</li>
+ * <li> {@code fiji-hbase://zkHost/instance/table/col}</li>
+ * <li> {@code fiji-hbase://zkHost/instance/table/col1,col2}</li>
+ * <li> {@code fiji-hbase://.env/instance/table}</li>
+ * <li> {@code fiji-hbase://.unset/instance/table}</li>
+ * </ul>
  */
 @ApiAudience.Framework
 @ApiStability.Evolving

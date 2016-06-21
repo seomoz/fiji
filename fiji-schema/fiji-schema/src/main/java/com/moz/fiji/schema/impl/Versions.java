@@ -119,7 +119,7 @@ public final class Versions {
    */
   public static final ProtocolVersion BLOCK_SIZE_LAYOUT_VERSION = LAYOUT_1_2_0;
 
-  /** Version of the layout that introduces {@link RowKeyFormat2}. */
+  /** Version of the layout that introduces {@code RowKeyFormat2}. */
   public static final ProtocolVersion RKF2_LAYOUT_VERSION = LAYOUT_1_1_0;
 
   /** Minimum layout version recognized by this client. */

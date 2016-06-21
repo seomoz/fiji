@@ -81,9 +81,11 @@ public final class ToolUtils {
   /**
    * Parses a command-line flag specifying an entity ID.
    *
-   * <li> HBase row key specifications must be prefixed with <code>"hbase=..."</code>
+   * <ul>
+   * <li> HBase row key specifications must be prefixed with <code>"hbase=..."</code></li>
    * <li> Fiji row key specifications may be explicitly prefixed with <code>"fiji=..."</code> if
-   *     necessary. The prefix is not always necessary.
+   *     necessary. The prefix is not always necessary.</li>
+   * </ul>
    *
    * @param entityFlag Command-line flag specifying an entity ID.
    * @param layout Layout of the table describing the entity ID format.
@@ -219,9 +221,11 @@ public final class ToolUtils {
    * Parses a command-line flag specifying a byte array.
    *
    * Valid specifications are:
-   *   <li> UTF-8 encoded strings, as in "utf8:encoded \x00 text".
-   *   <li> Hexadecimal sequence, with "hex:00dead88beefaa".
-   *   <li> URL encoded strings, as in "url:this%20is%20a%20URL".
+   * <ul>
+   *   <li> UTF-8 encoded strings, as in "utf8:encoded \x00 text".</li>
+   *   <li> Hexadecimal sequence, with "hex:00dead88beefaa".</li>
+   *   <li> URL encoded strings, as in "url:this%20is%20a%20URL".</li>
+   * </ul>
    *
    * UTF-8 is the default, hence the "utf8:" prefix is optional unless there is an ambiguity with
    * other prefixes.

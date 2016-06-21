@@ -77,12 +77,13 @@ public interface AtomicFijiPutter extends Closeable {
    * Atomically tests the content of a cell for a specific value,
    * and performs the accumulated puts if the test succeeds.
    *
-   * <p>
-   *   <li> If the passed value is null, the check is for the lack of a cell (i.e. non-existance).
+   * <ul>
+   *   <li> If the passed value is null, the check is for the lack of a cell (i.e. non-existance).</li>
    *   <li> If the check fails, the current transaction remains open and unmodified.
-   *        It is up to the caller to retry or rollback.
+   *        It is up to the caller to retry or rollback.</li>
    *   <li> If the commit succeeds, the current transaction is completed and a new transaction
-   *        may start with begin().
+   *        may start with begin().</li>
+   * </ul>
    *
    * @param family Column Family of the cell to check.
    * @param qualifier Column Qualifier of the cell to check.

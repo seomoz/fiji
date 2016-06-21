@@ -40,6 +40,7 @@ import com.moz.fiji.schema.hbase.HBaseScanOptions;
  *
  * <p>To get the three most recent versions of cell data from a column <code>bar</code> from
  * the family <code>foo</code> within the time range (123, 456):
+ * </p>
  * <pre>{@code
  *   FijiDataRequestBuilder builder = FijiDataRequest.builder()
  *     .withTimeRange(123L, 456L);
@@ -51,10 +52,10 @@ import com.moz.fiji.schema.hbase.HBaseScanOptions;
  *   final FijiTableReader reader = myFijiTable.openTableReader();
  *   final FijiRowData data = reader.get(myEntityId, request);
  * }</pre>
- * </p>
  *
  * <p>To get a row scanner across many records using the same column and version restrictions
  * from above:
+ * </p>
  * <pre>{@code
  *   final FijiRowScanner scanner = reader.getScanner(request);
  *
@@ -74,7 +75,6 @@ import com.moz.fiji.schema.hbase.HBaseScanOptions;
  * Finally, row caching may be configured via FijiScannerOptions.
  * By default, row caching is configured from the Hadoop Configuration property
  * {@code hbase.client.scanner.caching}.
- * </p>
  *
  * <p> Instantiated in Fiji Schema via {@link com.moz.fiji.schema.FijiTable#openTableReader()}. </p>
  * <p>

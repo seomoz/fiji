@@ -174,6 +174,7 @@ public abstract class FijiRowFilter {
    * FijiRowFilter.Context#getHBaseColumnName(FijiColumnName)} to
    * retrieve the HBase column family and qualifier.  Here's an implementation that
    * filters out rows where the latest version of the 'info:name' is equal to 'Bob'.
+   * </p>
    *
    * <pre>
    * FijiCell&lt;CharSequence&gt; bobCellValue = new FijiCell&lt;CharSequence&gt;(
@@ -188,7 +189,6 @@ public abstract class FijiRowFilter {
    * filter.setLatestVersionOnly(true);
    * filter.setFilterIfMissing(false);
    * return new SkipFilter(filter);</pre>
-   * </p>
    *
    * @param context A helper object you can use to convert Fiji objects into their HBase
    *     counterparts.

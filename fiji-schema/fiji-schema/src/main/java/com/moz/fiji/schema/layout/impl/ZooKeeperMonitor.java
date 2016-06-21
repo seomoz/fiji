@@ -56,6 +56,7 @@ import com.moz.fiji.schema.util.ZooKeeperLock;
  *
  * <p>
  *   The monitor roles include:
+ * </p>
  *   <ul>
  *     <li> Reporting new layout updates to active users of a table:
  *       When a table's layout is being updated, users of that table will receive a notification and
@@ -68,12 +69,12 @@ import com.moz.fiji.schema.util.ZooKeeperLock;
  *       on the table layout before applying further updates.
  *     </li>
  *   </ul>
- * </p>
  *
  * <h2> ZooKeeper node tree structure </h2>
  *
  * <p>
  *  The monitor manages a tree of ZooKeeper nodes organized as follows:
+ * </p>
  *  <ul>
  *    <li> {@code /fiji-schema} : Root ZooKeeper node for all Fiji instances. </li>
  *    <li> {@code /fiji-schema/instances/[instance-name]} :
@@ -84,7 +85,6 @@ import com.moz.fiji.schema.util.ZooKeeperLock;
  *        instance named "instance-name".
  *    </li>
  *  </ul>
- * </p>
  *
  * <h2> ZooKeeper nodes for a Fiji table </h2>
  *

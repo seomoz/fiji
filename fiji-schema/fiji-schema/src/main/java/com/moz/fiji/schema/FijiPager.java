@@ -34,10 +34,11 @@ import com.moz.fiji.annotations.Inheritance;
  *   at a time, to bound the amount of memory consumed on the client machine.
  * </p>
  * <p> To enable paging on a column, use
- *   {@link FijiDataRequestBuilder$ColumnsDef#withPageSize(int)} when building a
+ *   {@code FijiDataRequestBuilder$ColumnsDef#withPageSize(int)} when building a
  *   {@link FijiDataRequest}. For example, using a group type column <code>"info:name"</code>,
  *   you may request a maximum of 2 versions per page, with a maximum of 5 versions per qualifier
  *   as follows:
+ * </p>
  *   <pre>
  *     final FijiDataRequest dataRequest = FijiDataRequest.builder()
  *         .addColumnsDef(ColumnsDef.create()
@@ -46,10 +47,10 @@ import com.moz.fiji.annotations.Inheritance;
  *             .add("info", "name"))
  *         .build();
  *   </pre>
- * </p>
  * <p> To get a {@link FijiPager}, call {@link FijiRowData#getPager(java.lang.String)} or
  *   {@link FijiRowData#getPager(String, String)} on a {@link FijiRowData} constructed with paging
  *   enabled:
+ * </p>
  *   <pre>
  *     final FijiTableReader reader = ...
  *     final EntityId entityId = ...
@@ -66,7 +67,6 @@ import com.moz.fiji.annotations.Inheritance;
  *       pager.close();
  *     }
  *   </pre>
- * </p>
  *
  * Notes:
  * <ul>
@@ -88,6 +88,7 @@ import com.moz.fiji.annotations.Inheritance;
  * <p>
  *   If you don't need access to individual pages, you may use the following iterator/iterable
  *   helpers:
+ * </p>
  *   <ul>
  *     <li> {@link ColumnVersionIterator} iterates through the versions in a given column. </li>
  *     <li>
@@ -98,7 +99,6 @@ import com.moz.fiji.annotations.Inheritance;
  *       from a map-type family.
  *     </li>
  *   </ul>
- * </p>
  *
  * @see ColumnVersionIterator
  * @see MapFamilyQualifierIterator
@@ -115,7 +115,7 @@ public interface FijiPager extends Iterator<FijiRowData>, Closeable {
    *   <li> The page size is an upper bound to the number of cells retrieved from the table. </li>
    *   <li> The page may contain fewer cells than the specified page size.
    *        In particular, the page can sometimes be empty, even though more pages follow. </li>
-   *        Use {@link FijiPager#hasNext()} to determine if more pages follow.
+   *   <li>Use {@link FijiPager#hasNext()} to determine if more pages follow.</li>
    * </ul>
    *
    * @return the next page of cells as a {@link FijiRowData}.
@@ -130,7 +130,7 @@ public interface FijiPager extends Iterator<FijiRowData>, Closeable {
    *   <li> The page size is an upper bound to the number of cells retrieved from the table. </li>
    *   <li> The page may contain less cells than the specified page size.
    *        In particular, the page can sometimes be empty, even though more pages follow. </li>
-   *        Use {@link FijiPager#hasNext()} to determine if more pages follow.
+   *   <li>Use {@link FijiPager#hasNext()} to determine if more pages follow.</li>
    * </ul>
    *
    * @param pageSize The maximum number of cells to retrieve for this page.

@@ -44,9 +44,9 @@ import com.moz.fiji.schema.util.ResourceUtils;
  * --fiji to specify the target instance.
  *
  * --do=[put, get, put-version, get-version, get-all]
- *   put <key> <value> to assign the <key> property to <value>
- *   get <key> to return the value of the <key> property
- *   put-version <version> to assign a new version value
+ *   put {@code key} {@code value} to assign the {@code key} property to {@code value}
+ *   get {@code key} to return the value of the {@code key} property
+ *   put-version {@code version} to assign a new version value
  *   get-version to return the version information
  *   get-all to return all system table properties, including version
  */

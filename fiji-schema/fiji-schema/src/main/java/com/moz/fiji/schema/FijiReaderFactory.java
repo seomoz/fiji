@@ -70,12 +70,12 @@ public interface FijiReaderFactory {
    * <p>
    *   This factory method lets the user customize the layout of the table.
    *   In particular, for each column, the user may:
+   * </p>
    *   <ul>
    *     <li> choose between generic and specific Avro records. </li>
    *     <li> specify different Avro reader schemas. </li>
    *     <li> request the Avro writer schemas (this forces using generic records). </li>
    *   </ul>
-   * </p>
    *
    * <p>
    *   By default, the reader attempts to use Avro specific records if they are available
@@ -184,6 +184,7 @@ public interface FijiReaderFactory {
    *
    * <p>
    *   The reader builder provides several options for setting the behavior of a table reader.
+   * </p>
    *   <ul>
    *     <li>
    *       OnDecoderCacheMiss allows setting the reader's behavior when no cell decoder is found in
@@ -212,7 +213,6 @@ public interface FijiReaderFactory {
    *       alternatives.
    *     </li>
    *   </ul>
-   * </p>
    *
    * <p>
    *   Readers returned from this builder must be closed when they are no longer needed to release

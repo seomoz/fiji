@@ -60,7 +60,7 @@ import com.moz.fiji.schema.util.ToJson;
  *
  * <p>For example, for a table defined with a row key format of {@code INTEGER},
  * {@code LONG}, {@code STRING}:</p>
- * <table>
+ * <table summary="">
  * <tr><th>Filter</th><th>Row Key</th><th>Match</th></tr>
  * <tr>
  *   <td>({@code 100, 1000L, "value"})</td>

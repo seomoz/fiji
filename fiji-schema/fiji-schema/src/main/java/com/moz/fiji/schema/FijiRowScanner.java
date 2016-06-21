@@ -33,6 +33,7 @@ import com.moz.fiji.annotations.Inheritance;
  * <p>
  *   The row scanner behaves like an iterator over the rows in a Fiji table.
  *   The scanner implements the Java Iterable interface, so you can write code like this:
+ * </p>
  *   <pre>{@code
  *     FijiRowScanner scanner = tableReader.getScanner(...);
  *     try {
@@ -44,7 +45,6 @@ import com.moz.fiji.annotations.Inheritance;
  *       scanner.close();
  *     }
  *   }</pre>
- * </p>
  *
  * <p>
  *   Note: the scanner is backed by a single iterator:
