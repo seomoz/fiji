@@ -35,15 +35,18 @@ import com.moz.fiji.annotations.ApiAudience;
 /**
  * Parses region boundaries split files.
  *
- * <li> The file contains one row key per line.
- * <li> Row keys are encoded in ASCII.
- * <li> Non printable characters must be escaped in hexadecimal "\x??".
- * <li> Backslash must be escaped (doubled) "\\"
+ * <ul>
+ * <li> The file contains one row key per line.</li>
+ * <li> Row keys are encoded in ASCII.</li>
+ * <li> Non printable characters must be escaped in hexadecimal "\x??".</li>
+ * <li> Backslash must be escaped (doubled) "\\"</li>
+ * </ul>
  *
  * <p>
  * If a file contains N split keys, N+1 regions will be created, since the first region will contain
  * everything before the first split key, and the last region will contain everything after the last
  * split key.
+ * </p>
  */
 @ApiAudience.Private
 public final class SplitKeyFile {

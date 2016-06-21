@@ -90,11 +90,13 @@ import com.moz.fiji.schema.zookeeper.ZooKeeperFactory;
  * position as defined in RFC3986, and may take one of the following host/port forms, depending on
  * whether one or more hosts is specified, and whether a port is specified:
  *
- * <li> {@code .env}
- * <li> {@code host}
- * <li> {@code host:port}
- * <li> {@code host1,host2}
- * <li> {@code (host1,host2):port}
+ * <ul>
+ * <li> {@code .env}</li>
+ * <li> {@code host}</li>
+ * <li> {@code host:port}</li>
+ * <li> {@code host1,host2}</li>
+ * <li> {@code (host1,host2):port}</li>
+ * </ul>
  *
  * The {@value #ENV_URI_STRING} value will resolve at runtime to a ZooKeeper ensemble address
  * taken from the environment. Specifics of how the address is resolved is scheme-specific.
@@ -123,15 +125,17 @@ import com.moz.fiji.schema.zookeeper.ZooKeeperFactory;
  *
  * The following are valid {@code FijiURI}s:
  *
- * <li> {@code fiji://zkHost}
- * <li> {@code fiji://zkHost/instance}
- * <li> {@code fiji://zkHost/instance/table}
- * <li> {@code fiji://zkHost:zkPort/instance/table}
- * <li> {@code fiji://zkHost1,zkHost2/instance/table}
- * <li> {@code fiji://(zkHost1,zkHost2):zkPort/instance/table}
- * <li> {@code fiji://zkHost/instance/table/col}
- * <li> {@code fiji://zkHost/instance/table/col1,col2}
- * <li> {@code fiji://.env/instance/table}
+ * <ul>
+ * <li> {@code fiji://zkHost}</li>
+ * <li> {@code fiji://zkHost/instance}</li>
+ * <li> {@code fiji://zkHost/instance/table}</li>
+ * <li> {@code fiji://zkHost:zkPort/instance/table}</li>
+ * <li> {@code fiji://zkHost1,zkHost2/instance/table}</li>
+ * <li> {@code fiji://(zkHost1,zkHost2):zkPort/instance/table}</li>
+ * <li> {@code fiji://zkHost/instance/table/col}</li>
+ * <li> {@code fiji://zkHost/instance/table/col1,col2}</li>
+ * <li> {@code fiji://.env/instance/table}</li>
+ * </ul>
  *
  * <H2>Usage</H2>
  *

@@ -50,7 +50,7 @@ import com.moz.fiji.schema.layout.FijiTableLayout;
  *   </code>
  * </pre>
  *
- * <h2>Reading & Writing from a FijiTable:</h2>
+ * <h2>Reading &amp; Writing from a FijiTable:</h2>
  * <p>
  *   The FijiTable interface does not directly provide methods to perform I/O on a Fiji
  *   table. Read and write operations can be performed using either a {@link FijiTableReader}

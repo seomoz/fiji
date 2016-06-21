@@ -31,9 +31,8 @@ import com.moz.fiji.annotations.ApiStability;
  * Iterates through the qualifiers in a map-type family.
  *
  * <p> Wraps a map-type family pager. </p>
- * <p>
  *   You may construct a qualifier iterator on a map-type family with paging enabled as follows:
- *   <tt><pre>{@code
+ *   <pre>{@code
  *   final EntityId eid = ...;
  *   final String family = ...;
  *   final FijiDataRequest dataRequest = FijiDataRequest.builder()
@@ -54,8 +53,7 @@ import com.moz.fiji.annotations.ApiStability;
  *   } finally {
  *     iterable.close();
  *   }
- *   }</pre></tt>
- * </p>
+ *   }</pre>
  */
 @ApiAudience.Public
 @ApiStability.Experimental

@@ -26,7 +26,7 @@ import org.apache.avro.Schema;
 /**
  * Java interface to the Avro DSL parser.
  *
- * This class is implemented by {@link JavaAvroDSL}.
+ * This class is implemented by {@code JavaAvroDSL}.
  */
 public interface AvroDSLInterface {
   /**

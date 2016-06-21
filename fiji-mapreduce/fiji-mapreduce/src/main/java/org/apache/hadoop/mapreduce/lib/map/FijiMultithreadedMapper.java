@@ -44,15 +44,15 @@ import com.moz.fiji.schema.FijiRowData;
  * Multithreaded implementation for @link org.apache.hadoop.mapreduce.Mapper.
  * <p>
  * It can be used instead of the default implementation,
- * @link org.apache.hadoop.mapred.MapRunner, when the Map operation is not CPU
+ * {@link org.apache.hadoop.mapred.MapRunner}, when the Map operation is not CPU
  * bound in order to improve throughput.
  * <p>
  * Mapper implementations using this MapRunnable must be thread-safe.
  * <p>
  * The MapReduce job has to be configured with the mapper to use via
- * {@link #setMapperClass(Configuration, Class)} and
+ * {@code #setMapperClass(Configuration, Class)} and
  * the number of thread the thread-pool can use with the
- * {@link #getNumberOfThreads(Configuration) method. The default
+ * {@code #getNumberOfThreads(Configuration)} method. The default
  * value is 10 threads.
  * <p>
  */

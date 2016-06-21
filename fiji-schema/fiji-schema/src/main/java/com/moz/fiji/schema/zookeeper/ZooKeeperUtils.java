@@ -423,7 +423,7 @@ public final class ZooKeeperUtils {
    *
    * <p>
    * This method closes all ZooKeeper connections that have been returned from
-   * {@link #getZooKeeperClient).  Clients who continue to use these connections will receive
+   * {@link #getZooKeeperClient}.  Clients who continue to use these connections will receive
    * {@code IOExceptions}. This method should only be called when Fiji objects will no longer be
    * used in the JVM.
    * </p>

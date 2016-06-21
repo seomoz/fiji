@@ -37,6 +37,7 @@ import com.moz.fiji.annotations.ApiStability;
  *
  * <p>FijiRowKeyComponents consist of an ordered series of <code>Object</code>s. There are
  * presently two valid forms of a FijiRowKeyComponents:
+ * </p>
  *   <ul>
  *     <li>A single component, either a <code>byte[]</code> or <code>String</code>. This
  *         is suitable for generating raw, hash, or hash-prefix EntityIds.</li>
@@ -45,15 +46,14 @@ import com.moz.fiji.annotations.ApiStability;
  *         May contain trailing nulls, but the first component must not be null, and no
  *         non-null component is permitted after a null component.</li>
  *   </ul>
- * </p>
  *
  * <p>For more information on these formats, see {@link EntityId}. There are two ways to convert
  * a FijiRowKeyComponents to an EntityId:
+ * </p>
  *  <ul>
  *     <li>As a parameter to a {@link EntityIdFactory#getEntityId(FijiRowKeyComponents)}</li>
  *     <li>Via the method {@link #getEntityIdForTable(FijiTable)}</li>
  *   </ul>
- * </p>
  */
 @ApiAudience.Public
 @ApiStability.Evolving

@@ -59,7 +59,7 @@ import com.moz.fiji.schema.util.ProtocolVersion;
  * <p>The system table (a Fiji system table) is a simple key-value store for system-wide
  * properties of a Fiji installation.  There is a single column family "value".  For a
  * key-value property (K,V), the key K is stored as the row key in the Cassandra table,
- * and the value V is stored in the "value:" column.<p>
+ * and the value V is stored in the "value:" column.</p>
  */
 @ApiAudience.Private
 public final class CassandraSystemTable implements FijiSystemTable {

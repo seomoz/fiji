@@ -38,8 +38,9 @@ import com.moz.fiji.schema.FijiColumnName;
  * <p>
  *   In order to use this filter, you must override the reader schema of the affected columns
  *   as a final fixed byte array of size 4.
+ * </p>
  *
- *   <pre><tt>{@code
+ *   <pre>{@code
  *   final FijiTable table = ...;
  *   final FijiTableLayout layout = table.getLayout();
  *   final FijiColumnName column = FijiColumnName.create("family", "qualifier");
@@ -66,8 +67,7 @@ import com.moz.fiji.schema.FijiColumnName;
  *   } finally {
  *     reader.close();
  *   }
- *   }</tt></pre>
- * </p>
+ *   }</pre>
  * <p> TODO(SCHEMA-334): This filter may currently not be combined properly via
  *     {@link org.apache.hadoop.hbase.filter.FilterList}.
  *     If you need to apply this filter to specific columns, you must currently send separate get

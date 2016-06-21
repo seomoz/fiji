@@ -42,6 +42,7 @@ import com.moz.fiji.schema.NotAFijiManagedTableException;
  * The names of tables in HBase created and managed by Fiji are
  * made of a list of delimited components.  There are at least 3
  * components of a name:
+ * </p>
  *
  * <ol>
  *   <li>
@@ -56,12 +57,14 @@ import com.moz.fiji.schema.NotAFijiManagedTableException;
  *   </li>
  * </ol>
  *
+ * <p>
  * If the type of the table is "table", then it's name (the name users
  * of Fiji would use to refer to it) is the fourth and final component.
  * </p>
  *
  * <p>
  * For example, an HBase cluster might have the following tables:
+ * </p>
  * <pre>
  * devices
  * fiji.default.meta
@@ -79,6 +82,7 @@ import com.moz.fiji.schema.NotAFijiManagedTableException;
  * fiji.experimental.table.baz
  * </pre>
  *
+ * <p>
  * In this example, there is an HBase table completely unrelated to
  * fiji called "devices."  There are two fiji installations, one
  * called "default" and another called "experimental."  Within the

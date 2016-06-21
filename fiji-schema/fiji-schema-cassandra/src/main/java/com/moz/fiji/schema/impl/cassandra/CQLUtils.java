@@ -38,11 +38,11 @@ import com.moz.fiji.schema.layout.FijiTableLayout;
 /**
  * Provides utility methods and constants for constructing CQL statements.
  *
- * <h2>Notes on Fiji & Cassandra data model Entity ID to Primary Key translation</h2>
+ * <h2>Notes on Fiji &amp; Cassandra data model Entity ID to Primary Key translation</h2>
  *
  * <p>
  *   Cassandra (CQL) has the notion of a primary key, which consists of 1 or more CQL columns.  A
- *   primary key composed of >1 column is a compound primary key.  For example, the following table
+ *   primary key composed of more than 1 column is a compound primary key.  For example, the following table
  *   definition has a compound primary key consisting of two columns (c1, c2):
  * </p>
  *

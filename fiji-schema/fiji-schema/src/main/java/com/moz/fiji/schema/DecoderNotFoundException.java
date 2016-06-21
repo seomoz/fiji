@@ -22,7 +22,7 @@ import java.io.IOException;
 
 /**
  * Exception thrown if a decoder cannot be found while
- * {@link FijiReaderFactory.FijiTableReaderOptions.OnDecoderCacheMiss} is set to FAIL.
+ * {@code FijiReaderFactory.FijiTableReaderOptions.OnDecoderCacheMiss} is set to FAIL.
  */
 public final class DecoderNotFoundException extends IOException {
 

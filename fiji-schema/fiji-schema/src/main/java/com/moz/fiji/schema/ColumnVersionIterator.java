@@ -34,7 +34,8 @@ import com.moz.fiji.annotations.ApiStability;
  * <p> Wraps a fully-qualified column pager. </p>
  * <p>
  *   You may construct a version iterator on a column with paging enabled as follows:
- *   <pre><tt>{@code
+ * </p>
+ *   <pre>{@code
  *   final String family = ...;
  *   final String qualifier = ...;
  *   final FijiDataRequest dataRequest = FijiDataRequest.builder()
@@ -56,9 +57,8 @@ import com.moz.fiji.annotations.ApiStability;
  *   } finally {
  *     iterable.close();
  *   }
- *   }</tt></pre>
+ *   }</pre>
  *   Done
- * </p>
  *
  * @param <T> Type of the cells in the column.
  */

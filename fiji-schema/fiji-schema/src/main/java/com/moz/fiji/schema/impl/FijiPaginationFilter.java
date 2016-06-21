@@ -59,7 +59,7 @@ public final class FijiPaginationFilter extends FijiColumnFilter {
   /**
    * Initialize pagination filter with default settings.
    *
-   * @param maxQualifiers Maximum number of qualifiers to return. Must be >= 1.
+   * @param maxQualifiers Maximum number of qualifiers to return. Must be at least 1.
    */
   public FijiPaginationFilter(int maxQualifiers) {
     Preconditions.checkArgument(maxQualifiers >= 1,
@@ -72,7 +72,7 @@ public final class FijiPaginationFilter extends FijiColumnFilter {
    * Initialize pagination filter with other filters to fold in.
    *
    * @param filter Other filter that will precede
-   * @param maxQualifiers Maximum number of qualifiers to return. Must be >= 1.
+   * @param maxQualifiers Maximum number of qualifiers to return. Must be at least 1.
    */
   public FijiPaginationFilter(FijiColumnFilter filter, int maxQualifiers) {
     Preconditions.checkArgument(maxQualifiers >= 1,

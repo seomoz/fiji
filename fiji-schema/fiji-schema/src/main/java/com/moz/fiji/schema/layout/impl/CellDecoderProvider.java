@@ -67,12 +67,12 @@ import com.moz.fiji.schema.layout.FijiTableLayout;
  * </p>
  * <p>
  *   CellSpec customizations include:
+ * </p>
  *   <ul>
  *     <li> choosing between generic and specific Avro records. </li>
  *     <li> choosing a different Avro reader schema. </li>
  *     <li> using the Avro writer schema (this forces using generic records). </li>
  *   </ul>
- * </p>
  *
  * <h2>Thread Safety</h2>
  * <p>

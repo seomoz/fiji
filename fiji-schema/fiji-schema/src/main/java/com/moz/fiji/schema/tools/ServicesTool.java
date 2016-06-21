@@ -43,19 +43,19 @@ import com.moz.fiji.schema.zookeeper.ZooKeeperUtils;
  * <H2>Usage</H2>
  *
  * List all Fiji services and their instance counts:
- * <code><pre>
+ * <pre>
  *   fiji services
- * </pre></code>
+ * </pre>
  *
  * List instances of a specific Fiji service:
- * <code><pre>
+ * <pre>
  *   fiji services fiji-rest
- * </pre></code>
+ * </pre>
  *
  * List all instances of all Fiji services:
- * <code><pre>
+ * <pre>
  *   fiji services fiji-rest --all
- * </pre></code>
+ * </pre>
  */
 @ApiAudience.Private
 public final class ServicesTool extends BaseTool {

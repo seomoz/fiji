@@ -41,10 +41,9 @@ import com.moz.fiji.schema.FijiURIException;
  * CLI for setting, removing, and getting column and table annotations.
  *
  * <h3>Example Usage:</h3>
- * <p>
  *   <ul>
  *     <li>
- *       Set sample_key -> sample_value for table: "table":
+ *       Set sample_key -&gt; sample_value for table: "table":
  *       <pre>
  *         fiji notes --target=fiji://.env/default/table \
  *             --do=set \
@@ -53,7 +52,7 @@ import com.moz.fiji.schema.FijiURIException;
  *       </pre>
  *     </li>
  *     <li>
- *       Set sample_key -> sample_value and sample_key_2 -> sample_value_2 for qualified column
+ *       Set sample_key -&gt; sample_value and sample_key_2 -&gt; sample_value_2 for qualified column
  *       "family:qualfiier" in table "table":
  *       <pre>
  *         fiji notes --target=fiji://.env/default/table/family:qualifier \
@@ -85,12 +84,11 @@ import com.moz.fiji.schema.FijiURIException;
  *       <pre>
  *         fiji notes --target=fiji://.env/default/table/family \
  *             --do=get
- *             --key=^[a-zA-Z]*&
+ *             --key=^[a-zA-Z]*&amp;
  *             --regex
  *       </pre>
  *     </li>
  *   </ul>
- * </p>
  */
 @ApiAudience.Public
 @ApiStability.Experimental

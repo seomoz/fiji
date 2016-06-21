@@ -35,9 +35,11 @@ import com.moz.fiji.annotations.ApiAudience;
  * When only one value is needed, this can be shortened as:
  * <pre> fiji tool --flag=key=value </pre>
  *
- * <li> Keys must be unique.
- * <li> Values may not contain spaces.
- * <li> Values will typically be URLs or URIs and may include spaces escaped as "%20".
+ * <ul>
+ * <li> Keys must be unique.</li>
+ * <li> Values may not contain spaces.</li>
+ * <li> Values will typically be URLs or URIs and may include spaces escaped as "%20".</li>
+ * </ul>
  */
 @ApiAudience.Private
 public final class SpaceSeparatedMapParser {

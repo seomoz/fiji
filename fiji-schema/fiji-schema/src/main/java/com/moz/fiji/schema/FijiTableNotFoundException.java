@@ -37,7 +37,7 @@ public final class FijiTableNotFoundException extends IOException {
    * Creates a new <code>FijiTableNotFoundException</code> for the specified table.
    *
    * @param tableURI URI of the table that wasn't found.
-   * @deprecated Use {@link FijiTableNotFoundException#FijiTableNotFoundException(FijiURI).
+   * @deprecated Use {@link FijiTableNotFoundException#FijiTableNotFoundException(FijiURI)}.
    */
   @Deprecated
   public FijiTableNotFoundException(String tableURI) {

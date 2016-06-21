@@ -47,6 +47,7 @@ import com.moz.fiji.schema.layout.ColumnReaderSpec;
  * <p>For example, to request the 3 most recent versions of cell data from a column
  * <code>bar</code> from
  * the family <code>foo</code> within the time range [123, 456):
+ * </p>
  * <pre>
  * FijiDataRequestBuilder builder = FijiDataRequest.builder()
  *     .withTimeRange(123L, 456L);
@@ -60,15 +61,14 @@ import com.moz.fiji.schema.layout.ColumnReaderSpec;
  *     .addColumns(FijiDataRequestBuilder.ColumnsDef.create().withMaxVersions(3).add("foo", "bar"))
  *     .build();
  * </pre>
- * </p>
  *
  * <p>For convenience, you can also build FijiDataRequests for a single cell
  * using the <code>FijiDataRequest.create()</code> method:
+ * </p>
  *
  * <pre>
  * FijiDataRequest dataRequest = FijiDataRequest.create("info", "foo");
  * </pre>
- * </p>
  *
  * <p>You cannot set any properties of the requested column using this
  * syntax; for further customization, see {@link FijiDataRequestBuilder}.</p>

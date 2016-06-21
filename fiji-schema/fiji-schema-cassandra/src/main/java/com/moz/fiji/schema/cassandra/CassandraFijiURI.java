@@ -56,22 +56,26 @@ import com.moz.fiji.schema.impl.cassandra.CassandraFijiInstaller;
  * contact points take one of the following forms, depending on whether one or more hosts is
  * specified, and whether a port is specified:
  *
- * <li> {@code host}
- * <li> {@code host:port}
- * <li> {@code host1,host2}
- * <li> {@code (host1,host2):port}
+ * <ul>
+ * <li> {@code host}</li>
+ * <li> {@code host:port}</li>
+ * <li> {@code host1,host2}</li>
+ * <li> {@code (host1,host2):port}</li>
+ * </ul>
  *
  * <H2>{@code CassandraFijiURI} Examples</H2>
  *
  * The following are valid example {@code CassandraFijiURI}s:
  *
- * <li> {@code fiji-cassandra://zkEnsemble/contactPoint}
- * <li> {@code fiji-cassandra://zkEnsemble/contactPoint,contactPoint}
- * <li> {@code fiji-cassandra://zkEnsemble/contactPoint:9042/instance}
- * <li> {@code fiji-cassandra://zkEnsemble/contactPoint:9042/instance/table}
- * <li> {@code fiji-cassandra://zkEnsemble/contactPoint:9042/instance/table/col1,col2}
- * <li> {@code fiji-cassandra://zkEnsemble/(contactPoint,contactPoint):9042}
- * <li> {@code fiji-cassandra://zkEnsemble/(contactPoint,contactPoint):9042/instance/table}
+ * <ul>
+ * <li> {@code fiji-cassandra://zkEnsemble/contactPoint}</li>
+ * <li> {@code fiji-cassandra://zkEnsemble/contactPoint,contactPoint}</li>
+ * <li> {@code fiji-cassandra://zkEnsemble/contactPoint:9042/instance}</li>
+ * <li> {@code fiji-cassandra://zkEnsemble/contactPoint:9042/instance/table}</li>
+ * <li> {@code fiji-cassandra://zkEnsemble/contactPoint:9042/instance/table/col1,col2}</li>
+ * <li> {@code fiji-cassandra://zkEnsemble/(contactPoint,contactPoint):9042}</li>
+ * <li> {@code fiji-cassandra://zkEnsemble/(contactPoint,contactPoint):9042/instance/table}</li>
+ * </ul>
  */
 @ApiAudience.Framework
 @ApiStability.Evolving

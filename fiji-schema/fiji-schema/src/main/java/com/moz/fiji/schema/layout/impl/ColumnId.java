@@ -42,7 +42,7 @@ import com.moz.fiji.schema.impl.InvalidColumnNameException;
  * digits to the right.  This class allows you to convert between the integers and the
  * UTF-8 encoded physical names.  For example:</p>
  *
- *   <table>
+ *   <table summary="">
  *     <tr><th>id</th><th>name</th></tr>
  *     <tr><td>1</td><td>B</td></tr>
  *     <tr><td>1</td><td>BA</td></tr>

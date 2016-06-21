@@ -73,10 +73,12 @@ import com.moz.fiji.schema.util.ResourceUtils;
  *
  * <p>
  * The HTable row key is the name of the table, and the row has 3 columns:
+ * </p>
+ * <ul>
  *   <li> the layout update, as specified by the user/submitter; </li>
  *   <li> the effective layout after applying the update; </li>
  *   <li> a hash of the effective layout. </li>
- * </p>
+ * </ul>
  *
  * <p>
  * Layouts and layout updates are encoded as Fiji cells, using Avro schema hashes, and as
