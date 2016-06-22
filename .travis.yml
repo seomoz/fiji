@@ -16,7 +16,7 @@ addons:
     - chefdk
 
 before_script: ./travis-ci/before-script
-script: ./bin/fiji-build build # TODO(phs): test
+script: ./travis-ci/script
 
 env:
   global:
