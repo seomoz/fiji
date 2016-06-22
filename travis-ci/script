@@ -22,14 +22,16 @@ do
   (
     cd $d
     $root/bin/fiji-maven --settings $root/devtools/settings.xml \
-      test-compile javadoc:javadoc
+      test-compile javadoc:javadoc \
+      | grep -v "with value '\*' does not match a valid id pattern"
 
     if ! test -f src/main/assembly/release.xml
     then
       echo "No assembly descriptor, skipping"
       continue
     else
-      $root/bin/fiji-maven assembly:single -Ddescriptor=src/main/assembly/release.xml
+      $root/bin/fiji-maven assembly:single -Ddescriptor=src/main/assembly/release.xml \
+        | grep -v "with value '\*' does not match a valid id pattern"
     fi
   )
 done

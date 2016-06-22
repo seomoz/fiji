@@ -16,6 +16,7 @@ do
   echo "Assembling: $d"
   (
     cd $d/../../..
-    $root/bin/fiji-maven assembly:single -Ddescriptor=src/main/assembly/release.xml
+    $root/bin/fiji-maven assembly:single -Ddescriptor=src/main/assembly/release.xml \
+      | grep -v "with value '\*' does not match a valid id pattern"
   )
 done

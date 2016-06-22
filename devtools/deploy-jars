@@ -21,6 +21,7 @@ do
   (
     cd $d
     $root/bin/fiji-maven deploy --settings $root/devtools/settings.xml \
-      -DperformRelease=true -DskipTests=true
+      -DperformRelease=true -DskipTests=true \
+      | grep -v "with value '\*' does not match a valid id pattern"
   )
 done
