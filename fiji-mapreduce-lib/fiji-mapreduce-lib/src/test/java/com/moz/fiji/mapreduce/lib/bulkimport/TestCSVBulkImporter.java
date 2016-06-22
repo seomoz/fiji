@@ -297,11 +297,11 @@ public class TestCSVBulkImporter extends FijiClientTest {
     // Validate output:
     final FijiRowScanner scanner = mReader.getScanner(FijiDataRequest.create("primitives"));
     FijiRowData row = scanner.iterator().next();
-    assertEquals(false, row.getMostRecentValue("primitives", "boolean"));
-    assertEquals(0, row.getMostRecentValue("primitives", "int"));
-    assertEquals(1L, row.getMostRecentValue("primitives", "long"));
-    assertEquals(1.0f, row.getMostRecentValue("primitives", "float"));
-    assertEquals(2.0d, row.getMostRecentValue("primitives", "double"));
+    assertEquals(false, (boolean) row.getMostRecentValue("primitives", "boolean"));
+    assertEquals(0, (int) row.getMostRecentValue("primitives", "int"));
+    assertEquals(1L, (long) row.getMostRecentValue("primitives", "long"));
+    assertEquals(1.0f, (float) row.getMostRecentValue("primitives", "float"));
+    assertEquals(2.0d, (double) row.getMostRecentValue("primitives", "double"));
     assertEquals("Hello", row.getMostRecentValue("primitives", "string").toString());
     scanner.close();
   }
