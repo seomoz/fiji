@@ -42,6 +42,7 @@ deploy:
     api_key:
       # travis encrypt $API_KEY
       secure: MNeUOKbEuT0JPOrtu345JpkakxKVy7FkVp1aU+mKhJMRriHB7YyUHw7nIx1r+tZtMhtaA4x1YoSYcPnj8W6hBmNzSkeMzZGhUcQAAjd/7k7WimB7Ui+gPaoQmWlE9SPj408HsoHe0Zcz/qp/6dMMYYSCNCuk7aCo6PLwOagzzo3DtbU708iTtywcpN4nQ7gf3EP1tyafzO/vqLI2j0dqPzxemY17Brg63XwMBINGODk09sEOt1a3Tak+c+e/h7SVdsaVfkujEi/7j0B7tYV80OsJ2ESmLLpgjnCSSBcXnSunkEt/XxifJ60zZwnNcLCHqhF8RPb2CRoN/OwNu+U89EuaCTjmlxRGo+X9q6PDkDEZx6e3YmPa3QhXqudbY3BD5O5gXejROwKdr9QRRBz8xazXWe53GJlCC1i/5cWNQxqNGcBFTCCIeNMPkeN7IH0ym+Ar9xpImk6RV2egthLgaPFxPxDE5s4gBF1eNLYANVqFmJKCO+0JkGF8vGIb1yFFIGm7t37ojZj+h8AeXUYTjFc2yDDlmkxq7g+DBlb8vjeduzkpxwfATkhYwmmploFcNo2HobD0gxwN80ECobAJ5ToBU+InYAJGwxR2gXUIt5VLetH/LSZwPUHDJOpnB6ukhmRohk+yv0rCyfxHLdqPMTFh7un1AFnpKDPbuBqpgoE=
+    file_glob: true
     file:
       - fiji-express/fiji-express/target/fiji-express-lib-*-release.tar.gz
       - fiji-express/fiji-express-examples/target/fiji-express-examples-*-release.tar.gz
