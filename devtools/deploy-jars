@@ -10,18 +10,32 @@ set -e
 # 2. You are running this script from the project root directory.
 # 3. You have gpg installed and configured
 
+# http://central.sonatype.org/pages/manual-staging-bundle-creation-and-deployment.html
+
 root=$(pwd)
 
-find . -name target -prune -o -name pom.xml -print | \
-  xargs grep -l '<groupId>com.moz.fiji' | \
+find output/maven_repository -name '*.pom' | xargs grep -l '<groupId>com.moz.fiji' | \
 while read f
 do
   d=$(dirname $f)
-  echo "Deploying: $d"
+  base=$(basename $f | sed 's|\.pom$||')
+  echo "Deploying: ${base}"
   (
     cd $d
-    $root/bin/fiji-maven deploy --settings $root/devtools/settings.xml \
-      -DperformRelease=true -DskipTests=true \
-      | grep -v "with value '\*' does not match a valid id pattern"
-  )
+
+    $root/bin/fiji-maven gpg:sign-and-deploy-file \
+      --settings $root/devtools/settings.xml -DrepositoryId=ossrh -Dpackaging=jar \
+      -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ \
+      -DpomFile=${base}.pom -Dfile=${base}.jar
+
+    $root/bin/fiji-maven gpg:sign-and-deploy-file \
+      --settings $root/devtools/settings.xml -DrepositoryId=ossrh -Dpackaging=jar \
+      -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ \
+      -DpomFile=${base}.pom -Dfile=${base}-sources.jar -Dclassifier=sources
+
+    $root/bin/fiji-maven gpg:sign-and-deploy-file \
+      --settings $root/devtools/settings.xml -DrepositoryId=ossrh -Dpackaging=jar \
+      -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ \
+      -DpomFile=${base}.pom -Dfile=${base}-javadoc.jar -Dclassifier=javadoc
+  ) | grep -v "with value '\*' does not match a valid id pattern"
 done
