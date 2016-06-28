@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# Die on error
-set -e
+# Die on error, even in pipes
+set -x -e -o pipefail
 
 date
 
@@ -9,27 +9,61 @@ root=$(pwd)
 
 ./bin/fiji-build build # TODO(phs): test
 
-find . -name target -prune -o -name pom.xml -print | \
+find $root/ -name target -prune -o -name pom.xml -print | \
   xargs grep -l '<groupId>com.moz.fiji' | \
 while read f
 do
   d=$(dirname $f)
 
+  set +x
   echo "======================================================================"
   echo "Building: $d"
   echo "======================================================================"
+  set -x
 
-  (
-    cd $d
-    $root/bin/fiji-maven --settings $root/devtools/settings.xml \
-      test-compile source:jar javadoc:jar install
+  cd $d
 
-    if ! test -f src/main/assembly/release.xml
-    then
-      echo "No assembly descriptor, skipping"
-      continue
-    else
-      $root/bin/fiji-maven assembly:single -Ddescriptor=src/main/assembly/release.xml
-    fi
-  ) | grep -v "with value '\*' does not match a valid id pattern"
+  export artifact_id=$(
+    grep -m 1 '<artifactId>' pom.xml | sed -E 's| *</?artifactId>*||g')
+  export version=$(grep -m 1 '<version>' pom.xml | sed -E 's| *</?version>*||g')
+  export sources_jar="${artifact_id}-${version}-sources.jar"
+  export javadoc_jar="${artifact_id}-${version}-javadoc.jar"
+
+  $root/bin/fiji-maven --settings $root/devtools/settings.xml \
+    test-compile source:jar javadoc:jar \
+    | grep -v "with value '\*' does not match a valid id pattern"
+
+  export sources_jar_path=$(find . -name "$sources_jar" -print -quit)
+  export javadoc_jar_path=$(find . -name "$javadoc_jar" -print -quit)
+
+  # Create stubs if necessary
+  if ! test -f "$sources_jar_path"
+  then
+    export sources_jar_path="target/${sources_jar}"
+    mkdir -p target
+    jar -cf "$sources_jar_path" pom.xml
+  fi
+
+  if ! test -f "$javadoc_jar_path"
+  then
+    export javadoc_jar_path="target//${javadoc_jar}"
+    mkdir -p target
+    jar -cf "$javadoc_jar_path" pom.xml
+  fi
+
+  # Install sources and javadoc singly to avoid installing main jar.  We don't want
+  # that since the fiji (python) build already does so, and makes them _correctly_.
+  $root/bin/fiji-maven --settings $root/devtools/settings.xml install:install-file \
+    -DpomFile=pom.xml "-Dfile=${sources_jar_path}" -Dclassifier=sources \
+    | grep -v "with value '\*' does not match a valid id pattern"
+
+  $root/bin/fiji-maven --settings $root/devtools/settings.xml install:install-file \
+    -DpomFile=pom.xml "-Dfile=${javadoc_jar_path}" -Dclassifier=javadoc \
+    | grep -v "with value '\*' does not match a valid id pattern"
+
+  if test -f src/main/assembly/release.xml
+  then
+    $root/bin/fiji-maven assembly:single -Ddescriptor=src/main/assembly/release.xml \
+      | grep -v "with value '\*' does not match a valid id pattern"
+  fi
 done
