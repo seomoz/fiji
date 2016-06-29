@@ -16,8 +16,7 @@ set -x -e -o pipefail
 date
 
 root=$(pwd)
-# version=$(<FIJI_VERSION)
-version=0.1.10
+version=$(<FIJI_VERSION)
 
 find "${root}/output/maven_repository" -name '*.pom' | \
 grep "/${version}/" | \
