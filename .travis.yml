@@ -34,7 +34,7 @@ env:
 
 deploy:
   - provider: script
-    script: ./devtools/create-assemblies-and-deploy-jars
+    script: ./devtools/deploy-jars
     skip_cleanup: true
     on:
       tags: true

@@ -23,30 +23,30 @@ do
 
   cd $d
 
-  export artifact_id=$(
+  artifact_id=$(
     grep -m 1 '<artifactId>' pom.xml | sed -E 's| *</?artifactId>*||g')
-  export version=$(grep -m 1 '<version>' pom.xml | sed -E 's| *</?version>*||g')
-  export sources_jar="${artifact_id}-${version}-sources.jar"
-  export javadoc_jar="${artifact_id}-${version}-javadoc.jar"
+  version=$(grep -m 1 '<version>' pom.xml | sed -E 's| *</?version>*||g')
+  sources_jar="${artifact_id}-${version}-sources.jar"
+  javadoc_jar="${artifact_id}-${version}-javadoc.jar"
 
   $root/bin/fiji-maven --settings $root/devtools/settings.xml \
     test-compile source:jar javadoc:jar \
     | grep -v "with value '\*' does not match a valid id pattern"
 
-  export sources_jar_path=$(find . -name "$sources_jar" -print -quit)
-  export javadoc_jar_path=$(find . -name "$javadoc_jar" -print -quit)
+  sources_jar_path=$(find . -name "$sources_jar" -print -quit)
+  javadoc_jar_path=$(find . -name "$javadoc_jar" -print -quit)
 
   # Create stubs if necessary
   if ! test -f "$sources_jar_path"
   then
-    export sources_jar_path="target/${sources_jar}"
+    sources_jar_path="target/${sources_jar}"
     mkdir -p target
     jar -cf "$sources_jar_path" pom.xml
   fi
 
   if ! test -f "$javadoc_jar_path"
   then
-    export javadoc_jar_path="target//${javadoc_jar}"
+    javadoc_jar_path="target/${javadoc_jar}"
     mkdir -p target
     jar -cf "$javadoc_jar_path" pom.xml
   fi
