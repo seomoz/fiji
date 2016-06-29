@@ -15,6 +15,9 @@ set -x -e -o pipefail
 
 date
 
+# make sure ownership is right
+sudo chown -R "${USER}:${USER}" "${HOME}/.gnupg"
+
 root=$(pwd)
 version=$(<FIJI_VERSION)
 
