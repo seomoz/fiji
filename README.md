@@ -10,8 +10,8 @@
 [![Slack][slack-badge]][slack-link]
 ![Internal][scope-badge]
 
-[build-status-badge]: https://travis-ci.com/seomoz/fiji.svg?branch=master
-[build-status-link]: https://travis-ci.com/seomoz/fiji
+[build-status-badge]: https://travis-ci.org/seomoz/fiji.svg?branch=master
+[build-status-link]: https://travis-ci.org/seomoz/fiji
 [tickets-badge]: https://badge.waffle.io/seomoz/fiji.png?label=ready&title=Ready
 [tickets-link]: https://waffle.io/seomoz/fiji
 [status-badge]: https://img.shields.io/badge/status-incubating-blue.svg?style=flat
