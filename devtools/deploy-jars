@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # Die on error, even in pipes
-set -x -e -o pipefail
+set -e -o pipefail
 
 # Create jars suitable for uploading Fiji to the Maven central repository at
 # https://oss.sonatype.org/
@@ -13,7 +13,26 @@ set -x -e -o pipefail
 
 # http://central.sonatype.org/pages/manual-staging-bundle-creation-and-deployment.html
 
+cat > /tmp/things-we-care-about <<'EOF'
+com/moz/fiji/annotations/annotations/
+com/moz/fiji/checkin/fiji-checkin/
+com/moz/fiji/common/fiji-common-flags/
+com/moz/fiji/commons/fiji-commons-java/
+com/moz/fiji/delegation/fiji-delegation/
+com/moz/fiji/mapreduce/cdh5-mrbridge/
+com/moz/fiji/mapreduce/fiji-mapreduce-avro-lib/
+com/moz/fiji/mapreduce/fiji-mapreduce/
+com/moz/fiji/mapreduce/platform-api/
+com/moz/fiji/schema/cdh5-bridge/
+com/moz/fiji/schema/fiji-schema-avro/
+com/moz/fiji/schema/fiji-schema-extras/
+com/moz/fiji/schema/fiji-schema-shell-lib/
+com/moz/fiji/schema/fiji-schema/
+com/moz/fiji/schema/schema-platform-api/
+EOF
+
 date
+gpg --version
 
 root=$(pwd)
 version=$(<FIJI_VERSION)
@@ -21,6 +40,8 @@ version=$(<FIJI_VERSION)
 find "${root}/output/maven_repository" -name '*.pom' | \
 grep "/${version}/" | \
 xargs grep -l '<groupId>com.moz.fiji' | \
+grep -f /tmp/things-we-care-about | \
+sort | \
 while read f
 do
   d=$(dirname $f)
@@ -38,33 +59,22 @@ do
     continue
   fi
 
-  set +x
   echo "======================================================================"
   echo "Deploying: $d"
   echo "======================================================================"
-  set -x
 
-  # Create stub source and javadoc jars if necessary
-  if ! test -f "${sources_jar}"
-  then
-    jar -cf "${sources_jar}" $(basename $f)
-  fi
-
-  if ! test -f "${javadoc_jar}"
-  then
-    jar -cf "${javadoc_jar}" $(basename $f)
-  fi
-
-  cp "${main_jar}" /tmp/
-  cp "${sources_jar}" /tmp/
-  cp "${javadoc_jar}" /tmp/
+  main_dir=$(mktemp -d)
+  cp "${main_jar}" $main_dir/
 
   # https://github.com/making/travis-ci-maven-deploy-skelton
   $root/bin/fiji-maven gpg:sign-and-deploy-file \
     --settings $root/devtools/settings.xml \
     -DrepositoryId=ossrh \
     -Dpackaging=jar \
+    -DretryFailedDeploymentCount=10 \
     -Dgpg.executable=gpg \
+    -Dgpg.ascDirectory="$main_dir" \
+    -Dgpg.homedir="$main_dir" \
     -Dgpg.keyname="${GPG_KEYNAME}" \
     -Dgpg.passphrase="${GPG_PASSPHRASE}" \
     -Dgpg.defaultKeyring=false \
@@ -72,14 +82,28 @@ do
     -Dgpg.secretKeyring="${TRAVIS_BUILD_DIR}/devtools/secring.gpg" \
     -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ \
     -DpomFile=${base}.pom \
-    -Dfile="/tmp/${main_jar}" \
-    | grep -v "with value '\*' does not match a valid id pattern"
+    -Dfile="$main_dir/${main_jar}" \
+    | grep -v "with value '\*' does not match a valid id pattern" &
+
+  sleep 1
+
+  # Synthesize if necessary
+  if ! test -f "${sources_jar}"
+  then
+    jar -cf "${sources_jar}" $f
+  fi
+
+  sources_dir=$(mktemp -d)
+  cp "${sources_jar}" $sources_dir/
 
   $root/bin/fiji-maven gpg:sign-and-deploy-file \
     --settings $root/devtools/settings.xml \
     -DrepositoryId=ossrh \
     -Dpackaging=jar \
+    -DretryFailedDeploymentCount=10 \
     -Dgpg.executable=gpg \
+    -Dgpg.ascDirectory="$sources_dir" \
+    -Dgpg.homedir="$sources_dir" \
     -Dgpg.keyname="${GPG_KEYNAME}" \
     -Dgpg.passphrase="${GPG_PASSPHRASE}" \
     -Dgpg.defaultKeyring=false \
@@ -87,15 +111,29 @@ do
     -Dgpg.secretKeyring="${TRAVIS_BUILD_DIR}/devtools/secring.gpg" \
     -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ \
     -DpomFile=${base}.pom \
-    -Dfile=/tmp/"${sources_jar}" \
+    -Dfile="$sources_dir/${sources_jar}" \
     -Dclassifier=sources \
-    | grep -v "with value '\*' does not match a valid id pattern"
+    | grep -v "with value '\*' does not match a valid id pattern" &
+
+  sleep 1
+
+  # Synthesize if necessary
+  if ! test -f "${javadoc_jar}"
+  then
+    jar -cf "${javadoc_jar}" $f
+  fi
+
+  javadoc_dir=$(mktemp -d)
+  cp "${javadoc_jar}" $javadoc_dir/
 
   $root/bin/fiji-maven gpg:sign-and-deploy-file \
     --settings $root/devtools/settings.xml \
     -DrepositoryId=ossrh \
     -Dpackaging=jar \
+    -DretryFailedDeploymentCount=10 \
     -Dgpg.executable=gpg \
+    -Dgpg.ascDirectory="$javadoc_dir" \
+    -Dgpg.homedir="$javadoc_dir" \
     -Dgpg.keyname="${GPG_KEYNAME}" \
     -Dgpg.passphrase="${GPG_PASSPHRASE}" \
     -Dgpg.defaultKeyring=false \
@@ -103,7 +141,49 @@ do
     -Dgpg.secretKeyring="${TRAVIS_BUILD_DIR}/devtools/secring.gpg" \
     -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ \
     -DpomFile=${base}.pom \
-    -Dfile="/tmp/${javadoc_jar}" \
+    -Dfile="$javadoc_dir/${javadoc_jar}" \
     -Dclassifier=javadoc \
-    | grep -v "with value '\*' does not match a valid id pattern"
+    | grep -v "with value '\*' does not match a valid id pattern" &
+
+  sleep 1
+
+  while (( $(jobs -p | wc -l) > 6 ))
+  do
+    wait -n
+  done
 done
+
+wait
+
+cd $root
+
+# Releasing has an entirely separate security mechanism (for the same passwords.)
+# Set it up.  We don't care about the master pass at all, since we still rely on
+# the (travis-)encrypted env vars for the actual security.
+
+sed "s|MASTER_PASSORD|$($root/bin/fiji-maven -emp $RANDOM)|g" \
+  $root/devtools/settings-security.xml.template \
+  > $root/devtools/settings-security.xml
+
+encrypted_sonatype_username=$($root/bin/fiji-maven \
+  -Dsettings.security=$root/devtools/settings-security.xml \
+  -ep "$SONATYPE_USERNAME")
+
+encrypted_sonatype_password=$($root/bin/fiji-maven \
+  -Dsettings.security=$root/devtools/settings-security.xml \
+  -ep "$SONATYPE_PASSWORD")
+
+sed \
+  -e "s|SONATYPE_USERNAME|$encrypted_sonatype_username|g" \
+  -e "s|SONATYPE_PASSWORD|$encrypted_sonatype_password|g" \
+  $root/devtools/encrypted-settings.xml.template \
+  > $root/devtools/encrypted-settings.xml
+
+# It needs a pom for some reason
+$root/bin/fiji-maven org.sonatype.plugins:nexus-staging-maven-plugin:release \
+  --file $root/fiji-schema/fiji-schema/pom.xml \
+  --settings $root/devtools/encrypted-settings.xml \
+  -Dsettings.security=$root/devtools/settings-security.xml \
+  -DserverId=ossrh \
+  -DnexusUrl=https://oss.sonatype.org/ \
+  -DautoReleaseAfterClose=true

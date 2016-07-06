@@ -30,3 +30,7 @@ secrets.tar.gz
 
 # These are generated! See ./bin/fiji-build generate-pom
 pom.xml
+
+# Sonatype's cumbersome password management
+devtools/settings-security.xml
+devtools/encrypted-settings.xml
