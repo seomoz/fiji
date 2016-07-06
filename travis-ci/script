@@ -7,7 +7,7 @@ date
 
 root=$(pwd)
 
-./bin/fiji-build build # TODO(phs): test
+./bin/fiji-build build --nworkers=3 # TODO(phs): test
 
 find $root/ -name target -prune -o -name pom.xml -print | \
   xargs grep -l '<groupId>com.moz.fiji' | \
@@ -36,34 +36,27 @@ do
   sources_jar_path=$(find . -name "$sources_jar" -print -quit)
   javadoc_jar_path=$(find . -name "$javadoc_jar" -print -quit)
 
-  # Create stubs if necessary
-  if ! test -f "$sources_jar_path"
-  then
-    sources_jar_path="target/${sources_jar}"
-    mkdir -p target
-    jar -cf "$sources_jar_path" pom.xml
-  fi
-
-  if ! test -f "$javadoc_jar_path"
-  then
-    javadoc_jar_path="target/${javadoc_jar}"
-    mkdir -p target
-    jar -cf "$javadoc_jar_path" pom.xml
-  fi
-
   # Install sources and javadoc singly to avoid installing main jar.  We don't want
   # that since the fiji (python) build already does so, and makes them _correctly_.
-  $root/bin/fiji-maven --settings $root/devtools/settings.xml install:install-file \
-    -DpomFile=pom.xml "-Dfile=${sources_jar_path}" -Dclassifier=sources \
-    | grep -v "with value '\*' does not match a valid id pattern"
+  if test -f "$sources_jar_path"
+  then
+    $root/bin/fiji-maven --settings $root/devtools/settings.xml install:install-file \
+      -DpomFile=pom.xml "-Dfile=${sources_jar_path}" -Dclassifier=sources \
+      | grep -v "with value '\*' does not match a valid id pattern" &
+  fi
 
-  $root/bin/fiji-maven --settings $root/devtools/settings.xml install:install-file \
-    -DpomFile=pom.xml "-Dfile=${javadoc_jar_path}" -Dclassifier=javadoc \
-    | grep -v "with value '\*' does not match a valid id pattern"
+  if test -f "$javadoc_jar_path"
+  then
+    $root/bin/fiji-maven --settings $root/devtools/settings.xml install:install-file \
+      -DpomFile=pom.xml "-Dfile=${javadoc_jar_path}" -Dclassifier=javadoc \
+      | grep -v "with value '\*' does not match a valid id pattern" &
+  fi
 
   if test -f src/main/assembly/release.xml
   then
     $root/bin/fiji-maven assembly:single -Ddescriptor=src/main/assembly/release.xml \
-      | grep -v "with value '\*' does not match a valid id pattern"
+      | grep -v "with value '\*' does not match a valid id pattern" &
   fi
 done
+
+wait
