@@ -15,9 +15,6 @@ set -x -e -o pipefail
 
 date
 
-# make sure ownership is right
-sudo chown -R "${USER}:${USER}" "${HOME}/.gnupg"
-
 root=$(pwd)
 version=$(<FIJI_VERSION)
 
@@ -62,21 +59,51 @@ do
   cp "${sources_jar}" /tmp/
   cp "${javadoc_jar}" /tmp/
 
+  # https://github.com/making/travis-ci-maven-deploy-skelton
   $root/bin/fiji-maven gpg:sign-and-deploy-file \
-    --settings $root/devtools/settings.xml -DrepositoryId=ossrh -Dpackaging=jar \
+    --settings $root/devtools/settings.xml \
+    -DrepositoryId=ossrh \
+    -Dpackaging=jar \
+    -Dgpg.executable=gpg \
+    -Dgpg.keyname="${GPG_KEYNAME}" \
+    -Dgpg.passphrase="${GPG_PASSPHRASE}" \
+    -Dgpg.defaultKeyring=false \
+    -Dgpg.publicKeyring="${TRAVIS_BUILD_DIR}/devtools/pubring.gpg" \
+    -Dgpg.secretKeyring="${TRAVIS_BUILD_DIR}/devtools/secring.gpg" \
     -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ \
-    -DpomFile=${base}.pom "-Dfile=/tmp/${main_jar}" \
+    -DpomFile=${base}.pom \
+    -Dfile="/tmp/${main_jar}" \
     | grep -v "with value '\*' does not match a valid id pattern"
 
   $root/bin/fiji-maven gpg:sign-and-deploy-file \
-    --settings $root/devtools/settings.xml -DrepositoryId=ossrh -Dpackaging=jar \
+    --settings $root/devtools/settings.xml \
+    -DrepositoryId=ossrh \
+    -Dpackaging=jar \
+    -Dgpg.executable=gpg \
+    -Dgpg.keyname="${GPG_KEYNAME}" \
+    -Dgpg.passphrase="${GPG_PASSPHRASE}" \
+    -Dgpg.defaultKeyring=false \
+    -Dgpg.publicKeyring="${TRAVIS_BUILD_DIR}/devtools/pubring.gpg" \
+    -Dgpg.secretKeyring="${TRAVIS_BUILD_DIR}/devtools/secring.gpg" \
     -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ \
-    -DpomFile=${base}.pom "-Dfile=/tmp/${sources_jar}" -Dclassifier=sources \
+    -DpomFile=${base}.pom \
+    -Dfile=/tmp/"${sources_jar}" \
+    -Dclassifier=sources \
     | grep -v "with value '\*' does not match a valid id pattern"
 
   $root/bin/fiji-maven gpg:sign-and-deploy-file \
-    --settings $root/devtools/settings.xml -DrepositoryId=ossrh -Dpackaging=jar \
+    --settings $root/devtools/settings.xml \
+    -DrepositoryId=ossrh \
+    -Dpackaging=jar \
+    -Dgpg.executable=gpg \
+    -Dgpg.keyname="${GPG_KEYNAME}" \
+    -Dgpg.passphrase="${GPG_PASSPHRASE}" \
+    -Dgpg.defaultKeyring=false \
+    -Dgpg.publicKeyring="${TRAVIS_BUILD_DIR}/devtools/pubring.gpg" \
+    -Dgpg.secretKeyring="${TRAVIS_BUILD_DIR}/devtools/secring.gpg" \
     -Durl=https://oss.sonatype.org/service/local/staging/deploy/maven2/ \
-    -DpomFile=${base}.pom "-Dfile=/tmp/${javadoc_jar}" -Dclassifier=javadoc \
+    -DpomFile=${base}.pom \
+    -Dfile="/tmp/${javadoc_jar}" \
+    -Dclassifier=javadoc \
     | grep -v "with value '\*' does not match a valid id pattern"
 done
