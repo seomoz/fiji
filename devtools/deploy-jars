@@ -179,11 +179,39 @@ sed \
   $root/devtools/encrypted-settings.xml.template \
   > $root/devtools/encrypted-settings.xml
 
+# TODO(phs): this whines and blows up.  I'm done.  Turning it off so the github releases
+# deploy can run.  Deployment to maven central requires one to manually:
+# 1. Log into https://oss.sonatype.org/
+# 2. Go to "Staging Repositories"
+# 3. Select the "commoz-xxxx" entry in the bottom of the list
+# 4. Press the "Close" button
+# 5. Wait a minute and press "Refresh" (not your browser refresh)
+# 6. Select the same item and press "Release"
+
+# The error:
+# [INFO]  + Using server credentials "ossrh" from Maven settings.
+# [INFO]  * Connected to Nexus at https://oss.sonatype.org:443/, is version 2.13.0-01 and edition "Professional"
+# [INFO] We have nothing locally staged, bailing out.
+# [INFO] ------------------------------------------------------------------------
+# [INFO] BUILD FAILURE
+# [INFO] ------------------------------------------------------------------------
+# [INFO] Total time: 7.394s
+# [INFO] Finished at: Wed Jul 06 21:43:05 UTC 2016
+# [INFO] Final Memory: 17M/178M
+# [INFO] ------------------------------------------------------------------------
+# [ERROR] Failed to execute goal org.sonatype.plugins:nexus-staging-maven-plugin:1.6.7:release (default-cli) on project fiji-schema: The staging repository to operate against is not defined! (use "-DstagingRepositoryId=foo1,foo2" on CLI) -> [Help 1]
+# [ERROR]
+# [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+# [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+# [ERROR]
+# [ERROR] For more information about the errors and possible solutions, please read the following articles:
+# [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+
 # It needs a pom for some reason
-$root/bin/fiji-maven org.sonatype.plugins:nexus-staging-maven-plugin:release \
-  --file $root/fiji-schema/fiji-schema/pom.xml \
-  --settings $root/devtools/encrypted-settings.xml \
-  -Dsettings.security=$root/devtools/settings-security.xml \
-  -DserverId=ossrh \
-  -DnexusUrl=https://oss.sonatype.org/ \
-  -DautoReleaseAfterClose=true
+# $root/bin/fiji-maven org.sonatype.plugins:nexus-staging-maven-plugin:release \
+#   --file $root/fiji-schema/fiji-schema/pom.xml \
+#   --settings $root/devtools/encrypted-settings.xml \
+#   -Dsettings.security=$root/devtools/settings-security.xml \
+#   -DserverId=ossrh \
+#   -DnexusUrl=https://oss.sonatype.org/ \
+#   -DautoReleaseAfterClose=true
