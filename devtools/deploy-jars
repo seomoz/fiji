@@ -15,14 +15,26 @@ set -e -o pipefail
 
 cat > /tmp/things-we-care-about <<'EOF'
 com/moz/fiji/annotations/annotations/
-com/moz/fiji/checkin/
-com/moz/fiji/common/
-com/moz/fiji/commons/
-com/moz/fiji/deps/
-com/moz/fiji/delegation/
-com/moz/fiji/mapreduce/
-com/moz/fiji/platforms/
-com/moz/fiji/schema/
+com/moz/fiji/checkin/fiji-checkin/
+com/moz/fiji/common/fiji-common-flags/
+com/moz/fiji/commons/fiji-commons-java/
+com/moz/fiji/deps/jackson/
+com/moz/fiji/delegation/fiji-delegation/
+com/moz/fiji/mapreduce/cdh5-mrbridge/
+com/moz/fiji/mapreduce/fiji-mapreduce-avro-lib/
+com/moz/fiji/mapreduce/fiji-mapreduce/
+com/moz/fiji/mapreduce/platform-api/
+com/moz/platforms/cdh5.0-platform/
+com/moz/platforms/cdh5.1-platform/
+com/moz/platforms/cdh5.2-platform/
+com/moz/platforms/cdh5.3-platform/
+com/moz/platforms/compile-platform/
+com/moz/fiji/schema/cdh5-bridge/
+com/moz/fiji/schema/fiji-schema-avro/
+com/moz/fiji/schema/fiji-schema-extras/
+com/moz/fiji/schema/fiji-schema-shell-lib/
+com/moz/fiji/schema/fiji-schema/
+com/moz/fiji/schema/schema-platform-api/
 EOF
 
 date
