@@ -558,7 +558,7 @@ java_library(
 
 java_library(
     name="//com/moz/fiji/platforms:compile-platform",
-    deps=["//com/moz/fiji/platforms:cdh5.1-platform"],
+    deps=["//com/moz/fiji/platforms:cdh5.3-platform"],
 )
 
 
@@ -696,7 +696,7 @@ java_library(
 
 java_library(
     name="//com/moz/fiji/platforms:test-platform",
-    deps=["//com/moz/fiji/platforms:cdh5.1-test-platform"],
+    deps=["//com/moz/fiji/platforms:cdh5.3-test-platform"],
 )
 
 # --------------------------------------------------------------------------------------------------
@@ -1071,7 +1071,7 @@ java_library(
         "//com/moz/fiji/annotations:annotations",
         "//com/moz/fiji/schema:schema-platform-api",
 
-        dynamic(fiji_platform="//com/moz/fiji/platforms:cdh5.1-platform"),
+        dynamic(fiji_platform="//com/moz/fiji/platforms:cdh5.3-platform"),
     ],
     checkstyle=checkstyle_fiji,
 )
@@ -1096,7 +1096,7 @@ java_library(
         "//com/moz/fiji/delegation:fiji-delegation",
 
         "//com/moz/fiji/schema:schema-platform-api",  # brings compile-platform
-        "//com/moz/fiji/schema:cdh5-bridge",          # brings cdh5.1-platform
+        "//com/moz/fiji/schema:cdh5-bridge",          # brings cdh5.3-platform
         dynamic(fiji_platform="//com/moz/fiji/platforms:compile-platform"),
     ],
     checkstyle=checkstyle(
@@ -1463,7 +1463,7 @@ java_library(
         "//com/moz/fiji/delegation:fiji-delegation",
         "//com/moz/fiji/mapreduce:platform-api",
 
-        dynamic(fiji_platform="//com/moz/fiji/platforms:cdh5.1-platform"),
+        dynamic(fiji_platform="//com/moz/fiji/platforms:cdh5.3-platform"),
     ],
     checkstyle=checkstyle_fiji,
 )
@@ -1481,7 +1481,7 @@ java_library(
         "//com/moz/fiji/mapreduce:platform-api",
         "//com/moz/fiji/mapreduce:fiji-mapreduce-avro-lib",
 
-        "//com/moz/fiji/mapreduce:cdh5-mrbridge",          # brings cdh5.1-platform
+        "//com/moz/fiji/mapreduce:cdh5-mrbridge",          # brings cdh5.3-platform
 
         dynamic(fiji_platform="//com/moz/fiji/platforms:compile-platform"),
     ],
@@ -1601,7 +1601,7 @@ java_test(
         "java_library(//com/moz/fiji/schema:fiji-schema-test)",  # FIXME: extract fiji test framework
         "//com/moz/fiji/mapreduce:fiji-mapreduce",
 
-        "//com/moz/fiji/mapreduce:cdh5-mrbridge",          # brings cdh5.1-platform
+        "//com/moz/fiji/mapreduce:cdh5-mrbridge",          # brings cdh5.3-platform
 
         dynamic(fiji_platform="//com/moz/fiji/platforms:test-platform"),
     ],
