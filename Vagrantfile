@@ -4,13 +4,13 @@ Vagrant.configure('2') do |config|
   config.ssh.forward_agent = true
   # config.ssh.forward_x11 = true
 
-  config.vm.network 'forwarded_port', guest: 50070, host: 50070 # Namenode
-  config.vm.network 'forwarded_port', guest: 50075, host: 50075 # Datanode
-  config.vm.network 'forwarded_port', guest: 50090, host: 50090 # 2ndary Namenode
-  config.vm.network 'forwarded_port', guest: 60010, host: 60010 # HBase Master
-  config.vm.network 'forwarded_port', guest: 60030, host: 60030 # Region Server
-  config.vm.network 'forwarded_port', guest: 8088, host: 8088 # Resource Manager
-  config.vm.network 'forwarded_port', guest: 8042, host: 8042 # Node Manager
+  #config.vm.network 'forwarded_port', guest: 50070, host: 50070 # Namenode
+  #config.vm.network 'forwarded_port', guest: 50075, host: 50075 # Datanode
+  #config.vm.network 'forwarded_port', guest: 50090, host: 50090 # 2ndary Namenode
+  #config.vm.network 'forwarded_port', guest: 60010, host: 60010 # HBase Master
+  #config.vm.network 'forwarded_port', guest: 60030, host: 60030 # Region Server
+  #config.vm.network 'forwarded_port', guest: 8088, host: 8088 # Resource Manager
+  #config.vm.network 'forwarded_port', guest: 8042, host: 8042 # Node Manager
 
   # vagrant plugin install vagrant-cachier
   # http://fgrehm.viewdocs.io/vagrant-cachier/usage/

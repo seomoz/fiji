@@ -9,13 +9,11 @@ import org.apache.spark.Partition
 import org.apache.spark.SparkContext
 import org.apache.spark.rdd.RDD
 
-import com.moz.fiji.schema.cassandra.CassandraFijiURI
 import com.moz.fiji.schema.hbase.HBaseFijiURI
 import com.moz.fiji.schema.FijiDataRequest
 import com.moz.fiji.schema.FijiURI
 import com.moz.fiji.schema.FijiResult
 import com.moz.fiji.spark.connector.rdd.hbase.HBaseFijiRDD
-import com.moz.fiji.spark.connector.rdd.cassandra.CassandraFijiRDD
 import com.moz.fiji.spark.connector.FijiSpark
 
 /**
@@ -46,26 +44,6 @@ object FijiRDD {
    */
   def apply (
       @transient sc: SparkContext,
-      @transient fijiURI: FijiURI,
-      fijiDataRequest: FijiDataRequest
-  ): FijiRDD[_] = {
-    fijiURI match {
-      case cassandraFijiURI: CassandraFijiURI => CassandraFijiRDD(sc, fijiURI, fijiDataRequest)
-      case _ => throw new UnsupportedOperationException(FijiSpark.UnsupportedFiji)
-    }
-  }
-
-  /**
-   *
-   * @param sc
-   * @param conf
-   * @param credentials
-   * @param fijiURI
-   * @param fijiDataRequest
-   * @return
-   */
-  def apply (
-      @transient sc: SparkContext,
       @transient conf: Configuration,
       @transient credentials: Credentials,
       @transient fijiURI: FijiURI,
@@ -73,7 +51,6 @@ object FijiRDD {
   ): FijiRDD[_] = {
     fijiURI match {
       case hbaseFijiURI: HBaseFijiURI => HBaseFijiRDD(sc, conf, credentials, fijiURI, fijiDataRequest)
-      case cassandraFijiURI: CassandraFijiURI => CassandraFijiRDD(sc, fijiURI, fijiDataRequest)
       case _ => throw new UnsupportedOperationException(FijiSpark.UnsupportedFiji)
     }
   }
