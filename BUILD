@@ -522,39 +522,39 @@ java_library(
     provides=["fiji_platform"],
 )
 
-java_library(
-    name="//com/moz/fiji/platforms:cassandra-platform",
-    deps=[
-        maven(guava),
+# java_library(
+#     name="//com/moz/fiji/platforms:cassandra-platform",
+#     deps=[
+#         maven(guava),
 
-        maven("org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.3.0-cdh5.1.3"),
-        maven("org.apache.hadoop:hadoop-mapreduce-client-app:2.3.0-cdh5.1.3"),
-        maven("org.apache.hadoop:hadoop-common:2.3.0-cdh5.1.3"),
-        maven("org.apache.hbase:hbase-client:0.98.1-cdh5.1.3"),
-        maven("org.apache.zookeeper:zookeeper:3.4.5-cdh5.1.3"),
-        maven("org.apache.curator:curator-recipes:2.4.1"),
-        maven("org.apache.hadoop:hadoop-hdfs:2.3.0-cdh5.1.3"),
+#         maven("org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.3.0-cdh5.1.3"),
+#         maven("org.apache.hadoop:hadoop-mapreduce-client-app:2.3.0-cdh5.1.3"),
+#         maven("org.apache.hadoop:hadoop-common:2.3.0-cdh5.1.3"),
+#         maven("org.apache.hbase:hbase-client:0.98.1-cdh5.1.3"),
+#         maven("org.apache.zookeeper:zookeeper:3.4.5-cdh5.1.3"),
+#         maven("org.apache.curator:curator-recipes:2.4.1"),
+#         maven("org.apache.hadoop:hadoop-hdfs:2.3.0-cdh5.1.3"),
 
-        maven("com.datastax.cassandra:cassandra-driver-core:2.1.4"),
-        maven(dropwizard_metrics_core),
-    ],
-    maven_exclusions=[
-        # Globally exclude Hadoop MR1:
-        "org.apache.hadoop:hadoop-core:*:*:*",
-        "org.apache.hadoop:hadoop-hdfs:test-jar:*:*",
+#         maven("com.datastax.cassandra:cassandra-driver-core:2.1.4"),
+#         maven(dropwizard_metrics_core),
+#     ],
+#     maven_exclusions=[
+#         # Globally exclude Hadoop MR1:
+#         "org.apache.hadoop:hadoop-core:*:*:*",
+#         "org.apache.hadoop:hadoop-hdfs:test-jar:*:*",
 
-        # Cassandra driver 2.1.4 uses an old version of Coda Hale metrics under a different package
-        # name, so exclude it and instead include the newer correct version.
-        "com.codahale.metrics:metrics-core:*:*:3.0.2",
+#         # Cassandra driver 2.1.4 uses an old version of Coda Hale metrics under a different package
+#         # name, so exclude it and instead include the newer correct version.
+#         "com.codahale.metrics:metrics-core:*:*:3.0.2",
 
-        # Exclude junit from non-test platforms:
-        "junit:junit:*:*:*",
+#         # Exclude junit from non-test platforms:
+#         "junit:junit:*:*:*",
 
-        # This conflicts with newer asm maven artifact org.ow2:asm.
-        "asm:asm:*:*:*",
-    ],
-    provides=["fiji_platform"],
-)
+#         # This conflicts with newer asm maven artifact org.ow2:asm.
+#         "asm:asm:*:*:*",
+#     ],
+#     provides=["fiji_platform"],
+# )
 
 java_library(
     name="//com/moz/fiji/platforms:compile-platform",
@@ -675,24 +675,24 @@ java_library(
     ],
 )
 
-java_library(
-    name="//com/moz/fiji/platforms:cassandra-test-platform",
-    deps=[
-        maven(guava),
+# java_library(
+#     name="//com/moz/fiji/platforms:cassandra-test-platform",
+#     deps=[
+#         maven(guava),
 
-        maven("org.apache.hadoop:hadoop-yarn-server-tests:test-jar:tests:2.3.0-cdh5.1.3"),
-        maven("org.apache.curator:curator-test:2.4.1"),
+#         maven("org.apache.hadoop:hadoop-yarn-server-tests:test-jar:tests:2.3.0-cdh5.1.3"),
+#         maven("org.apache.curator:curator-test:2.4.1"),
 
-        maven("com.datastax.cassandra:cassandra-driver-core:2.1.4"),
-        maven("org.apache.cassandra:cassandra-all:2.0.9"),
+#         maven("com.datastax.cassandra:cassandra-driver-core:2.1.4"),
+#         maven("org.apache.cassandra:cassandra-all:2.0.9"),
 
-        "//com/moz/fiji/platforms:cdh5.1-platform",
-    ],
-    maven_exclusions=[
-        # Globally exclude Hadoop MR1:
-        "org.apache.hadoop:hadoop-core:*:*:*",
-    ],
-)
+#         "//com/moz/fiji/platforms:cdh5.1-platform",
+#     ],
+#     maven_exclusions=[
+#         # Globally exclude Hadoop MR1:
+#         "org.apache.hadoop:hadoop-core:*:*:*",
+#     ],
+# )
 
 java_library(
     name="//com/moz/fiji/platforms:test-platform",
@@ -1106,27 +1106,27 @@ java_library(
     ),
 )
 
-java_library(
-    name="//com/moz/fiji/schema:fiji-schema-cassandra",
-    sources=["//fiji-schema/fiji-schema-cassandra/src/main/java"],
-    resources=["//fiji-schema/fiji-schema-cassandra/src/main/resources/"],
-    deps=[
-        "//com/moz/fiji/annotations:annotations",
-        "//com/moz/fiji/delegation:fiji-delegation",
-        "//com/moz/fiji/schema:fiji-schema",
-        "//com/moz/fiji/schema:fiji-schema-avro",
-        "//com/moz/fiji/schema:schema-platform-api",  # brings compile-platform
-        avro,
-        avro_ipc,
-        avro_mapred,
-        dynamic(fiji_platform="//com/moz/fiji/platforms:cassandra-platform"),
-        maven(guava),
-        maven(jsr305),
-        maven(netty),
-        maven(slf4j_api),
-    ],
-    checkstyle=checkstyle_fiji,
-)
+# java_library(
+#     name="//com/moz/fiji/schema:fiji-schema-cassandra",
+#     sources=["//fiji-schema/fiji-schema-cassandra/src/main/java"],
+#     resources=["//fiji-schema/fiji-schema-cassandra/src/main/resources/"],
+#     deps=[
+#         "//com/moz/fiji/annotations:annotations",
+#         "//com/moz/fiji/delegation:fiji-delegation",
+#         "//com/moz/fiji/schema:fiji-schema",
+#         "//com/moz/fiji/schema:fiji-schema-avro",
+#         "//com/moz/fiji/schema:schema-platform-api",  # brings compile-platform
+#         avro,
+#         avro_ipc,
+#         avro_mapred,
+#         dynamic(fiji_platform="//com/moz/fiji/platforms:cassandra-platform"),
+#         maven(guava),
+#         maven(jsr305),
+#         maven(netty),
+#         maven(slf4j_api),
+#     ],
+#     checkstyle=checkstyle_fiji,
+# )
 
 java_binary(
     name="//com/moz/fiji/schema:fiji",
@@ -1248,25 +1248,25 @@ java_test(
     ),
 )
 
-java_test(
-    name="//com/moz/fiji/schema:fiji-schema-cassandra-test",
-    sources=["//fiji-schema/fiji-schema-cassandra/src/test/java"],
-    resources=["//fiji-schema/fiji-schema-cassandra/src/test/resources/"],
-    deps=[
-        maven(easymock),
-        maven(hamcrest),
-        maven(junit),
+# java_test(
+#     name="//com/moz/fiji/schema:fiji-schema-cassandra-test",
+#     sources=["//fiji-schema/fiji-schema-cassandra/src/test/java"],
+#     resources=["//fiji-schema/fiji-schema-cassandra/src/test/resources/"],
+#     deps=[
+#         maven(easymock),
+#         maven(hamcrest),
+#         maven(junit),
 
-        "//com/moz/fiji/schema:fiji-schema",
-        "//com/moz/fiji/schema:fiji-schema-cassandra",
+#         "//com/moz/fiji/schema:fiji-schema",
+#         "//com/moz/fiji/schema:fiji-schema-cassandra",
 
-        "java_library(//com/moz/fiji/schema:fiji-schema-test)",  # FIXME: extract fiji test framework
-        "//com/moz/fiji/schema:fiji-schema-test-avro",
+#         "java_library(//com/moz/fiji/schema:fiji-schema-test)",  # FIXME: extract fiji test framework
+#         "//com/moz/fiji/schema:fiji-schema-test-avro",
 
-        dynamic(fiji_platform="//com/moz/fiji/platforms:cassandra-test-platform"),
-    ],
-    checkstyle=checkstyle_fiji_test,
-)
+#         dynamic(fiji_platform="//com/moz/fiji/platforms:cassandra-test-platform"),
+#     ],
+#     checkstyle=checkstyle_fiji_test,
+# )
 
 scala_library(
     name="//com/moz/fiji/schema:fiji-schema-extras",
@@ -1313,13 +1313,13 @@ generated_pom(
     test_deps=["//com/moz/fiji/schema:fiji-schema-test"],
 )
 
-generated_pom(
-    name="//com/moz/fiji/schema:fiji-schema-cassandra-pom",
-    pom_name="//com/moz/fiji/schema:fiji-schema-cassandra",
-    pom_file="//fiji-schema/fiji-schema-cassandra/pom.xml",
-    main_deps=["//com/moz/fiji/schema:fiji-schema-cassandra"],
-    test_deps=["//com/moz/fiji/schema:fiji-schema-cassandra-test"],
-)
+# generated_pom(
+#     name="//com/moz/fiji/schema:fiji-schema-cassandra-pom",
+#     pom_name="//com/moz/fiji/schema:fiji-schema-cassandra",
+#     pom_file="//fiji-schema/fiji-schema-cassandra/pom.xml",
+#     main_deps=["//com/moz/fiji/schema:fiji-schema-cassandra"],
+#     test_deps=["//com/moz/fiji/schema:fiji-schema-cassandra-test"],
+# )
 
 generated_pom(
     name="//com/moz/fiji/schema:fiji-schema-extras-pom",
@@ -1333,51 +1333,51 @@ generated_pom(
 # --------------------------------------------------------------------------------------------------
 # FijiPhonebook
 
-avro_java_library(
-    name="//com/moz/fiji/examples/phonebook:fiji-phonebook-avro-lib",
-    sources=["//fiji-phonebook/src/main/avro/*.avsc"],
-)
+# avro_java_library(
+#     name="//com/moz/fiji/examples/phonebook:fiji-phonebook-avro-lib",
+#     sources=["//fiji-phonebook/src/main/avro/*.avsc"],
+# )
 
-java_library(
-    name="//com/moz/fiji/examples/phonebook:fiji-phonebook",
-    sources=["//fiji-phonebook/src/main/java"],
-    resources=["//fiji-phonebook/src/main/resources"],
-    deps=[
-        "//com/moz/fiji/examples/phonebook:fiji-phonebook-avro-lib",
+# java_library(
+#     name="//com/moz/fiji/examples/phonebook:fiji-phonebook",
+#     sources=["//fiji-phonebook/src/main/java"],
+#     resources=["//fiji-phonebook/src/main/resources"],
+#     deps=[
+#         "//com/moz/fiji/examples/phonebook:fiji-phonebook-avro-lib",
 
-        "//com/moz/fiji/common:fiji-common-flags",
-        "//com/moz/fiji/schema:fiji-schema",
-        "//com/moz/fiji/schema:fiji-schema-cassandra",
-        "//com/moz/fiji/mapreduce:fiji-mapreduce",
-        "//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
+#         "//com/moz/fiji/common:fiji-common-flags",
+#         "//com/moz/fiji/schema:fiji-schema",
+#         "//com/moz/fiji/schema:fiji-schema-cassandra",
+#         "//com/moz/fiji/mapreduce:fiji-mapreduce",
+#         "//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
 
-        maven(commons_io),
-    ],
-    checkstyle=checkstyle_fiji,
-)
+#         maven(commons_io),
+#     ],
+#     checkstyle=checkstyle_fiji,
+# )
 
-java_test(
-    name="//com/moz/fiji/examples/phonebook:fiji-phonebook-test",
-    sources=["//fiji-phonebook/src/test/java"],
-    deps=[
-        "//com/moz/fiji/examples/phonebook:fiji-phonebook",
+# java_test(
+#     name="//com/moz/fiji/examples/phonebook:fiji-phonebook-test",
+#     sources=["//fiji-phonebook/src/test/java"],
+#     deps=[
+#         "//com/moz/fiji/examples/phonebook:fiji-phonebook",
 
-        "//com/moz/fiji/testing:fake-hbase",
-        "java_library(//com/moz/fiji/schema:fiji-schema-test)",  # FIXME: extract fiji test framework
-        "//com/moz/fiji/schema:fiji-schema-shell-lib",
+#         "//com/moz/fiji/testing:fake-hbase",
+#         "java_library(//com/moz/fiji/schema:fiji-schema-test)",  # FIXME: extract fiji test framework
+#         "//com/moz/fiji/schema:fiji-schema-shell-lib",
 
-        dynamic(fiji_platform="//com/moz/fiji/platforms:test-platform"),
-    ],
-    checkstyle=checkstyle_fiji_test,
-)
+#         dynamic(fiji_platform="//com/moz/fiji/platforms:test-platform"),
+#     ],
+#     checkstyle=checkstyle_fiji_test,
+# )
 
-generated_pom(
-    name="//com/moz/fiji/examples/phonebook:fiji-phonebook-pom",
-    pom_name="//com/moz/fiji/examples/phonebook:fiji-phonebook",
-    pom_file="//fiji-phonebook/pom.xml",
-    main_deps=["//com/moz/fiji/examples/phonebook:fiji-phonebook"],
-    test_deps=["//com/moz/fiji/examples/phonebook:fiji-phonebook-test"],
-)
+# generated_pom(
+#     name="//com/moz/fiji/examples/phonebook:fiji-phonebook-pom",
+#     pom_name="//com/moz/fiji/examples/phonebook:fiji-phonebook",
+#     pom_file="//fiji-phonebook/pom.xml",
+#     main_deps=["//com/moz/fiji/examples/phonebook:fiji-phonebook"],
+#     test_deps=["//com/moz/fiji/examples/phonebook:fiji-phonebook-test"],
+# )
 
 # --------------------------------------------------------------------------------------------------
 # FijiSchema DDL Shell
@@ -1492,31 +1492,31 @@ java_library(
     ),
 )
 
-java_library(
-    name="//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
-    sources=["//fiji-mapreduce/fiji-mapreduce-cassandra/src/main/java"],
-    resources=["//fiji-mapreduce/fiji-mapreduce-cassandra/src/main/resources"],
-    deps=[
-        maven(guava),
-        maven(slf4j_api),
-        maven(commons_codec),
-        maven(commons_io),
-        maven(commons_lang),
+# java_library(
+#     name="//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
+#     sources=["//fiji-mapreduce/fiji-mapreduce-cassandra/src/main/java"],
+#     resources=["//fiji-mapreduce/fiji-mapreduce-cassandra/src/main/resources"],
+#     deps=[
+#         maven(guava),
+#         maven(slf4j_api),
+#         maven(commons_codec),
+#         maven(commons_io),
+#         maven(commons_lang),
 
-        "//com/moz/fiji/schema:fiji-schema",
-        "//com/moz/fiji/schema:fiji-schema-cassandra",
-        "//com/moz/fiji/mapreduce:fiji-mapreduce",
-        "//com/moz/fiji/mapreduce:platform-api",
-        "//com/moz/fiji/mapreduce:fiji-mapreduce-avro-lib",
+#         "//com/moz/fiji/schema:fiji-schema",
+#         "//com/moz/fiji/schema:fiji-schema-cassandra",
+#         "//com/moz/fiji/mapreduce:fiji-mapreduce",
+#         "//com/moz/fiji/mapreduce:platform-api",
+#         "//com/moz/fiji/mapreduce:fiji-mapreduce-avro-lib",
 
-        dynamic(fiji_platform="//com/moz/fiji/platforms:cassandra-platform"),
-    ],
-    maven_exclusions=[
-        # Something is bringing in junit in compile scope.
-        "junit:junit:*:*:*",
-    ],
-    checkstyle=checkstyle_fiji,
-)
+#         dynamic(fiji_platform="//com/moz/fiji/platforms:cassandra-platform"),
+#     ],
+#     maven_exclusions=[
+#         # Something is bringing in junit in compile scope.
+#         "junit:junit:*:*:*",
+#     ],
+#     checkstyle=checkstyle_fiji,
+# )
 
 avro_java_library(
     name="//com/moz/fiji/mapreduce/lib:fiji-mapreduce-lib-avro-lib",
@@ -1608,18 +1608,18 @@ java_test(
     checkstyle=checkstyle_fiji_test,
 )
 
-java_test(
-    name="//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra-test",
-    sources=["//fiji-mapreduce/fiji-mapreduce-cassandra/src/test/java"],
-    resources=["//fiji-mapreduce/fiji-mapreduce-cassandra/src/test/resources"],
-    deps=[
-        "java_library(//com/moz/fiji/mapreduce:fiji-mapreduce-test)",  # FIXME: extract fiji test framework
-        "//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
+# java_test(
+#     name="//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra-test",
+#     sources=["//fiji-mapreduce/fiji-mapreduce-cassandra/src/test/java"],
+#     resources=["//fiji-mapreduce/fiji-mapreduce-cassandra/src/test/resources"],
+#     deps=[
+#         "java_library(//com/moz/fiji/mapreduce:fiji-mapreduce-test)",  # FIXME: extract fiji test framework
+#         "//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
 
-        dynamic(fiji_platform="//com/moz/fiji/platforms:cassandra-test-platform"),
-    ],
-    checkstyle=checkstyle_fiji_test,
-)
+#         dynamic(fiji_platform="//com/moz/fiji/platforms:cassandra-test-platform"),
+#     ],
+#     checkstyle=checkstyle_fiji_test,
+# )
 
 java_test(
     name="//com/moz/fiji/mapreduce/lib:fiji-mapreduce-lib-test",
@@ -1660,13 +1660,13 @@ generated_pom(
     test_deps=["//com/moz/fiji/mapreduce:fiji-mapreduce-test"],
 )
 
-generated_pom(
-    name="//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra-pom",
-    pom_name="//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
-    pom_file="//fiji-mapreduce/fiji-mapreduce-cassandra/pom.xml",
-    main_deps=["//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra"],
-    test_deps=["//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra-test"],
-)
+# generated_pom(
+#     name="//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra-pom",
+#     pom_name="//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
+#     pom_file="//fiji-mapreduce/fiji-mapreduce-cassandra/pom.xml",
+#     main_deps=["//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra"],
+#     test_deps=["//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra-test"],
+# )
 
 generated_pom(
     name="//com/moz/fiji/mapreduce/lib:fiji-mapreduce-lib-pom",
@@ -1688,48 +1688,48 @@ generated_pom(
 # --------------------------------------------------------------------------------------------------
 # FijiMusic
 
-avro_java_library(
-    name="//com/moz/fiji/examples/music:fiji-music-avro-lib",
-    sources=["//fiji-music/src/main/avro/*.avdl"],
-)
+# avro_java_library(
+#     name="//com/moz/fiji/examples/music:fiji-music-avro-lib",
+#     sources=["//fiji-music/src/main/avro/*.avdl"],
+# )
 
-java_library(
-    name="//com/moz/fiji/examples/music:fiji-music",
-    sources=["//fiji-music/src/main/java"],
-    deps=[
-        maven(commons_io),
-        maven(json_simple),
-        "//com/moz/fiji/examples/music:fiji-music-avro-lib",
+# java_library(
+#     name="//com/moz/fiji/examples/music:fiji-music",
+#     sources=["//fiji-music/src/main/java"],
+#     deps=[
+#         maven(commons_io),
+#         maven(json_simple),
+#         "//com/moz/fiji/examples/music:fiji-music-avro-lib",
 
-        "//com/moz/fiji/schema:fiji-schema",
-        "//com/moz/fiji/mapreduce:fiji-mapreduce",
-        "//com/moz/fiji/mapreduce/lib:fiji-mapreduce-lib",
-    ],
-    checkstyle=checkstyle_fiji,
-)
+#         "//com/moz/fiji/schema:fiji-schema",
+#         "//com/moz/fiji/mapreduce:fiji-mapreduce",
+#         "//com/moz/fiji/mapreduce/lib:fiji-mapreduce-lib",
+#     ],
+#     checkstyle=checkstyle_fiji,
+# )
 
-java_test(
-    name="//com/moz/fiji/examples/music:fiji-music-test",
-    sources=["//fiji-music/src/test/java"],
-    resources=["//fiji-music/src/test/resources"],
-    deps=[
-        "//com/moz/fiji/examples/music:fiji-music",
+# java_test(
+#     name="//com/moz/fiji/examples/music:fiji-music-test",
+#     sources=["//fiji-music/src/test/java"],
+#     resources=["//fiji-music/src/test/resources"],
+#     deps=[
+#         "//com/moz/fiji/examples/music:fiji-music",
 
-        "//com/moz/fiji/testing:fake-hbase",
-        "java_library(//com/moz/fiji/schema:fiji-schema-test)",  # FIXME: extract fiji test framework
+#         "//com/moz/fiji/testing:fake-hbase",
+#         "java_library(//com/moz/fiji/schema:fiji-schema-test)",  # FIXME: extract fiji test framework
 
-        dynamic(fiji_platform="//com/moz/fiji/platforms:test-platform"),
-    ],
-    checkstyle=checkstyle_fiji_test,
-)
+#         dynamic(fiji_platform="//com/moz/fiji/platforms:test-platform"),
+#     ],
+#     checkstyle=checkstyle_fiji_test,
+# )
 
-generated_pom(
-    name="//com/moz/fiji/examples/music:fiji-music-pom",
-    pom_name="//com/moz/fiji/examples/music:fiji-music",
-    pom_file="//fiji-music/pom.xml",
-    main_deps=["//com/moz/fiji/examples/music:fiji-music"],
-    test_deps=["//com/moz/fiji/examples/music:fiji-music-test"],
-)
+# generated_pom(
+#     name="//com/moz/fiji/examples/music:fiji-music-pom",
+#     pom_name="//com/moz/fiji/examples/music:fiji-music",
+#     pom_file="//fiji-music/pom.xml",
+#     main_deps=["//com/moz/fiji/examples/music:fiji-music"],
+#     test_deps=["//com/moz/fiji/examples/music:fiji-music-test"],
+# )
 
 # --------------------------------------------------------------------------------------------------
 # FijiHive
@@ -1943,43 +1943,43 @@ scala_test(
     ],
 )
 
-avro_java_library(
-    name="//com/moz/fiji/express:fiji-express-music-avro-lib",
-    sources=["//fiji-express-music/src/main/avro/*.avdl"],
-)
+# avro_java_library(
+#     name="//com/moz/fiji/express:fiji-express-music-avro-lib",
+#     sources=["//fiji-express-music/src/main/avro/*.avdl"],
+# )
 
-scala_library(
-    name="//com/moz/fiji/express:fiji-express-music",
-    sources=["//fiji-express-music/src/main/scala"],
-    resources=["//fiji-express-music/src/main/resources"],
-    deps=[
-        "//com/moz/fiji/schema:fiji-schema",
-        "//com/moz/fiji/schema:fiji-schema-cassandra",
-        "//com/moz/fiji/schema:fiji-schema-shell-lib",
-        "//com/moz/fiji/mapreduce:fiji-mapreduce",
-        "//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
-        "//com/moz/fiji/express:fiji-express-lib",
-        "//com/moz/fiji/express:fiji-express-music-avro-lib",
+# scala_library(
+#     name="//com/moz/fiji/express:fiji-express-music",
+#     sources=["//fiji-express-music/src/main/scala"],
+#     resources=["//fiji-express-music/src/main/resources"],
+#     deps=[
+#         "//com/moz/fiji/schema:fiji-schema",
+#         "//com/moz/fiji/schema:fiji-schema-cassandra",
+#         "//com/moz/fiji/schema:fiji-schema-shell-lib",
+#         "//com/moz/fiji/mapreduce:fiji-mapreduce",
+#         "//com/moz/fiji/mapreduce:fiji-mapreduce-cassandra",
+#         "//com/moz/fiji/express:fiji-express-lib",
+#         "//com/moz/fiji/express:fiji-express-music-avro-lib",
 
-        dynamic(fiji_platform="//com/moz/fiji/platforms:compile-platform"),
-    ],
-)
+#         dynamic(fiji_platform="//com/moz/fiji/platforms:compile-platform"),
+#     ],
+# )
 
-scala_test(
-    name="//com/moz/fiji/express:fiji-express-music-test",
-    test_name_pattern=".*Suite$",
-    sources=["//fiji-express-music/src/test/scala"],
-    resources=["//fiji-express-music/src/test/resources"],
-    deps=[
-        "//com/moz/fiji/testing:fake-hbase",
-        "java_library(//com/moz/fiji/express:fiji-express-test)",  # FIXME: extract fiji test framework
-        "//com/moz/fiji/express:fiji-express-music",
+# scala_test(
+#     name="//com/moz/fiji/express:fiji-express-music-test",
+#     test_name_pattern=".*Suite$",
+#     sources=["//fiji-express-music/src/test/scala"],
+#     resources=["//fiji-express-music/src/test/resources"],
+#     deps=[
+#         "//com/moz/fiji/testing:fake-hbase",
+#         "java_library(//com/moz/fiji/express:fiji-express-test)",  # FIXME: extract fiji test framework
+#         "//com/moz/fiji/express:fiji-express-music",
 
-        dynamic(fiji_platform="//com/moz/fiji/platforms:test-platform"),
+#         dynamic(fiji_platform="//com/moz/fiji/platforms:test-platform"),
 
-        maven(scalatest),
-    ],
-)
+#         maven(scalatest),
+#     ],
+# )
 
 generated_pom(
     name="//com/moz/fiji/express:fiji-express-pom",
@@ -2008,14 +2008,14 @@ generated_pom(
     test_deps=["//com/moz/fiji/express:fiji-express-tools-test"],
 )
 
-generated_pom(
-    name="//com/moz/fiji/express:fiji-express-music-pom",
-    pom_name="//com/moz/fiji/express:fiji-express-music",
-    pom_file="//fiji-express-music/pom.xml",
-    pom_template=scala_pom_template,
-    main_deps=["//com/moz/fiji/express:fiji-express-music"],
-    test_deps=["//com/moz/fiji/express:fiji-express-music-test"],
-)
+# generated_pom(
+#     name="//com/moz/fiji/express:fiji-express-music-pom",
+#     pom_name="//com/moz/fiji/express:fiji-express-music",
+#     pom_file="//fiji-express-music/pom.xml",
+#     pom_template=scala_pom_template,
+#     main_deps=["//com/moz/fiji/express:fiji-express-music"],
+#     test_deps=["//com/moz/fiji/express:fiji-express-music-test"],
+# )
 
 # --------------------------------------------------------------------------------------------------
 # FijiSpark
@@ -2055,7 +2055,7 @@ scala_library(
     sources=["//fiji-spark/src/main/scala"],
     deps=[
         "//com/moz/fiji/schema:fiji-schema",
-        "//com/moz/fiji/schema:fiji-schema-cassandra",
+        # "//com/moz/fiji/schema:fiji-schema-cassandra",
         dynamic(spark_core="//com/moz/fiji/deps:spark-core"),
         maven("joda-time:joda-time:2.6"),
         # CDH 5.3 platform will be the first version to support FijiSpark
@@ -2077,7 +2077,7 @@ scala_test(
         "//com/moz/fiji/spark:fiji-spark",
         "//com/moz/fiji/schema:fiji-schema",
         "java_library(//com/moz/fiji/schema:fiji-schema-test)",
-        "//com/moz/fiji/schema:fiji-schema-cassandra",
+        # "//com/moz/fiji/schema:fiji-schema-cassandra",
         "//com/moz/fiji/commons:fiji-commons-scala",
         maven(spark_core),
         maven("joda-time:joda-time:2.6"),
