@@ -592,22 +592,6 @@ scala_library(
     scalastyle=scalastyle_fiji,
 )
 
-java_library(
-    name="//com/moz/fiji/checkin:fiji-checkin",
-    sources=["//fiji-checkin/src/main/java"],
-    deps=[
-        maven(commons_io),
-        maven(commons_lang),
-        maven(gson),
-        maven(guava),
-        maven(httpclient),
-        maven(slf4j_api),
-
-        "//com/moz/fiji/common:fiji-common-flags",
-    ],
-    checkstyle=checkstyle_fiji,
-)
-
 avro_java_library(
     name="//com/moz/fiji/commons:fiji-commons-java-test-avro-lib",
     sources=["//fiji-commons/fiji-commons-java/src/test/avro/*.avdl"],
@@ -643,19 +627,6 @@ scala_test(
     ],
 )
 
-# TODO: Re-enable this once we have support for setting jar MANIFEST.mf files. TestVersionInfo
-#     relies on being able to read the "package title" from the MANIFEST.mf in the fiji-delegation
-#     jar.
-java_test(
-    name="//com/moz/fiji/checkin:fiji-checkin-test",
-    sources=["//fiji-checkin/src/test/java"],
-    deps=[
-        maven(easymock),
-        "//com/moz/fiji/checkin:fiji-checkin",
-    ],
-    checkstyle=checkstyle_fiji_test,
-)
-
 generated_pom(
     name="//com/moz/fiji/commons:fiji-commons-java-pom",
     pom_name="//com/moz/fiji/commons:fiji-commons-java",
@@ -680,56 +651,6 @@ generated_pom(
     main_deps=["//com/moz/fiji/commons:fiji-commons-scala"],
     test_deps=["//com/moz/fiji/commons:fiji-commons-scala-test"],
 )
-
-generated_pom(
-    name="//com/moz/fiji/checkin:fiji-checkin-pom",
-    pom_name="//com/moz/fiji/checkin:fiji-checkin",
-    pom_file="//fiji-checkin/pom.xml",
-    main_deps=["//com/moz/fiji/checkin:fiji-checkin"],
-    test_deps=["//com/moz/fiji/checkin:fiji-checkin-test"],
-)
-
-# --------------------------------------------------------------------------------------------------
-# FijiSolr
-
-#java_library(
-#    name="//com/moz/fiji/solr:fiji-solr-lib",
-#    sources=["//fiji-solr/src/main/java"],
-#    deps=[
-#        maven(slf4j_api),
-#        maven(solr_core),
-#        maven(solr_solrj),
-#        "//com/moz/fiji/schema:fiji-schema",
-#    ],
-#    checkstyle=checkstyle_fiji,
-#)
-
-#java_binary(
-#    name="//com/moz/fiji/solr:fiji-solr",
-#    main_class="com.moz.fiji.solr.HelloWorld",
-#    deps=[
-#        "//com/moz/fiji/solr:fiji-solr-lib",
-#    ],
-#    maven_exclusions=[],
-#)
-
-#java_test(
-#    name="//com/moz/fiji/solr:fiji-solr-test",
-#    sources=["//fiji-solr/src/test/java"],
-#    deps=[
-#        maven(junit),
-#        "//com/moz/fiji/solr:fiji-solr-lib",
-#    ],
-#    checkstyle=checkstyle_fiji_test,
-#)
-
-#generated_pom(
-#    name="//com/moz/fiji/solr:fiji-solr-pom",
-#    pom_name="//com/moz/fiji/solr:fiji-solr",
-#    pom_file="//fiji-solr/pom.xml",
-#    main_deps=["//com/moz/fiji/solr:fiji-solr-lib"],
-#    test_deps=["//com/moz/fiji/solr:fiji-solr-test"],
-#)
 
 # --------------------------------------------------------------------------------------------------
 # FijiSchema
@@ -781,7 +702,6 @@ java_library(
 
         "//com/moz/fiji/schema:fiji-schema-avro",
         "//com/moz/fiji/annotations:annotations",
-        "//com/moz/fiji/checkin:fiji-checkin",
         "//com/moz/fiji/common:fiji-common-flags",
         "//com/moz/fiji/commons:fiji-commons-java",
         "//com/moz/fiji/delegation:fiji-delegation",
@@ -1174,8 +1094,8 @@ java_library(
     sources=["//fiji-hive-adapter/fiji-hive-adapter/src/main/java"],
     deps=[
         # TODO: Move this to a platform perhaps?
-        maven("org.apache.hive:hive-exec:0.12.0-cdh5.0.3"),
-        maven("org.apache.hive:hive-serde:0.12.0-cdh5.0.3"),
+        maven("org.apache.hive:hive-exec:0.13.1-cdh5.3.5"),
+        maven("org.apache.hive:hive-serde:0.13.1-cdh5.3.5"),
 
         "//com/moz/fiji/schema:fiji-schema",
     ],

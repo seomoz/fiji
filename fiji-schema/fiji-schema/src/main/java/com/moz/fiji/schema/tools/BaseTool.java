@@ -35,8 +35,6 @@ import org.slf4j.LoggerFactory;
 import com.moz.fiji.annotations.ApiAudience;
 import com.moz.fiji.annotations.ApiStability;
 import com.moz.fiji.annotations.Inheritance;
-import com.moz.fiji.checkin.CommandLogger;
-import com.moz.fiji.checkin.models.FijiCommand;
 import com.moz.fiji.common.flags.Flag;
 import com.moz.fiji.common.flags.FlagParser;
 import com.moz.fiji.schema.FijiNotInstalledException;
@@ -302,11 +300,6 @@ public abstract class BaseTool extends Configured implements FijiTool {
         int returnFlag = FAILURE;
 
         try {
-          final CommandLogger logger = new CommandLogger();
-          logger.logCommand(
-              new FijiCommand.Builder(this.getClass())
-                  .withCommandName(this.getClass().getSimpleName())
-                  .withSuccess(true).build(), true);
           setup();
           returnFlag = run(nonFlagArgs);
           return returnFlag;

@@ -37,7 +37,6 @@ import org.junit.rules.TestName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.moz.fiji.checkin.CheckinUtils;
 import com.moz.fiji.schema.platform.SchemaPlatformBridge;
 import com.moz.fiji.schema.util.TestingFileUtils;
 
@@ -134,8 +133,6 @@ public class FijiClientTest {
       mConf.set("hbase.zookeeper.property.clientPort", port);
     }
     mFiji = null;  // lazily initialized
-    // Disable logging of commands to the upgrade server by accident.
-    System.setProperty(CheckinUtils.DISABLE_CHECKIN_PROP, "true");
   }
 
   /**
