@@ -24,9 +24,6 @@ com/moz/fiji/mapreduce/cdh5-mrbridge/
 com/moz/fiji/mapreduce/fiji-mapreduce-avro-lib/
 com/moz/fiji/mapreduce/fiji-mapreduce/
 com/moz/fiji/mapreduce/platform-api/
-com/moz/fiji/platforms/cdh5.0-platform/
-com/moz/fiji/platforms/cdh5.1-platform/
-com/moz/fiji/platforms/cdh5.2-platform/
 com/moz/fiji/platforms/cdh5.3-platform/
 com/moz/fiji/platforms/compile-platform/
 com/moz/fiji/schema/cdh5-bridge/

@@ -988,6 +988,38 @@ class FakeHTable(
     sys.error("Not implemented")
   }
 
+  override def batchCoprocessorService[R <: com.google.protobuf.Message](
+    x$1: com.google.protobuf.Descriptors.MethodDescriptor,
+    x$2: com.google.protobuf.Message,
+    x$3: Array[Byte],
+    x$4: Array[Byte],
+    x$5: R,
+    x$6: org.apache.hadoop.hbase.client.coprocessor.Batch.Callback[R]
+  ):Unit = {
+    sys.error("Not implemented")
+  }
+
+  override def batchCoprocessorService[R <: com.google.protobuf.Message](
+    x$1: com.google.protobuf.Descriptors.MethodDescriptor,
+    x$2: com.google.protobuf.Message,
+    x$3: Array[Byte],
+    x$4: Array[Byte],
+    x$5: R
+  ):java.util.Map[Array[Byte],R] = {
+    sys.error("Not implemented")
+  }
+
+  def checkAndMutate(
+    x$1: Array[Byte],
+    x$2: Array[Byte],
+    x$3: Array[Byte],
+    x$4: org.apache.hadoop.hbase.filter.CompareFilter.CompareOp,
+    x$5: Array[Byte],
+    x$6: org.apache.hadoop.hbase.client.RowMutations
+  ):Boolean = {
+    sys.error("Not implemented")
+  }
+
   override def exists(gets: JList[Get]): Array[JBoolean] = {
     val exists: Array[JBoolean] = new Array[JBoolean](gets.size)
     synchronized {
