@@ -261,8 +261,8 @@ scalding_core = "com.twitter:scalding-core_2.10:0.9.1"
 scallop = "org.rogach:scallop_2.10:0.9.5"
 slf4j_api = "org.slf4j:slf4j-api:1.7.5"
 slf4j_log4j12 = "org.slf4j:slf4j-log4j12:1.7.5"
-spark_core = "org.apache.spark:spark-core_2.10:1.2.0-cdh5.3.1"
-spark_mllib = "org.apache.spark:spark-mllib_2.10:1.2.0-cdh5.3.1"
+spark_core = "org.apache.spark:spark-core_2.10:1.2.0-cdh5.3.5"
+spark_mllib = "org.apache.spark:spark-mllib_2.10:1.2.0-cdh5.3.5"
 specs2 = "org.specs2:specs2_2.10:2.3.8"
 solr_core = "org.apache.solr:solr-core:4.10.3"
 solr_solrj = "org.apache.solr:solr-solrj:4.10.3"
@@ -505,12 +505,12 @@ java_library(
         maven(guava),
         maven(jsr305),
         maven(slf4j_api),
-        maven("org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.5.0-cdh5.3.1"),
-        maven("org.apache.hadoop:hadoop-mapreduce-client-app:2.5.0-cdh5.3.1"),
-        maven("org.apache.hadoop:hadoop-common:2.5.0-cdh5.3.1"),
-        maven("org.apache.hbase:hbase-client:0.98.6-cdh5.3.1"),
-        maven("org.apache.hbase:hbase-server:0.98.6-cdh5.3.1"),
-        maven("org.apache.zookeeper:zookeeper:3.4.5-cdh5.3.1"),
+        maven("org.apache.hadoop:hadoop-mapreduce-client-jobclient:2.5.0-cdh5.3.5"),
+        maven("org.apache.hadoop:hadoop-mapreduce-client-app:2.5.0-cdh5.3.5"),
+        maven("org.apache.hadoop:hadoop-common:2.5.0-cdh5.3.5"),
+        maven("org.apache.hbase:hbase-client:0.98.6-cdh5.3.5"),
+        maven("org.apache.hbase:hbase-server:0.98.6-cdh5.3.5"),
+        maven("org.apache.zookeeper:zookeeper:3.4.5-cdh5.3.5"),
         maven("org.apache.curator:curator-recipes:2.4.1"),
     ],
     maven_exclusions=[
@@ -659,13 +659,13 @@ java_library(
         "//com/moz/fiji/platforms:cdh5.3-platform",
         maven(guava),
 
-        maven("org.apache.hadoop:hadoop-yarn-server-tests:test-jar:tests:2.5.0-cdh5.3.1"),
+        maven("org.apache.hadoop:hadoop-yarn-server-tests:test-jar:tests:2.5.0-cdh5.3.5"),
 
         # for HBaseTestingUtility
-        maven("org.apache.hbase:hbase-server:test-jar:tests:0.98.6-cdh5.3.1"),
+        maven("org.apache.hbase:hbase-server:test-jar:tests:0.98.6-cdh5.3.5"),
 
         # for HBaseCommonTestingUtility
-        maven("org.apache.hbase:hbase-common:test-jar:tests:0.98.6-cdh5.3.1"),
+        maven("org.apache.hbase:hbase-common:test-jar:tests:0.98.6-cdh5.3.5"),
 
         maven("org.apache.curator:curator-test:2.4.1"),
     ],
